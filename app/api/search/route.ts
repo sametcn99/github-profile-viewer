@@ -28,6 +28,11 @@ export async function GET(request: NextRequest) {
       per_page: 10,
     });
 
+    // const userGists = await octokit.request("GET /search/users", {
+    //   q: username,
+    //   per_page: 10,
+    // });
+
     // Log userRepos to the console (commented out)
     // console.log("User Repositories:", userRepos.url);
 

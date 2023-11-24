@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { Input } from "@nextui-org/input";
 import { getBaseUrl } from "@/utils/utils";
 import SearchCard from "./search-card";
-import { debounce } from "lodash";
-import { useMemo } from "react";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState(""); // State to store input value
@@ -35,8 +33,8 @@ export default function SearchBar() {
     router.push(`/${inputValue}`);
   };
 
-  const fetchData = useMemo(
-    () => async () => {
+  useEffect(() => {
+    const fetchData = async () => {
       try {
         const response = await fetch(
           `${getBaseUrl()}/api/search?username=${inputValue}`,
@@ -47,16 +45,13 @@ export default function SearchBar() {
         const fetchedData = await response.json();
         setData(fetchedData);
         setIsLoading(false);
+        //console.log("Veri alındı:", fetchedData.items);
       } catch (error) {
         console.error("Veri alınamadı:", error);
       }
-    },
-    [inputValue],
-  );
-
-  useEffect(() => {
+    };
     fetchData();
-  }, [fetchData]);
+  }, [inputValue]);
 
   return (
     <section className="flex flex-col items-center justify-center gap-5">

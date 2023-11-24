@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { Card, Spacer } from "@nextui-org/react";
+import { Card } from "@nextui-org/react";
 import Avatar from "./Avatar";
 
 export default function Header({ ...props }) {
@@ -39,7 +38,7 @@ export default function Header({ ...props }) {
             href={`https://gist.github.com/${props.login}`}
           >{`Public Gists: ${props.public_gists}`}</a>
           <h1 className="break-words">
-            Created at: {new Date(props.created_at).toLocaleString()}
+            Member Since: {new Date(props.created_at).toLocaleString()}
           </h1>
           <h1>
             Last Profile Update:{" "}

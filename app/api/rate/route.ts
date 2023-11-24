@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { Octokit } from "octokit";
 
 // Define an asynchronous function named GET
@@ -26,6 +26,7 @@ export async function GET() {
         resetTime: resetTime.toISOString(),
       });
     }
+
     const rate_limit = {
       search_limit: rateLimitResponse.data.resources.search.limit,
       search_remaining: rateLimitResponse.data.resources.search.remaining,
@@ -36,7 +37,7 @@ export async function GET() {
     // Log userRepos to the console (commented out)
     // console.log("User Repositories:", userRepos.url);
 
-    return NextResponse.json(rate_limit);
+    return NextResponse.json(rateLimitResponse.data);
   } catch (error) {
     // return a JSON response
     return NextResponse.json(error);
