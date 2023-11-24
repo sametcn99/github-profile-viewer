@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
-export default function Avatar({ avatar_url }: any) {
+export default function Avatar({ ...props }) {
+  const avatar_url = props.avatar_url || props.gravatar_url;
   return (
     <Image
       priority

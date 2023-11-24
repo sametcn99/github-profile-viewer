@@ -6,6 +6,7 @@ import type { NextRequest } from "next/server";
 export async function GET(request: NextRequest) {
   const nextUrl = request.nextUrl;
   const username = nextUrl.searchParams.get("username");
+
   if (username === null) {
     // Handle the case where "username" is not provided in the URL
     return NextResponse.json({
@@ -19,32 +20,33 @@ export async function GET(request: NextRequest) {
     },
     userAgent: "Github Profile Next UI", // Specify the user agent for the request
   });
+
   try {
+    // Fetch rate limit status
+    const rateLimitResponse = await octokit.request("GET /rate_limit");
+    const rateLimitRemaining = rateLimitResponse.data.resources.core.remaining;
+
+    // Check if the rate limit allows making the request
+    if (rateLimitRemaining === 0) {
+      const resetTime = new Date(
+        rateLimitResponse.data.resources.core.reset * 1000,
+      );
+      return NextResponse.json({
+        error: "Rate limit exceeded. Please try again later.",
+        resetTime: resetTime.toISOString(),
+      });
+    }
     // Fetch all repositories for the specified user
     const userRepos = await octokit.rest.repos.listForUser({
       username,
     });
-    // Extract specific information from each repository
-    const repoDetails = userRepos.data.map((repo) => ({
-      id: repo.id,
-      name: repo.name,
-      description: repo.description,
-      stars: repo.stargazers_count,
-      html_url: repo.html_url,
-      home_page: repo.homepage,
-      topics: repo.topics,
-      created_at: repo.created_at,
-      updated_at: repo.updated_at,
-      license_name: repo.license?.name,
-      license_url: repo.license?.url,
-      license_key: repo.license?.key,
-      language: repo.language,
-      license_spdx_id: repo.license?.spdx_id,
-    }));
 
     return NextResponse.json(userRepos);
   } catch (error) {
-    // return a JSON response
-    return NextResponse.json(error);
+    // Return a JSON response
+    return NextResponse.json({
+      error: "An error occurred while fetching data from GitHub API.",
+      details: error,
+    });
   }
 }

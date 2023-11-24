@@ -33,42 +33,55 @@ type GitHubRepo = {
 const Projects = ({ username }: any) => {
   // State to store GitHub API data
   const [data, setData] = useState<GitHubRepo[] | null>(null);
+  const [error, setError] = useState<string | null>(null); // New state for error message
+
   // Fetch data from GitHub API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getBaseUrl()}/api/repos?username=${username}`
+          `${getBaseUrl()}/api/repos?username=${username}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }
         const fetchedData = await response.json();
-        console.log(fetchedData);
+        if (fetchedData.error) {
+          // If there is an error in the data, set the error state
+          setError(fetchedData.error);
+        } else {
+          // If no error, set the data state
+          setData(fetchedData.data);
+        }
         // sort data by stars
         //const sortedData = fetchedData.sort((a, b) => b.stars - a.stars);
-
+        console.log(fetchedData);
         setData(fetchedData.data);
       } catch (error) {
         console.error("Veri alınamadı:", error);
       }
     };
-
     fetchData();
-  }, []);
+  }, [username]);
 
   return (
     <section className="">
+      {error && (
+        // Display error message in a div
+        <div className="mb-4 text-center font-bold text-red-500">
+          Error: {error}
+        </div>
+      )}
       {Array.isArray(data) &&
         data.map((project, index) => (
           <Card
-            className="z-10 mb-3 bg-opacity-50 select-none hover:scale-105 max-w-[35rem] flex flex-col"
+            className="z-10 mb-3 flex max-w-[35rem] select-none flex-col bg-opacity-50 hover:scale-105"
             key={`${project.id}-${index}`}
           >
             <CardHeader className="justify-between">
               <div className="flex gap-5">
                 <div className="flex flex-row flex-wrap items-center">
-                  <h1 className="font-semibold leading-none hover:font-bold text-small text-default-600">
+                  <h1 className="text-small font-semibold leading-none text-default-600 hover:font-bold">
                     {project.name}
                   </h1>
                   {project.stargazers_count > 0 && (
@@ -76,9 +89,9 @@ const Projects = ({ username }: any) => {
                       content="Give a star to help!"
                       delay={0}
                       closeDelay={0}
-                      className="bg-black bg-opacity-60 select-none"
+                      className="select-none bg-opacity-60 light:bg-black dark:bg-white"
                     >
-                      <div className="flex gap-2 items-center font-bold scale-85">
+                      <div className="flex scale-85 items-center gap-2 font-bold">
                         <FaStar />
                         {project.stargazers_count}
                       </div>
@@ -86,42 +99,42 @@ const Projects = ({ username }: any) => {
                   )}
                 </div>
               </div>
-              <div className="flex flex-wrap gap-1 justify-end items-center">
+              <div className="flex flex-wrap items-center justify-end gap-1">
                 {project.homepage && (
                   <a href={project.homepage} target="_blank">
                     <Button
                       className={
-                        "text-foreground border border-opacity-50 border-white hover:bg-opacity-50 hover:bg-zinc-700 transition-all duration-1000 fill-white "
+                        "border border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
                       }
                       radius="full"
                       size="sm"
                       variant={"bordered"}
                     >
                       Demo
-                      <MdOpenInNew className="text-sm fill-white" />
+                      <MdOpenInNew className="text-sm light:fill-black dark:fill-white" />
                     </Button>
                   </a>
                 )}
                 <a href={project.html_url} target="_blank">
                   <Button
                     className={
-                      "text-foreground border border-opacity-50 border-white hover:bg-opacity-50 hover:bg-zinc-700 transition-all duration-1000 fill-white "
+                      "border border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
                     }
                     radius="full"
                     size="sm"
                     variant={"bordered"}
                   >
                     Source Code
-                    <FaGithub className="text-sm fill-white" />
+                    <FaGithub className="text-sm light:fill-black dark:fill-white" />
                   </Button>
                 </a>
               </div>
             </CardHeader>
-            <CardBody className="py-0 px-3 text-small text-default-600">
+            <CardBody className="px-3 py-0 text-small text-default-600">
               {project.description}
             </CardBody>
-            <CardFooter className="flex flex-col gap-3 items-start">
-              <div className="flex flex-col flex-wrap gap-1 text-xs text-left item">
+            <CardFooter className="flex flex-col items-start gap-3">
+              <div className="item flex flex-col flex-wrap gap-1 text-left text-xs">
                 <p>{project.license?.spdx_id}</p>
                 <p>
                   {project.language ? `Language: ${project.language}` : null}
@@ -135,11 +148,11 @@ const Projects = ({ username }: any) => {
                   {new Date(project.updated_at).toLocaleDateString()}
                 </p>
               </div>
-              <div className="flex flex-row flex-wrap jus">
+              <div className="jus flex flex-row flex-wrap">
                 {project.topics.map((topic, index) => (
                   <p
                     key={index}
-                    className="p-1 mb-1 text-xs font-thin bg-opacity-5 rounded-2xl select-none hover:font-normal m-[0.063rem] bg-slate-400 dark:bg-slate-900"
+                    className="m-[0.063rem] mb-1 select-none rounded-2xl bg-slate-400 bg-opacity-5 p-1 text-xs font-thin hover:font-normal dark:bg-slate-900"
                   >
                     {topic}
                   </p>
