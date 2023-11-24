@@ -1,13 +1,16 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+import SearchBar from "@/components/search-bar";
 
 export default function Home() {
   return (
-    <section className="flex flex-col gap-4 justify-center items-center py-8 md:py-10"></section>
+    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <h1 className="text-3xl font-bold">Github Profile Viewer</h1>
+      <span className=" max-w-[50rem] text-center text-gray-500">
+        This website is a dynamic web platform created with Next.js and NextUI
+        that allows users to effortlessly explore GitHub profiles. Harnessing
+        the power of the GitHub API, our site seamlessly retrieves and displays
+        comprehensive information about any GitHub user.
+      </span>
+      <SearchBar />
+    </section>
   );
 }
