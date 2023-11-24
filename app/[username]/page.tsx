@@ -15,7 +15,6 @@ async function UserPage(searchParams: any) {
     `${getBaseUrl()}/api/public-events?username=${username}`,
   );
   const latestEvent = await latestEventRes.json();
-  console.log(latestEvent.latestEventDate);
   if (profile.data) {
     return (
       <section className=" flex w-full flex-col items-center">

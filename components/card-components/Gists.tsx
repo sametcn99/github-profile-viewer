@@ -6,9 +6,9 @@ import {
   CardBody,
   CardFooter,
   Button,
-  Tooltip,
 } from "@nextui-org/react";
 import { FaGithub } from "react-icons/fa";
+import Loading from "@/app/loading";
 
 type GitHubRepo = {
   id: number;
@@ -31,7 +31,8 @@ type GitHubRepo = {
 const Gists = ({ username }: any) => {
   // State to store GitHub API data
   const [data, setData] = useState<GitHubRepo[] | null>(null);
-  console.log(username);
+  const [isLoading, setIsloading] = useState(true);
+
   // Fetch data from GitHub API
   useEffect(() => {
     const fetchData = async () => {
@@ -46,6 +47,7 @@ const Gists = ({ username }: any) => {
         //const sortedData = fetchedData.sort((a, b) => b.stars - a.stars);
 
         setData(fetchedData);
+        setIsloading(false);
       } catch (error) {
         console.error("Veri alınamadı:", error);
       }
@@ -56,49 +58,57 @@ const Gists = ({ username }: any) => {
 
   return (
     <>
-      {Array.isArray(data) &&
-        data.map((gist, index) => (
-          <Card
-            className="z-10 my-3 max-w-[35rem] select-none bg-opacity-50 hover:scale-105"
-            key={`${gist.id}-${index}`}
-          >
-            <CardHeader className="justify-between">
-              <div className="flex flex-col items-start">
-                {Object.keys(gist.files).map((filename, index) => (
-                  <div key={index}>{filename}</div>
-                ))}
-              </div>
-              <div>
-                <a href={gist.html_url} target="_blank">
-                  <Button
-                    className={
-                      "border border-opacity-50 text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
-                    }
-                    radius="full"
-                    size="sm"
-                    variant={"bordered"}
-                  >
-                    Source Code
-                    <FaGithub className="text-sm light:fill-black dark:fill-white" />
-                  </Button>
-                </a>
-              </div>
-            </CardHeader>
-            <CardBody className="px-3 py-0 text-small text-default-600">
-              {gist.description}
-            </CardBody>
-            <CardFooter className="flex flex-col items-start gap-3">
-              <div className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-                <p>
-                  Created at: {new Date(gist.created_at).toLocaleDateString()}
-                </p>
-                <p>
-                  Last update: {new Date(gist.updated_at).toLocaleDateString()}
-                </p>
-              </div>
-            </CardFooter>
-          </Card>
-        ))}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {Array.isArray(data) &&
+            data.map((gist, index) => (
+              <Card
+                className="z-10 my-3 max-w-[35rem] select-none bg-opacity-50 hover:scale-105"
+                key={`${gist.id}-${index}`}
+              >
+                <CardHeader className="justify-between">
+                  <div className="flex flex-col items-start">
+                    {Object.keys(gist.files).map((filename, index) => (
+                      <div key={index}>{filename}</div>
+                    ))}
+                  </div>
+                  <div>
+                    <a href={gist.html_url} target="_blank">
+                      <Button
+                        className={
+                          "border border-opacity-50 text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
+                        }
+                        radius="full"
+                        size="sm"
+                        variant={"bordered"}
+                      >
+                        Source Code
+                        <FaGithub className="text-sm light:fill-black dark:fill-white" />
+                      </Button>
+                    </a>
+                  </div>
+                </CardHeader>
+                <CardBody className="px-3 py-0 text-small text-default-600">
+                  {gist.description}
+                </CardBody>
+                <CardFooter className="flex flex-col items-start gap-3">
+                  <div className="item flex flex-col flex-wrap gap-1 text-left text-xs">
+                    <p>
+                      Created at:{" "}
+                      {new Date(gist.created_at).toLocaleDateString()}
+                    </p>
+                    <p>
+                      Last update:{" "}
+                      {new Date(gist.updated_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                </CardFooter>
+              </Card>
+            ))}
+        </>
+      )}
     </>
   );
 };
