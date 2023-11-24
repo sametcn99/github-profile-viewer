@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
   }
   // Create a new instance of Octokit with GitHub token and API version
   const octokit = new Octokit({
+    auth: process.env.GH_TOKEN, // GitHub token obtained from environment variables
     headers: {
       "X-GitHub-Api-Version": "2022-11-28", // Specify the GitHub API version
     },
@@ -21,23 +22,18 @@ export async function GET(request: NextRequest) {
 
   try {
     // Replace 'username' with the GitHub username whose repositories you want to fetch
-    const events = await octokit.request("GET /users/:username/events", {
-      username: username,
+    // Fetch all repositories for the specified user
+    const userGists = await octokit.rest.search.users({
+      q: username,
+      per_page: 10,
     });
 
-    // Check if there are any events
-    if (events.data.length > 0) {
-      // Get the latest event
-      const latestEvent = events.data[0];
+    // Log userRepos to the console (commented out)
+    // console.log("User Repositories:", userRepos.url);
 
-      // Return the date of the latest event
-      return NextResponse.json({ latestEventDate: latestEvent.created_at });
-    } else {
-      // If there are no events, return a message
-      return NextResponse.json({ message: "No events found for the user." });
-    }
-  } catch (error: any) {
-    // Explicitly type 'error' as 'any' or use a more specific type if available
-    return NextResponse.json({ error: error.message });
+    return NextResponse.json(userGists.data);
+  } catch (error) {
+    // return a JSON response
+    return NextResponse.json(error);
   }
 }

@@ -1,12 +1,18 @@
 "use client";
 import { SearchIcon } from "@/components/icons";
 import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
-import { useState } from "react"; // Import useState hook
+import { useEffect, useState } from "react"; // Import useState hook
 import { useRouter } from "next/navigation";
+import { Input } from "@nextui-org/input";
+import { getBaseUrl } from "@/utils/utils";
+import SearchCard from "./search-card";
+import { debounce } from "lodash";
+import { useMemo } from "react";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState(""); // State to store input value
+  const [data, setData] = useState<[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   const handleKeyPress = (e: any) => {
@@ -28,6 +34,30 @@ export default function SearchBar() {
   const seachHandle = () => {
     router.push(`/${inputValue}`);
   };
+
+  const fetchData = useMemo(
+    () => async () => {
+      try {
+        const response = await fetch(
+          `${getBaseUrl()}/api/search?username=${inputValue}`,
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
+        }
+        const fetchedData = await response.json();
+        setData(fetchedData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Veri alınamadı:", error);
+      }
+    },
+    [inputValue],
+  );
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   return (
     <section className="flex flex-col items-center justify-center gap-5">
       <Input
@@ -46,6 +76,7 @@ export default function SearchBar() {
         onChange={handleChange} // Add onChange event handler to update input value
         value={inputValue} // Pass the input value to the component
       />
+      {data && <SearchCard data={data} />}
       <Button
         className="ml-2 w-9"
         onClick={handleSearchClick} // Add onClick event handler for the search button
