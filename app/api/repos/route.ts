@@ -39,6 +39,7 @@ export async function GET(request: NextRequest) {
     // Fetch all repositories for the specified user
     const userRepos = await octokit.rest.repos.listForUser({
       username,
+      per_page: 100,
     });
 
     return NextResponse.json(userRepos);

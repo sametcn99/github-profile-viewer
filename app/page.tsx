@@ -9,6 +9,10 @@ export default function Home() {
         that allows users to effortlessly explore GitHub profiles. Harnessing
         the power of the GitHub API, our site seamlessly retrieves and displays
         comprehensive information about any GitHub user.
+        <br />
+        <span className="text-sm font-extralight">
+          The display of projects and gists is limited to 100.
+        </span>
       </span>
       <SearchBar />
     </section>

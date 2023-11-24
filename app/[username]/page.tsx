@@ -10,8 +10,9 @@ async function UserPage(searchParams: any) {
   );
   const profile = await profileRes.json();
   const data = profile.data;
+
   const latestEventRes = await fetch(
-    `${getBaseUrl()}/api/events?username=${username}`,
+    `${getBaseUrl()}/api/public-events?username=${username}`,
   );
   const latestEvent = await latestEventRes.json();
   console.log(latestEvent.latestEventDate);

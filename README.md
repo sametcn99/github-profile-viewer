@@ -1,40 +1,35 @@
-# Next.js & NextUI Template
+# Github Profile Viewer
 
-This is a template for creating applications using Next.js 13 (app directory) and NextUI (v2).
+Explore GitHub profiles with ease using Github Profile Viewer, a dynamic web platform built with Next.js and styled with NextUI.
 
-## Technologies Used
+## Features
 
-- [Next.js 13](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- **Intuitive Search Interface:**
+  Easily search for any GitHub user by entering their username in the search bar on the homepage.
+
+- **Real-time GitHub Data:**
+  Utilizes the GitHub API to fetch and display up-to-date details about the searched user, including repositories, contributions, followers, and following.
+
+- **Dynamic URL Parameterization:**
+  The user's GitHub username becomes a part of the URL, enabling easy sharing and bookmarking of specific profiles.
+
+- **Next.js and NextUI Integration:**
+  Enjoy a seamless and visually appealing user experience with the power of Next.js and NextUI.
 
 ## How to Use
 
+1. Visit Github Profile Viewer.
+2. On the homepage, locate the search bar.
+3. Enter the GitHub username of the profile you want to explore.
+4. Click 'Search,' and witness the magic unfold as the site dynamically updates with the user's GitHub information.
 
-### Use the template with create-next-app
+## Why Github Profile Viewer?
 
-To create a new project based on this template using `create-next-app`, run the following command:
+- **Efficiency and Speed:**
+  Prioritizes speed and efficiency, ensuring quick access to GitHub profiles.
 
-```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
-```
+- **Responsive Design:**
+  Integrates Next.js and NextUI for a visually pleasing and responsive design on various devices.
 
-### Install dependencies
-
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
+- **Up-to-Date Information:**
+  Delivers real-time data thanks to the GitHub API, ensuring the latest information on GitHub profiles.

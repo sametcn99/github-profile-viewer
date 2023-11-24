@@ -23,8 +23,9 @@ export async function GET(request: NextRequest) {
   try {
     // Replace 'username' with the GitHub username whose repositories you want to fetch
     // Fetch all repositories for the specified user
-    const userGists = await octokit.request("GET /users/{username}/gists", {
-      username: username,
+    const userGists = await octokit.rest.gists.listForUser({
+      username,
+      per_page: 100,
     });
 
     // Log userRepos to the console (commented out)

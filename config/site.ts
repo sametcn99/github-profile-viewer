@@ -1,8 +1,9 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Next.js + NextUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Github Profile Viewer",
+  description:
+    "This website is a dynamic web platform created with Next.js and NextUI that allows users to effortlessly explore GitHub profiles.",
   navItems: [
     {
       label: "Home",
