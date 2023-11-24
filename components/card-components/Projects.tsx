@@ -99,7 +99,7 @@ const Projects = ({ username }: any) => {
                           content="Total Stars"
                           delay={0}
                           closeDelay={0}
-                          className="select-none bg-opacity-60 light:bg-black dark:bg-white"
+                          className="select-none bg-opacity-60 light:bg-black light:text-white dark:bg-white dark:text-black"
                         >
                           <div className="flex scale-85 items-center gap-2 font-bold">
                             <FaStar />

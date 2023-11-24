@@ -1,4 +1,5 @@
 import SearchBar from "@/components/search-bar";
+import Link from "next/link";
 
 export default function Home() {
   return (

@@ -9,7 +9,7 @@ export default function Avatar({ ...props }) {
       content="User Avatar"
       delay={0}
       closeDelay={0}
-      className="select-none bg-opacity-60 light:bg-black dark:bg-white"
+      className="select-none bg-opacity-60 light:bg-black light:text-white dark:bg-white dark:text-black"
     >
       <Image
         priority
