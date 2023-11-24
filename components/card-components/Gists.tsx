@@ -31,7 +31,7 @@ type GitHubRepo = {
 const Gists = ({ username }: any) => {
   // State to store GitHub API data
   const [data, setData] = useState<GitHubRepo[] | null>(null);
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch data from GitHub API
   useEffect(() => {
@@ -52,7 +52,7 @@ const Gists = ({ username }: any) => {
           : null;
 
         setData(sortedData);
-        setIsloading(false);
+        setIsLoading(false);
       } catch (error) {
         console.error("Veri alınamadı:", error);
       }

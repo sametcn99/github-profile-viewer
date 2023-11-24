@@ -35,7 +35,7 @@ const Projects = ({ username }: any) => {
   // State to store GitHub API data
   const [data, setData] = useState<GitHubRepo[] | null>(null);
   const [error, setError] = useState<string | null>(null); // New state for error message
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   // Fetch data from GitHub API
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +62,7 @@ const Projects = ({ username }: any) => {
           : null;
 
         setData(sortedData);
-        setIsloading(false);
+        setIsLoading(false);
       } catch (error) {
         console.error("Veri alınamadı:", error);
       }
