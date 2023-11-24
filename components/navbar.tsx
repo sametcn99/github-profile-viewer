@@ -14,7 +14,7 @@ import { GithubIcon } from "@/components/icons";
 
 export const Navbar = () => {
   return (
-    <NextUINavbar maxWidth="lg" position="sticky">
+    <NextUINavbar maxWidth="lg" position="static">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="max-w-fit gap-3">
           <NextLink

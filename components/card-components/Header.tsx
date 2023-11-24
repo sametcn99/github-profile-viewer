@@ -15,8 +15,13 @@ export default function Header({ ...props }) {
           <h1 className="text-5xl font-bold">{props.name}</h1>
           <h1 className="font-extralight">@{props.login}</h1>
           <h1 className="break-words">{props.bio}</h1>
-          <h1 className="break-words">{props.total_private_repos}</h1>
           <h1 className="break-words">{props.email}</h1>
+          <h1 className="break-words">{props.company}</h1>
+          <h1 className="break-words">From: {props.location}</h1>
+          <h1>
+            Profile Type: <span>{props.type}</span>
+          </h1>
+          <h1 className="break-words">{props.twitter_username}</h1>
           <a
             href={`${props.html_url}?tab=followers`}
           >{`Followers: ${props.followers}`}</a>
@@ -29,6 +34,9 @@ export default function Header({ ...props }) {
           <a
             href={`https://gist.github.com/${props.login}`}
           >{`Public Gists: ${props.public_gists}`}</a>
+          <h1 className="break-words">
+            Created at: {new Date(props.created_at).toLocaleString()}
+          </h1>
           <h1>
             Last Profile Update:{" "}
             <span>{new Date(props.updated_at).toLocaleString()}</span>

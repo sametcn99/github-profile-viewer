@@ -11,7 +11,7 @@ export default function Home() {
         comprehensive information about any GitHub user.
         <br />
         <span className="text-sm font-extralight">
-          The display of projects and gists is limited to 100.
+          The display of projects and gists is limited to 100.(for now)
         </span>
       </span>
       <SearchBar />

@@ -54,9 +54,6 @@ const Projects = ({ username }: any) => {
           // If no error, set the data state
           setData(fetchedData.data);
         }
-        // sort data by stars
-        //const sortedData = fetchedData.sort((a, b) => b.stars - a.stars);
-        console.log(fetchedData);
         setData(fetchedData.data);
         setIsloading(false);
       } catch (error) {

@@ -21,6 +21,21 @@ export async function GET(request: NextRequest) {
   });
 
   try {
+    // Fetch rate limit status
+    const rateLimitResponse = await octokit.request("GET /rate_limit");
+    const rateLimitRemaining = rateLimitResponse.data.resources.core.remaining;
+
+    // Check if the rate limit allows making the request
+    if (rateLimitRemaining === 0) {
+      const resetTime = new Date(
+        rateLimitResponse.data.resources.core.reset * 1000,
+      );
+      return NextResponse.json({
+        error: "Rate limit exceeded. Please try again later.",
+        resetTime: resetTime.toISOString(),
+      });
+    }
+
     // Replace 'username' with the GitHub username whose repositories you want to fetch
     // Fetch all repositories for the specified user
     const userGists = await octokit.rest.gists.listForUser({

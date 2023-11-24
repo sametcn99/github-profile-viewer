@@ -28,7 +28,6 @@ async function UserPage(searchParams: any) {
           name={data.name}
           bio={data.bio}
           company={data.company}
-          blog={data.blog}
           location={data.location}
           email={data.email}
           followers={data.followers}
@@ -36,7 +35,6 @@ async function UserPage(searchParams: any) {
           public_repos={data.public_repos}
           public_gists={data.public_gists}
           twitter_username={data.twitter_username}
-          hireable={data.hireable}
           type={data.type}
           followers_url={data.followers_url}
           following_url={data.following_url}
@@ -47,8 +45,7 @@ async function UserPage(searchParams: any) {
       </section>
     );
   } else {
-    // Eğer profile.data yoksa, isteği başarısız sayabilir veya başka bir işlem yapabilirsiniz.
-    return null; // veya başka bir şey döndürebilirsiniz, örneğin hata mesajı içeren bir bileşen
+    return null;
   }
 }
 
