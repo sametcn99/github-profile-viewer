@@ -23,15 +23,19 @@ export default function Header({ ...props }) {
           </h1>
           <h1 className="break-words">{props.twitter_username}</h1>
           <a
+            className="w-fit"
             href={`${props.html_url}?tab=followers`}
           >{`Followers: ${props.followers}`}</a>
           <a
+            className="w-fit"
             href={`${props.html_url}?tab=following`}
           >{`Following: ${props.following}`}</a>
           <a
+            className="w-fit"
             href={`${props.html_url}?tab=repositories`}
           >{`Public Repos: ${props.public_repos}`}</a>
           <a
+            className="w-fit"
             href={`https://gist.github.com/${props.login}`}
           >{`Public Gists: ${props.public_gists}`}</a>
           <h1 className="break-words">
