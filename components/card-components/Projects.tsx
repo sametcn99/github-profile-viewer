@@ -50,11 +50,18 @@ const Projects = ({ username }: any) => {
         if (fetchedData.error) {
           // If there is an error in the data, set the error state
           setError(fetchedData.error);
-        } else {
-          // If no error, set the data state
-          setData(fetchedData.data);
         }
-        setData(fetchedData.data);
+
+        // Sort the data by updated_at in descending order
+        const sortedData = Array.isArray(fetchedData.data)
+          ? fetchedData.data.sort(
+              (a: any, b: any) =>
+                new Date(b.updated_at).getTime() -
+                new Date(a.updated_at).getTime(),
+            )
+          : null;
+
+        setData(sortedData);
         setIsloading(false);
       } catch (error) {
         console.error("Veri alınamadı:", error);

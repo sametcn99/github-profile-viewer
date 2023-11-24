@@ -42,11 +42,16 @@ const Gists = ({ username }: any) => {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }
         const fetchedData = await response.json();
-        console.log(fetchedData);
-        // sort data by stars
-        //const sortedData = fetchedData.sort((a, b) => b.stars - a.stars);
+        // Sort the gists by updated_at in descending order
+        const sortedData = Array.isArray(fetchedData)
+          ? fetchedData.sort(
+              (a, b) =>
+                new Date(b.updated_at).getTime() -
+                new Date(a.updated_at).getTime(),
+            )
+          : null;
 
-        setData(fetchedData);
+        setData(sortedData);
         setIsloading(false);
       } catch (error) {
         console.error("Veri alınamadı:", error);
