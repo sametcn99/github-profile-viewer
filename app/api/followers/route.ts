@@ -5,7 +5,6 @@ import { Octokit } from "octokit";
 export async function GET(request: NextRequest) {
   const nextUrl = request.nextUrl;
   const username = nextUrl.searchParams.get("username");
-  console.log(username);
   if (username === null) {
     // Handle the case where "username" is not provided in the URL
     return NextResponse.json({

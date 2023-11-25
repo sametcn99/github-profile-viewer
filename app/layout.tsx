@@ -5,7 +5,6 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import clsx from "clsx";
-import Footer from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "@/components/scroll-to-top";
 
