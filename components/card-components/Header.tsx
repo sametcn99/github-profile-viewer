@@ -13,12 +13,12 @@ import { getBaseUrl } from "@/utils/utils";
 export default function Header({ ...props }) {
   return (
     <section className="flex h-fit w-full flex-col items-center justify-center  ">
-      <Card className="flex flex-row items-center justify-center">
+      <Card className="flex flex-row items-center justify-center p-5">
         <Avatar
           avatar_url={props.avatar_url}
           gravatar_url={props.gravatar_url}
         />
-        <Card className="flex h-fit w-full max-w-[35rem] flex-col items-center justify-center">
+        <Card className="flex h-fit w-full max-w-[35rem] flex-col items-center justify-center p-2">
           <section className="flex flex-col">
             <span className="flex flex-col">
               <span className="text-5xl font-bold" title="name">
