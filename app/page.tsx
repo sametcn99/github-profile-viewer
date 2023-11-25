@@ -1,3 +1,4 @@
+import RateCard from "@/components/RateCard";
 import SearchBar from "@/components/search-bar";
 import Link from "next/link";
 
@@ -15,13 +16,7 @@ export default function Home() {
           The display of projects and gists is limited to 100.(for now)
         </span>
       </span>
-      <Link
-        href={"/api/rate"}
-        target="_blank"
-        className="text-gray-500 hover:text-gray-600 hover:underline"
-      >
-        Api Status
-      </Link>
+      <RateCard />
       <SearchBar />
     </section>
   );

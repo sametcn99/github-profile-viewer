@@ -37,7 +37,7 @@ export async function GET() {
     // Log userRepos to the console (commented out)
     // console.log("User Repositories:", userRepos.url);
 
-    return NextResponse.json(rate_limit);
+    return NextResponse.json(rateLimitResponse.data);
   } catch (error) {
     // return a JSON response
     return NextResponse.json(error);
