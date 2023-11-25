@@ -8,7 +8,8 @@ import { Link } from "@nextui-org/link";
 
 import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
-
+import { Button } from "@nextui-org/button";
+import { HeartFilledIcon } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switch";
 import { GithubIcon } from "@/components/icons";
 
@@ -32,6 +33,18 @@ export const Navbar = () => {
             <GithubIcon className="text-default-500" />
           </Link>
           <ThemeSwitcher />
+        </NavbarItem>
+        <NavbarItem>
+          <Button
+            isExternal
+            as={Link}
+            className="bg-default-100 text-sm font-normal text-default-600"
+            href={siteConfig.links.sponsor}
+            startContent={<HeartFilledIcon className="text-danger" />}
+            variant="flat"
+          >
+            Sponsor
+          </Button>
         </NavbarItem>
       </NavbarContent>
     </NextUINavbar>
