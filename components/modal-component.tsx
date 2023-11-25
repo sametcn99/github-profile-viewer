@@ -11,7 +11,6 @@ import {
   User,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import { getBaseUrl } from "@/utils/utils";
 import Link from "next/link";
 
 export default function ModalComponent({

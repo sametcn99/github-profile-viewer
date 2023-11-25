@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import { FaGithub } from "react-icons/fa";
 import Loading from "@/app/loading";
+import { getSiteUrl } from "@/utils/utils";
 
 type GitHubRepo = {
   id: number;
@@ -37,7 +38,9 @@ const Gists = ({ username }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`api/gists?username=${username}`);
+        const response = await fetch(
+          `${getSiteUrl()}/api/gists?username=${username}`,
+        );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }

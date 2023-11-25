@@ -11,8 +11,8 @@ import {
 } from "@nextui-org/react";
 import { FaGithub, FaStar } from "react-icons/fa";
 import { MdOpenInNew } from "react-icons/md";
-import { getBaseUrl } from "@/utils/utils";
 import Loading from "@/app/loading";
+import { getSiteUrl } from "@/utils/utils";
 
 type GitHubRepo = {
   id: number;
@@ -41,7 +41,7 @@ const Projects = ({ username }: any) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getBaseUrl()}/api/repos?username=${username}`,
+          `${getSiteUrl()}/api/repos?username=${username}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);

@@ -3,14 +3,13 @@
 import React from "react";
 import Header from "@/components/card-components/Header";
 import TabSwitcher from "@/components/tab-switcher";
-import { getBaseUrl } from "@/utils/utils";
+import { getSiteUrl } from "@/utils/utils";
 
 async function fetchUserPage(searchParams: any) {
   try {
-    console.log(getBaseUrl());
     const username = searchParams.params.username;
     const profileRes = await fetch(
-      `${getBaseUrl()}/api/profile?username=${username}`,
+      `${getSiteUrl()}/api/profile?username=${username}`,
     );
 
     if (!profileRes.ok) {

@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import Avatar from "./Avatar";
 import ModalComponent from "../modal-component";
-import { getBaseUrl } from "@/utils/utils";
+import { getSiteUrl } from "@/utils/utils";
 
 export default function Header({ profileData }: any) {
   return (
@@ -51,12 +51,12 @@ export default function Header({ profileData }: any) {
           <ModalComponent
             title={`Followers: ${profileData.followers}`}
             modalTitle="Followers"
-            url={`${getBaseUrl()}/api/followers?username=${profileData.login}`}
+            url={`${getSiteUrl()}/api/followers?username=${profileData.login}`}
           />
           <ModalComponent
             title={`Followings: ${profileData.following}`}
             modalTitle="Followings"
-            url={`${getBaseUrl()}/api/following?username=${profileData.login}`}
+            url={`${getSiteUrl()}/api/following?username=${profileData.login}`}
           />
           <span
             className="w-fit"
