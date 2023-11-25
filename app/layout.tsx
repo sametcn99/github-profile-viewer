@@ -5,7 +5,6 @@ import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import clsx from "clsx";
-import { Analytics } from "@vercel/analytics/react";
 import ScrollToTop from "@/components/scroll-to-top";
 
 export const metadata: Metadata = {
@@ -53,7 +52,6 @@ export default function RootLayout({
             </main>
           </div>
         </Providers>
-        <Analytics />
         <ScrollToTop />
       </body>
     </html>
