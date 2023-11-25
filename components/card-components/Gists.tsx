@@ -70,7 +70,7 @@ const Gists = ({ username }: any) => {
           {Array.isArray(data) &&
             data.map((gist, index) => (
               <Card
-                className="z-10 my-3 max-w-[35rem] select-none bg-opacity-50 hover:scale-105"
+                className="z-10 my-3 max-w-[45rem] select-none bg-opacity-50 hover:scale-105"
                 key={`${gist.id}-${index}`}
               >
                 <CardHeader className="justify-between">
