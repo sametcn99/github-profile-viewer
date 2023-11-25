@@ -1,5 +1,5 @@
 import { Tooltip } from "@nextui-org/react";
-import Image from "next/image";
+import { Image } from "@nextui-org/react";
 import React from "react";
 
 export default function Avatar({ ...props }) {
@@ -12,11 +12,11 @@ export default function Avatar({ ...props }) {
       className="select-none bg-opacity-60 light:bg-black light:text-white dark:bg-white dark:text-black"
     >
       <Image
-        priority
+        isZoomed
         src={avatar_url}
         alt="profile image"
-        width={200}
-        height={200}
+        width={500}
+        height={500}
         loading="eager"
         onDragStart={(e) => e.preventDefault()} // Prevent dragging
         className="rounded-large p-2"

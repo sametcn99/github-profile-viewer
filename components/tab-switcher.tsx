@@ -5,11 +5,11 @@ import Gists from "./card-components/Gists";
 
 export default function TabSwitcher({ username }: any) {
   return (
-    <section className="sticky top-0 z-10 mt-2 flex select-none flex-col items-center">
+    <section className="sticky top-0 z-10 mt-2 flex w-full select-none flex-col items-center">
       <Tabs
         defaultSelectedKey={"projects"}
         aria-label="Options"
-        className={`sticky top-0 z-50 flex w-full items-center justify-center p-2 lg:w-[35rem] lg:p-0`}
+        className={`sticky top-0 z-50 flex w-full items-center justify-center p-2 lg:p-0`}
       >
         <Tab key="projects" title="Projects">
           <Projects username={username} />
