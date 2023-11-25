@@ -19,7 +19,7 @@ export default function Avatar({ ...props }) {
         height={200}
         loading="eager"
         onDragStart={(e) => e.preventDefault()} // Prevent dragging
-        className="rounded-large"
+        className="rounded-large p-2"
       />
     </Tooltip>
   );

@@ -17,7 +17,7 @@ async function UserPage(searchParams: any) {
   const latestEvent = await latestEventRes.json();
   if (profile.data) {
     return (
-      <section className=" flex flex-col justify-center lg:flex-row  ">
+      <section className=" flex w-full flex-col  justify-center space-y-4">
         <Header
           login={data.login}
           created_at={data.created_at}
