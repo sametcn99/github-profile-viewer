@@ -74,10 +74,6 @@ export default function Header({ ...props }) {
             Last Profile Update: <br />
             <span>{new Date(props.updated_at).toLocaleString()}</span>
           </span>
-          <span title="Last Event">
-            Last Event: <br />
-            <span>{new Date(props.latestEvent).toLocaleString()}</span>
-          </span>
         </section>
       </Card>
     </section>

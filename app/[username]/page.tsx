@@ -11,10 +11,6 @@ async function UserPage(searchParams: any) {
   const profile = await profileRes.json();
   const data = profile.data;
 
-  const latestEventRes = await fetch(
-    `${getBaseUrl()}/api/public-events?username=${username}`,
-  );
-  const latestEvent = await latestEventRes.json();
   if (profile.data) {
     return (
       <section className=" flex w-full flex-col justify-center space-y-4">
@@ -39,7 +35,6 @@ async function UserPage(searchParams: any) {
           followers_url={data.followers_url}
           following_url={data.following_url}
           gists_url={data.gists_url}
-          latestEvent={latestEvent.latestEventDate}
         />
         <TabSwitcher username={username} />
       </section>
