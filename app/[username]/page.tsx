@@ -7,6 +7,7 @@ import { getBaseUrl } from "@/utils/utils";
 
 async function fetchUserPage(searchParams: any) {
   try {
+    console.log(getBaseUrl());
     const username = searchParams.params.username;
     const profileRes = await fetch(
       `${getBaseUrl()}/api/profile?username=${username}`,
