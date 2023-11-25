@@ -20,16 +20,12 @@ async function fetchUserPage(searchParams: any) {
     const profile = await profileRes.json();
     const data = profile.data;
 
-    if (data) {
-      return (
-        <section className="flex w-full flex-col justify-center space-y-4">
-          <Header profileData={data} />
-          <TabSwitcher username={username} />
-        </section>
-      );
-    } else {
-      return <div>Error fetching user profile. Please try again later.</div>;
-    }
+    return (
+      <section className="flex w-full flex-col justify-center space-y-4">
+        <Header profileData={data} />
+        <TabSwitcher username={username} />
+      </section>
+    );
   } catch (error) {
     console.error("Error fetching user profile:", error);
     return <div>Error fetching user profile. Please try again later.</div>;
