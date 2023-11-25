@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react"; // Import useState hook
 import { useRouter } from "next/navigation";
 import { Input } from "@nextui-org/input";
-import { getBaseUrl } from "@/utils/utils";
+import { getSiteUrl } from "@/utils/utils";
 import SearchCard from "./search-card";
 
 export default function SearchBar() {
@@ -37,7 +37,7 @@ export default function SearchBar() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getBaseUrl()}/api/search?username=${inputValue}`,
+          `${getSiteUrl()}/api/search?username=${inputValue}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
