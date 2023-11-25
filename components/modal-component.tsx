@@ -73,6 +73,7 @@ export default function ModalComponent({
                       <li key={index}>
                         <Link href={`/${item.login}`}>
                           <User
+                            className="flex w-full items-center justify-start p-2 hover:bg-blue-950 hover:bg-opacity-30 dark:hover:bg-black dark:hover:bg-opacity-30"
                             key={index}
                             name={item.login}
                             description={item.type}
