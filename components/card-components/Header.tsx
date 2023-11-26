@@ -19,16 +19,40 @@ export default function Header({ profileData }: any) {
             <span className="text-5xl font-bold" title="name">
               {profileData.name}
             </span>
-            <span className="font-extralight" title="username">
+            <a
+              className="font-extralight hover:underline"
+              title="username"
+              href={profileData.html_url}
+            >
               @{profileData.login}
-            </span>
+            </a>
             <Divider className="my-1" />
           </span>
           <span className="break-words" title="biography">
             {profileData.bio}
           </span>
-          <span className="break-words" title="email">
+          <a
+            className="break-words hover:underline"
+            title="email"
+            type="email"
+            href={`mailto:${profileData.email}`}
+          >
             {profileData.email}
+          </a>
+          <span className="break-words" title="email">
+            {profileData.blog && (
+              <>
+                <span>Website: </span>
+                <a
+                  className="hover:underline"
+                  href={profileData.blog}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {profileData.blog}
+                </a>
+              </>
+            )}
           </span>
           <span className="break-words" title="company">
             {profileData.company}
@@ -40,7 +64,8 @@ export default function Header({ profileData }: any) {
             Profile Type: <span>{profileData.type}</span>
           </span>
           <span className="break-words" title="twitter user name">
-            {profileData.twitter_username}
+            {profileData.twitter_username &&
+              `Twitter: ${profileData.twitter_username}`}
           </span>
           <ModalComponent
             title={`Followers: ${profileData.followers}`}

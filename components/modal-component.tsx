@@ -45,7 +45,7 @@ export default function ModalComponent({
     <div title={modalTitle}>
       <div
         onClick={onOpen}
-        className="m-0  bg-transparent p-0 hover:cursor-pointer"
+        className="m-0  bg-transparent p-0 hover:cursor-pointer hover:underline"
       >
         {title}
       </div>
@@ -60,7 +60,7 @@ export default function ModalComponent({
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 ">
                 {modalTitle}
               </ModalHeader>
               <ModalBody>
