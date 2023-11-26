@@ -19,7 +19,12 @@ export async function GET(request: NextRequest) {
     },
   });
   try {
-    const followers = await octokit.request(`GET /users/${username}/followers`);
+    const followers = await octokit.request(
+      `GET /users/${username}/followers`,
+      {
+        per_page: 100, // Adjust per_page based on your needs
+      },
+    );
 
     return NextResponse.json(followers.data);
   } catch (error: any) {
