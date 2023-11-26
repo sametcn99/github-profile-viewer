@@ -14,29 +14,6 @@ export async function GET() {
   try {
     // Fetch rate limit status
     const rateLimitResponse = await octokit.request("GET /rate_limit");
-    const rateLimitRemaining = rateLimitResponse.data.resources.core.remaining;
-
-    // Check if the rate limit allows making the request
-    if (rateLimitRemaining === 0) {
-      const resetTime = new Date(
-        rateLimitResponse.data.resources.core.reset * 1000,
-      );
-      return NextResponse.json({
-        error: "Rate limit exceeded. Please try again later.",
-        resetTime: resetTime.toISOString(),
-      });
-    }
-
-    const rate_limit = {
-      search_limit: rateLimitResponse.data.resources.search.limit,
-      search_remaining: rateLimitResponse.data.resources.search.remaining,
-      search_reset: rateLimitResponse.data.resources.search.reset,
-      rate: rateLimitResponse.data.rate,
-    };
-
-    // Log userRepos to the console (commented out)
-    // console.log("User Repositories:", userRepos.url);
-
     return NextResponse.json(rateLimitResponse.data);
   } catch (error) {
     // return a JSON response
