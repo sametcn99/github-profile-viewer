@@ -49,44 +49,48 @@ export default function ModalComponent({
       >
         {title}
       </div>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        backdrop="opaque"
-        size="sm"
-        placement="center"
-        scrollBehavior="inside"
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1 ">
-                {modalTitle}
-              </ModalHeader>
-              <ModalBody>
-                <ul className="space-y-2">
-                  {Array.isArray(data) &&
-                    data.map((item: any, index: number) => (
-                      <li key={index}>
-                        <Link href={`/${item.login}`}>
-                          <User
-                            className="flex w-full items-center justify-start p-2 hover:bg-blue-950 hover:bg-opacity-30 dark:hover:bg-black dark:hover:bg-opacity-30"
-                            key={index}
-                            name={item.login}
-                            description={item.type}
-                            avatarProps={{
-                              src: `${item.avatar_url}`,
-                            }}
-                          />
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      <>
+        {Array.isArray(data) && data?.length > 0 && (
+          <Modal
+            isOpen={isOpen}
+            onOpenChange={onOpenChange}
+            backdrop="opaque"
+            size="sm"
+            placement="center"
+            scrollBehavior="inside"
+          >
+            <ModalContent>
+              {(onClose) => (
+                <>
+                  <ModalHeader className="flex flex-col gap-1 ">
+                    {modalTitle}
+                  </ModalHeader>
+                  <ModalBody>
+                    <ul className="space-y-2">
+                      {Array.isArray(data) &&
+                        data.map((item: any, index: number) => (
+                          <li key={index}>
+                            <Link href={`/${item.login}`}>
+                              <User
+                                className="flex w-full items-center justify-start p-2 hover:bg-blue-950 hover:bg-opacity-30 dark:hover:bg-black dark:hover:bg-opacity-30"
+                                key={index}
+                                name={item.login}
+                                description={item.type}
+                                avatarProps={{
+                                  src: `${item.avatar_url}`,
+                                }}
+                              />
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
+                  </ModalBody>
+                </>
+              )}
+            </ModalContent>
+          </Modal>
+        )}
+      </>
     </div>
   );
 }
