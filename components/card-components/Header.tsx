@@ -39,7 +39,7 @@ export default function Header({ profileData }: any) {
           >
             {profileData.email}
           </a>
-          <span className="break-words" title="email">
+          <span className="break-words" title="website">
             {profileData.blog && (
               <>
                 <span>Website: </span>
