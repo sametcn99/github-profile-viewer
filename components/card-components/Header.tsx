@@ -45,7 +45,7 @@ export default function Header({ profileData }: any) {
                 <span>Website: </span>
                 <a
                   className="hover:underline"
-                  href={profileData.blog}
+                  href={`http://${profileData.blog}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
