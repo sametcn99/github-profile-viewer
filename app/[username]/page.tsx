@@ -4,6 +4,7 @@ import React from "react";
 import Header from "@/components/card-components/Header";
 import TabSwitcher from "@/components/tab-switcher";
 import { getSiteUrl } from "@/utils/utils";
+import FilterDataBar from "@/components/FilterDataBar";
 
 async function fetchUserPage(searchParams: any) {
   try {
@@ -24,7 +25,7 @@ async function fetchUserPage(searchParams: any) {
 
     if (data) {
       return (
-        <section className="flex w-full flex-col justify-center space-y-4">
+        <section className="flex w-full flex-col items-center justify-center gap-3">
           <Header profileData={data} />
           <TabSwitcher username={username} />
         </section>

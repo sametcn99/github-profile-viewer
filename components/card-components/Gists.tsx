@@ -10,29 +10,15 @@ import {
 import { FaGithub } from "react-icons/fa";
 import Loading from "@/app/loading";
 import { getSiteUrl } from "@/utils/utils";
+import FilterDataBar from "../FilterDataBar";
+import { GitHubRepo } from "@/types";
 
-type GitHubRepo = {
-  id: number;
-  name: string;
-  stars: number;
-  html_url: string;
-  home_page: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  topics: string[];
-  license_name: string;
-  license_url: string;
-  language: string;
-  license_key: string;
-  license_spdx_id: string;
-  files: string[];
-};
 // Gistss component
 const Gists = ({ username }: any) => {
   // State to store GitHub API data
   const [data, setData] = useState<GitHubRepo[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterValue, setFilterValue] = useState("");
 
   // Fetch data from GitHub API
   useEffect(() => {
@@ -42,7 +28,7 @@ const Gists = ({ username }: any) => {
           `${getSiteUrl()}/api/gists?username=${username}`,
         );
         if (!response.ok) {
-          throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         const fetchedData = await response.json();
         // Sort the gists by updated_at in descending order
@@ -57,21 +43,34 @@ const Gists = ({ username }: any) => {
         setData(sortedData);
         setIsLoading(false);
       } catch (error) {
-        console.error("Veri alınamadı:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, [username]);
 
+  const filteredData = data
+    ? data.filter((project) =>
+        Object.keys(project.files).some((filename) =>
+          filename.toLowerCase().includes(filterValue.toLowerCase()),
+        ),
+      )
+    : null;
+
   return (
-    <>
+    <section className="flex flex-col items-center gap-3">
+      <FilterDataBar
+        setFilterValue={setFilterValue}
+        count={filteredData?.length}
+        totalCount={data?.length}
+      />
       {isLoading ? (
         <Loading />
       ) : (
-        <>
+        <section>
           {Array.isArray(data) &&
-            data.map((gist, index) => (
+            filteredData?.map((gist, index) => (
               <Card
                 className="z-10 my-3 max-w-[45rem] select-none bg-opacity-50 hover:scale-105"
                 key={`${gist.id}-${index}`}
@@ -115,9 +114,9 @@ const Gists = ({ username }: any) => {
                 </CardFooter>
               </Card>
             ))}
-        </>
+        </section>
       )}
-    </>
+    </section>
   );
 };
 

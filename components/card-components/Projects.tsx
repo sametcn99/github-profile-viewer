@@ -13,29 +13,17 @@ import { FaGithub, FaStar } from "react-icons/fa";
 import { MdOpenInNew } from "react-icons/md";
 import Loading from "@/app/loading";
 import { getSiteUrl } from "@/utils/utils";
+import FilterDataBar from "../FilterDataBar";
+import { GitHubRepo } from "@/types";
 
-type GitHubRepo = {
-  id: number;
-  name: string;
-  stargazers_count: number;
-  html_url: string;
-  homepage: string;
-  description: string;
-  created_at: string;
-  updated_at: string;
-  topics: string[];
-  license_name: string;
-  license_url: string;
-  language: string;
-  license_key: string;
-  license: any;
-};
 // Projects component
 const Projects = ({ username }: any) => {
   // State to store GitHub API data
   const [data, setData] = useState<GitHubRepo[] | null>(null);
   const [error, setError] = useState<string | null>(null); // New state for error message
   const [isLoading, setIsLoading] = useState(true);
+  const [filterValue, setFilterValue] = useState("");
+
   // Fetch data from GitHub API
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +32,7 @@ const Projects = ({ username }: any) => {
           `${getSiteUrl()}/api/repos?username=${username}`,
         );
         if (!response.ok) {
-          throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         const fetchedData = await response.json();
         if (fetchedData.error) {
@@ -64,14 +52,25 @@ const Projects = ({ username }: any) => {
         setData(sortedData);
         setIsLoading(false);
       } catch (error) {
-        console.error("Veri alınamadı:", error);
+        console.error("Error fetching data:", error);
       }
     };
     fetchData();
   }, [username]);
 
+  const filteredData = data
+    ? data.filter((project) =>
+        project.name.toLowerCase().includes(filterValue.toLowerCase()),
+      )
+    : null;
+
   return (
-    <>
+    <section className="flex flex-col items-center gap-3">
+      <FilterDataBar
+        setFilterValue={setFilterValue}
+        count={filteredData?.length}
+        totalCount={data?.length}
+      />
       {isLoading ? (
         <Loading />
       ) : (
@@ -82,8 +81,9 @@ const Projects = ({ username }: any) => {
               Error: {error}
             </div>
           )}
+
           {Array.isArray(data) &&
-            data.map((project, index) => (
+            filteredData?.map((project, index) => (
               <Card
                 className="z-10 mb-3 flex max-w-[45rem] select-none flex-col bg-opacity-50 hover:scale-105"
                 key={`${project.id}-${index}`}
@@ -175,7 +175,7 @@ const Projects = ({ username }: any) => {
             ))}
         </section>
       )}
-    </>
+    </section>
   );
 };
 
