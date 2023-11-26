@@ -19,7 +19,6 @@ export async function GET(request: NextRequest) {
     },
   });
   try {
-    // Replace 'username' with the GitHub username whose repositories you want to fetch
     const followers = await octokit.request(`GET /users/${username}/following`);
 
     return NextResponse.json(followers.data);

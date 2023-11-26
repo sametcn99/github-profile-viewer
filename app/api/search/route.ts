@@ -21,22 +21,11 @@ export async function GET(request: NextRequest) {
   });
 
   try {
-    // Replace 'username' with the GitHub username whose repositories you want to fetch
-    // Fetch all repositories for the specified user
-    const userGists = await octokit.rest.search.users({
+    const users = await octokit.rest.search.users({
       q: username,
       per_page: 10,
     });
-
-    // const userGists = await octokit.request("GET /search/users", {
-    //   q: username,
-    //   per_page: 10,
-    // });
-
-    // Log userRepos to the console (commented out)
-    // console.log("User Repositories:", userRepos.url);
-
-    return NextResponse.json(userGists.data);
+    return NextResponse.json(users.data);
   } catch (error) {
     // return a JSON response
     return NextResponse.json(error);

@@ -20,7 +20,6 @@ export async function GET(request: NextRequest) {
   });
 
   try {
-    // Replace 'username' with the GitHub username whose repositories you want to fetch
     const events = await octokit.request("GET /users/:username/events", {
       username: username,
     });

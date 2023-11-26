@@ -21,7 +21,6 @@ export async function GET(request: NextRequest) {
   });
 
   try {
-    // Replace 'username' with the GitHub username whose repositories you want to fetch
     const userDetails = await octokit.rest.users.getByUsername({
       username,
     });
