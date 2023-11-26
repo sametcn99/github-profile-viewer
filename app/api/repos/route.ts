@@ -22,11 +22,29 @@ export async function GET(request: NextRequest) {
   });
 
   try {
-    // Fetch all repositories for the specified user
-    const userRepos = await octokit.rest.repos.listForUser({
-      username,
-      per_page: 100,
-    });
+    let userRepos: any[] = [];
+    let page = 1;
+
+    // Fetch repositories for the specified user until there are no more pages
+    while (true) {
+      const response = await octokit.rest.repos.listForUser({
+        username,
+        per_page: 100,
+        page,
+      });
+
+      // Concatenate the repositories to the existing array
+      userRepos = userRepos.concat(response.data);
+
+      // Check if there is another page
+      const linkHeader = response.headers.link;
+      if (!linkHeader || !linkHeader.includes('rel="next"')) {
+        break;
+      }
+
+      // Increment the page number for the next request
+      page++;
+    }
 
     return NextResponse.json(userRepos);
   } catch (error) {

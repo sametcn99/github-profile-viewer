@@ -8,20 +8,17 @@ import { getSiteUrl } from "@/utils/utils";
 import SearchCard from "./search-card";
 
 export default function SearchBar() {
-  const [inputValue, setInputValue] = useState(""); // State to store input value
+  const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState<[] | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   const handleKeyPress = (e: any) => {
-    // Check if the pressed key is Enter (key code 13)
     if (e.key === "Enter") {
       seachHandle();
     }
   };
 
   const handleChange = (e: any) => {
-    // Update the input value in the state
     setInputValue(e.target.value);
   };
 
@@ -44,8 +41,6 @@ export default function SearchBar() {
         }
         const fetchedData = await response.json();
         setData(fetchedData);
-        setIsLoading(false);
-        //console.log("Veri alındı:", fetchedData.items);
       } catch (error) {
         console.error("Veri alınamadı:", error);
       }
@@ -67,15 +62,12 @@ export default function SearchBar() {
         labelPlacement="outside"
         placeholder="write user name..."
         type="search"
-        onKeyPress={handleKeyPress} // Add onKeyPress event handler
-        onChange={handleChange} // Add onChange event handler to update input value
-        value={inputValue} // Pass the input value to the component
+        onKeyPress={handleKeyPress}
+        onChange={handleChange}
+        value={inputValue}
       />
       {data && <SearchCard data={data} />}
-      <Button
-        className="ml-2 w-9"
-        onClick={handleSearchClick} // Add onClick event handler for the search button
-      >
+      <Button className="ml-2 w-9" onClick={handleSearchClick}>
         Search
       </Button>
     </section>

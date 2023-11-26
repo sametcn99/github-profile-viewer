@@ -1,11 +1,5 @@
 "use client";
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  useDisclosure,
-} from "@nextui-org/react";
+import { Card, Divider } from "@nextui-org/react";
 import Avatar from "./Avatar";
 import ModalComponent from "../modal-component";
 import { getSiteUrl } from "@/utils/utils";

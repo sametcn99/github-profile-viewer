@@ -1,35 +1,18 @@
 "use client";
-import React from "react";
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button,
   useDisclosure,
-  User,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { getSiteUrl } from "@/utils/utils";
 
-export default function RateCard({ title, username, url, modalTitle }: any) {
+export default function RateCard({ username, url, modalTitle }: any) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [data, setData] = useState<[] | null>(null);
 
-  //   // Function to traverse the object and format all "reset" fields
-  //   const formatAllResets = (obj: any) => {
-  //     for (const key in obj) {
-  //       if (typeof obj[key] === "object" && obj[key] !== null) {
-  //         formatAllResets(obj[key]);
-  //       } else if (key === "reset" && typeof obj[key] === "number") {
-  //         obj[key] = new Date(obj[key] * 1000).toISOString();
-  //       }
-  //     }
-  //   };
-
-  // Fetch data from GitHub API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -41,7 +24,6 @@ export default function RateCard({ title, username, url, modalTitle }: any) {
         if (fetchedData.error) {
           console.log(fetchedData.error);
         }
-        //formatAllResets(fetchedData);
         setData(fetchedData);
       } catch (error) {
         console.error("Veri alınamadı:", error);

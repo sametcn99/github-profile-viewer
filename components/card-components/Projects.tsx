@@ -53,8 +53,8 @@ const Projects = ({ username }: any) => {
         }
 
         // Sort the data by updated_at in descending order
-        const sortedData = Array.isArray(fetchedData.data)
-          ? fetchedData.data.sort(
+        const sortedData = Array.isArray(fetchedData)
+          ? fetchedData.sort(
               (a: any, b: any) =>
                 new Date(b.updated_at).getTime() -
                 new Date(a.updated_at).getTime(),
