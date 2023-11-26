@@ -7,7 +7,7 @@ import { getSiteUrl } from "@/utils/utils";
 export default function Header({ profileData }: any) {
   return (
     <section className="flex  items-center justify-center  ">
-      <Card className="flex flex-col items-center justify-center p-5 md:flex-row">
+      <Card className="flex flex-col items-center justify-center bg-opacity-50 p-5 md:flex-row">
         <Card className="scale-80 md:h-fit md:w-fit">
           <Avatar
             avatar_url={profileData.avatar_url}
