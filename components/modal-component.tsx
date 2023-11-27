@@ -9,6 +9,7 @@ import {
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Loading from "@/app/loading";
 
 export default function ModalComponent({
   title,
@@ -19,28 +20,31 @@ export default function ModalComponent({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [data, setData] = useState<[] | null>(null);
   const [error, setError] = useState<string | null>(null); // New state for error message
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   // Fetch data from GitHub API
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${url}`);
-        if (!response.ok) {
-          throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
-        }
-        const fetchedData = await response.json();
-        if (fetchedData.error) {
-          // If there is an error in the data, set the error state
-          setError(fetchedData.error);
-        }
-        setData(fetchedData);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Veri alınamadı:", error);
+    if (isOpen === true) {
+      fetchData();
+    }
+  }, [isOpen, url, username]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${url}`);
+      if (!response.ok) {
+        throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
       }
-    };
-    fetchData();
-  }, [url, username]);
+      const fetchedData = await response.json();
+      if (fetchedData.error) {
+        // If there is an error in the data, set the error state
+        setError(fetchedData.error);
+      }
+      setData(fetchedData);
+      setIsLoaded(true);
+    } catch (error) {
+      console.error("Veri alınamadı:", error);
+    }
+  };
   return (
     <div title={modalTitle}>
       <div
@@ -66,24 +70,28 @@ export default function ModalComponent({
                     {modalTitle}
                   </ModalHeader>
                   <ModalBody>
-                    <ul className="space-y-2">
-                      {Array.isArray(data) &&
-                        data.map((item: any, index: number) => (
-                          <li key={index}>
-                            <Link href={`/${item.login}`}>
-                              <User
-                                className="flex w-full items-center justify-start p-2 hover:bg-blue-950 hover:bg-opacity-30 dark:hover:bg-black dark:hover:bg-opacity-30"
-                                key={index}
-                                name={item.login}
-                                description={item.type}
-                                avatarProps={{
-                                  src: `${item.avatar_url}`,
-                                }}
-                              />
-                            </Link>
-                          </li>
-                        ))}
-                    </ul>
+                    {isLoaded ? (
+                      <ul className="space-y-2">
+                        {Array.isArray(data) &&
+                          data.map((item: any, index: number) => (
+                            <li key={index}>
+                              <Link href={`/${item.login}`}>
+                                <User
+                                  className="flex w-full items-center justify-start p-2 hover:bg-blue-950 hover:bg-opacity-30 dark:hover:bg-black dark:hover:bg-opacity-30"
+                                  key={index}
+                                  name={item.login}
+                                  description={item.type}
+                                  avatarProps={{
+                                    src: `${item.avatar_url}`,
+                                  }}
+                                />
+                              </Link>
+                            </li>
+                          ))}
+                      </ul>
+                    ) : (
+                      <Loading />
+                    )}
                   </ModalBody>
                 </>
               )}
