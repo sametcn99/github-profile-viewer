@@ -2,7 +2,7 @@ module.exports = {
     async headers() {
         return [
             {
-                source: '/api/:path*', // /api altındaki tüm rotaları belirtin
+                source: '/(.*)',
                 headers: [
                     {
                         key: 'Cache-Control',
