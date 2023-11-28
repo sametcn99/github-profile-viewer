@@ -1,17 +1,5 @@
-module.exports = {
-    async headers() {
-        return [
-            {
-                source: '/(.*)',
-                headers: [
-                    {
-                        key: 'Cache-Control',
-                        value: 'no-store', // Önbelleklemeyi devre dışı bırakır
-                    },
-                ],
-            },
-        ];
-    },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
     images: {
         remotePatterns: [
             {
@@ -21,4 +9,7 @@ module.exports = {
         ],
     },
     productionBrowserSourceMaps: true,
-};
+
+}
+
+module.exports = nextConfig

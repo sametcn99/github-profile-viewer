@@ -16,7 +16,9 @@ export default function RateCard({ username, url, modalTitle }: any) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${getSiteUrl()}/api/rate`);
+        const response = await fetch(`${getSiteUrl()}/api/rate`, {
+          next: { revalidate: 3600 },
+        });
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
         }
