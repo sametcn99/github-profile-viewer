@@ -13,7 +13,7 @@ export async function GET() {
 
   try {
     // Fetch rate limit status
-    const rateLimitResponse = await octokit.request("GET /rate_limit");
+    const rateLimitResponse = await octokit.rest.rateLimit.get();
     return NextResponse.json(rateLimitResponse.data);
   } catch (error) {
     // return a JSON response
