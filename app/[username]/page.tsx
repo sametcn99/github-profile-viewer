@@ -25,7 +25,7 @@ async function fetchUserPage(searchParams: any) {
 
     if (data) {
       return (
-        <section className="flex w-full flex-col items-center justify-center gap-3">
+        <section className="flex w-full select-none flex-col items-center justify-center gap-3">
           <Header profileData={data} />
           <TabSwitcher username={username} />
         </section>

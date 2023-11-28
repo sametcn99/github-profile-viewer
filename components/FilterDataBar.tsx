@@ -7,7 +7,7 @@ export default function FilterDataBar({
   totalCount,
 }: any) {
   return (
-    <section className="w-f mx-auto flex flex-row items-center space-x-2">
+    <section className=" mx-auto flex flex-row items-center space-x-2">
       <Input
         aria-label="Search"
         classNames={{
