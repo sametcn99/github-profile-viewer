@@ -11,6 +11,7 @@ import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import Loading from "@/app/loading";
 import FilterDataBar from "./FilterDataBar";
+import { VList } from "virtua";
 
 export default function ModalComponent({
   title,
@@ -31,7 +32,6 @@ export default function ModalComponent({
         throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
       }
       const fetchedData = await response.json();
-
       if (Array.isArray(fetchedData) && fetchedData.length > 0) {
         setData((prevData) => {
           const newData = Array.isArray(fetchedData)
@@ -39,7 +39,7 @@ export default function ModalComponent({
             : [fetchedData];
           return [...prevData, ...newData];
         });
-
+        console.log(data);
         setIsLoaded(true);
         setPage(page + 1);
       }
@@ -89,11 +89,11 @@ export default function ModalComponent({
                   <ModalBody>
                     <FilterDataBar setFilterValue={setFilterValue} />
                     {isLoaded ? (
-                      <ul className="space-y-2">
+                      <VList style={{ height: "50vh" }}>
                         {Array.isArray(filteredData) &&
                         filteredData?.length > 0 ? (
                           filteredData.map((item: any, index: number) => (
-                            <li key={index}>
+                            <span key={index}>
                               <Link href={`/${item.login}`}>
                                 <User
                                   className="flex w-full items-center justify-start p-2 hover:bg-blue-950 hover:bg-opacity-30 dark:hover:bg-black dark:hover:bg-opacity-30"
@@ -105,12 +105,12 @@ export default function ModalComponent({
                                   }}
                                 />
                               </Link>
-                            </li>
+                            </span>
                           ))
                         ) : (
                           <p>No matching data found.</p>
                         )}
-                      </ul>
+                      </VList>
                     ) : (
                       <Loading />
                     )}
