@@ -46,7 +46,7 @@ export default function ModalComponent({
     } catch (error) {
       console.error("Veri alınamadı:", error);
     }
-  }, [url, page]);
+  }, [url, page, data]);
 
   useEffect(() => {
     if (isOpen === true) {

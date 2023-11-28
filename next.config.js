@@ -1,5 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
+    async headers() {
+        return [
+            {
+                source: '/api/:path*', // /api altındaki tüm rotaları belirtin
+                headers: [
+                    {
+                        key: 'Cache-Control',
+                        value: 'no-store', // Önbelleklemeyi devre dışı bırakır
+                    },
+                ],
+            },
+        ];
+    },
     images: {
         remotePatterns: [
             {
@@ -9,6 +21,4 @@ const nextConfig = {
         ],
     },
     productionBrowserSourceMaps: true,
-}
-
-module.exports = nextConfig
+};
