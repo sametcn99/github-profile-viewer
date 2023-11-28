@@ -6,7 +6,7 @@ export default function Avatar({ ...props }) {
   const avatar_url = props.avatar_url || props.gravatar_url;
   return (
     <Tooltip
-      content="User Avatar"
+      content="Profile Image"
       delay={0}
       closeDelay={0}
       className="select-none bg-opacity-60 light:bg-black light:text-white dark:bg-white dark:text-black"

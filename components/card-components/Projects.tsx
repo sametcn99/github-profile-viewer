@@ -65,7 +65,7 @@ const Projects = ({ username }: any) => {
     : null;
 
   return (
-    <section className="flex flex-col items-center gap-3">
+    <section className="flex flex-col flex-wrap items-center gap-3 break-all">
       <FilterDataBar
         setFilterValue={setFilterValue}
         count={filteredData?.length}

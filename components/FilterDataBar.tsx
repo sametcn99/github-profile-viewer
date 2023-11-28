@@ -11,7 +11,7 @@ export default function FilterDataBar({
       <Input
         aria-label="Search"
         classNames={{
-          inputWrapper: "bg-default-100 w-[20rem]",
+          inputWrapper: "bg-default-100 w-[10rem] sm:w-[20rem]",
           input: "text-sm",
         }}
         endContent={

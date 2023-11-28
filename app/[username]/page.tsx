@@ -3,37 +3,78 @@
 import React from "react";
 import Header from "@/components/card-components/Header";
 import TabSwitcher from "@/components/tab-switcher";
-import { getSiteUrl } from "@/utils/utils";
 import FilterDataBar from "@/components/FilterDataBar";
+import { getSiteUrl } from "@/utils/utils";
 
-async function fetchUserPage(searchParams: any) {
+// Define TypeScript types for the profile data and search parameters
+interface ProfileData {
+  login: string;
+  // Add other properties as needed
+}
+
+interface SearchParams {
+  params: {
+    username: string;
+    // Add other properties as needed
+  };
+}
+// Function to fetch user profile data
+async function fetchUserProfile(username: string): Promise<ProfileData | null> {
+  const profileUrl = `${getSiteUrl()}/api/profile?username=${username}`;
+  const profileRes = await fetch(profileUrl);
+
+  if (!profileRes.ok) {
+    const errorText = await profileRes.text();
+    throw new Error(
+      `Failed to fetch profile data: ${profileRes.statusText}. ${errorText}`,
+    );
+  }
+
+  const profile = await profileRes.json();
+  return profile.data || null;
+}
+
+// Function to generate page metadata
+export async function generateMetadata(
+  searchParams: SearchParams,
+): Promise<{ title: string }> {
   try {
     const username = searchParams.params.username;
-    const profileRes = await fetch(
-      `${getSiteUrl()}/api/profile?username=${username}`,
-    );
+    const userData = await fetchUserProfile(username);
 
-    if (!profileRes.ok) {
-      const errorText = await profileRes.text();
-      throw new Error(
-        `Failed to fetch profile data: ${profileRes.statusText}. ${errorText}`,
-      );
+    if (userData) {
+      return {
+        title: userData.login,
+      };
     }
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+  }
 
-    const profile = await profileRes.json();
-    const data = profile.data;
+  return {
+    title: "Default Title",
+  };
+}
 
-    if (data) {
+// Main function to fetch user page and render components
+export default async function fetchUserPage(searchParams: any) {
+  try {
+    const username = searchParams.params.username;
+    const userData = await fetchUserProfile(username);
+
+    if (userData) {
       return (
         <section className="flex w-full select-none flex-col items-center justify-center gap-3">
-          <Header profileData={data} />
+          <Header profileData={userData} />
           <TabSwitcher username={username} />
         </section>
       );
     } else {
-      console.log(data);
+      console.log(userData);
       return (
-        <div>Error fetching user profile. Please try again later.{data}\</div>
+        <div>
+          Error fetching user profile. Please try again later. {userData}\
+        </div>
       );
     }
   } catch (error) {
@@ -41,5 +82,3 @@ async function fetchUserPage(searchParams: any) {
     return <div>Error fetching user profile. Please try again later.</div>;
   }
 }
-
-export default fetchUserPage;

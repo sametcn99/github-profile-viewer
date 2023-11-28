@@ -64,12 +64,18 @@ export default function ModalComponent({
 
   return (
     <div title={modalTitle}>
-      <div
-        onClick={onOpen}
-        className="m-0 bg-transparent p-0 hover:cursor-pointer hover:underline"
-      >
-        {title}
-      </div>
+      <>
+        <div
+          onClick={onOpen}
+          className="
+          flex flex-col items-start justify-center rounded-lg bg-slate-100 p-2 
+          transition-colors
+          hover:cursor-pointer hover:bg-slate-200 dark:bg-zinc-900 hover:dark:bg-zinc-950"
+        >
+          <span className="font-bold"> {title}</span>
+          <div>{modalTitle}</div>
+        </div>
+      </>
       <>
         {Array.isArray(filteredData) && (
           <Modal
