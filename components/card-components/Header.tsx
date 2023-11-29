@@ -98,7 +98,11 @@ export default function Header({ profileData }: any) {
               >
                 {profileData.company.startsWith("@") ? (
                   <a
-                    href={`https://github.com/${profileData.company}`}
+                    href={`https://github.com/${
+                      profileData.company.includes("@")
+                        ? profileData.company.replace("@", "")
+                        : profileData.company
+                    }`}
                     className="flex flex-col hover:underline"
                   >
                     <span> Working at </span>
