@@ -102,7 +102,9 @@ export default function Header({ profileData }: any) {
                     className="flex flex-col hover:underline"
                   >
                     <span> Working at </span>
-                    {profileData.company}
+                    {profileData.company.includes("@")
+                      ? profileData.company.replace("@", "")
+                      : profileData.company}
                   </a>
                 ) : (
                   <div className="flex flex-col">
