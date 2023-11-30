@@ -15,7 +15,7 @@ import MainSec from "../header-components/MainSec";
 export default function Header({ profileData }: any) {
   return (
     <section className="relative flex break-all text-sm md:text-base">
-      <WithTooltip>
+      <WithTooltip type={profileData.type}>
         <span className="absolute right-4 top-4 z-10 text-2xl">
           {profileData.type === "Organization" ? (
             <GoOrganization />
