@@ -23,7 +23,6 @@ async function fetchUserProfile(username: string): Promise<ProfileData | null> {
   const profileUrl = `${getSiteUrl()}/api/profile?username=${username}`;
   const profileRes = await fetch(profileUrl, {
     next: { revalidate: 3600 },
-    cache: "no-cache",
   });
 
   if (!profileRes.ok) {

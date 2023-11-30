@@ -27,7 +27,9 @@ export default function ModalComponent({
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetch(`${url}&page=${page}`);
+      const response = await fetch(`${url}&page=${page}`, {
+        next: { revalidate: 3600 },
+      });
       if (!response.ok) {
         throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
       }
