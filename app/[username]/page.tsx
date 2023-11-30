@@ -21,7 +21,10 @@ interface SearchParams {
 // Function to fetch user profile data
 async function fetchUserProfile(username: string): Promise<ProfileData | null> {
   const profileUrl = `${getSiteUrl()}/api/profile?username=${username}`;
-  const profileRes = await fetch(profileUrl);
+  const profileRes = await fetch(profileUrl, {
+    next: { revalidate: 3600 },
+    cache: "no-cache",
+  });
 
   if (!profileRes.ok) {
     const errorText = await profileRes.text();

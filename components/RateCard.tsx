@@ -17,7 +17,8 @@ export default function RateCard({ username, url, modalTitle }: any) {
     const fetchData = async () => {
       try {
         const response = await fetch(`${getSiteUrl()}/api/rate`, {
-          cache: "no-store",
+          next: { revalidate: 3600 },
+          cache: "no-cache",
         });
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);

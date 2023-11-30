@@ -26,6 +26,7 @@ const Gists = ({ username }: any) => {
       try {
         const response = await fetch(
           `${getSiteUrl()}/api/gists?username=${username}`,
+          { next: { revalidate: 3600 }, cache: "no-cache" },
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
