@@ -12,6 +12,7 @@ import { TbWorld } from "react-icons/tb";
 import WithTooltip from "../header-components/WithTooltip";
 import MainSec from "../header-components/MainSec";
 import SocialAccounts from "../header-components/SocialAccounts";
+import Readme from "./Readme";
 
 export default function Header({ profileData }: any) {
   return (
@@ -30,7 +31,7 @@ export default function Header({ profileData }: any) {
           avatar_url={profileData.avatar_url}
           gravatar_url={profileData.gravatar_url}
         />
-        <section className="flex h-fit w-full max-w-[27rem] flex-col items-start justify-center p-2">
+        <section className="flex h-fit w-full max-w-[40em] flex-col items-start justify-center p-2">
           <MainSec
             name={profileData.name}
             html_url={profileData.html_url}
@@ -58,7 +59,7 @@ export default function Header({ profileData }: any) {
               {new Date(profileData.created_at).toLocaleDateString()}
             </span>
           </section>
-          <section className="flex max-w-[20rem] flex-row flex-wrap gap-2">
+          <section className="flex w-full flex-row flex-wrap gap-2">
             <ModalComponent
               title={`${profileData.followers}`}
               modalTitle="Followers"
@@ -102,6 +103,7 @@ export default function Header({ profileData }: any) {
               />
             )}
             <SocialAccounts username={profileData.login} />
+            <Readme username={profileData.login} />
           </section>
         </section>
       </Card>
