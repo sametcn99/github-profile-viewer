@@ -15,3 +15,17 @@ export const getSiteUrl = () => {
   // Return the appropriate base URL based on the environment.
   return baseUrl;
 };
+
+export const createUrlObject = (link: string) => {
+  try {
+    if (!link) {
+      throw new Error("Link is empty");
+    }
+    let newLink = link.startsWith("http") ? link : `https://${link}`;
+    let url = new URL(newLink);
+    return url;
+  } catch (error) {
+    console.error("Hata:", error);
+    return null;
+  }
+};

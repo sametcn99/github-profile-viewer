@@ -2,7 +2,7 @@
 import { Card } from "@nextui-org/react";
 import Avatar from "./Avatar";
 import ModalComponent from "../modal-component";
-import { getSiteUrl } from "@/utils/utils";
+import { getSiteUrl, createUrlObject } from "@/utils/utils";
 import { FaUser } from "react-icons/fa";
 import { GoOrganization } from "react-icons/go";
 import { FaXTwitter } from "react-icons/fa6";
@@ -11,6 +11,7 @@ import { MdOutlineWorkOutline } from "react-icons/md";
 import { TbWorld } from "react-icons/tb";
 import WithTooltip from "../header-components/WithTooltip";
 import MainSec from "../header-components/MainSec";
+import SocialAccounts from "../header-components/SocialAccounts";
 
 export default function Header({ profileData }: any) {
   return (
@@ -74,11 +75,7 @@ export default function Header({ profileData }: any) {
             />
             {profileData.blog && (
               <HeaderButtons
-                href={
-                  profileData.blog.startsWith("http")
-                    ? profileData.blog
-                    : `https://${profileData.blog}`
-                }
+                href={createUrlObject(profileData.blog)}
                 title={profileData.blog}
                 logo={<TbWorld className="text-xl" />}
               />
@@ -104,6 +101,7 @@ export default function Header({ profileData }: any) {
                 logo={<FaXTwitter className="text-xl" />}
               />
             )}
+            <SocialAccounts username={profileData.login} />
           </section>
         </section>
       </Card>

@@ -72,7 +72,6 @@ export default async function fetchUserPage(searchParams: any) {
         </section>
       );
     } else {
-      console.log(userData);
       return (
         <div>
           Error fetching user profile. Please try again later. {userData}\
