@@ -106,5 +106,7 @@ export default function Readme(username: any) {
         </Modal>
       </div>
     );
+  } else {
+    return null;
   }
 }
