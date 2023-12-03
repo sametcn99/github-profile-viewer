@@ -70,8 +70,8 @@ export default function ModalComponent({
         <div
           onClick={onOpen}
           className="
-          flex flex-col items-start justify-center rounded-lg bg-slate-100 p-2 
-          transition-colors
+          flex w-fit flex-col items-start justify-center rounded-lg bg-slate-100 
+          p-2 transition-colors
           hover:cursor-pointer hover:bg-slate-200 dark:bg-zinc-900 hover:dark:bg-zinc-950"
         >
           <span className="font-bold"> {title}</span>

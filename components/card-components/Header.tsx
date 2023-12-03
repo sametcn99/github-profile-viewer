@@ -60,20 +60,22 @@ export default function Header({ profileData }: any) {
             </span>
           </section>
           <section className="flex w-full flex-row flex-wrap gap-2">
-            <ModalComponent
-              title={`${profileData.followers}`}
-              modalTitle="Followers"
-              url={`${getSiteUrl()}/api/followers?username=${
-                profileData.login
-              }`}
-            />
-            <ModalComponent
-              title={`${profileData.following}`}
-              modalTitle="Followings"
-              url={`${getSiteUrl()}/api/following?username=${
-                profileData.login
-              }`}
-            />
+            <section className="flex w-full flex-row gap-2">
+              <ModalComponent
+                title={`${profileData.followers}`}
+                modalTitle="Followers"
+                url={`${getSiteUrl()}/api/followers?username=${
+                  profileData.login
+                }`}
+              />
+              <ModalComponent
+                title={`${profileData.following}`}
+                modalTitle="Followings"
+                url={`${getSiteUrl()}/api/following?username=${
+                  profileData.login
+                }`}
+              />
+            </section>
             {profileData.blog && (
               <HeaderButtons
                 href={createUrlObject(profileData.blog)}
