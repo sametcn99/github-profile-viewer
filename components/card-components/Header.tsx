@@ -74,7 +74,7 @@ export default function Header({ profileData }: any) {
             />
             {profileData.blog && (
               <HeaderButtons
-                href={`https://${profileData.blog}`}
+                href={`${profileData.blog}`}
                 title={profileData.blog}
                 logo={<TbWorld className="text-xl" />}
               />
