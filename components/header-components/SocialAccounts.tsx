@@ -34,22 +34,19 @@ export default function SocialAccounts(username: any) {
   }, [username.username]);
 
   return Array.isArray(data) && data.length > 0 ? (
-    <section className="flex max-w-[20rem] flex-col flex-wrap gap-2">
-      <span>Social Links</span>
-      <section className="flex max-w-[20rem] flex-row flex-wrap gap-2">
-        {data.map((item: SocialAccount, index: number) => (
-          <Link
-            key={index}
-            target="_blank"
-            className="flex flex-col items-start justify-center break-words rounded-lg bg-slate-100 p-2 
+    <>
+      {data.map((item: SocialAccount, index: number) => (
+        <Link
+          key={index}
+          target="_blank"
+          className="flex flex-col items-start justify-center break-words rounded-lg bg-slate-100 p-2 
           transition-colors 
           hover:cursor-pointer hover:bg-slate-200 dark:bg-zinc-900 hover:dark:bg-zinc-950"
-            href={item.url}
-          >
-            {item.provider === "generic" ? item.url : item.provider}
-          </Link>
-        ))}
-      </section>
-    </section>
+          href={item.url}
+        >
+          {item.provider === "generic" ? item.url : item.provider}
+        </Link>
+      ))}
+    </>
   ) : null;
 }
