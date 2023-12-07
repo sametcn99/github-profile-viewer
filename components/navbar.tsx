@@ -12,6 +12,7 @@ import { Button } from "@nextui-org/button";
 import { HeartFilledIcon } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switch";
 import { GithubIcon } from "@/components/icons";
+import GetUser from "./GetUser";
 
 export const Navbar = () => {
   return (
@@ -23,6 +24,7 @@ export const Navbar = () => {
             href="/"
           >
             GPV
+            <GetUser />
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
