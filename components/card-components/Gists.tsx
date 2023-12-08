@@ -13,6 +13,8 @@ import { getSiteUrl } from "@/utils/utils";
 import FilterDataBar from "../FilterDataBar";
 import { GitHubRepo } from "@/types";
 import { SortData } from "@/utils/sort-data";
+import CardButtons from "../CardButtons";
+import { GithubIcon } from "../icons";
 
 // Gistss component
 const Gists = ({ username }: any) => {
@@ -74,21 +76,11 @@ const Gists = ({ username }: any) => {
                       <div key={index}>{filename}</div>
                     ))}
                   </div>
-                  <div>
-                    <a href={gist.html_url} target="_blank">
-                      <Button
-                        className={
-                          "border border-opacity-50 text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
-                        }
-                        radius="full"
-                        size="sm"
-                        variant={"bordered"}
-                      >
-                        Source Code
-                        <FaGithub className="text-sm light:fill-black dark:fill-white" />
-                      </Button>
-                    </a>
-                  </div>
+                  <CardButtons
+                    href={gist.html_url}
+                    title="Source Code"
+                    logo={<GithubIcon className="fill-white text-sm" />}
+                  />
                 </CardHeader>
                 <CardBody className="px-3 py-0 text-small text-default-600">
                   {gist.description}

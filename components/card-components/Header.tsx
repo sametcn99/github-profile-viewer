@@ -104,8 +104,8 @@ export default function Header({ profileData }: any) {
                 logo={<FaXTwitter className="text-xl" />}
               />
             )}
-            <SocialAccounts username={profileData.login} />
             <Readme username={profileData.login} />
+            <SocialAccounts username={profileData.login} />
           </section>
         </section>
       </Card>

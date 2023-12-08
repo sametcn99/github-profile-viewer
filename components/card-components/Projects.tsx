@@ -16,6 +16,10 @@ import { getSiteUrl } from "@/utils/utils";
 import FilterDataBar from "../FilterDataBar";
 import { GitHubRepo } from "@/types";
 import { SortData } from "@/utils/sort-data";
+import CardButtons from "../CardButtons";
+import { GithubIcon } from "../icons";
+import OpenOn from "../OpenOn";
+import Link from "next/link";
 
 // Projects component
 const Projects = ({ username }: any) => {
@@ -103,33 +107,33 @@ const Projects = ({ username }: any) => {
                   </div>
                   <div className="flex flex-wrap items-center justify-end gap-1">
                     {project.homepage && (
-                      <a href={project.homepage} target="_blank">
-                        <Button
-                          className={
-                            "border border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
-                          }
-                          radius="full"
-                          size="sm"
-                          variant={"bordered"}
-                        >
-                          Website
+                      <CardButtons
+                        href={project.homepage}
+                        title="Website"
+                        logo={
                           <MdOpenInNew className="text-sm light:fill-black dark:fill-white" />
-                        </Button>
-                      </a>
-                    )}
-                    <a href={project.html_url} target="_blank">
-                      <Button
-                        className={
-                          "border border-opacity-50 fill-white text-foreground transition-all duration-1000 hover:bg-zinc-700 hover:bg-opacity-50 light:fill-black dark:fill-white "
                         }
-                        radius="full"
-                        size="sm"
-                        variant={"bordered"}
-                      >
-                        Source Code
-                        <FaGithub className="text-sm light:fill-black dark:fill-white" />
-                      </Button>
-                    </a>
+                      />
+                    )}
+                    {/* <div className="flex flex-col items-center gap-2">
+                      <CardButtons
+                        href={project.html_url}
+                        title="Source Code"
+                        logo={<GithubIcon className="fill-white text-sm" />}
+                      />
+                      <CardButtons
+                        href={project.html_url}
+                        title="Open on Github IDE"
+                        logo={<GithubIcon className="fill-white text-sm" />}
+                      />
+                    </div> */}
+                    <OpenOn
+                      github={project.html_url}
+                      githubide={project.html_url.replace(
+                        "github.com",
+                        "github.dev",
+                      )}
+                    />
                   </div>
                 </CardHeader>
                 <CardBody className="px-3 py-0 text-small text-default-600">
