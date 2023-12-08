@@ -20,12 +20,12 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="max-w-fit gap-3">
           <NextLink
-            className="flex h-full w-full items-center justify-start  gap-1 break-words text-2xl font-bold"
+            className="flex h-full w-full items-center justify-start  gap-1 break-words text-2xl font-bold hover:underline"
             href="/"
           >
             GPV
-            <GetUser />
           </NextLink>
+          <GetUser />
         </NavbarBrand>
       </NavbarContent>
 
