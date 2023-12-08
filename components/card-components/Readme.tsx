@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import Loading from "@/app/loading";
+import { FiInfo } from "react-icons/fi";
 
 export default function Readme(username: any) {
   const [content, setContent] = useState<string | undefined>();
@@ -71,11 +72,13 @@ export default function Readme(username: any) {
         <div
           onClick={onOpen}
           className="
-          flex flex-col items-start justify-center rounded-lg bg-slate-100 p-2 
-          transition-colors
+          flex h-[4rem] flex-col items-start justify-center rounded-lg bg-slate-100 
+          p-2 transition-colors
           hover:cursor-pointer hover:bg-slate-200 dark:bg-zinc-900 hover:dark:bg-zinc-950"
         >
-          <div>README.MD</div>
+          <div>
+            Readme.md <FiInfo />
+          </div>
         </div>
         <Modal
           isOpen={isOpen}

@@ -1,6 +1,14 @@
 import { getSiteUrl } from "@/utils/utils";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
+import { FiLink } from "react-icons/fi";
 
 // Consider using a TypeScript interface to define the structure of the social account data.
 type SocialAccount = {
@@ -34,19 +42,27 @@ export default function SocialAccounts(username: any) {
   }, [username.username]);
 
   return Array.isArray(data) && data.length > 0 ? (
-    <>
-      {data.map((item: SocialAccount, index: number) => (
-        <Link
-          key={index}
-          target="_blank"
-          className="flex flex-col items-start justify-center break-words rounded-lg bg-slate-100 p-2 
-          transition-colors 
-          hover:cursor-pointer hover:bg-slate-200 dark:bg-zinc-900 hover:dark:bg-zinc-950"
-          href={item.url}
-        >
-          {item.provider === "generic" ? item.url : item.provider}
-        </Link>
-      ))}
-    </>
+    <Dropdown>
+      <DropdownTrigger
+        className="flex h-[4rem] flex-col items-start justify-center break-words rounded-lg bg-slate-100 
+          p-2 
+          transition-colors hover:cursor-pointer hover:bg-slate-200 dark:bg-zinc-900 hover:dark:bg-zinc-950"
+      >
+        <Button>
+          Links <FiLink />
+        </Button>
+      </DropdownTrigger>
+      {data && (
+        <DropdownMenu aria-label="Static Actions">
+          {data.map((item: SocialAccount, index: number) => (
+            <DropdownItem key={index} target="_blank" href={item.url}>
+              {item.provider === "generic"
+                ? item.url.replace("https://", "").substring(0, 50)
+                : item.provider}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      )}
+    </Dropdown>
   ) : null;
 }
