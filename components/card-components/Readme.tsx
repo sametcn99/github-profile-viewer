@@ -32,7 +32,6 @@ export default function Readme(username: any) {
 
       const fetchedData = await response.json();
       setContent(fetchedData.download_url);
-      console.log(fetchedData.download_url);
     } catch (error) {
       console.error("Error fetching data:", error);
       // Handle errors as needed
@@ -41,7 +40,7 @@ export default function Readme(username: any) {
 
   useEffect(() => {
     fetchData();
-  }, [username.username]);
+  }, [fetchData, username.username]);
 
   useEffect(() => {
     const fetchData = async () => {

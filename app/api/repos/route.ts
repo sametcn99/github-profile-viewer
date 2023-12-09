@@ -6,7 +6,7 @@ import type { NextRequest } from "next/server";
 export async function GET(request: NextRequest) {
   const nextUrl = request.nextUrl;
   const username = nextUrl.searchParams.get("username");
-
+  const page = nextUrl.searchParams.get("page");
   if (username === null) {
     // Handle the case where "username" is not provided in the URL
     return NextResponse.json({
@@ -22,31 +22,16 @@ export async function GET(request: NextRequest) {
   });
 
   try {
-    let userRepos: any[] = [];
-    let page = 1;
-
     // Fetch repositories for the specified user until there are no more pages
-    while (true) {
-      const response = await octokit.rest.repos.listForUser({
-        username,
-        per_page: 100,
-        page,
-      });
+    const response = await octokit.rest.repos.listForUser({
+      username,
+      per_page: 100,
+      page: page ? parseInt(page, 10) : undefined, // Convert page to number if not null
+    });
 
-      // Concatenate the repositories to the existing array
-      userRepos = userRepos.concat(response.data);
+    // Increment the page number for the next request
 
-      // Check if there is another page
-      const linkHeader = response.headers.link;
-      if (!linkHeader || !linkHeader.includes('rel="next"')) {
-        break;
-      }
-
-      // Increment the page number for the next request
-      page++;
-    }
-
-    return NextResponse.json(userRepos);
+    return NextResponse.json(response.data);
   } catch (error) {
     // Return a JSON response
     return NextResponse.json({

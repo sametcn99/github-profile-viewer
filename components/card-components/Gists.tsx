@@ -1,49 +1,54 @@
 // gists component
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Button,
-} from "@nextui-org/react";
-import { FaGithub } from "react-icons/fa";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import Loading from "@/app/loading";
 import { getSiteUrl } from "@/utils/utils";
 import FilterDataBar from "../FilterDataBar";
-import { GitHubRepo } from "@/types";
-import { SortData } from "@/utils/sort-data";
 import CardButtons from "../CardButtons";
 import { GithubIcon } from "../icons";
 
 // Gistss component
 const Gists = ({ username }: any) => {
   // State to store GitHub API data
-  const [data, setData] = useState<GitHubRepo[] | null>(null);
+  const [data, setData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("");
+  const [page, setPage] = useState(1);
 
   // Fetch data from GitHub API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getSiteUrl()}/api/gists?username=${username}`,
+          `${getSiteUrl()}/api/repos?username=${username}&page=${page}`,
           { next: { revalidate: 3600 } },
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const fetchedData = await response.json();
-        setData(SortData(fetchedData));
-        setIsLoading(false);
+        if (Array.isArray(fetchedData) && fetchedData.length > 0) {
+          setData((prevData) => {
+            const newData = Array.isArray(fetchedData)
+              ? fetchedData
+              : [fetchedData];
+
+            // Filter out duplicates by comparing with previous data
+            const uniqueData = newData.filter((item) => {
+              return !prevData.some((prevItem) => prevItem.id === item.id);
+            });
+
+            return [...prevData, ...uniqueData];
+          });
+          setIsLoading(false);
+          setPage(page + 1);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
-  }, [username]);
+  }, [page, username]);
 
   const filteredData = data
     ? data.filter((project) =>

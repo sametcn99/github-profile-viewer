@@ -6,35 +6,31 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Button,
   Tooltip,
 } from "@nextui-org/react";
-import { FaGithub, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { MdOpenInNew } from "react-icons/md";
 import Loading from "@/app/loading";
 import { getSiteUrl } from "@/utils/utils";
 import FilterDataBar from "../FilterDataBar";
-import { GitHubRepo } from "@/types";
-import { SortData } from "@/utils/sort-data";
 import CardButtons from "../CardButtons";
-import { GithubIcon } from "../icons";
 import OpenOn from "../OpenOn";
-import Link from "next/link";
 
 // Projects component
 const Projects = ({ username }: any) => {
   // State to store GitHub API data
-  const [data, setData] = useState<GitHubRepo[] | null>(null);
+  const [data, setData] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null); // New state for error message
   const [isLoading, setIsLoading] = useState(true);
   const [filterValue, setFilterValue] = useState("");
+  const [page, setPage] = useState(1);
 
   // Fetch data from GitHub API
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getSiteUrl()}/api/repos?username=${username}`,
+          `${getSiteUrl()}/api/repos?username=${username}&page=${page}`,
           { next: { revalidate: 3600 } },
         );
         if (!response.ok) {
@@ -45,14 +41,29 @@ const Projects = ({ username }: any) => {
           // If there is an error in the data, set the error state
           setError(fetchedData.error);
         }
-        setData(SortData(fetchedData));
-        setIsLoading(false);
+        if (Array.isArray(fetchedData) && fetchedData.length > 0) {
+          setData((prevData) => {
+            const newData = Array.isArray(fetchedData)
+              ? fetchedData
+              : [fetchedData];
+
+            // Filter out duplicates by comparing with previous data
+            const uniqueData = newData.filter((item) => {
+              return !prevData.some((prevItem) => prevItem.id === item.id);
+            });
+
+            return [...prevData, ...uniqueData];
+          });
+          setIsLoading(false);
+          setPage(page + 1);
+          console.log(page);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
-  }, [username]);
+  }, [page, username]);
 
   const filteredData = data
     ? data.filter((project) =>
@@ -157,7 +168,7 @@ const Projects = ({ username }: any) => {
                     </p>
                   </div>
                   <div className="jus flex flex-row flex-wrap">
-                    {project.topics.map((topic, index) => (
+                    {project.topics.map((topic: any, index: any) => (
                       <p
                         key={index}
                         className="m-[0.063rem] mb-1 select-none rounded-2xl bg-slate-400 bg-opacity-5 p-1 text-xs font-thin hover:font-normal dark:bg-slate-900"
