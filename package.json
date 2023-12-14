@@ -30,6 +30,8 @@
     "@uiw/react-json-view": "^2.0.0-alpha.10",
     "@uiw/react-markdown-preview": "^5.0.3",
     "autoprefixer": "10.4.16",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12",
     "clsx": "^2.0.0",
     "eslint": "8.48.0",
     "eslint-config-next": "14.0.2",

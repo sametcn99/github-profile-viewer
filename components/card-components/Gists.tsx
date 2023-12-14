@@ -20,7 +20,7 @@ const Gists = ({ username }: any) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getSiteUrl()}/api/repos?username=${username}&page=${page}`,
+          `${getSiteUrl()}/api/gists?username=${username}&page=${page}`,
           { next: { revalidate: 3600 } },
         );
         if (!response.ok) {
@@ -51,10 +51,12 @@ const Gists = ({ username }: any) => {
   }, [page, username]);
 
   const filteredData = data
-    ? data.filter((project) =>
-        Object.keys(project.files).some((filename) =>
-          filename.toLowerCase().includes(filterValue.toLowerCase()),
-        ),
+    ? data.filter(
+        (project) =>
+          project.files &&
+          Object.keys(project.files).some((filename) =>
+            filename.toLowerCase().includes(filterValue.toLowerCase()),
+          ),
       )
     : null;
 
