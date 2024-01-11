@@ -7,7 +7,7 @@ const GetUser = ({ ...props }) => {
   const userName = searchParams.username;
   return (
     <>
-      {userName ? <p className="select-none text-base">| {userName}</p> : null}
+      {userName ? <p className="select-none text-xl ">| {userName}</p> : null}
     </>
   );
 };

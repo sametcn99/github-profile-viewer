@@ -1,35 +1,63 @@
 # Github Profile Viewer
 
-Explore GitHub profiles with ease using Github Profile Viewer, a dynamic web platform built with Next.js and styled with NextUI.
+Welcome to the Github Profile Viewer, a dynamic web platform powered by Next.js and NextUI. Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information. Discover a user's coding journey and contributions to the open-source community.
 
-## Features
+## Key Features
 
-- **Intuitive Search Interface:**
-  Easily search for any GitHub user by entering their username in the search bar on the homepage.
+- View detailed repository information, including names and descriptions.
+- Explore a user's followers and those they follow.
+- Check out contribution statistics, including commit history.
+- Discover public Gists and their content.
 
-- **Real-time GitHub Data:**
-  Utilizes the GitHub API to fetch and display up-to-date details about the searched user, including repositories, contributions, followers, and following.
+## Why use Github Profile Viewer?
 
-- **Dynamic URL Parameterization:**
-  The user's GitHub username becomes a part of the URL, enabling easy sharing and bookmarking of specific profiles.
+Our platform provides a user-friendly interface to navigate through GitHub profiles efficiently. Whether you are an open-source enthusiast, a hiring manager, or just curious about a developer's work, Github Profile Viewer offers valuable insights.
 
-- **Next.js and NextUI Integration:**
-  Enjoy a seamless and visually appealing user experience with the power of Next.js and NextUI.
+---
 
-## How to Use
+## Getting Started
 
-1. Visit Github Profile Viewer.
-2. On the homepage, locate the search bar.
-3. Enter the GitHub username of the profile you want to explore.
-4. Click 'Search,' and witness the magic unfold as the site dynamically updates with the user's GitHub information.
+To get started with Github Profile Viewer, follow the steps below:
 
-## Why Github Profile Viewer?
+### Installation
 
-- **Efficiency and Speed:**
-  Prioritizes speed and efficiency, ensuring quick access to GitHub profiles.
+1. Clone the repository:
 
-- **Responsive Design:**
-  Integrates Next.js and NextUI for a visually pleasing and responsive design on various devices.
+    ```bash
+    git clone https://github.com/sametcn99/github-profile-viewer.git
+    ```
 
-- **Up-to-Date Information:**
-  Delivers real-time data thanks to the GitHub API, ensuring the latest information on GitHub profiles.
+2. Install dependencies:
+
+    ```bash
+    cd github-profile-viewer
+    npm install
+    ```
+
+3. Create a `.env.local` file in the project root and add the following:
+
+    ```env
+    GH_TOKEN="your-api-token"
+    ```
+
+   Replace `https://api.github.com` with your GitHub API endpoint if needed.
+
+4. Run the application:
+
+    ```bash
+    npm run dev
+    ```
+
+5. Open your browser and go to [http://localhost:3000](http://localhost:3000)
+
+## Contributing
+
+If you'd like to contribute to Github Profile Viewer, feel free to open an issue or submit a pull request. We welcome any suggestions, bug reports, or feature requests.
+
+## License
+
+This project is licensed under the [GPL 3.0](LICENSE). Feel free to use and modify the code as per your requirements.
+
+---
+
+Thank you for using Github Profile Viewer! Explore and enjoy the world of open source.

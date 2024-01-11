@@ -1,16 +1,14 @@
 // fetchUserPage.js
 
+import { getSiteUrl } from "@/lib/utils";
 import React from "react";
-import Header from "@/components/card-components/Header";
-import TabSwitcher from "@/components/tab-switcher";
-import FilterDataBar from "@/components/FilterDataBar";
-import { getSiteUrl } from "@/utils/utils";
-
-// Define TypeScript types for the profile data and search parameters
-interface ProfileData {
-  login: string;
-  // Add other properties as needed
-}
+import Header from "./components/Header/Header";
+import { UserData } from "@/types/types";
+import Projects from "@/components/Projects";
+import Gists from "@/components/Gists";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { GithubProvider } from "../context/context";
+import Stats from "@/components/Stats";
 
 interface SearchParams {
   params: {
@@ -18,9 +16,10 @@ interface SearchParams {
     // Add other properties as needed
   };
 }
+
 // Function to fetch user profile data
-async function fetchUserProfile(username: string): Promise<ProfileData | null> {
-  const profileUrl = `${getSiteUrl()}/api/profile?username=${username}`;
+async function fetchUserProfile(username: string): Promise<UserData | null> {
+  const profileUrl = `${getSiteUrl()}/api/github?option=profile&username=${username}`;
   const profileRes = await fetch(profileUrl, {
     next: { revalidate: 3600 },
   });
@@ -59,24 +58,37 @@ export async function generateMetadata(
 }
 
 // Main function to fetch user page and render components
-export default async function fetchUserPage(searchParams: any) {
+
+export default async function fetchUserPage(searchParams: SearchParams) {
   try {
     const username = searchParams.params.username;
-    const userData = await fetchUserProfile(username);
+    const userData: UserData | null = await fetchUserProfile(username);
 
     if (userData) {
       return (
-        <section className="flex w-full select-none flex-col items-center justify-center gap-3">
-          <Header profileData={userData} />
-          <TabSwitcher username={username} />
-        </section>
+        <GithubProvider username={userData.login}>
+          <Header userData={userData} />
+          <Tabs defaultValue="stats" className="w-full">
+            <TabsList>
+              <TabsTrigger value="repositories">Repos</TabsTrigger>
+              <TabsTrigger value="stats">Stats</TabsTrigger>
+              <TabsTrigger value="gists">Gists</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="repositories">
+              <Projects />
+            </TabsContent>
+            <TabsContent value="stats">
+              <Stats />
+            </TabsContent>
+            <TabsContent value="gists">
+              <Gists />
+            </TabsContent>
+          </Tabs>
+        </GithubProvider>
       );
     } else {
-      return (
-        <div>
-          Error fetching user profile. Please try again later. {userData}\
-        </div>
-      );
+      return <div>Error fetching user profile. Please try again later.</div>;
     }
   } catch (error) {
     console.error("Error fetching user profile:", error);
