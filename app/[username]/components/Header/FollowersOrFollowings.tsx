@@ -41,12 +41,12 @@ export default function FollowersOrFollowings({ username, option }: any) {
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       />
+      {loading && (
+        <div className="flex w-full items-center justify-center">
+          <Loading />
+        </div>
+      )}
       <VList style={{ height: "50vh" }}>
-        {loading && (
-          <div className="flex w-full items-center justify-center">
-            <Loading />
-          </div>
-        )}
         {Array.isArray(filteredData) && filteredData?.length > 0 ? (
           filteredData.map((item: UserData, index: number) => (
             <Link
