@@ -1,15 +1,6 @@
 "use client";
 // gists component
 import { useContext, useMemo, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import Link from "next/link";
 import { GithubContext } from "@/app/context/context";
 import FilterInput from "./FilterInput";
 import {
@@ -18,16 +9,8 @@ import {
   sortByUpdatedAscending,
   sortByUpdatedDescending,
 } from "@/lib/utils/sort";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "./ui/button";
+import { Box, Button, Card, DropdownMenu, Link, Text } from "@radix-ui/themes";
+
 import Loading from "@/app/loading";
 import { FaGithub } from "react-icons/fa";
 
@@ -44,8 +27,8 @@ const Gists = () => {
           (gist: any) =>
             gist.files &&
             Object.keys(gist.files).some((filename) =>
-              filename.toLowerCase().includes(filterValue.toLowerCase()),
-            ),
+              filename.toLowerCase().includes(filterValue.toLowerCase())
+            )
         )
       : null;
 
@@ -74,49 +57,49 @@ const Gists = () => {
   return (
     <>
       {loading && (
-        <div className="flex w-full items-center justify-center">
+        <Box className="flex w-full items-center justify-center">
           <Loading />
-        </div>
+        </Box>
       )}
-      <section className="flex flex-col gap-3">
-        <div className="flex flex-row gap-3">
+      <Box className="flex flex-col gap-3">
+        <Box className="flex flex-row gap-3">
           <FilterInput setFilterValue={setFilterValue} />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className="rounded-2xl text-xl">
-              <Button variant="outline">Sort By</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 rounded-2xl">
-              <DropdownMenuLabel>Sort by</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuRadioGroup value={sort} onValueChange={setSort}>
-                <DropdownMenuRadioItem value="Updated Descending">
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <Button>Sort By</Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Label>Sort by</DropdownMenu.Label>
+              <DropdownMenu.Separator />
+              <DropdownMenu.RadioGroup value={sort} onValueChange={setSort}>
+                <DropdownMenu.RadioItem value="Updated Descending">
                   Updated Descending
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="Updated Ascending">
+                </DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="Updated Ascending">
                   Updated Ascending
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="Created Descending">
-                  Created Descending
-                </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="Created Ascending">
+                </DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="Created Ascending">
                   Created Ascending
-                </DropdownMenuRadioItem>
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+                </DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="Created Descending">
+                  Created Descending
+                </DropdownMenu.RadioItem>
+              </DropdownMenu.RadioGroup>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+        </Box>
         {Array.isArray(filteredAndSortedGists) &&
           filteredAndSortedGists.map((gist, index) => (
             <Card key={index}>
-              <CardHeader className="gap-4">
-                <CardTitle className="flex flex-row flex-wrap items-center justify-between gap-2 break-all">
-                  <div className="flex flex-row flex-wrap items-start justify-start gap-2 break-all text-start">
-                    <div className="flex flex-col gap-2 break-all">
+              <Box className="gap-4">
+                <Box className="flex flex-row flex-wrap items-center justify-between gap-2 break-all">
+                  <Box className="flex flex-row flex-wrap items-start justify-start gap-2 break-all text-start">
+                    <Box className="flex flex-col gap-2 break-all">
                       {Object.keys(gist.files).map((filename, index) => (
-                        <span key={index}>{filename}</span>
+                        <Text key={index}>{filename}</Text>
                       ))}
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                   <Button className="flex flex-row rounded-2xl">
                     <Link
                       href={gist.html_url}
@@ -126,27 +109,28 @@ const Gists = () => {
                       <FaGithub /> <span>Source</span>
                     </Link>
                   </Button>
-                </CardTitle>
-                <CardDescription></CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>{gist.description}</p>
-              </CardContent>
-              <CardFooter className="flex flex-col items-start">
-                <div className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-                  <p>{gist.language ? `Language: ${gist.language}` : null}</p>
-                  <p>
+                </Box>
+              </Box>
+              <Box>
+                <Text>{gist.description}</Text>
+              </Box>
+              <Box className="flex flex-col items-start">
+                <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
+                  <Text>
+                    {gist.language ? `Language: ${gist.language}` : null}
+                  </Text>
+                  <Text>
                     Created at: {new Date(gist.created_at).toLocaleDateString()}
-                  </p>
-                  <p>
+                  </Text>
+                  <Text>
                     Last update:{" "}
                     {new Date(gist.updated_at).toLocaleDateString()}
-                  </p>
-                </div>
-              </CardFooter>
+                  </Text>
+                </Box>
+              </Box>
             </Card>
           ))}
-      </section>
+      </Box>
     </>
   );
 };

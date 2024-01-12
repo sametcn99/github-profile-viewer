@@ -1,14 +1,9 @@
 // fetchUserPage.js
-
 import { getSiteUrl } from "@/lib/utils";
-import React from "react";
 import Header from "./components/Header/Header";
 import { UserData } from "@/types/types";
-import Projects from "@/components/Projects";
-import Gists from "@/components/Gists";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GithubProvider } from "../context/context";
-import Stats from "@/components/Stats";
+import TabWrapper from "./components/TabWrapper";
 
 interface SearchParams {
   params: {
@@ -27,7 +22,7 @@ async function fetchUserProfile(username: string): Promise<UserData | null> {
   if (!profileRes.ok) {
     const errorText = await profileRes.text();
     throw new Error(
-      `Failed to fetch profile data: ${profileRes.statusText}. ${errorText}`,
+      `Failed to fetch profile data: ${profileRes.statusText}. ${errorText}`
     );
   }
 
@@ -37,7 +32,7 @@ async function fetchUserProfile(username: string): Promise<UserData | null> {
 
 // Function to generate page metadata
 export async function generateMetadata(
-  searchParams: SearchParams,
+  searchParams: SearchParams
 ): Promise<{ title: string }> {
   try {
     const username = searchParams.params.username;
@@ -68,23 +63,7 @@ export default async function fetchUserPage(searchParams: SearchParams) {
       return (
         <GithubProvider username={userData.login}>
           <Header userData={userData} />
-          <Tabs defaultValue="stats" className="w-full">
-            <TabsList>
-              <TabsTrigger value="repositories">Repos</TabsTrigger>
-              <TabsTrigger value="stats">Stats</TabsTrigger>
-              <TabsTrigger value="gists">Gists</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="repositories">
-              <Projects />
-            </TabsContent>
-            <TabsContent value="stats">
-              <Stats />
-            </TabsContent>
-            <TabsContent value="gists">
-              <Gists />
-            </TabsContent>
-          </Tabs>
+          <TabWrapper />
         </GithubProvider>
       );
     } else {

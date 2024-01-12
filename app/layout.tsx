@@ -5,8 +5,9 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import { Analytics } from "@vercel/analytics/react";
 import Link from "next/link";
-
+import "@radix-ui/themes/styles.css";
 const inter = Inter({ subsets: ["latin"] });
+import { Theme, ThemePanel } from "@radix-ui/themes";
 
 export const metadata: Metadata = {
   title: {
@@ -42,10 +43,19 @@ export default function RootLayout({
       <body
         className={`${inter.className} flex min-h-screen w-full justify-center px-1 md:px-4 transition-all duration-1000`}
       >
-        <main className=" flex w-[60rem] flex-col gap-4 p-2 pt-4">
-          <Navbar />
-          {children}
-        </main>
+        <Theme
+          appearance="dark"
+          accentColor="gray"
+          grayColor="slate"
+          radius="large"
+          scaling="110%"
+        >
+          <main className=" flex max-w-[60rem] flex-col gap-4 p-2 pt-4">
+            <Navbar />
+            {children}
+          </main>
+          {/* <ThemePanel /> */}
+        </Theme>
         <Analytics />
       </body>
     </html>

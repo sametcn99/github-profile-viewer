@@ -4,9 +4,8 @@ import { useRouter } from "next/navigation";
 import { getSiteUrl } from "@/lib/utils";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import Link from "next/link";
 import { UserData } from "@/types/types";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Link, ScrollArea, TextArea, TextField } from "@radix-ui/themes";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
@@ -47,21 +46,29 @@ export default function SearchBar() {
 
   return (
     <section className="flex md:w-[25rem] flex-col items-center justify-center gap-5 static ">
-      <Input
+      {/* <TextField.Root
+        size="1"
+        className="w-full"
         aria-label="Search"
         placeholder="write user name..."
-        type="search"
         onKeyDown={handleKeyPress}
         onChange={handleChange}
         value={inputValue}
-      />
+      /> */}
+      <TextField.Root size="1" className="w-full" aria-label="Search">
+        <TextField.Input
+          placeholder="Write user name"
+          onKeyDown={handleKeyPress}
+          onChange={handleChange}
+        />
+      </TextField.Root>
       {data && data?.length > 0 ? (
-        <ScrollArea className="w-full h-[30rem] bg-secondary absolute rounded-2xl">
+        <ScrollArea type="always" scrollbars="vertical" style={{ height: 300 }}>
           {data.map((item: any, index: number) => (
             <Link
               href={`/${item.login}`}
               key={index}
-              className="flex flex-row items-start gap-2 rounded-2xl p-2 hover:bg-purple-950 relative"
+              className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 p-2 justify-start"
             >
               <Avatar>
                 <AvatarImage src={item.avatar_url || item.avatar_url} />
