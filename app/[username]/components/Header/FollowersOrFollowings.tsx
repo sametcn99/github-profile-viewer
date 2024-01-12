@@ -13,6 +13,15 @@ import {
   TextField,
 } from "@radix-ui/themes";
 import Loading from "@/app/loading";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function FollowersOrFollowings({
   username,
@@ -26,6 +35,7 @@ export default function FollowersOrFollowings({
   const [data, setData] = useState<UserData[]>([]);
   const [filter, setFilter] = useState<string>("");
   const [loading, setLoading] = useState(true);
+  const [selectedFilter, setSelectedFilter] = useState("All");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,10 +51,20 @@ export default function FollowersOrFollowings({
     fetchData();
   }, [option, username]); // Empty dependency array to run the effect only once
 
-  const filteredData = data.filter((item: UserData) =>
-    item.login.toLowerCase().includes(filter.toLowerCase())
-  );
+  const filteredData = data.filter((item: UserData) => {
+    const loginMatches = item.login
+      .toLowerCase()
+      .includes(filter.toLowerCase());
 
+    // Additional filtering based on the selected filter type
+    if (selectedFilter === "All") {
+      return loginMatches;
+    } else {
+      return (
+        item.type.toLowerCase() === selectedFilter.toLowerCase() && loginMatches
+      );
+    }
+  });
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -66,6 +86,34 @@ export default function FollowersOrFollowings({
             placeholder="Filter by name"
             onChange={(e) => setFilter(e.target.value)}
           ></TextField.Input>
+          <Select onValueChange={setSelectedFilter}>
+            <SelectTrigger className="w-[8rem] rounded-lg">
+              <SelectValue placeholder="Filter by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Filter</SelectLabel>
+                <SelectItem
+                  value="All"
+                  className="hover:bg-black hover:bg-opacity-50 hover:cursor-pointer"
+                >
+                  All
+                </SelectItem>
+                <SelectItem
+                  value="User"
+                  className="hover:bg-black hover:bg-opacity-50 hover:cursor-pointer"
+                >
+                  User
+                </SelectItem>
+                <SelectItem
+                  value="Organization"
+                  className="hover:bg-black hover:bg-opacity-50 hover:cursor-pointer"
+                >
+                  Organization
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </TextField.Root>
         <ScrollArea className="h-[35rem]">
           {Array.isArray(filteredData) && filteredData?.length > 0 ? (
