@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@mui/material": "^5.15.4",
     "@mui/x-charts": "^6.18.7",
+    "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/themes": "^2.0.3",
     "@uiw/react-markdown-preview": "^5.0.7",
     "@vercel/analytics": "^1.1.1",
