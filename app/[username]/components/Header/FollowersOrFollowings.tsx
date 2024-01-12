@@ -12,6 +12,7 @@ import {
   Text,
   TextField,
 } from "@radix-ui/themes";
+import Loading from "@/app/loading";
 
 export default function FollowersOrFollowings({
   username,
@@ -57,6 +58,7 @@ export default function FollowersOrFollowings({
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>Users</Dialog.Title>
+        {loading && <Loading />}
         <TextField.Root>
           <TextField.Input
             value={filter}
@@ -84,7 +86,7 @@ export default function FollowersOrFollowings({
               </Link>
             ))
           ) : (
-            <Text>No matching data found.</Text>
+            <>{!loading && <Text>No matching data found.</Text>}</>
           )}
         </ScrollArea>
       </Dialog.Content>
