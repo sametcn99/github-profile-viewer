@@ -38,11 +38,11 @@ const Gists = () => {
 
       // Updated Ascending(artan)
       case "Updated Ascending":
-        return sortByKeyAscending(filteredGists, "pushed_at");
+        return sortByKeyAscending(filteredGists, "updated_at");
 
       // Updated Descending
       default:
-        return sortByKeyDescending(filteredGists, "pushed_at"); // Default sorting by pushed date (descending)
+        return sortByKeyDescending(filteredGists, "updated_at"); // Default sorting by pushed date (descending)
     }
   }, [gists, sort, filterValue]);
   return (
