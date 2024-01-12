@@ -2,13 +2,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { UserData } from "@/types/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import FollowersOrFollowings from "./FollowersOrFollowings";
 import SocialLinks from "./SocialLinks";
 import { createUrlObject } from "@/lib/utils";
@@ -68,36 +61,16 @@ export default function Header({ userData }: HeaderProps) {
         </div>
       </CardContent>
       <CardFooter className="flex w-full flex-row flex-wrap justify-center gap-2">
-        <Dialog>
-          <DialogTrigger className="dialog-trigger">
-            <span>Followers: </span>
-            <span>{userData.followers}</span>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Followers</DialogTitle>
-            </DialogHeader>
-            <FollowersOrFollowings
-              option="followers"
-              username={userData.login}
-            />
-          </DialogContent>
-        </Dialog>
-        <Dialog>
-          <DialogTrigger className="dialog-trigger">
-            <span>Following: </span>
-            <span className="">{userData.following}</span>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Followings</DialogTitle>
-            </DialogHeader>
-            <FollowersOrFollowings
-              option="followings"
-              username={userData.login}
-            />
-          </DialogContent>
-        </Dialog>
+        <FollowersOrFollowings
+          option="followers"
+          username={userData.login}
+          count={userData.followers}
+        />
+        <FollowersOrFollowings
+          option="followings"
+          username={userData.login}
+          count={userData.following}
+        />
         {userData.blog && (
           <Link
             href={createUrlObject(userData.blog).href}

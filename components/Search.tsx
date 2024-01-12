@@ -61,13 +61,13 @@ export default function SearchBar() {
               <Link
                 href={`/${item.login}`}
                 key={index}
-                className="flex flex-row items-center gap-2 rounded-2xl p-2 hover:bg-purple-950"
+                className="flex flex-row items-start gap-2 rounded-2xl p-2 hover:bg-purple-950"
               >
                 <Avatar>
                   <AvatarImage src={item.avatar_url || item.avatar_url} />
                   <AvatarFallback>{item.login.charAt(0)}</AvatarFallback>
                 </Avatar>
-                <div className="flex flex-col">
+                <div className="flex flex-col text-start">
                   <span className="text-xl font-bold"> {item.login}</span>
                   <span> {item.type}</span>
                 </div>
