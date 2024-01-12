@@ -29,7 +29,7 @@ export default function SearchBar() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getSiteUrl()}/api/github?option=search&username=${inputValue}`,
+          `${getSiteUrl()}/api/github?option=search&username=${inputValue}`
         );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
@@ -45,7 +45,7 @@ export default function SearchBar() {
   }, [inputValue]);
 
   return (
-    <section className="flex w-[25rem] flex-col items-center justify-center gap-5">
+    <section className="flex md:w-[25rem] flex-col items-center justify-center gap-5">
       <Input
         aria-label="Search"
         placeholder="write user name..."

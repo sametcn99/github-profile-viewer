@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { VList } from "virtua";
-import { getSiteUrl } from "@/lib/utils";
+import { fetchContact, getSiteUrl } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserData } from "@/types/types";
 import { Input } from "@/components/ui/input";
@@ -12,36 +12,24 @@ export default function FollowersOrFollowings({ username, option }: any) {
   const [data, setData] = useState<UserData[]>([]);
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState<string>("");
-  const url = `${getSiteUrl()}/api/github?username=${username}&option=${option}&page=${page}`;
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status code: ${response.status}`);
-        }
-        const fetchedData = await response.json();
-        if (fetchedData.data.length > 0) setPage((prev) => prev + 1);
-        if (data.length > 0) {
-          setData((prevData) => [...prevData, ...fetchedData.data]);
-        } else if (data.length === 0) {
-          setData(fetchedData.data);
-        }
-        if (fetchedData.data.length === 0) {
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
+        const repositoryData = await fetchContact(username, option);
+        setData(repositoryData);
         setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle the error as needed
       }
     };
     fetchData();
-    console.log(`Data length: ${data.length}\n Page: ${page}`);
-  }, [username, page, url, data.length]);
+  }, [option, username]); // Empty dependency array to run the effect only once
 
   const filteredData = data.filter((item: UserData) =>
-    item.login.toLowerCase().includes(filter.toLowerCase()),
+    item.login.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (

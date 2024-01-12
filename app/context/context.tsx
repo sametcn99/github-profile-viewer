@@ -1,5 +1,5 @@
 "use client";
-import { fetchRepos } from "@/lib/utils";
+import { fetchGithub } from "@/lib/utils";
 import { GitHubRepo } from "@/types/types";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
@@ -29,8 +29,8 @@ export const GithubProvider = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const repositoryData = await fetchRepos(username, "repos");
-        const gistsData = await fetchRepos(username, "gists");
+        const repositoryData = await fetchGithub(username, "repos");
+        const gistsData = await fetchGithub(username, "gists");
         setGists(gistsData);
         setRepos(repositoryData);
         setLoading(false);
