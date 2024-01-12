@@ -1,7 +1,5 @@
-import Navbar from "@/components/Navbar";
 import SearchBar from "@/components/Search";
 import { Section, Text } from "@radix-ui/themes";
-import Link from "next/link";
 
 export default function Home() {
   return (

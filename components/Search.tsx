@@ -2,16 +2,8 @@
 import { useEffect, useState } from "react"; // Import useState hook
 import { useRouter } from "next/navigation";
 import { getSiteUrl } from "@/lib/utils";
-import { Input } from "./ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { UserData } from "@/types/types";
-import {
-  Link,
-  ScrollArea,
-  TextArea,
-  TextField,
-  Section,
-} from "@radix-ui/themes";
+import { Link, ScrollArea, TextField, Section, Avatar } from "@radix-ui/themes";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
@@ -67,10 +59,11 @@ export default function SearchBar() {
               key={index}
               className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 p-2 justify-start"
             >
-              <Avatar>
-                <AvatarImage src={item.avatar_url || item.avatar_url} />
-                <AvatarFallback>{item.login.charAt(0)}</AvatarFallback>
-              </Avatar>
+              <Avatar
+                size="9"
+                fallback={item.login.charAt(0)}
+                src={item.avatar_url || item.avatar_url}
+              />
               <div className="flex flex-col text-start">
                 <span className="text-xl font-bold"> {item.login}</span>
                 <span> {item.type}</span>

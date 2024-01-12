@@ -16,6 +16,7 @@ export async function GET(request: NextRequest) {
   //--- /api/github?username=sametcn99&option=repo&reponame=personal-website
   //--- /api/github?username=sametcn99&option=profile
   //--- /api/github?option=search&username=sametcn99
+
   const octokit = new Octokit({
     auth: process.env.GH_TOKEN, // GitHub token obtained from environment variables
     headers: {

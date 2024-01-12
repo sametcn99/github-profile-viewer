@@ -2,6 +2,7 @@
 import { getSiteUrl } from "@/lib/utils";
 import { Button, DropdownMenu, Link } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
+
 export default function SocialLinks({
   username,
   option,

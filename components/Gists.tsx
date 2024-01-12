@@ -3,16 +3,11 @@
 import { useContext, useMemo, useState } from "react";
 import { GithubContext } from "@/app/context/context";
 import FilterInput from "./FilterInput";
-import {
-  sortByCreatedAscending,
-  sortByCreatedDescending,
-  sortByUpdatedAscending,
-  sortByUpdatedDescending,
-} from "@/lib/utils/sort";
 import { Box, Button, Card, DropdownMenu, Link, Text } from "@radix-ui/themes";
 
 import Loading from "@/app/loading";
 import { FaGithub } from "react-icons/fa";
+import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 
 // Gistss component
 const Gists = () => {
@@ -35,23 +30,19 @@ const Gists = () => {
     switch (sort) {
       // Created Ascending(artan)
       case "Created Ascending":
-        return sortByCreatedAscending(filteredGists);
+        return sortByKeyAscending(filteredGists, "created_at");
 
       // Created Descending(azalan)
       case "Created Descending":
-        return sortByCreatedDescending(filteredGists);
+        return sortByKeyDescending(filteredGists, "created_at");
 
       // Updated Ascending(artan)
       case "Updated Ascending":
-        return sortByUpdatedAscending(filteredGists);
+        return sortByKeyAscending(filteredGists, "pushed_at");
 
-      // Updated Descending(azalan)
-      case "Updated Descending":
-        return sortByUpdatedDescending(filteredGists);
-
-      // Stars Descending
+      // Updated Descending
       default:
-        return sortByCreatedDescending(filteredGists); // Default sorting by pushed date (descending)
+        return sortByKeyDescending(filteredGists, "pushed_at"); // Default sorting by pushed date (descending)
     }
   }, [gists, sort, filterValue]);
   return (

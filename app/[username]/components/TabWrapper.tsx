@@ -2,8 +2,7 @@
 import Gists from "@/components/Gists";
 import Projects from "@/components/Projects";
 import Stats from "@/components/Stats";
-import { Box, Container, Tabs } from "@radix-ui/themes";
-import React from "react";
+import { Box, Tabs } from "@radix-ui/themes";
 
 export default function TabWrapper() {
   return (

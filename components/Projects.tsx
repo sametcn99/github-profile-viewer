@@ -5,14 +5,6 @@ import { BsFillStarFill } from "react-icons/bs";
 import { FaCodeFork } from "react-icons/fa6";
 import { GithubContext } from "@/app/context/context";
 import FilterInput from "./FilterInput";
-import {
-  sortByCreatedAscending,
-  sortByPushedAscending,
-  sortByPushedDescending,
-  sortByCreatedDescending,
-  sortByStarsDescending,
-  sortByStarsAscending,
-} from "@/lib/utils/sort";
 import Loading from "@/app/loading";
 import { formatNumber } from "@/lib/utils";
 import {
@@ -24,6 +16,7 @@ import {
   Text,
   Tooltip,
 } from "@radix-ui/themes";
+import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 
 export default function Projects() {
   const { repos, loading }: any = useContext(GithubContext);
@@ -56,26 +49,26 @@ export default function Projects() {
     switch (sort) {
       // Created Ascending(artan)
       case "Created Ascending":
-        return sortByCreatedAscending(filteredRepos);
+        return sortByKeyAscending(filteredRepos, "created_at");
 
       // Created Descending(azalan)
       case "Created Descending":
-        return sortByCreatedDescending(filteredRepos);
+        return sortByKeyDescending(filteredRepos, "created_at");
 
       // Updated Ascending(artan)
       case "Updated Ascending":
-        return sortByPushedAscending(filteredRepos);
+        return sortByKeyAscending(filteredRepos, "pushed_at");
 
       // Updated Descending(azalan)
       case "Updated Descending":
-        return sortByPushedDescending(filteredRepos);
+        return sortByKeyDescending(filteredRepos, "pushed_at");
 
       case "Stars Ascending":
-        return sortByStarsAscending(filteredRepos);
+        return sortByKeyAscending(filteredRepos, "stargazers_count");
 
       // Stars Descending
       default:
-        return sortByStarsDescending(filteredRepos); // Default sorting by pushed date (descending)
+        return sortByKeyDescending(filteredRepos, "stargazers_count"); // Default sorting by pushed date (descending)
     }
   }, [repos, sort, selectedTopic, filterValue]);
 

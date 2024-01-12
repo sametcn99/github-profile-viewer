@@ -3,67 +3,42 @@ import { GitHubRepo } from "@/types/types";
 export const sortByDateDesc = (property: string) => (a: any, b: any) =>
   new Date(b[property]).getTime() - new Date(a[property]).getTime();
 
-export function sortByUpdatedDescending(data: GitHubRepo[]) {
+/**
+ * Sorts an array of GitHubRepo objects by the specified key in descending order.
+ * @param data - The array of GitHubRepo objects to be sorted.
+ * @param key - The key based on which the sorting will be performed.
+ * @returns The array of GitHubRepo objects sorted by the specified key in descending order.
+ */
+export function sortByKeyDescending<K extends keyof GitHubRepo>(
+  data: GitHubRepo[],
+  key: K
+): GitHubRepo[] {
   return data.sort((a, b) => {
-    const dateA = new Date(a.updated_at);
-    const dateB = new Date(b.updated_at);
-    return dateB.getTime() - dateA.getTime();
+    if (b[key] > a[key]) {
+      return 1;
+    } else if (b[key] < a[key]) {
+      return -1;
+    }
+    return 0;
   });
 }
 
-export function sortByUpdatedAscending(data: GitHubRepo[]) {
+/**
+ * Sorts an array of GitHubRepo objects by the specified key in ascending order.
+ * @param data - The array of GitHubRepo objects to be sorted.
+ * @param key - The key based on which the sorting will be performed.
+ * @returns The array of GitHubRepo objects sorted by the specified key in ascending order.
+ */
+export function sortByKeyAscending<K extends keyof GitHubRepo>(
+  data: GitHubRepo[],
+  key: K
+): GitHubRepo[] {
   return data.sort((a, b) => {
-    const dateA = new Date(a.updated_at);
-    const dateB = new Date(b.updated_at);
-    return dateA.getTime() - dateB.getTime(); // Reverse the comparison for ascending order
-  });
-}
-
-export function sortByCreatedDescending(data: GitHubRepo[]) {
-  return data.sort((a, b) => {
-    const dateA = new Date(a.created_at);
-    const dateB = new Date(b.created_at);
-    return dateB.getTime() - dateA.getTime();
-  });
-}
-
-export function sortByCreatedAscending(data: GitHubRepo[]) {
-  return data.sort((a, b) => {
-    const dateA = new Date(a.created_at);
-    const dateB = new Date(b.created_at);
-    return dateA.getTime() - dateB.getTime(); // Reverse the comparison for ascending order
-  });
-}
-export function sortByStarsDescending(data: GitHubRepo[]) {
-  return data.sort((a, b) => {
-    const starsA = a.stargazers_count || 0;
-    const starsB = b.stargazers_count || 0;
-    return starsB - starsA;
-  });
-}
-export function sortByStarsAscending(data: GitHubRepo[]) {
-  return data.sort((a, b) => {
-    const starsA = a.stargazers_count;
-    const starsB = b.stargazers_count;
-    return starsA - starsB; // Reverse the comparison for ascending order
-  });
-}
-
-export function sortByPushedDescending(data: GitHubRepo[]) {
-  return data.sort((a, b) => {
-    const dateA = new Date(a.pushed_at);
-    const dateB = new Date(b.pushed_at);
-
-    // Compare dates for descending order:
-    return dateB.getTime() - dateA.getTime();
-  });
-}
-export function sortByPushedAscending(data: GitHubRepo[]) {
-  return data.sort((a, b) => {
-    const dateA = new Date(a.pushed_at);
-    const dateB = new Date(b.pushed_at);
-
-    // Compare dates for ascending order:
-    return dateA.getTime() - dateB.getTime();
+    if (a[key] > b[key]) {
+      return 1;
+    } else if (a[key] < b[key]) {
+      return -1;
+    }
+    return 0;
   });
 }

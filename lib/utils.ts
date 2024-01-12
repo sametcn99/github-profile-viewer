@@ -1,7 +1,7 @@
 import { GitHubRepo, UserData } from "@/types/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { sortByStarsDescending } from "./utils/sort";
+import { sortByKeyDescending } from "./utils/sort";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -131,7 +131,7 @@ export async function fetchGithub(
     // Log and handle any errors that occur during the fetch process
     console.error(error);
   }
-  repos = sortByStarsDescending(repos);
+  repos = sortByKeyDescending(repos, "created_at");
   // Return the accumulated repositories
   return repos;
 }
