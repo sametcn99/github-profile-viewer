@@ -59,8 +59,8 @@ export default function FollowersOrFollowings({ username, option }: any) {
                 <AvatarFallback>{item.login.charAt(0)}</AvatarFallback>
               </Avatar>
               <div className="flex flex-col">
-                <span className="text-xl font-bold"> {item.login}</span>
-                <span> {item.type}</span>
+                <div className="text-xl font-bold"> {item.login}</div>
+                <div> {item.type}</div>
               </div>
             </Link>
           ))
