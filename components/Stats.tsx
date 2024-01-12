@@ -58,13 +58,15 @@ export default function Stats() {
         {languages && (
           <div className=" header-wrapper">
             <span className="header-title">Languages</span>
-            <ScrollArea className="h-[200px] w-full rounded-2xl border p-4">
+            <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
               <ul>
-                {Object.entries(languages).map(([language, count]) => (
-                  <li key={language} className="ml-4 list-disc">
-                    {language}: {count}
-                  </li>
-                ))}
+                {Object.entries(languages)
+                  .sort((a, b) => b[1] - a[1])
+                  .map(([language, count]) => (
+                    <li key={language} className="ml-4 list-disc">
+                      {language}: {count}
+                    </li>
+                  ))}
               </ul>
             </ScrollArea>
           </div>
