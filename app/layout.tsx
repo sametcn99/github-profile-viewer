@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import Navbar from "@/components/Navbar";
 import { Analytics } from "@vercel/analytics/react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +40,7 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body
-        className={`${inter.className} flex min-h-screen w-full justify-center px-4 transition-all duration-1000`}
+        className={`${inter.className} flex min-h-screen w-full justify-center px-1 md:px-4 transition-all duration-1000`}
       >
         <main className=" flex w-[60rem] flex-col gap-4 p-2 pt-4">
           <Navbar />

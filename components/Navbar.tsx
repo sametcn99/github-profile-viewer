@@ -2,6 +2,7 @@ import React from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import GetUser from "./GetUser";
+import SearchBar from "./Search";
 
 const Navbar = () => {
   return (

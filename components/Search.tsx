@@ -6,6 +6,7 @@ import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
 import { UserData } from "@/types/types";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
@@ -45,7 +46,7 @@ export default function SearchBar() {
   }, [inputValue]);
 
   return (
-    <section className="flex md:w-[25rem] flex-col items-center justify-center gap-5">
+    <section className="flex md:w-[25rem] flex-col items-center justify-center gap-5 static ">
       <Input
         aria-label="Search"
         placeholder="write user name..."
@@ -54,30 +55,28 @@ export default function SearchBar() {
         onChange={handleChange}
         value={inputValue}
       />
-      <div className="w-full">
-        {data && data?.length > 0 ? (
-          <>
-            {data.map((item: any, index: number) => (
-              <Link
-                href={`/${item.login}`}
-                key={index}
-                className="flex flex-row items-start gap-2 rounded-2xl p-2 hover:bg-purple-950"
-              >
-                <Avatar>
-                  <AvatarImage src={item.avatar_url || item.avatar_url} />
-                  <AvatarFallback>{item.login.charAt(0)}</AvatarFallback>
-                </Avatar>
-                <div className="flex flex-col text-start">
-                  <span className="text-xl font-bold"> {item.login}</span>
-                  <span> {item.type}</span>
-                </div>
-              </Link>
-            ))}
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
+      {data && data?.length > 0 ? (
+        <ScrollArea className="w-full h-[30rem] bg-secondary absolute rounded-2xl">
+          {data.map((item: any, index: number) => (
+            <Link
+              href={`/${item.login}`}
+              key={index}
+              className="flex flex-row items-start gap-2 rounded-2xl p-2 hover:bg-purple-950 relative"
+            >
+              <Avatar>
+                <AvatarImage src={item.avatar_url || item.avatar_url} />
+                <AvatarFallback>{item.login.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col text-start">
+                <span className="text-xl font-bold"> {item.login}</span>
+                <span> {item.type}</span>
+              </div>
+            </Link>
+          ))}
+        </ScrollArea>
+      ) : (
+        <></>
+      )}
     </section>
   );
 }

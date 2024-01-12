@@ -83,6 +83,7 @@ export default function Header({ userData }: HeaderProps) {
         )}
         {userData.company && (
           <Link
+            target="_blank"
             href={
               userData.company.startsWith("@")
                 ? `https://github.com/${userData.company.replace("@", "")}`
