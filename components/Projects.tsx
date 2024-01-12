@@ -192,6 +192,7 @@ export default function Projects() {
                 <Box className="flex w-full flex-row flex-wrap justify-center gap-2">
                   {repo.topics.map((topic: any, index: any) => (
                     <Text
+                      size="2"
                       key={index}
                       className={
                         // Bold selected topic
