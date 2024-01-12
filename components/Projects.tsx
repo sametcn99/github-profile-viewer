@@ -128,7 +128,9 @@ export default function Projects() {
                     <Text>{repo.name}</Text>
                     {repo.fork && (
                       <Tooltip content="Forked Repo">
-                        <FaCodeFork size={22} />
+                        <Box>
+                          <FaCodeFork size={22} />
+                        </Box>
                       </Tooltip>
                     )}
                     {repo.stargazers_count > 0 && (
