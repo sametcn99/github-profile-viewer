@@ -196,15 +196,15 @@ export default function Projects() {
                     Last update: {new Date(repo.pushed_at).toLocaleDateString()}
                   </Text>
                 </Box>
-                <Box className="flex w-full flex-row flex-wrap justify-center">
+                <Box className="flex w-full flex-row flex-wrap justify-center gap-2">
                   {repo.topics.map((topic: any, index: any) => (
                     <Text
                       key={index}
                       className={
                         // Bold selected topic
                         selectedTopic === topic
-                          ? "m-[0.063rem] mb-1 select-none rounded-2xl   bg-primary p-1 text-xs font-bold hover:cursor-pointer"
-                          : "m-[0.063rem] mb-1 select-none rounded-2xl bg-secondary  p-1 text-xs font-thin hover:cursor-pointer"
+                          ? "mb-1 select-none rounded-2xl p-1 font-bold hover:cursor-pointer"
+                          : "mb-1 select-none rounded-2xl p-1  font-thin hover:cursor-pointer"
                       }
                       onClick={() => handleTopicClick(topic)} // Add click handler
                     >
