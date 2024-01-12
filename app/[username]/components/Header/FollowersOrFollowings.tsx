@@ -10,8 +10,8 @@ import {
   Dialog,
   ScrollArea,
   Text,
+  TextField,
 } from "@radix-ui/themes";
-import { AvatarImage } from "@radix-ui/react-avatar";
 
 export default function FollowersOrFollowings({
   username,
@@ -57,13 +57,21 @@ export default function FollowersOrFollowings({
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>Users</Dialog.Title>
-        <ScrollArea className="h-[35rem] w-full rounded-2xl p-4">
+        <TextField.Root>
+          <TextField.Input
+            value={filter}
+            type="search"
+            placeholder="Filter by name"
+            onChange={(e) => setFilter(e.target.value)}
+          ></TextField.Input>
+        </TextField.Root>
+        <ScrollArea className="h-[35rem]">
           {Array.isArray(filteredData) && filteredData?.length > 0 ? (
             filteredData.map((item: UserData, index: number) => (
               <Link
                 href={`/${item.login}`}
                 key={index}
-                className="flex flex-row items-center gap-2 rounded-2xl p-2 hover:bg-black hover:bg-opacity-50 "
+                className="flex flex-row items-center gap-2 rounded-2xl p-2 hover:bg-black hover:bg-opacity-50"
               >
                 <Avatar
                   fallback={item.login.charAt(0)}

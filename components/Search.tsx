@@ -5,7 +5,13 @@ import { getSiteUrl } from "@/lib/utils";
 import { Input } from "./ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { UserData } from "@/types/types";
-import { Link, ScrollArea, TextArea, TextField } from "@radix-ui/themes";
+import {
+  Link,
+  ScrollArea,
+  TextArea,
+  TextField,
+  Section,
+} from "@radix-ui/themes";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
@@ -45,16 +51,7 @@ export default function SearchBar() {
   }, [inputValue]);
 
   return (
-    <section className="flex md:w-[25rem] flex-col items-center justify-center gap-5 static ">
-      {/* <TextField.Root
-        size="1"
-        className="w-full"
-        aria-label="Search"
-        placeholder="write user name..."
-        onKeyDown={handleKeyPress}
-        onChange={handleChange}
-        value={inputValue}
-      /> */}
+    <Section className="flex md:w-[25rem] w-[15rem] flex-col items-center justify-center gap-5 static ">
       <TextField.Root size="1" className="w-full" aria-label="Search">
         <TextField.Input
           placeholder="Write user name"
@@ -84,6 +81,6 @@ export default function SearchBar() {
       ) : (
         <></>
       )}
-    </section>
+    </Section>
   );
 }
