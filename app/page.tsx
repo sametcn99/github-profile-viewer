@@ -1,3 +1,4 @@
+import RecommendedUsers from "@/components/RecommendedUsers";
 import SearchBar from "@/components/Search";
 import { Section, Text } from "@radix-ui/themes";
 
@@ -13,6 +14,7 @@ export default function Home() {
           Discover a user&apos;s coding journey and contributions to the
           open-source community.
         </Text>
+        <RecommendedUsers />
         <SearchBar />
       </Section>
     </>

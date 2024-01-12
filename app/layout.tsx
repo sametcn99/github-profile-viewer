@@ -50,7 +50,7 @@ export default function RootLayout({
           radius="large"
           scaling="110%"
         >
-          <main className=" flex max-w-[60rem] flex-col gap-4 p-2 pt-4">
+          <main className=" flex 2xl:w-[70rem] lg:w-[60rem] md:w-[40rem] sm:w-[30rem] flex-col gap-4 p-2 pt-4 transition-all duration-1000">
             <Navbar />
             {children}
           </main>

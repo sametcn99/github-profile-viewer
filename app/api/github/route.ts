@@ -68,6 +68,12 @@ export async function GET(request: NextRequest) {
           username,
         });
         break;
+      case "trending-developers":
+        // Fetch profile details for the specified user
+        responseData = await octokit.rest.users.list({
+          per_page: 100,
+        });
+        break;
       case "followers":
         // Fetch profile details for the specified user
         responseData = await octokit.rest.users.listFollowersForUser({

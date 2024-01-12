@@ -43,7 +43,7 @@ export default function SearchBar() {
   }, [inputValue]);
 
   return (
-    <Section className="flex md:w-[25rem] w-[15rem] flex-col items-center justify-center gap-5 static ">
+    <section className="flex md:w-[25rem] w-[15rem] flex-col items-center justify-center gap-5 static ">
       <TextField.Root size="1" className="w-full" aria-label="Search">
         <TextField.Input
           placeholder="Write user name"
@@ -57,10 +57,10 @@ export default function SearchBar() {
             <Link
               href={`/${item.login}`}
               key={index}
-              className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 p-2 justify-start"
+              className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 gap-2 p-2 justify-start"
             >
               <Avatar
-                size="9"
+                size="3"
                 fallback={item.login.charAt(0)}
                 src={item.avatar_url || item.avatar_url}
               />
@@ -74,6 +74,6 @@ export default function SearchBar() {
       ) : (
         <></>
       )}
-    </Section>
+    </section>
   );
 }
