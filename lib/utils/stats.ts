@@ -32,7 +32,7 @@ export const calculateTotalStars = (repos: GitHubRepo[]): number => {
 export const findMostStarredRepo = (repos: GitHubRepo[]): GitHubRepo => {
   return repos.reduce(
     (max, repo) => (max.stargazers_count > repo.stargazers_count ? max : repo),
-    repos[0],
+    repos[0]
   );
 };
 
@@ -46,7 +46,7 @@ export const findLatestUpdatedRepo = (repos: GitHubRepo[]): GitHubRepo => {
   return repos.reduce(
     (latest, repo) =>
       new Date(latest.pushed_at) > new Date(repo.pushed_at) ? latest : repo,
-    repos[0],
+    repos[0]
   );
 };
 
@@ -67,7 +67,7 @@ export const calculateTotalForks = (repos: GitHubRepo[]): number => {
  * @returns {Record<string, number>} - Language distribution as an object.
  */
 export const calculateLanguageDistribution = (
-  repos: GitHubRepo[],
+  repos: GitHubRepo[]
 ): Record<string, number> => {
   const languageDistribution: Record<string, number> = {};
 
@@ -91,7 +91,7 @@ export const findOldestRepo = (repos: GitHubRepo[]): GitHubRepo | null => {
       oldest === null || new Date(repo.created_at) < new Date(oldest.created_at)
         ? repo
         : oldest,
-    null as unknown as GitHubRepo,
+    null as unknown as GitHubRepo
   );
 };
 
@@ -102,10 +102,9 @@ export const findOldestRepo = (repos: GitHubRepo[]): GitHubRepo | null => {
  * @returns {GitHubRepo | null} - Repository with the longest update period or null if the array is empty.
  */
 export const findRepoWithLongestUpdatePeriod = (
-  repos: GitHubRepo[],
+  repos: GitHubRepo[]
 ): GitHubRepo | null => {
   if (repos.length === 0) {
-    console.error("The array is empty");
     return null;
   }
 
@@ -116,6 +115,6 @@ export const findRepoWithLongestUpdatePeriod = (
         new Date(latest.created_at).getTime()
         ? repo
         : latest,
-    repos[0],
+    repos[0]
   );
 };
