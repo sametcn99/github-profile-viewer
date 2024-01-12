@@ -65,7 +65,7 @@ export default function FollowersOrFollowings({ username, option }: any) {
             </Link>
           ))
         ) : (
-          <p>No matching data found.</p>
+          <div>No matching data found.</div>
         )}
       </VList>
     </>
