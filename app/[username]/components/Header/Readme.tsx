@@ -2,13 +2,8 @@
 import { useCallback, useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { getSiteUrl } from "@/lib/utils";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog } from "@radix-ui/themes";
+
 export default function Readme(username: any) {
   const [content, setContent] = useState<string | undefined>();
   const [markdownContent, setMarkdownContent] = useState("");
@@ -21,7 +16,7 @@ export default function Readme(username: any) {
         }`,
         {
           next: { revalidate: 3600 },
-        },
+        }
       );
 
       if (!response.ok) {
@@ -64,17 +59,15 @@ export default function Readme(username: any) {
 
   if (markdownContent !== "") {
     return (
-      <Dialog>
-        <DialogTrigger className="dialog-trigger">
+      <Dialog.Root>
+        <Dialog.Trigger className="dialog-trigger">
           <span>Readme.md </span>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Followers</DialogTitle>
-          </DialogHeader>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Title>Readme.md</Dialog.Title>
           <MarkdownPreview source={markdownContent} />
-        </DialogContent>
-      </Dialog>
+        </Dialog.Content>
+      </Dialog.Root>
     );
   } else {
     return null;

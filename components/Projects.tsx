@@ -91,7 +91,7 @@ export default function Projects() {
           <FilterInput setFilterValue={setFilterValue} />
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
-              <Button>Sort By</Button>
+              <Button className="hover:cursor-pointer">Sort By</Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>
               <DropdownMenu.Label>Sort by</DropdownMenu.Label>
@@ -143,8 +143,8 @@ export default function Projects() {
                     )}
                   </Box>
                   <DropdownMenu.Root>
-                    <DropdownMenu.Trigger className="rounded-2xl bg-primary">
-                      <Button>Open</Button>
+                    <DropdownMenu.Trigger>
+                      <Button className="hover:cursor-pointer">Open</Button>
                     </DropdownMenu.Trigger>
                     <DropdownMenu.Content className="flex w-fit flex-col gap-2 p-2 ">
                       <DropdownMenu.Item className="px-2 text-base hover:bg-primary">

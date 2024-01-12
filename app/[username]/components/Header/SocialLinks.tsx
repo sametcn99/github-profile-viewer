@@ -35,7 +35,7 @@ export default function SocialLinks({
       {data.length > 0 && (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
-            <Button variant="soft">Links</Button>
+            <Button className="hover:cursor-pointer">Links</Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
             {data.map((item: any, index: number) => (
