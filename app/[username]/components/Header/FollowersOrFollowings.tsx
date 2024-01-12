@@ -57,7 +57,7 @@ export default function FollowersOrFollowings({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Followings</DialogTitle>
+          <DialogTitle>{option.charAt(0).toUpperCase()}</DialogTitle>
         </DialogHeader>
         <Input
           aria-label="Search"
