@@ -16,6 +16,7 @@ const Navbar = () => {
           href="https://github.com/sametcn99"
           className="m-2 rounded-2xl text-white hover:bg-secondary"
           aria-label="Github"
+          target="_blank"
         >
           <FaGithub size={30} />
         </a>
