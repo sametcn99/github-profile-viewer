@@ -30,20 +30,26 @@ export default function Header({ userData }: HeaderProps) {
             >
               @{userData.login}
             </Link>
-            <Text className="text-base font-normal">{userData.bio}</Text>
-            <Text className="text-base font-normal">
-              From: {userData.location}
-            </Text>
-            <Text>
-              Email:{" "}
-              <Link
-                className="break-words hover:underline"
-                type="email"
-                href={`mailto:${userData.email}`}
-              >
-                {userData.email}
-              </Link>
-            </Text>
+            {userData.bio && (
+              <Text className="text-base font-normal">{userData.bio}</Text>
+            )}
+            {userData.location && (
+              <Text className="text-base font-normal">
+                From: {userData.location}
+              </Text>
+            )}
+            {userData.email && (
+              <Text>
+                Email:{" "}
+                <Link
+                  className="break-words hover:underline"
+                  type="email"
+                  href={`mailto:${userData.email}`}
+                >
+                  {userData.email}
+                </Link>
+              </Text>
+            )}
             <Text className="text-base font-normal">
               Public Repos: {userData.public_repos}
             </Text>
