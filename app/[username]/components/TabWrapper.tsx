@@ -9,9 +9,15 @@ export default function TabWrapper() {
     <div>
       <Tabs.Root defaultValue="stats">
         <Tabs.List className="w-full items-center justify-center mb-2">
-          <Tabs.Trigger value="repositories">Repos</Tabs.Trigger>
-          <Tabs.Trigger value="stats">Stats</Tabs.Trigger>
-          <Tabs.Trigger value="gists">Gists</Tabs.Trigger>
+          <Tabs.Trigger value="repositories" className="hover:cursor-pointer">
+            Repos
+          </Tabs.Trigger>
+          <Tabs.Trigger value="stats" className="hover:cursor-pointer">
+            Stats
+          </Tabs.Trigger>
+          <Tabs.Trigger value="gists" className="hover:cursor-pointer">
+            Gists
+          </Tabs.Trigger>
         </Tabs.List>
         <Box>
           <Tabs.Content value="repositories">
