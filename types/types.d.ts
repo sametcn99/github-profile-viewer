@@ -20,6 +20,7 @@ export type GitHubRepo = {
   license_spdx_id: string;
   files: string[];
   owner: any;
+  [key: string]: any; // Index signature for dynamic properties
 };
 
 export type GithubApiResponse = {

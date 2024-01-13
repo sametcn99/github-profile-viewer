@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
+
 export default function Languages({
   language,
   count,

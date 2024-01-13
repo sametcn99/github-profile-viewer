@@ -18,7 +18,7 @@ export default function Readme(url: any) {
     return (
       <Dialog.Root>
         <Dialog.Trigger className="dialog-trigger">
-          <FaReadme size={25} />
+          <FaReadme size={22} />
         </Dialog.Trigger>
         <Dialog.Content>
           <Dialog.Title>Readme.md</Dialog.Title>
