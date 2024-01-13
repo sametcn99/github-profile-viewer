@@ -1,14 +1,16 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { getSiteUrl } from "@/lib/utils";
 import { Dialog } from "@radix-ui/themes";
+import { GithubContext } from "@/app/context/context";
 
 export default function Readme(username: any) {
   const [content, setContent] = useState<string | undefined>();
   const [markdownContent, setMarkdownContent] = useState("");
+  const { repos, loading }: any = useContext(GithubContext);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     try {
       const response = await fetch(
         `${getSiteUrl()}/api/github?option=readme&username=${
@@ -29,11 +31,23 @@ export default function Readme(username: any) {
       console.error("Error fetching data:", error);
       // Handle errors as needed
     }
-  }, [username.username]);
+  };
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData, username.username]);
+    const findReadme = repos.reduce((foundRepo: any, repo: any) => {
+      if (repo.name === username.username) {
+        foundRepo = repo;
+      }
+      return foundRepo;
+    }, null);
+
+    if (findReadme) {
+      console.log("readme file found");
+      fetchData();
+    } else {
+      console.log("readme file not found");
+    }
+  }, [repos, username, username.username]);
 
   useEffect(() => {
     const fetchData = async () => {
