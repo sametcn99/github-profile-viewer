@@ -11,7 +11,7 @@ const RecommendedUsers = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getSiteUrl()}/api/github?username=sametcn99&option=trending-developers`
+          `${getSiteUrl()}/api/github?option=trending-developers`
         );
         const data = await response.json();
 

@@ -36,20 +36,41 @@ export default function FollowersOrFollowings({
   const [filter, setFilter] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState("All");
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+
     const fetchData = async () => {
       try {
-        const repositoryData = await fetchContact(username, option);
+        console.log(`Fetching ${username}'s ${option}...`);
+        const repositoryData = await fetchContact(username, option, signal);
         setData(repositoryData);
         setLoading(false);
+        console.log(
+          `${username}'s ${option} fetched successfully.\n${repositoryData}`
+        );
       } catch (error) {
-        console.error("Error fetching data:", error);
-        // Handle the error as needed
+        if (error === "AbortError") {
+          // Request was aborted
+          console.log("Fetch operation was aborted");
+        } else {
+          console.error("Error fetching data:", error);
+          // Handle the error as needed
+        }
       }
     };
-    fetchData();
-  }, [option, username]); // Empty dependency array to run the effect only once
+
+    if (dialogOpen && data.length === 0) {
+      fetchData();
+    }
+
+    return () => {
+      // Cleanup function to abort the ongoing operation
+      abortController.abort();
+    };
+  }, [dialogOpen, data.length, option, username]);
 
   const filteredData = data.filter((item: UserData) => {
     const loginMatches = item.login
@@ -66,7 +87,7 @@ export default function FollowersOrFollowings({
     }
   });
   return (
-    <Dialog.Root>
+    <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
       <Dialog.Trigger>
         <Button className="hover:cursor-pointer">
           <Text>

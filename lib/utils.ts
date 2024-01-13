@@ -44,22 +44,29 @@ export const removeDuplicates = (arr: any[]) => {
 
   return uniqueData;
 };
-// Async function to fetch GitHub repositories based on a username and option
 export async function fetchContact(
   username: string,
-  option: string
+  option: string,
+  signal: AbortSignal
 ): Promise<UserData[]> {
   // Initialize variables for pagination and repository storage
   let nextPage = 1;
   let repos: UserData[] = [];
   let completed = false;
+
   try {
     // Infinite loop to paginate through the user's repositories
     while (completed === false) {
+      // Check if the request has been aborted
+      if (signal.aborted) {
+        throw new DOMException("Aborted", "AbortError");
+      }
+
       let url = `/api/github?username=${username}&option=${option}&page=${nextPage}`;
       console.log(url);
+
       // Fetch repositories data from the server using the provided username, option, and page number
-      const reposResponse = await fetch(url);
+      const reposResponse = await fetch(url, { signal });
 
       // Check if the response is successful; otherwise, throw an error
       if (!reposResponse.ok) {
@@ -85,10 +92,17 @@ export async function fetchContact(
   } catch (error) {
     // Log and handle any errors that occur during the fetch process
     console.error(error);
+
+    // Re-throw the error if it's not an AbortError
+    if (error !== "AbortError") {
+      throw error;
+    }
   }
+
   // Return the accumulated repositories
   return repos;
 }
+
 // Async function to fetch GitHub repositories based on a username and option
 export async function fetchGithub(
   username: string,
