@@ -47,9 +47,7 @@ const RecommendedUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${getSiteUrl()}/api/github?option=trending-developers`
-        );
+        const response = await fetch(`/api/github?option=trending-developers`);
         const data = await response.json();
         // Set the fetched data to the state
         setData(data.data);
@@ -86,7 +84,7 @@ const RecommendedUsers = () => {
             <Link
               href={`/${item.login}`}
               key={index}
-              className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 gap-2 p-2 justify-start"
+              className="flex flex-row items-center justify-start gap-2 rounded-3xl p-2 hover:bg-black hover:bg-opacity-50"
             >
               <Avatar
                 size="3"

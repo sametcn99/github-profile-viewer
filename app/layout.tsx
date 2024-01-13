@@ -41,16 +41,15 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body
-        className={`${inter.className} flex min-h-screen w-full justify-center px-1 md:px-4 transition-all duration-1000`}
+        className={`${inter.className} flex min-h-screen w-full justify-center px-1 transition-all duration-1000 md:px-4`}
       >
         <Theme
           appearance="dark"
           accentColor="gray"
           grayColor="slate"
           radius="large"
-          scaling="110%"
         >
-          <main className=" flex xl:w-[70rem] lg:w-[60rem] md:w-[40rem] sm:w-[30rem] w-full flex-col gap-4 p-2 pt-4 transition-all duration-1000">
+          <main className=" flex w-full flex-col gap-4 p-2 pt-4 transition-all duration-1000 sm:w-[30rem] md:w-[40rem] lg:w-[60rem] xl:w-[70rem]">
             <Navbar />
             {children}
           </main>

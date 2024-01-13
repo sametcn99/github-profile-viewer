@@ -22,7 +22,7 @@ async function fetchUserProfile(username: string): Promise<UserData | null> {
   if (!profileRes.ok) {
     const errorText = await profileRes.text();
     throw new Error(
-      `Failed to fetch profile data: ${profileRes.statusText}. ${errorText}`
+      `Failed to fetch profile data: ${profileRes.statusText}. ${errorText}`,
     );
   }
 
@@ -32,7 +32,7 @@ async function fetchUserProfile(username: string): Promise<UserData | null> {
 
 // Function to generate page metadata
 export async function generateMetadata(
-  searchParams: SearchParams
+  searchParams: SearchParams,
 ): Promise<{ title: string }> {
   try {
     const username = searchParams.params.username;

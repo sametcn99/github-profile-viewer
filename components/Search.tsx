@@ -28,7 +28,7 @@ export default function SearchBar() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${getSiteUrl()}/api/github?option=search&username=${inputValue}`
+          `${getSiteUrl()}/api/github?option=search&username=${inputValue}`,
         );
         if (!response.ok) {
           throw new Error(`HTTP hata! Durum kodu: ${response.status}`);
@@ -44,7 +44,7 @@ export default function SearchBar() {
   }, [inputValue]);
 
   return (
-    <section className="flex md:w-[25rem] w-[15rem] flex-col items-center justify-center gap-5 static ">
+    <section className="static flex w-[15rem] flex-col items-center justify-center gap-5 md:w-[25rem] ">
       <TextField.Root size="1" className="w-full" aria-label="Search">
         <TextField.Input
           placeholder="Write user name"
@@ -81,7 +81,7 @@ export default function SearchBar() {
             <Link
               href={`/${item.login}`}
               key={index}
-              className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 gap-2 p-2 justify-start"
+              className="flex flex-row items-center justify-start gap-2 rounded-3xl p-2 hover:bg-black hover:bg-opacity-50"
             >
               <Avatar
                 size="3"

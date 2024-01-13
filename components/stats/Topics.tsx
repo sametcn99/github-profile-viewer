@@ -26,7 +26,7 @@ export default function Topics({
       {Object.keys(topTopics).length > 0 && (
         <Card>
           <Heading className="ml-3">Top 5 Topics</Heading>
-          <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl p-2">
+          <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
             <BarChart
               xAxis={[
                 {

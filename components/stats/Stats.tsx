@@ -15,15 +15,14 @@ import {
   getCreationStatsByYear,
 } from "@/lib/utils/stats";
 import { useContext } from "react";
-import Repository from "./Repository";
+import Repository from "../repositories/Repository";
 import "@/app/globals.css";
 import { formatNumber } from "@/lib/utils";
 import { Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
-import Licenses from "./stats/Licenses";
-import Topics from "./stats/Topics";
-import Languages from "./stats/Languages";
-import { LineChart } from "@mui/x-charts/LineChart";
-import CreationDate from "./stats/CreationDate";
+import Licenses from "./Licenses";
+import Topics from "./Topics";
+import Languages from "./Languages";
+import CreationDate from "./CreationDate";
 
 export default function Stats() {
   const { repos, loading }: any = useContext(GithubContext);
@@ -53,17 +52,17 @@ export default function Stats() {
   };
   return (
     <>
-      {loading && (
-        <Box className="flex w-full items-center justify-center">
-          <Loading />
-        </Box>
-      )}
       <Card>
         <Flex gap="4" direction="column">
           <Heading size="7">Repository Statistics</Heading>
           <Text>
             These statistics are calculated using the data from the GitHub API.
           </Text>
+          {loading && (
+            <Box className="flex w-full items-center justify-center">
+              <Loading />
+            </Box>
+          )}
           {!loading && (
             <>
               <Text>Total Stars: {formatNumber(totalStars)}</Text>

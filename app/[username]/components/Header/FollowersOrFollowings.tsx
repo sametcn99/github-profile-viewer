@@ -41,7 +41,7 @@ export default function FollowersOrFollowings({
         setData(repositoryData);
         setLoading(false);
         console.log(
-          `${username}'s ${option} fetched successfully.\n${repositoryData}`
+          `${username}'s ${option} fetched successfully.\n${repositoryData}`,
         );
       } catch (error) {
         if (error === "AbortError") {

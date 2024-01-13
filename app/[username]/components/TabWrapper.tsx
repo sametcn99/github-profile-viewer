@@ -1,14 +1,14 @@
 "use client";
 import Gists from "@/components/Gists";
-import Projects from "@/components/Projects";
-import Stats from "@/components/Stats";
+import Repositories from "@/components/repositories/Repositories";
+import Stats from "@/components/stats/Stats";
 import { Box, Tabs } from "@radix-ui/themes";
 
 export default function TabWrapper() {
   return (
     <div>
       <Tabs.Root defaultValue="stats">
-        <Tabs.List className="w-full items-center justify-center mb-2">
+        <Tabs.List className="mb-2 w-full items-center justify-center">
           <Tabs.Trigger value="repositories" className="hover:cursor-pointer">
             Repos
           </Tabs.Trigger>
@@ -21,7 +21,7 @@ export default function TabWrapper() {
         </Tabs.List>
         <Box>
           <Tabs.Content value="repositories">
-            <Projects />
+            <Repositories />
           </Tabs.Content>
           <Tabs.Content value="stats">
             <Stats />

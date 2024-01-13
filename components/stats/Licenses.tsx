@@ -12,7 +12,7 @@ export default function Licenses({ licenses, count }: any) {
   return (
     <Card>
       <Heading className="ml-3">Top 5 Licenses</Heading>
-      <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl block md:hidden">
+      <Box className="block h-[20rem] w-full rounded-2xl bg-gray-400 md:hidden">
         <PieChart
           sx={{
             color: "green",
@@ -36,7 +36,7 @@ export default function Licenses({ licenses, count }: any) {
           ]}
         />
       </Box>
-      <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl hidden md:block">
+      <Box className="hidden h-[20rem] w-full rounded-2xl bg-gray-400 md:block">
         <BarChart
           xAxis={[
             {

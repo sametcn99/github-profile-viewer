@@ -12,7 +12,7 @@ export default function CreationDate({ statsData }: { statsData: any[] }) {
     <>
       <Card>
         <Heading className="ml-3">Creation Dates</Heading>
-        <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl p-2">
+        <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
           <LineChart
             xAxis={[
               {

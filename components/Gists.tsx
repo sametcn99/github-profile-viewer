@@ -4,7 +4,6 @@ import { useContext, useMemo, useState } from "react";
 import { GithubContext } from "@/app/context/context";
 import FilterInput from "./FilterInput";
 import { Box, Button, Card, DropdownMenu, Link, Text } from "@radix-ui/themes";
-
 import Loading from "@/app/loading";
 import { FaGithub } from "react-icons/fa";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
@@ -22,8 +21,8 @@ const Gists = () => {
           (gist: any) =>
             gist.files &&
             Object.keys(gist.files).some((filename) =>
-              filename.toLowerCase().includes(filterValue.toLowerCase())
-            )
+              filename.toLowerCase().includes(filterValue.toLowerCase()),
+            ),
         )
       : null;
 
@@ -91,15 +90,13 @@ const Gists = () => {
                       ))}
                     </Box>
                   </Box>
-                  <Button className="flex flex-row rounded-2xl">
-                    <Link
-                      href={gist.html_url}
-                      target="_blank"
-                      className="flex flex-row items-center justify-center gap-2 text-base"
-                    >
-                      <FaGithub /> <span>Source</span>
-                    </Link>
-                  </Button>
+                  <Link
+                    href={gist.html_url}
+                    target="_blank"
+                    className="flex flex-row items-center justify-center gap-2 text-base"
+                  >
+                    <FaGithub size={22} /> <span>Source</span>
+                  </Link>
                 </Box>
               </Box>
               <Box>

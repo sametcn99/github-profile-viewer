@@ -17,7 +17,7 @@ export default function Languages({
   return (
     <Card>
       <Heading className="ml-3">Top 5 Languages</Heading>
-      <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl p-2">
+      <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
         {language.length > 0 && count.length > 0 && (
           <PieChart
             sx={{

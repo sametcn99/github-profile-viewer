@@ -18,7 +18,7 @@ export default function Readme(username: any) {
         }`,
         {
           next: { revalidate: 3600 },
-        }
+        },
       );
 
       if (!response.ok) {

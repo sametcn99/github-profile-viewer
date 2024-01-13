@@ -22,7 +22,7 @@ export default function Header({ userData }: HeaderProps) {
             src={userData.avatar_url || userData.avatar_url}
           />
           <Box className="flex flex-col">
-            <Text className="text-5xl break-words">{userData.name}</Text>
+            <Text className="break-words text-5xl">{userData.name}</Text>
             <Link
               className="text-lg hover:underline"
               href={userData.html_url}
@@ -31,7 +31,7 @@ export default function Header({ userData }: HeaderProps) {
               @{userData.login}
             </Link>
             {userData.bio && (
-              <Text className="text-base font-normal break-all md:break-normal">
+              <Text className="break-all text-base font-normal md:break-normal">
                 {userData.bio}
               </Text>
             )}
