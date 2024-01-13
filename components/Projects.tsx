@@ -31,6 +31,7 @@ export default function Projects() {
   const [sort, setSort] = useState("Stars Descending");
   const [filterValue, setFilterValue] = useState("");
   const [selectedTopic, setSelectedTopic] = useState(""); // Add state for selected topic
+  const [selectedLanguage, setSelectedLanguage] = useState(""); // Add state for selected topic
   const [selectedFilter, setSelectedFilter] = useState("All");
 
   // Handle topic click to filter
@@ -43,11 +44,23 @@ export default function Projects() {
     }
   };
 
+  const handleLanguageClick = (language: string) => {
+    setSelectedLanguage(language);
+    // Reset filter if the same language is clicked again
+    if (language === selectedLanguage) {
+      setSelectedLanguage("");
+    }
+    console.log(language);
+  };
+
   const filteredAndSortedRepos = useMemo(() => {
     const filteredRepos = repos
       ? repos.filter((repo: any) => {
           if (selectedTopic) {
             return repo.topics.includes(selectedTopic);
+          }
+          if (selectedLanguage) {
+            return repo.language === selectedLanguage; // Corrected line
           }
 
           const nameMatches = repo.name
@@ -83,7 +96,14 @@ export default function Projects() {
       default:
         return sortByKeyDescending(filteredRepos, "stargazers_count");
     }
-  }, [repos, sort, selectedTopic, filterValue, selectedFilter]);
+  }, [
+    repos,
+    sort,
+    selectedTopic,
+    selectedLanguage,
+    filterValue,
+    selectedFilter,
+  ]);
 
   return (
     <>
@@ -213,7 +233,14 @@ export default function Projects() {
               <Box className="flex flex-col items-start">
                 <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
                   <Text>{repo.license?.spdx_id}</Text>
-                  <Text>
+                  <Text
+                    onClick={() => handleLanguageClick(repo.language)}
+                    className={
+                      selectedLanguage === repo.language
+                        ? "font-bold hover:cursor-pointer"
+                        : "font-thin hover:cursor-pointer"
+                    }
+                  >
                     {repo.language ? `Language: ${repo.language}` : null}
                   </Text>
                   <Text>
