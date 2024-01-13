@@ -1,6 +1,5 @@
 "use client";
 import { useContext, useMemo, useState } from "react";
-
 import { BsFillStarFill } from "react-icons/bs";
 import { FaCodeFork } from "react-icons/fa6";
 import { GithubContext } from "@/app/context/context";
@@ -17,6 +16,7 @@ import {
   Tooltip,
 } from "@radix-ui/themes";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
+import Readme from "./Readme";
 
 export default function Projects() {
   const { repos, loading }: any = useContext(GithubContext);
@@ -183,6 +183,13 @@ export default function Projects() {
                         </Box>
                       </Tooltip>
                     )}
+                    <Tooltip content="Show Readme">
+                      <Box className="flex flex-row gap-2 items-center">
+                        <Readme
+                          url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
+                        />
+                      </Box>
+                    </Tooltip>
                     {repo.stargazers_count > 0 && (
                       <Tooltip content="Total Stars">
                         <Box className="flex flex-row gap-2">
