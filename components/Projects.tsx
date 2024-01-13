@@ -17,15 +17,7 @@ import {
   Tooltip,
 } from "@radix-ui/themes";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 export default function Projects() {
   const { repos, loading }: any = useContext(GithubContext);
   const [sort, setSort] = useState("Stars Descending");
@@ -204,13 +196,13 @@ export default function Projects() {
                     <DropdownMenu.Trigger>
                       <Button className="hover:cursor-pointer">Open</Button>
                     </DropdownMenu.Trigger>
-                    <DropdownMenu.Content className="flex w-fit flex-col gap-2 p-2 ">
-                      <DropdownMenu.Item className="px-2 text-base hover:bg-primary">
+                    <DropdownMenu.Content>
+                      <DropdownMenu.Item>
                         <Link href={repo.html_url} target="_blank">
                           Github
                         </Link>
                       </DropdownMenu.Item>
-                      <DropdownMenu.Item className="px-2 text-base hover:bg-primary">
+                      <DropdownMenu.Item>
                         <Link
                           href={repo.html_url.replace(
                             "github.com",
@@ -222,7 +214,7 @@ export default function Projects() {
                         </Link>
                       </DropdownMenu.Item>
                       {repo.home_page && (
-                        <DropdownMenu.Item className="px-2 text-base hover:bg-primary">
+                        <DropdownMenu.Item>
                           <Link
                             href={repo.home_page.replace(
                               "github.com",
