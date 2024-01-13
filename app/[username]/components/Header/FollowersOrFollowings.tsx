@@ -8,20 +8,12 @@ import {
   Box,
   Button,
   Dialog,
+  DropdownMenu,
   ScrollArea,
   Text,
   TextField,
 } from "@radix-ui/themes";
 import Loading from "@/app/loading";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 export default function FollowersOrFollowings({
   username,
@@ -107,34 +99,27 @@ export default function FollowersOrFollowings({
             placeholder="Filter by name"
             onChange={(e) => setFilter(e.target.value)}
           ></TextField.Input>
-          <Select onValueChange={setSelectedFilter}>
-            <SelectTrigger className="w-[8rem] rounded-lg">
-              <SelectValue placeholder="Filter by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Filter</SelectLabel>
-                <SelectItem
-                  value="All"
-                  className="hover:bg-black hover:bg-opacity-50 hover:cursor-pointer"
-                >
-                  All
-                </SelectItem>
-                <SelectItem
-                  value="User"
-                  className="hover:bg-black hover:bg-opacity-50 hover:cursor-pointer"
-                >
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <Button className="hover:cursor-pointer">Filter By</Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Label>Sort by</DropdownMenu.Label>
+              <DropdownMenu.Separator />
+              <DropdownMenu.RadioGroup
+                value={selectedFilter}
+                onValueChange={setSelectedFilter}
+              >
+                <DropdownMenu.RadioItem value="All">All</DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="Updated Ascending">
                   User
-                </SelectItem>
-                <SelectItem
-                  value="Organization"
-                  className="hover:bg-black hover:bg-opacity-50 hover:cursor-pointer"
-                >
+                </DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="Organization">
                   Organization
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+                </DropdownMenu.RadioItem>
+              </DropdownMenu.RadioGroup>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
         </TextField.Root>
         <ScrollArea className="h-[35rem]">
           {Array.isArray(filteredData) && filteredData?.length > 0 ? (
