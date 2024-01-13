@@ -22,7 +22,7 @@ export default function Header({ userData }: HeaderProps) {
             src={userData.avatar_url || userData.avatar_url}
           />
           <Box className="flex flex-col">
-            <Text className="text-5xl">{userData.name}</Text>
+            <Text className="text-5xl break-words">{userData.name}</Text>
             <Link
               className="text-lg hover:underline"
               href={userData.html_url}
@@ -31,7 +31,9 @@ export default function Header({ userData }: HeaderProps) {
               @{userData.login}
             </Link>
             {userData.bio && (
-              <Text className="text-base font-normal">{userData.bio}</Text>
+              <Text className="text-base font-normal break-all md:break-normal">
+                {userData.bio}
+              </Text>
             )}
             {userData.location && (
               <Text className="text-base font-normal">
@@ -83,7 +85,9 @@ export default function Header({ userData }: HeaderProps) {
             target="_blank"
           >
             <TfiWorld />
-            {userData.blog}
+            {(userData.blog.startsWith("http://" || "hhpts://") &&
+              userData.blog.replace("http://", "")) ||
+              userData.blog.replace("https://", "")}
           </Link>
         )}
         {userData.company && (
