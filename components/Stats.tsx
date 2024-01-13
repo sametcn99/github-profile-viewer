@@ -110,7 +110,27 @@ export default function Stats() {
               {Object.values(licenses).length > 0 && (
                 <Card>
                   <Heading className="ml-3">Top 5 Licenses</Heading>
-                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl">
+                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl block md:hidden">
+                    <PieChart
+                      sx={{
+                        color: "green", // Metin rengini burada belirtin
+                        WebkitTextStrokeColor: "white",
+                        fontWeight: "bold", // Fontu kalın yapmak için fontWeight özelliğini ekleyin
+                      }}
+                      series={[
+                        {
+                          data: Object.keys(licenses)
+                            .slice(0, 5)
+                            .map((lang, index) => ({
+                              id: index.toString(),
+                              value: count[index],
+                              label: lang,
+                            })),
+                        },
+                      ]}
+                    />
+                  </Box>
+                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl hidden md:block">
                     <BarChart
                       xAxis={[
                         {
