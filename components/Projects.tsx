@@ -33,6 +33,7 @@ export default function Projects() {
   const [selectedTopic, setSelectedTopic] = useState(""); // Add state for selected topic
   const [selectedLanguage, setSelectedLanguage] = useState(""); // Add state for selected topic
   const [selectedFilter, setSelectedFilter] = useState("All");
+  const [selectedLicense, setSelectedLicense] = useState(""); // Add state for selected topic
 
   // Handle topic click to filter
   // Handle topic click to filter
@@ -50,7 +51,14 @@ export default function Projects() {
     if (language === selectedLanguage) {
       setSelectedLanguage("");
     }
-    console.log(language);
+  };
+  const handleLicenseClick = (license: string) => {
+    setSelectedLicense(license);
+    // Reset filter if the same license is clicked again
+    if (license === selectedLicense) {
+      setSelectedLicense("");
+      console.log(license);
+    }
   };
 
   const filteredAndSortedRepos = useMemo(() => {
@@ -61,6 +69,10 @@ export default function Projects() {
           }
           if (selectedLanguage) {
             return repo.language === selectedLanguage; // Corrected line
+          }
+          if (selectedLicense) {
+            console.log("Selected License:", selectedLicense);
+            return repo.license?.spdx_id === selectedLicense; // Corrected line
           }
 
           const nameMatches = repo.name
@@ -101,6 +113,7 @@ export default function Projects() {
     sort,
     selectedTopic,
     selectedLanguage,
+    selectedLicense,
     filterValue,
     selectedFilter,
   ]);
@@ -232,7 +245,16 @@ export default function Projects() {
               </Box>
               <Box className="flex flex-col items-start">
                 <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-                  <Text>{repo.license?.spdx_id}</Text>
+                  <Text
+                    onClick={() => handleLicenseClick(repo.license?.spdx_id)}
+                    className={
+                      selectedLicense === repo.license?.spdx_id
+                        ? "font-bold hover:cursor-pointer"
+                        : "font-thin hover:cursor-pointer"
+                    }
+                  >
+                    {repo.license?.spdx_id}
+                  </Text>
                   <Text
                     onClick={() => handleLanguageClick(repo.language)}
                     className={
