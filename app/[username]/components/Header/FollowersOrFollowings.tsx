@@ -104,7 +104,7 @@ export default function FollowersOrFollowings({
               <Button className="hover:cursor-pointer">Filter By</Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>
-              <DropdownMenu.Label>Sort by</DropdownMenu.Label>
+              <DropdownMenu.Label>Filter By</DropdownMenu.Label>
               <DropdownMenu.Separator />
               <DropdownMenu.RadioGroup
                 value={selectedFilter}
