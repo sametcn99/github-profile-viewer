@@ -3,6 +3,7 @@ import { GithubContext } from "@/app/context/context";
 import Loading from "@/app/loading";
 import {
   calculateLanguageDistribution,
+  calculateLicenseDistribution,
   calculateTotalForks,
   calculateTotalRepos,
   calculateTotalStars,
@@ -16,6 +17,8 @@ import Repository from "./Repository";
 import "@/app/globals.css";
 import { formatNumber } from "@/lib/utils";
 import { PieChart } from "@mui/x-charts/PieChart";
+import { BarChart } from "@mui/x-charts/BarChart";
+
 import {
   Accordion,
   AccordionContent,
@@ -37,7 +40,7 @@ export default function Stats() {
   const updatePeriod = findRepoWithLongestUpdatePeriod(repos);
   const language = Object.keys(languages);
   const count = Object.values(languages);
-
+  const licenses = calculateLicenseDistribution(repos);
   return (
     <>
       {loading && (
@@ -60,24 +63,10 @@ export default function Stats() {
                 Average Stars Per Repository: {averageStarsPerRepo.toFixed(2)}
               </Text>
               {language.length > 0 && (
-                <>
-                  <Box className=" header-wrapper rounded-2xl bg-primary w-full h-[20rem] py-2">
-                    <Text>Languages</Text>
+                <Card>
+                  <Heading className="ml-3">Top 5 Languages</Heading>
+                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl p-2">
                     {language.length > 0 && count.length > 0 && (
-                      // <BarChart
-                      //   xAxis={[
-                      //     {
-                      //       id: "barCategories",
-                      //       data: language.slice(0, 5),
-                      //       scaleType: "band",
-                      //     },
-                      //   ]}
-                      //   series={[
-                      //     {
-                      //       data: count.slice(0, 5),
-                      //     },
-                      //   ]}
-                      // />
                       <PieChart
                         sx={{
                           color: "green", // Metin rengini burada belirtin
@@ -116,7 +105,48 @@ export default function Stats() {
                       </AccordionItem>
                     </Accordion>
                   )}
-                </>
+                </Card>
+              )}
+              {Object.values(licenses).length > 0 && (
+                <Card>
+                  <Heading className="ml-3">Top 5 Licenses</Heading>
+                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl">
+                    <BarChart
+                      xAxis={[
+                        {
+                          id: "barCategories",
+                          data: Object.keys(licenses).slice(0, 5),
+                          scaleType: "band",
+                        },
+                      ]}
+                      series={[
+                        {
+                          data: Object.values(licenses).slice(0, 5),
+                        },
+                      ]}
+                    />
+                  </Box>
+                  {Object.values(licenses).length > 5 && (
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>See all Licenses</AccordionTrigger>
+                        <AccordionContent>
+                          <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                            <ul>
+                              {Object.entries(licenses)
+                                .sort((a, b) => b[1] - a[1])
+                                .map(([license, count]) => (
+                                  <li key={license} className="ml-4 list-disc">
+                                    {license}: {count}
+                                  </li>
+                                ))}
+                            </ul>
+                          </ScrollArea>{" "}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  )}
+                </Card>
               )}
               {mostStarredRepo && (
                 <Box>

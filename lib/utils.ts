@@ -44,6 +44,7 @@ export const removeDuplicates = (arr: any[]) => {
 
   return uniqueData;
 };
+
 export async function fetchContact(
   username: string,
   option: string,

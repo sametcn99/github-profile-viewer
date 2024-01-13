@@ -79,6 +79,30 @@ export const calculateLanguageDistribution = (
   return languageDistribution;
 };
 
+export const calculateLicenseDistribution = (
+  repos: GitHubRepo[]
+): Record<string, number> => {
+  const licenseDistribution: Record<string, number> = {};
+
+  repos.forEach((repo) => {
+    const license =
+      repo.license_spdx_id ||
+      (repo.license && repo.license.spdx_id) ||
+      "Unknown";
+    console.log(license); // Görüntülemek için kullanılır.
+    if (typeof license === "string") {
+      licenseDistribution[license] = (licenseDistribution[license] || 0) + 1;
+    } else {
+      console.log(`Invalid license_spdx_id type for repo: ${repo.name}`);
+      // Eğer lisans bilgisi yoksa "Unknown" olarak sayalım.
+      licenseDistribution["Unknown"] =
+        (licenseDistribution["Unknown"] || 0) + 1;
+    }
+  });
+
+  return licenseDistribution;
+};
+
 /**
  * Finds the oldest repository based on the creation date.
  *
