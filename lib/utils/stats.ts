@@ -79,6 +79,12 @@ export const calculateLanguageDistribution = (
   return languageDistribution;
 };
 
+/**
+ * Calculates the distribution of repository licenses across all repositories.
+ *
+ * @param {GitHubRepo[]} repos - Array of GitHub repositories.
+ * @returns {Record<string, number>} - License distribution as an object.
+ */
 export const calculateLicenseDistribution = (
   repos: GitHubRepo[]
 ): Record<string, number> => {
@@ -89,12 +95,10 @@ export const calculateLicenseDistribution = (
       repo.license_spdx_id ||
       (repo.license && repo.license.spdx_id) ||
       "Unknown";
-    console.log(license); // Görüntülemek için kullanılır.
     if (typeof license === "string") {
       licenseDistribution[license] = (licenseDistribution[license] || 0) + 1;
     } else {
       console.log(`Invalid license_spdx_id type for repo: ${repo.name}`);
-      // Eğer lisans bilgisi yoksa "Unknown" olarak sayalım.
       licenseDistribution["Unknown"] =
         (licenseDistribution["Unknown"] || 0) + 1;
     }

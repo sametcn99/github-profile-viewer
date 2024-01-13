@@ -17,12 +17,21 @@ import {
   Tooltip,
 } from "@radix-ui/themes";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 export default function Projects() {
   const { repos, loading }: any = useContext(GithubContext);
   const [sort, setSort] = useState("Stars Descending");
   const [filterValue, setFilterValue] = useState("");
   const [selectedTopic, setSelectedTopic] = useState(""); // Add state for selected topic
+  const [selectedFilter, setSelectedFilter] = useState("All");
 
   // Handle topic click to filter
   // Handle topic click to filter
@@ -37,40 +46,44 @@ export default function Projects() {
   const filteredAndSortedRepos = useMemo(() => {
     const filteredRepos = repos
       ? repos.filter((repo: any) => {
-          // Filter by topic if a topic is selected
           if (selectedTopic) {
             return repo.topics.includes(selectedTopic);
           }
 
-          // Filter by name if no topic is selected
-          return repo.name.toLowerCase().includes(filterValue.toLowerCase());
+          const nameMatches = repo.name
+            .toLowerCase()
+            .includes(filterValue.toLowerCase());
+          const isForked = repo.fork;
+          const isNotForked = !repo.fork;
+
+          switch (selectedFilter) {
+            case "All":
+              return nameMatches;
+            case "Forked":
+              return nameMatches && isForked;
+            case "Not Forked":
+              return nameMatches && isNotForked;
+            default:
+              return nameMatches;
+          }
         })
       : [];
+
     switch (sort) {
-      // Created Ascending(artan)
       case "Created Ascending":
         return sortByKeyAscending(filteredRepos, "created_at");
-
-      // Created Descending(azalan)
       case "Created Descending":
         return sortByKeyDescending(filteredRepos, "created_at");
-
-      // Updated Ascending(artan)
       case "Updated Ascending":
         return sortByKeyAscending(filteredRepos, "pushed_at");
-
-      // Updated Descending(azalan)
       case "Updated Descending":
         return sortByKeyDescending(filteredRepos, "pushed_at");
-
       case "Stars Ascending":
         return sortByKeyAscending(filteredRepos, "stargazers_count");
-
-      // Stars Descending
       default:
-        return sortByKeyDescending(filteredRepos, "stargazers_count"); // Default sorting by pushed date (descending)
+        return sortByKeyDescending(filteredRepos, "stargazers_count");
     }
-  }, [repos, sort, selectedTopic, filterValue]);
+  }, [repos, sort, selectedTopic, filterValue, selectedFilter]);
 
   return (
     <>
@@ -107,6 +120,27 @@ export default function Projects() {
                 </DropdownMenu.RadioItem>
                 <DropdownMenu.RadioItem value="Stars Descending">
                   Stars Descending
+                </DropdownMenu.RadioItem>
+              </DropdownMenu.RadioGroup>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <Button className="hover:cursor-pointer">Filter By</Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Label>Filter By</DropdownMenu.Label>
+              <DropdownMenu.Separator />
+              <DropdownMenu.RadioGroup
+                value={selectedFilter}
+                onValueChange={setSelectedFilter}
+              >
+                <DropdownMenu.RadioItem value="All">All</DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="Forked">
+                  Forked
+                </DropdownMenu.RadioItem>
+                <DropdownMenu.RadioItem value="Not Forked">
+                  Not Forked
                 </DropdownMenu.RadioItem>
               </DropdownMenu.RadioGroup>
             </DropdownMenu.Content>

@@ -47,7 +47,7 @@ export default function Readme(username: any) {
     } else {
       console.log("readme file not found");
     }
-  }, [repos, username, username.username]);
+  });
 
   useEffect(() => {
     const fetchData = async () => {
