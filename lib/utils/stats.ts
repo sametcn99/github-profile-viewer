@@ -1,8 +1,17 @@
+/**
+ * Utility functions.
+ */
 // utils.js
 
 // Importing GitHubRepo type from the specified module
 import { GitHubRepo } from "@/types/types";
 
+/**
+ * Calculates the total number of repositories.
+ *
+ * @param {GitHubRepo[]} repos - Array of GitHub repositories.
+ * @returns {number} - Total number of repositories.
+ */
 /**
  * Calculates the total number of repositories.
  *

@@ -15,8 +15,9 @@ import {
   Text,
   Tooltip,
 } from "@radix-ui/themes";
-import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import Readme from "./Readme";
+import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
+type SetSelectedFunction = (value: string) => void;
 
 export default function Projects() {
   const { repos, loading }: any = useContext(GithubContext);
@@ -27,29 +28,29 @@ export default function Projects() {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [selectedLicense, setSelectedLicense] = useState(""); // Add state for selected topic
 
-  // Handle topic click to filter
-  // Handle topic click to filter
-  const handleTopicClick = (topic: string) => {
-    setSelectedTopic(topic);
-    // Reset filter if the same topic is clicked again
-    if (topic === selectedTopic) {
-      setSelectedTopic("");
+  const handleFilterClick = (
+    value: string,
+    setSelectedFunction: SetSelectedFunction,
+    selectedValue: string
+  ): void => {
+    setSelectedFunction(value);
+    // Reset filter if the same value is clicked again
+    if (value === selectedValue) {
+      setSelectedFunction("");
     }
   };
 
-  const handleLanguageClick = (language: string) => {
-    setSelectedLanguage(language);
-    // Reset filter if the same language is clicked again
-    if (language === selectedLanguage) {
-      setSelectedLanguage("");
-    }
+  // Kullanım örnekleri
+  const handleTopicClick = (topic: string): void => {
+    handleFilterClick(topic, setSelectedTopic, selectedTopic);
   };
-  const handleLicenseClick = (license: string) => {
-    setSelectedLicense(license);
-    // Reset filter if the same license is clicked again
-    if (license === selectedLicense) {
-      setSelectedLicense("");
-    }
+
+  const handleLanguageClick = (language: string): void => {
+    handleFilterClick(language, setSelectedLanguage, selectedLanguage);
+  };
+
+  const handleLicenseClick = (license: string): void => {
+    handleFilterClick(license, setSelectedLicense, selectedLicense);
   };
 
   const filteredAndSortedRepos = useMemo(() => {
@@ -108,6 +109,26 @@ export default function Projects() {
     selectedFilter,
   ]);
 
+  const uniqueLanguages = useMemo(() => {
+    const languagesSet = new Set<string>();
+    filteredAndSortedRepos.forEach((repo: any) => {
+      if (repo.language) {
+        languagesSet.add(repo.language);
+      }
+    });
+    return Array.from(languagesSet);
+  }, [filteredAndSortedRepos]);
+
+  const uniqueTopics = useMemo(() => {
+    const topicSet = new Set<string>();
+    filteredAndSortedRepos.forEach((repo: any) => {
+      if (Array.isArray(repo.topics)) {
+        repo.topics.forEach((topic: any) => topicSet.add(topic));
+      }
+    });
+    return Array.from(topicSet);
+  }, [filteredAndSortedRepos]);
+
   return (
     <>
       {loading && (
@@ -149,6 +170,50 @@ export default function Projects() {
           </DropdownMenu.Root>
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
+              <Button className="hover:cursor-pointer">Languages</Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Label>Languages</DropdownMenu.Label>
+              <DropdownMenu.Separator />
+              <DropdownMenu.RadioGroup
+                value={selectedLanguage}
+                onValueChange={setSelectedLanguage}
+              >
+                <DropdownMenu.RadioItem value="">All</DropdownMenu.RadioItem>
+                {uniqueLanguages.map((language: string, index: number) => (
+                  <DropdownMenu.RadioItem key={index} value={language}>
+                    {language}
+                  </DropdownMenu.RadioItem>
+                ))}
+              </DropdownMenu.RadioGroup>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
+              <Button className="hover:cursor-pointer">Topics</Button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Content>
+              <DropdownMenu.Label>Topics</DropdownMenu.Label>
+              <DropdownMenu.Separator />
+              <DropdownMenu.RadioGroup
+                value={selectedTopic}
+                onValueChange={setSelectedTopic}
+                style={{
+                  maxHeight: "300px",
+                  overflowY: "auto",
+                }}
+              >
+                <DropdownMenu.RadioItem value="">All</DropdownMenu.RadioItem>
+                {uniqueTopics.map((topic: string, index: number) => (
+                  <DropdownMenu.RadioItem key={index} value={topic}>
+                    {topic}
+                  </DropdownMenu.RadioItem>
+                ))}
+              </DropdownMenu.RadioGroup>
+            </DropdownMenu.Content>
+          </DropdownMenu.Root>
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger>
               <Button className="hover:cursor-pointer">Filter By</Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>
@@ -175,7 +240,9 @@ export default function Projects() {
               <Box className="gap-4">
                 <Box className="flex flex-row flex-wrap items-center justify-between gap-2">
                   <Box className="flex flex-row flex-wrap items-start justify-start gap-2 break-all text-start">
-                    <Text>{repo.name}</Text>
+                    <Text className="md:break-normal break-all">
+                      {repo.name}
+                    </Text>
                     {repo.fork && (
                       <Tooltip content="Forked Repo">
                         <Box>
