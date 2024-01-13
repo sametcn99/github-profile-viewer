@@ -156,6 +156,12 @@ export const findRepoWithLongestUpdatePeriod = (
   );
 };
 
+/**
+ * Calculates the most common topics used across the given GitHub repositories.
+ *
+ * @param repos - Array of GitHub repository objects to analyze.
+ * @returns Record with keys of topic names and values of occurrence counts.
+ */
 export const calculateTopTopics = (repos: GitHubRepo[]) => {
   const topics: Record<string, number> = {};
 
@@ -170,4 +176,21 @@ export const calculateTopTopics = (repos: GitHubRepo[]) => {
   });
 
   return topics;
+};
+
+export const getCreationStatsByYear = (repos: GitHubRepo[]) => {
+  const stats: { [year: string]: number } = {};
+
+  repos.forEach((repo) => {
+    const date = new Date(repo.created_at);
+    const year = date.getFullYear().toString();
+
+    if (!stats[year]) {
+      stats[year] = 0;
+    }
+
+    stats[year]++;
+  });
+
+  return stats;
 };

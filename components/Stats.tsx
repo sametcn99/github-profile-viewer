@@ -12,29 +12,18 @@ import {
   findMostStarredRepo,
   findOldestRepo,
   findRepoWithLongestUpdatePeriod,
+  getCreationStatsByYear,
 } from "@/lib/utils/stats";
 import { useContext } from "react";
 import Repository from "./Repository";
 import "@/app/globals.css";
 import { formatNumber } from "@/lib/utils";
-import { PieChart } from "@mui/x-charts/PieChart";
-import { BarChart } from "@mui/x-charts/BarChart";
-
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  Box,
-  Card,
-  Flex,
-  Heading,
-  ScrollArea,
-  Table,
-  Text,
-} from "@radix-ui/themes";
+import { Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
+import Licenses from "./stats/Licenses";
+import Topics from "./stats/Topics";
+import Languages from "./stats/Languages";
+import { LineChart } from "@mui/x-charts/LineChart";
+import CreationDate from "./stats/CreationDate";
 
 export default function Stats() {
   const { repos, loading }: any = useContext(GithubContext);
@@ -51,7 +40,17 @@ export default function Stats() {
   const count = Object.values(languages);
   const licenses = calculateLicenseDistribution(repos);
   const topTopics = calculateTopTopics(repos);
-
+  const creationStats = getCreationStatsByYear(repos);
+  const statsData = Object.entries(creationStats).map(([year, count]) => ({
+    category: year,
+    value: count,
+  }));
+  const customize = {
+    height: 300,
+    legend: { hidden: true },
+    margin: { top: 5 },
+    stackingOrder: "descending",
+  };
   return (
     <>
       {loading && (
@@ -74,193 +73,13 @@ export default function Stats() {
                 Average Stars Per Repository: {averageStarsPerRepo.toFixed(2)}
               </Text>
               {language.length > 0 && (
-                <Card>
-                  <Heading className="ml-3">Top 5 Languages</Heading>
-                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl p-2">
-                    {language.length > 0 && count.length > 0 && (
-                      <PieChart
-                        sx={{
-                          color: "green", // Metin rengini burada belirtin
-                          WebkitTextStrokeColor: "white",
-                          fontWeight: "bold", // Fontu kalın yapmak için fontWeight özelliğini ekleyin
-                        }}
-                        series={[
-                          {
-                            data: language.slice(0, 5).map((lang, index) => ({
-                              id: index.toString(),
-                              value: count[index],
-                              label: lang,
-                            })),
-                          },
-                        ]}
-                      />
-                    )}
-                  </Box>
-                  {language.length > 5 && (
-                    <Accordion type="single" collapsible className="w-full">
-                      <AccordionItem value="item-1">
-                        <AccordionTrigger>See All Languages</AccordionTrigger>
-                        <AccordionContent>
-                          <Table.Root>
-                            <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                              <Table.Header>
-                                <Table.Row>
-                                  <Table.ColumnHeaderCell>
-                                    Language
-                                  </Table.ColumnHeaderCell>
-                                  <Table.ColumnHeaderCell>
-                                    Count
-                                  </Table.ColumnHeaderCell>
-                                </Table.Row>
-                              </Table.Header>
-                              <Table.Body>
-                                {Object.entries(languages)
-                                  .sort((a, b) => b[1] - a[1])
-                                  .map(([topic, count]) => (
-                                    <Table.Row key={topic}>
-                                      <Table.Cell>{topic}</Table.Cell>
-                                      <Table.Cell>{count}</Table.Cell>
-                                    </Table.Row>
-                                  ))}
-                              </Table.Body>
-                            </ScrollArea>
-                          </Table.Root>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  )}
-                </Card>
+                <Languages language={language} count={count} />
               )}
               {Object.values(licenses).length > 0 && (
-                <Card>
-                  <Heading className="ml-3">Top 5 Licenses</Heading>
-                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl block md:hidden">
-                    <PieChart
-                      sx={{
-                        color: "green", // Metin rengini burada belirtin
-                        WebkitTextStrokeColor: "white",
-                        fontWeight: "bold", // Fontu kalın yapmak için fontWeight özelliğini ekleyin
-                      }}
-                      series={[
-                        {
-                          data: Object.keys(licenses)
-                            .slice(0, 5)
-                            .map((lang, index) => ({
-                              id: index.toString(),
-                              value: count[index],
-                              label: lang,
-                            })),
-                        },
-                      ]}
-                    />
-                  </Box>
-                  <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl hidden md:block">
-                    <BarChart
-                      xAxis={[
-                        {
-                          id: "barCategories",
-                          data: Object.keys(licenses).slice(0, 5),
-                          scaleType: "band",
-                        },
-                      ]}
-                      series={[
-                        {
-                          data: Object.values(licenses).slice(0, 5),
-                        },
-                      ]}
-                    />
-                  </Box>
-                  {Object.values(licenses).length > 5 && (
-                    <Accordion type="single" collapsible className="w-full">
-                      <AccordionItem value="item-1">
-                        <AccordionTrigger>See All Licenses</AccordionTrigger>
-                        <AccordionContent>
-                          <Table.Root>
-                            <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                              <Table.Header>
-                                <Table.Row>
-                                  <Table.ColumnHeaderCell>
-                                    License
-                                  </Table.ColumnHeaderCell>
-                                  <Table.ColumnHeaderCell>
-                                    Count
-                                  </Table.ColumnHeaderCell>
-                                </Table.Row>
-                              </Table.Header>
-                              <Table.Body>
-                                {Object.entries(licenses)
-                                  .sort((a, b) => b[1] - a[1])
-                                  .map(([topic, count]) => (
-                                    <Table.Row key={topic}>
-                                      <Table.Cell>{topic}</Table.Cell>
-                                      <Table.Cell>{count}</Table.Cell>
-                                    </Table.Row>
-                                  ))}
-                              </Table.Body>
-                            </ScrollArea>
-                          </Table.Root>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  )}
-                </Card>
+                <Licenses licenses={licenses} count={Object.values(licenses)} />
               )}
-              {topTopics && (
-                <>
-                  <Card>
-                    <Heading className="ml-3">Top 5 Topics</Heading>
-                    <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl p-2">
-                      <BarChart
-                        xAxis={[
-                          {
-                            id: "barCategories",
-                            data: Object.keys(topTopics).slice(0, 5),
-                            scaleType: "band",
-                          },
-                        ]}
-                        series={[
-                          {
-                            data: Object.values(topTopics).slice(0, 5),
-                          },
-                        ]}
-                      />
-                    </Box>
-                  </Card>
-                  {Object.keys(topTopics).length > 5 && (
-                    <Accordion type="single" collapsible className="w-full">
-                      <AccordionItem value="item-1">
-                        <AccordionTrigger>See All Topics</AccordionTrigger>
-                        <AccordionContent>
-                          <Table.Root>
-                            <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                              <Table.Header>
-                                <Table.Row>
-                                  <Table.ColumnHeaderCell>
-                                    Topic
-                                  </Table.ColumnHeaderCell>
-                                  <Table.ColumnHeaderCell>
-                                    Count
-                                  </Table.ColumnHeaderCell>
-                                </Table.Row>
-                              </Table.Header>
-                              <Table.Body>
-                                {Object.entries(topTopics)
-                                  .sort((a, b) => b[1] - a[1])
-                                  .map(([topic, count]) => (
-                                    <Table.Row key={topic}>
-                                      <Table.Cell>{topic}</Table.Cell>
-                                      <Table.Cell>{count}</Table.Cell>
-                                    </Table.Row>
-                                  ))}
-                              </Table.Body>
-                            </ScrollArea>
-                          </Table.Root>
-                        </AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  )}
-                </>
-              )}
+              {topTopics && <Topics topTopics={topTopics} />}
+              {statsData.length > 0 && <CreationDate statsData={statsData} />}
               {mostStarredRepo && (
                 <Box>
                   <Text>Most Starred Repository</Text>
