@@ -14,7 +14,6 @@ export default function Home() {
           Discover a user&apos;s coding journey and contributions to the
           open-source community.
         </Text>
-        <RecommendedUsers />
         <SearchBar />
       </Section>
     </>

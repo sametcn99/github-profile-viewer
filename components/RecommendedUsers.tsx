@@ -1,12 +1,12 @@
 "use client";
+import Loading from "@/app/loading";
 import { getSiteUrl } from "@/lib/utils";
 import { UserData } from "@/types/types";
 import { Avatar, Box, Heading, Link, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 
 const RecommendedUsers = () => {
-  const [randomUserData, setRandomUserData] = useState<UserData | null>(null);
-
+  const [randomUserData, setRandomUserData] = useState<UserData[] | []>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -14,53 +14,55 @@ const RecommendedUsers = () => {
           `${getSiteUrl()}/api/github?option=trending-developers`
         );
         const data = await response.json();
-
-        // Check if there is data and it has items
-        if (data && data.data && data.data.length > 0) {
-          // Pick a random item from the array
-          const randomIndex = Math.floor(Math.random() * data.data.length);
-          const randomUser = data.data[randomIndex];
-
-          // Set the random user data to the state
-          setRandomUserData(randomUser);
-        }
+        // Set the fetched data to the state
+        setRandomUserData(data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    fetchData();
+    if (randomUserData.length === 0) fetchData();
 
-    // Set up an interval to fetch new data every 1.5 seconds (adjust as needed)
-    const intervalId = setInterval(fetchData, 1500);
+    // Set up an interval to shuffle the data every 2 seconds
+    const intervalId = setInterval(() => {
+      // Shuffle the array to get random users
+      if (randomUserData) {
+        const shuffledData = [...randomUserData]
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 10);
+        // Set the shuffled data to the state
+        setRandomUserData(shuffledData);
+      }
+    }, 2000);
 
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
-  }, []); // Empty dependency array to run the effect only once on mount
+  }, [randomUserData]); // Dependency on randomUserData to re-run effect when the data changes
 
   return (
     <>
-      {randomUserData ? (
+      {randomUserData.length < 100 ? (
         <>
-          <Link
-            href={`/${randomUserData.login}`}
-            className="flex flex-row items-center gap-2 justify-start hover:bg-black hover:bg-opacity-50 w-[15rem] h-fit"
-          >
-            {randomUserData.avatar_url && (
+          {randomUserData.map((item: any, index: number) => (
+            <Link
+              href={`/${item.login}`}
+              key={index}
+              className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 gap-2 p-2 justify-start"
+            >
               <Avatar
                 size="3"
-                fallback={randomUserData.login.charAt(0)}
-                src={randomUserData.avatar_url || randomUserData.avatar_url}
+                fallback={item.login.charAt(0)}
+                src={item.avatar_url || item.avatar_url}
               />
-            )}
-            <Box className="flex flex-col text-start justify-center">
-              <Text size="5">{randomUserData.login}</Text>
-              <Text size="2">Random {randomUserData.type}</Text>
-            </Box>
-          </Link>
+              <div className="flex flex-col text-start">
+                <span className="text-xl font-bold">{item.login}</span>
+                <span>Random {item.type}</span>
+              </div>
+            </Link>
+          ))}
         </>
       ) : (
-        <Text>Loading...</Text>
+        <Loading />
       )}
     </>
   );
