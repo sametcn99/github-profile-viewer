@@ -10,18 +10,28 @@ import {
   Text,
   Tooltip,
 } from "@radix-ui/themes";
+import Readme from "./Readme";
 export default function Repository({ repo, index }: any) {
   return (
     <Card key={index}>
       <Box className="gap-4">
         <Box className="flex flex-row flex-wrap items-center justify-between gap-2">
           <Box className="flex flex-row flex-wrap items-start justify-start gap-2 break-all text-start">
-            <Text>{repo.name}</Text>
+            <Text className="md:break-normal break-all">{repo.name}</Text>
             {repo.fork && (
               <Tooltip content="Forked Repo">
-                <FaCodeFork size={22} />
+                <Box>
+                  <FaCodeFork size={22} />
+                </Box>
               </Tooltip>
             )}
+            <Tooltip content="Show Readme">
+              <Box className="flex flex-row gap-2 items-center">
+                <Readme
+                  url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
+                />
+              </Box>
+            </Tooltip>
             {repo.stargazers_count > 0 && (
               <Tooltip content="Total Stars">
                 <Box className="flex flex-row gap-2">
@@ -35,13 +45,13 @@ export default function Repository({ repo, index }: any) {
             <DropdownMenu.Trigger>
               <Button className="hover:cursor-pointer">Open</Button>
             </DropdownMenu.Trigger>
-            <DropdownMenu.Content className="flex w-fit flex-col gap-2 p-2 ">
-              <DropdownMenu.Item className="px-2 text-base hover:bg-primary">
+            <DropdownMenu.Content>
+              <DropdownMenu.Item>
                 <Link href={repo.html_url} target="_blank">
                   Github
                 </Link>
               </DropdownMenu.Item>
-              <DropdownMenu.Item className="px-2 text-base hover:bg-primary">
+              <DropdownMenu.Item>
                 <Link
                   href={repo.html_url.replace("github.com", "github.dev")}
                   target="_blank"
@@ -50,7 +60,7 @@ export default function Repository({ repo, index }: any) {
                 </Link>
               </DropdownMenu.Item>
               {repo.home_page && (
-                <DropdownMenu.Item className="px-2 text-base hover:bg-primary">
+                <DropdownMenu.Item>
                   <Link
                     href={repo.home_page.replace("github.com", "github.dev")}
                     target="_blank"
@@ -68,8 +78,12 @@ export default function Repository({ repo, index }: any) {
       </Box>
       <Box className="flex flex-col items-start">
         <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-          <Text>{repo.license?.spdx_id}</Text>
-          <Text>{repo.language ? `Language: ${repo.language}` : null}</Text>
+          <Text className={"font-thin hover:cursor-pointer"}>
+            {repo.license?.spdx_id}
+          </Text>
+          <Text className={"font-thin hover:cursor-pointer"}>
+            {repo.language ? `Language: ${repo.language}` : null}
+          </Text>
           <Text>
             Created at: {new Date(repo.created_at).toLocaleDateString()}
           </Text>
@@ -77,12 +91,14 @@ export default function Repository({ repo, index }: any) {
             Last update: {new Date(repo.pushed_at).toLocaleDateString()}
           </Text>
         </Box>
-        <Box className="flex w-full flex-row flex-wrap justify-center">
+        <Box className="flex w-full flex-row flex-wrap justify-center gap-2">
           {repo.topics.map((topic: any, index: any) => (
             <Text
+              size="2"
               key={index}
               className={
-                "m-[0.063rem] mb-1 select-none rounded-2xl p-1 text-xs font-bold"
+                // Bold selected topic
+                "mb-1 select-none rounded-2xl p-1  font-thin hover:cursor-pointer"
               }
             >
               {topic}

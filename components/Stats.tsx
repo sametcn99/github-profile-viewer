@@ -4,6 +4,7 @@ import Loading from "@/app/loading";
 import {
   calculateLanguageDistribution,
   calculateLicenseDistribution,
+  calculateTopTopics,
   calculateTotalForks,
   calculateTotalRepos,
   calculateTotalStars,
@@ -25,7 +26,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Box, Card, Flex, Heading, ScrollArea, Text } from "@radix-ui/themes";
+import {
+  Box,
+  Card,
+  Flex,
+  Heading,
+  ScrollArea,
+  Table,
+  Text,
+} from "@radix-ui/themes";
 
 export default function Stats() {
   const { repos, loading }: any = useContext(GithubContext);
@@ -41,6 +50,8 @@ export default function Stats() {
   const language = Object.keys(languages);
   const count = Object.values(languages);
   const licenses = calculateLicenseDistribution(repos);
+  const topTopics = calculateTopTopics(repos);
+
   return (
     <>
       {loading && (
@@ -88,19 +99,32 @@ export default function Stats() {
                   {language.length > 5 && (
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1">
-                        <AccordionTrigger>See all languages</AccordionTrigger>
+                        <AccordionTrigger>See All Languages</AccordionTrigger>
                         <AccordionContent>
-                          <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                            <ul>
-                              {Object.entries(languages)
-                                .sort((a, b) => b[1] - a[1])
-                                .map(([language, count]) => (
-                                  <li key={language} className="ml-4 list-disc">
-                                    {language}: {count}
-                                  </li>
-                                ))}
-                            </ul>
-                          </ScrollArea>{" "}
+                          <Table.Root>
+                            <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                              <Table.Header>
+                                <Table.Row>
+                                  <Table.ColumnHeaderCell>
+                                    Language
+                                  </Table.ColumnHeaderCell>
+                                  <Table.ColumnHeaderCell>
+                                    Count
+                                  </Table.ColumnHeaderCell>
+                                </Table.Row>
+                              </Table.Header>
+                              <Table.Body>
+                                {Object.entries(languages)
+                                  .sort((a, b) => b[1] - a[1])
+                                  .map(([topic, count]) => (
+                                    <Table.Row key={topic}>
+                                      <Table.Cell>{topic}</Table.Cell>
+                                      <Table.Cell>{count}</Table.Cell>
+                                    </Table.Row>
+                                  ))}
+                              </Table.Body>
+                            </ScrollArea>
+                          </Table.Root>
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>
@@ -149,24 +173,93 @@ export default function Stats() {
                   {Object.values(licenses).length > 5 && (
                     <Accordion type="single" collapsible className="w-full">
                       <AccordionItem value="item-1">
-                        <AccordionTrigger>See all Licenses</AccordionTrigger>
+                        <AccordionTrigger>See All Licenses</AccordionTrigger>
                         <AccordionContent>
-                          <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                            <ul>
-                              {Object.entries(licenses)
-                                .sort((a, b) => b[1] - a[1])
-                                .map(([license, count]) => (
-                                  <li key={license} className="ml-4 list-disc">
-                                    {license}: {count}
-                                  </li>
-                                ))}
-                            </ul>
-                          </ScrollArea>{" "}
+                          <Table.Root>
+                            <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                              <Table.Header>
+                                <Table.Row>
+                                  <Table.ColumnHeaderCell>
+                                    License
+                                  </Table.ColumnHeaderCell>
+                                  <Table.ColumnHeaderCell>
+                                    Count
+                                  </Table.ColumnHeaderCell>
+                                </Table.Row>
+                              </Table.Header>
+                              <Table.Body>
+                                {Object.entries(licenses)
+                                  .sort((a, b) => b[1] - a[1])
+                                  .map(([topic, count]) => (
+                                    <Table.Row key={topic}>
+                                      <Table.Cell>{topic}</Table.Cell>
+                                      <Table.Cell>{count}</Table.Cell>
+                                    </Table.Row>
+                                  ))}
+                              </Table.Body>
+                            </ScrollArea>
+                          </Table.Root>
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>
                   )}
                 </Card>
+              )}
+              {topTopics && (
+                <>
+                  <Card>
+                    <Heading className="ml-3">Top 5 Topics</Heading>
+                    <Box className="w-full h-[20rem] bg-gray-400 rounded-2xl p-2">
+                      <BarChart
+                        xAxis={[
+                          {
+                            id: "barCategories",
+                            data: Object.keys(topTopics).slice(0, 5),
+                            scaleType: "band",
+                          },
+                        ]}
+                        series={[
+                          {
+                            data: Object.values(topTopics).slice(0, 5),
+                          },
+                        ]}
+                      />
+                    </Box>
+                  </Card>
+                  {Object.keys(topTopics).length > 5 && (
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>See All Topics</AccordionTrigger>
+                        <AccordionContent>
+                          <Table.Root>
+                            <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                              <Table.Header>
+                                <Table.Row>
+                                  <Table.ColumnHeaderCell>
+                                    Topic
+                                  </Table.ColumnHeaderCell>
+                                  <Table.ColumnHeaderCell>
+                                    Count
+                                  </Table.ColumnHeaderCell>
+                                </Table.Row>
+                              </Table.Header>
+                              <Table.Body>
+                                {Object.entries(topTopics)
+                                  .sort((a, b) => b[1] - a[1])
+                                  .map(([topic, count]) => (
+                                    <Table.Row key={topic}>
+                                      <Table.Cell>{topic}</Table.Cell>
+                                      <Table.Cell>{count}</Table.Cell>
+                                    </Table.Row>
+                                  ))}
+                              </Table.Body>
+                            </ScrollArea>
+                          </Table.Root>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  )}
+                </>
               )}
               {mostStarredRepo && (
                 <Box>

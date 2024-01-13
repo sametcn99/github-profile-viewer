@@ -155,3 +155,19 @@ export const findRepoWithLongestUpdatePeriod = (
     repos[0]
   );
 };
+
+export const calculateTopTopics = (repos: GitHubRepo[]) => {
+  const topics: Record<string, number> = {};
+
+  repos.forEach((repo) => {
+    if (repo.topics) {
+      repo.topics.forEach((topic) => {
+        if (typeof topic === "string") {
+          topics[topic] = (topics[topic] || 0) + 1;
+        }
+      });
+    }
+  });
+
+  return topics;
+};
