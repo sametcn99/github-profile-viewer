@@ -57,7 +57,6 @@ export default function Projects() {
     // Reset filter if the same license is clicked again
     if (license === selectedLicense) {
       setSelectedLicense("");
-      console.log(license);
     }
   };
 
@@ -71,7 +70,6 @@ export default function Projects() {
             return repo.language === selectedLanguage; // Corrected line
           }
           if (selectedLicense) {
-            console.log("Selected License:", selectedLicense);
             return repo.license?.spdx_id === selectedLicense; // Corrected line
           }
 
