@@ -69,15 +69,19 @@ export default function FollowersOrFollowings({
       .toLowerCase()
       .includes(filter.toLowerCase());
 
-    // Additional filtering based on the selected filter type
     if (selectedFilter === "All") {
       return loginMatches;
     } else {
+      console.log("Selected Filter:", selectedFilter);
+      console.log("Item Type:", item.type.toLowerCase());
+      console.log("Login Matches:", loginMatches);
+
       return (
         item.type.toLowerCase() === selectedFilter.toLowerCase() && loginMatches
       );
     }
   });
+
   return (
     <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
       <Dialog.Trigger>
@@ -111,7 +115,7 @@ export default function FollowersOrFollowings({
                 onValueChange={setSelectedFilter}
               >
                 <DropdownMenu.RadioItem value="All">All</DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value="Updated Ascending">
+                <DropdownMenu.RadioItem value="User">
                   User
                 </DropdownMenu.RadioItem>
                 <DropdownMenu.RadioItem value="Organization">
