@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 
 const RecommendedUsers = () => {
   const [randomUserData, setRandomUserData] = useState<UserData[] | []>([]);
+  const [data, setData] = useState<UserData[] | []>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -15,7 +16,7 @@ const RecommendedUsers = () => {
         );
         const data = await response.json();
         // Set the fetched data to the state
-        setRandomUserData(data.data);
+        setData(data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -27,7 +28,7 @@ const RecommendedUsers = () => {
     const intervalId = setInterval(() => {
       // Shuffle the array to get random users
       if (randomUserData) {
-        const shuffledData = [...randomUserData]
+        const shuffledData = [...data]
           .sort(() => Math.random() - 0.5)
           .slice(0, 10);
         // Set the shuffled data to the state
