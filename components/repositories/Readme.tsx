@@ -1,9 +1,7 @@
 "use client";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import { getSiteUrl } from "@/lib/utils";
-import { Box, Dialog } from "@radix-ui/themes";
-import { GithubContext } from "@/app/context/context";
+import { Dialog } from "@radix-ui/themes";
 import { FaReadme } from "react-icons/fa6";
 
 export default function Readme(url: any) {

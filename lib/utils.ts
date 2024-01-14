@@ -48,7 +48,7 @@ export const removeDuplicates = (arr: any[]) => {
 export async function fetchContact(
   username: string,
   option: string,
-  signal: AbortSignal
+  signal: AbortSignal,
 ): Promise<UserData[]> {
   // Initialize variables for pagination and repository storage
   let nextPage = 1;
@@ -107,7 +107,7 @@ export async function fetchContact(
 // Async function to fetch GitHub repositories based on a username and option
 export async function fetchGithub(
   username: string,
-  option: string
+  option: string,
 ): Promise<GitHubRepo[]> {
   // Initialize variables for pagination and repository storage
   let nextPage = 1;

@@ -9,11 +9,12 @@ import {
   Button,
   Dialog,
   DropdownMenu,
-  ScrollArea,
   Text,
   TextField,
 } from "@radix-ui/themes";
 import Loading from "@/app/loading";
+import { VList } from "virtua";
+import { FaUser } from "react-icons/fa6";
 
 export default function FollowersOrFollowings({
   username,
@@ -86,7 +87,8 @@ export default function FollowersOrFollowings({
     <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
       <Dialog.Trigger>
         <Button className="hover:cursor-pointer">
-          <Text>
+          <Text className="flex flex-row items-center gap-2">
+            <FaUser />
             {option.charAt(0).toUpperCase()}
             {option.slice(1)}
           </Text>
@@ -94,8 +96,14 @@ export default function FollowersOrFollowings({
         </Button>
       </Dialog.Trigger>
       <Dialog.Content>
-        <Dialog.Title>Users</Dialog.Title>
-        {loading && <Loading />}
+        <Dialog.Title className="flex w-full flex-row justify-between">
+          <Box className="flex w-full flex-row items-start justify-between">
+            <div> Users </div>
+            <Dialog.Close>
+              <Button className="cursor-pointer hover:underline">Close</Button>
+            </Dialog.Close>
+          </Box>
+        </Dialog.Title>
         <TextField.Root>
           <TextField.Input
             value={filter}
@@ -125,12 +133,18 @@ export default function FollowersOrFollowings({
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </TextField.Root>
-        <ScrollArea className="h-[35rem]">
+        {loading && <Loading />}
+        <VList
+          style={{
+            height: "50vh",
+            marginTop: "20px",
+          }}
+        >
           {Array.isArray(filteredData) && filteredData?.length > 0 ? (
             filteredData.map((item: UserData, index: number) => (
               <Link
-                href={`/${item.login}`}
                 key={index}
+                href={`/${item.login}`}
                 className="flex flex-row items-center gap-2 rounded-2xl p-2 hover:bg-black hover:bg-opacity-50"
               >
                 <Avatar
@@ -146,7 +160,7 @@ export default function FollowersOrFollowings({
           ) : (
             <>{!loading && <Text>No matching data found.</Text>}</>
           )}
-        </ScrollArea>
+        </VList>
       </Dialog.Content>
     </Dialog.Root>
   );

@@ -23,6 +23,7 @@ import Licenses from "./Licenses";
 import Topics from "./Topics";
 import Languages from "./Languages";
 import CreationDate from "./CreationDate";
+
 export default function Stats() {
   const { repos, loading }: any = useContext(GithubContext);
   const totalRepos = calculateTotalRepos(repos);

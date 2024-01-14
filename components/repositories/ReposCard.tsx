@@ -1,10 +1,5 @@
-import React from "react";
-import { useContext, useMemo, useState } from "react";
 import { BsFillStarFill } from "react-icons/bs";
 import { FaCodeFork } from "react-icons/fa6";
-import { GithubContext } from "@/app/context/context";
-import FilterInput from "../FilterInput";
-import Loading from "@/app/loading";
 import { formatNumber } from "@/lib/utils";
 import {
   Box,
@@ -17,8 +12,7 @@ import {
   Tooltip,
 } from "@radix-ui/themes";
 import Readme from "./Readme";
-import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
-import FilterBar from "./FilterBar";
+import { languageIcons } from "./LanguageIcons";
 
 export default function ReposCard({
   repo,
@@ -104,22 +98,44 @@ export default function ReposCard({
             onClick={() => handleLicenseClick(repo.license?.spdx_id)}
             className={
               selectedLicense === repo.license?.spdx_id
-                ? "font-bold hover:cursor-pointer"
-                : "font-thin hover:cursor-pointer"
+                ? "flex scale-105 flex-row items-center gap-2 font-bold hover:cursor-pointer"
+                : "flex flex-row items-center gap-2 font-thin hover:cursor-pointer"
             }
           >
             {repo.license?.spdx_id}
           </Text>
-          <Text
-            onClick={() => handleLanguageClick(repo.language)}
-            className={
-              selectedLanguage === repo.language
-                ? "font-bold hover:cursor-pointer"
-                : "font-thin hover:cursor-pointer"
-            }
-          >
-            {repo.language ? `Language: ${repo.language}` : null}
-          </Text>
+          {repo.language && (
+            <>
+              {repo.language && languageIcons[repo.language] ? (
+                // Display icon if available
+                <Tooltip content={`Language: ${repo.language}`}>
+                  <Box
+                    onClick={() => handleLanguageClick(repo.language)}
+                    className={
+                      selectedLanguage === repo.language
+                        ? "flex scale-105 flex-row items-center gap-2 font-bold hover:cursor-pointer"
+                        : "flex flex-row items-center gap-2 font-thin hover:cursor-pointer"
+                    }
+                  >
+                    {languageIcons[repo.language]}
+                    <Text>{repo.language}</Text>
+                  </Box>
+                </Tooltip>
+              ) : (
+                // Display language name if icon is not available
+                <Text
+                  className={
+                    selectedLanguage === repo.language
+                      ? "flex scale-105 flex-row items-center gap-2 font-bold hover:cursor-pointer"
+                      : "flex flex-row items-center gap-2 font-thin hover:cursor-pointer"
+                  }
+                  onClick={() => handleLanguageClick(repo.language)}
+                >
+                  Language: {repo.language}
+                </Text>
+              )}
+            </>
+          )}
           <Text>
             Created at: {new Date(repo.created_at).toLocaleDateString()}
           </Text>

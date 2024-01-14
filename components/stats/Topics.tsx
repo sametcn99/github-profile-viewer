@@ -1,19 +1,10 @@
-import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Box,
-  Card,
-  Flex,
-  Heading,
-  ScrollArea,
-  Table,
-  Text,
-} from "@radix-ui/themes";
+import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
 import { BarChart } from "@mui/x-charts/BarChart";
 
 export default function Topics({

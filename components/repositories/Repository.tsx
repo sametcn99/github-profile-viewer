@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "@radix-ui/themes";
 import Readme from "./Readme";
+import { languageIcons } from "./LanguageIcons";
 export default function Repository({ repo, index }: any) {
   return (
     <Card key={index}>
@@ -83,12 +84,29 @@ export default function Repository({ repo, index }: any) {
       </Box>
       <Box className="flex flex-col items-start">
         <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-          <Text className={"font-thin hover:cursor-pointer"}>
+          <Text className={"flex flex-row items-center gap-2 font-thin "}>
             {repo.license?.spdx_id}
           </Text>
-          <Text className={"font-thin hover:cursor-pointer"}>
-            {repo.language ? `Language: ${repo.language}` : null}
-          </Text>
+          {repo.language && (
+            <>
+              {repo.language && languageIcons[repo.language] ? (
+                // Display icon if available
+                <Tooltip content={`Language: ${repo.language}`}>
+                  <Box
+                    className={"flex flex-row items-center gap-2 font-thin "}
+                  >
+                    {languageIcons[repo.language]}
+                    <Text>{repo.language}</Text>
+                  </Box>
+                </Tooltip>
+              ) : (
+                // Display language name if icon is not available
+                <Text className={"flex flex-row items-center gap-2 font-thin "}>
+                  Language: {repo.language}
+                </Text>
+              )}
+            </>
+          )}
           <Text>
             Created at: {new Date(repo.created_at).toLocaleDateString()}
           </Text>
@@ -101,9 +119,7 @@ export default function Repository({ repo, index }: any) {
             <Text
               size="2"
               key={index}
-              className={
-                "mb-1 select-none rounded-2xl p-1  font-thin hover:cursor-pointer"
-              }
+              className={"mb-1 select-none rounded-2xl p-1 font-thin "}
             >
               {topic}
             </Text>

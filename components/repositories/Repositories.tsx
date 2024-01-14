@@ -1,22 +1,8 @@
 "use client";
 import { useContext, useMemo, useState } from "react";
-import { BsFillStarFill } from "react-icons/bs";
-import { FaCodeFork } from "react-icons/fa6";
 import { GithubContext } from "@/app/context/context";
-import FilterInput from "../FilterInput";
 import Loading from "@/app/loading";
-import { formatNumber } from "@/lib/utils";
-import {
-  Box,
-  Button,
-  Card,
-  DropdownMenu,
-  Heading,
-  Link,
-  Text,
-  Tooltip,
-} from "@radix-ui/themes";
-import Readme from "./Readme";
+import { Box } from "@radix-ui/themes";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import FilterBar from "./FilterBar";
 import ReposCard from "./ReposCard";

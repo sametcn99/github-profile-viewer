@@ -1,9 +1,8 @@
 "use client";
 import Loading from "@/app/loading";
-import { getSiteUrl } from "@/lib/utils";
 import { UserData } from "@/types/types";
-import { Avatar, Box, Heading, Link, Text } from "@radix-ui/themes";
-import React, { useEffect, useState } from "react";
+import { Avatar, Link } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
 
 const RecommendedUsers = () => {
   const [randomUserData, setRandomUserData] = useState<UserData[] | []>([]);

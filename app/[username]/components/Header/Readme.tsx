@@ -1,9 +1,10 @@
 "use client";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { getSiteUrl } from "@/lib/utils";
-import { Dialog } from "@radix-ui/themes";
+import { Box, Dialog } from "@radix-ui/themes";
 import { GithubContext } from "@/app/context/context";
+import { FaReadme } from "react-icons/fa6";
 
 export default function Readme(username: any) {
   const [content, setContent] = useState<string | undefined>();
@@ -75,10 +76,12 @@ export default function Readme(username: any) {
     return (
       <Dialog.Root>
         <Dialog.Trigger className="dialog-trigger">
-          <span>Readme.md </span>
+          <Box>
+            <FaReadme /> README.md
+          </Box>
         </Dialog.Trigger>
         <Dialog.Content>
-          <Dialog.Title>Readme.md</Dialog.Title>
+          <Dialog.Title>README.md</Dialog.Title>
           <MarkdownPreview source={markdownContent} />
         </Dialog.Content>
       </Dialog.Root>

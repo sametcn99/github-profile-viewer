@@ -7,6 +7,8 @@ import { BsTwitterX } from "react-icons/bs";
 import Readme from "./Readme";
 import { TfiWorld } from "react-icons/tfi";
 import { Avatar, Box, Card, Link, Text } from "@radix-ui/themes";
+import { HiLocationMarker } from "react-icons/hi";
+import { MdEmail } from "react-icons/md";
 
 interface HeaderProps {
   userData: UserData;
@@ -20,6 +22,7 @@ export default function Header({ userData }: HeaderProps) {
             size="9"
             fallback={userData.login.charAt(0)}
             src={userData.avatar_url || userData.avatar_url}
+            className="transition-all duration-1000 hover:shadow-md hover:shadow-slate-700"
           />
           <Box className="flex flex-col">
             <Text className="break-words text-5xl">{userData.name}</Text>
@@ -36,13 +39,14 @@ export default function Header({ userData }: HeaderProps) {
               </Text>
             )}
             {userData.location && (
-              <Text className="text-base font-normal">
-                From: {userData.location}
+              <Text className="flex flex-row items-center gap-2 text-base font-normal">
+                <HiLocationMarker />
+                {userData.location}
               </Text>
             )}
             {userData.email && (
-              <Text>
-                Email:{" "}
+              <Text className="flex flex-row items-center gap-2 text-base font-normal">
+                <MdEmail />
                 <Link
                   className="break-words hover:underline"
                   type="email"
@@ -53,7 +57,7 @@ export default function Header({ userData }: HeaderProps) {
               </Text>
             )}
             <Text className="text-base font-normal">
-              Public Repos: {userData.public_repos}
+              Public Repositories: {userData.public_repos}
             </Text>
             <Text className="text-base font-normal">
               Public Gists: {userData.public_gists}
