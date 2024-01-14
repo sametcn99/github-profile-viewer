@@ -47,7 +47,7 @@ export default function Rate() {
             The primary rate limit for anonymous requests is 60 requests per
             hour.
             <br />
-            Application rate limit of 5,000 requests per hour.
+            Application rate limit is 5,000 requests per hour.
           </Text>
         </Dialog.Description>
 
