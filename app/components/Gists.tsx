@@ -55,7 +55,7 @@ const Gists = () => {
         <Box className="flex flex-row gap-3">
           <FilterInput setFilterValue={setFilterValue} />
           <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
+            <DropdownMenu.Trigger className="hover:cursor-pointer">
               <Button>Sort By</Button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content>

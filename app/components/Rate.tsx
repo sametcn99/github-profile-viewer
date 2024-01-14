@@ -33,7 +33,7 @@ export default function Rate() {
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger>
+      <Dialog.Trigger className="hover:cursor-pointer">
         <Button>API Rate</Button>
       </Dialog.Trigger>
 
