@@ -33,7 +33,7 @@ export default function CreationDate({ statsData }: { statsData: any[] }) {
       {statsData.length > 5 && (
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger>See All Languages</AccordionTrigger>
+            <AccordionTrigger>See All Creation Dates</AccordionTrigger>
             <AccordionContent>
               <Table.Root>
                 <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
