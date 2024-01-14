@@ -116,7 +116,7 @@ export default function FollowersOrFollowings({
     <>
       {count > 1000 && (
         <Tooltip
-          content={`User have more than 1000 ${option.charAt(0).toUpperCase()}${option.slice(1)}. If you open dialog, the application sent
+          content={`User have more than 1000 ${option.charAt(0).toUpperCase()}${option.slice(1)}. If you open dialog, the application send
                   request for every 100 user.`}
         >
           <Box className="flex items-center">
