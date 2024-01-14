@@ -38,7 +38,7 @@ export default function Header({ userData }: HeaderProps) {
           <Box className="flex flex-col">
             <Text className="break-words text-5xl">{userData.name}</Text>
             <Link
-              className="text-lg hover:underline"
+              className="w-fit text-lg hover:underline"
               href={userData.html_url}
               target="_blank"
             >
