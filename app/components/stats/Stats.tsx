@@ -23,9 +23,10 @@ import Licenses from "./Licenses";
 import Topics from "./Topics";
 import Languages from "./Languages";
 import CreationDate from "./CreationDate";
+import GistCreationDate from "./GistCreationDate";
 
 export default function Stats() {
-  const { repos, loading }: any = useContext(GithubContext);
+  const { repos, loading, gists }: any = useContext(GithubContext);
   const totalRepos = calculateTotalRepos(repos);
   const totalStars = calculateTotalStars(repos);
   const mostStarredRepo = findMostStarredRepo(repos);
@@ -40,11 +41,17 @@ export default function Stats() {
   const licenses = calculateLicenseDistribution(repos);
   const topTopics = calculateTopTopics(repos);
   const creationStats = getCreationStatsByYear(repos);
+  const gistCreationStats = getCreationStatsByYear(gists);
   const statsData = Object.entries(creationStats).map(([year, count]) => ({
     category: year,
     value: count,
   }));
-
+  const gistStatsData = Object.entries(gistCreationStats).map(
+    ([year, count]) => ({
+      category: year,
+      value: count,
+    }),
+  );
   return (
     <>
       <Card>
@@ -74,6 +81,9 @@ export default function Stats() {
               )}
               {topTopics && <Topics topTopics={topTopics} />}
               {statsData.length > 0 && <CreationDate statsData={statsData} />}
+              {gistStatsData.length > 0 && (
+                <GistCreationDate statsData={gistStatsData} />
+              )}
               {mostStarredRepo && (
                 <Box>
                   <Text>Most Starred Repository</Text>

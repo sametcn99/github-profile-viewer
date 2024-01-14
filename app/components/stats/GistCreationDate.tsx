@@ -1,17 +1,17 @@
+import React from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
-import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/app/components/ui/accordion";
-export default function CreationDate({ statsData }: { statsData: any[] }) {
+export default function GistCreationDate({ statsData }: { statsData: any[] }) {
   return (
     <>
       <Card>
-        <Heading className="ml-3">Repository Creation Dates</Heading>
+        <Heading className="ml-3">Gist Creation Dates</Heading>
         <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
           <LineChart
             xAxis={[
