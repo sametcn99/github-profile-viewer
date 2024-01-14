@@ -15,10 +15,21 @@ export const metadata: Metadata = {
   },
   description:
     "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information",
+  applicationName: "Github Profile Viewer",
+  keywords: "github profile viewer, github stats, github profile",
+  creator: "sametcn99",
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
     apple: "/favicon.png",
+  },
+  openGraph: {
+    title: {
+      template: "%s | GPV",
+      default: "Github Profile Viewer",
+    },
+    description:
+      "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information",
   },
 };
 
