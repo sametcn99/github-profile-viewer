@@ -6,18 +6,29 @@ import { MdOutlineWorkOutline } from "react-icons/md";
 import { BsTwitterX } from "react-icons/bs";
 import Readme from "./Readme";
 import { TfiWorld } from "react-icons/tfi";
-import { Avatar, Box, Card, Link, Text } from "@radix-ui/themes";
+import { Avatar, Box, Card, Link, Text, Tooltip } from "@radix-ui/themes";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { GrOrganization } from "react-icons/gr";
 
 interface HeaderProps {
   userData: UserData;
 }
 export default function Header({ userData }: HeaderProps) {
   return (
-    <Card className="h-fit pt-4">
+    <Card className="h-fit">
       <Box className="flex flex-col">
         <Box className="flex flex-col items-center justify-center gap-6 md:flex-row ">
+          <Box className="absolute right-5 top-5">
+            <Tooltip content={`Profile Type: ${userData.type}`}>
+              {userData.type === "User" ? (
+                <FaUser size={22} />
+              ) : (
+                <GrOrganization size={22} />
+              )}
+            </Tooltip>
+          </Box>
           <Avatar
             size="9"
             fallback={userData.login.charAt(0)}
