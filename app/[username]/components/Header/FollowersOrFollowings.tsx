@@ -11,10 +11,12 @@ import {
   DropdownMenu,
   Text,
   TextField,
+  Tooltip,
 } from "@radix-ui/themes";
 import Loading from "@/app/loading";
 import { VList } from "virtua";
 import { FaUser } from "react-icons/fa6";
+import { BsInfoCircleFill } from "react-icons/bs";
 
 export default function FollowersOrFollowings({
   username,
@@ -111,93 +113,109 @@ export default function FollowersOrFollowings({
 
   // JSX for rendering the component
   return (
-    <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-      <Dialog.Trigger>
-        <Button className="hover:cursor-pointer">
-          <Text className="flex flex-row items-center gap-2">
-            <FaUser />
-            {option.charAt(0).toUpperCase()}
-            {option.slice(1)}
-          </Text>
-          <Text className="">{count}</Text>
-        </Button>
-      </Dialog.Trigger>
-      <Dialog.Content>
-        <Dialog.Title className="flex w-full flex-row justify-between">
-          <Box className="flex w-full flex-row items-start justify-between">
-            <div> Users </div>
-            <Dialog.Close>
-              <Button className="cursor-pointer hover:underline">Close</Button>
-            </Dialog.Close>
-          </Box>
-        </Dialog.Title>
-        {/* Textfield for filtering by name */}
-        <TextField.Root>
-          <TextField.Input
-            value={filter}
-            type="search"
-            placeholder="Filter by name"
-            onChange={(e) => setFilter(e.target.value)}
-          ></TextField.Input>
-          {/* Dropdown for selecting the filter option */}
-          <DropdownMenu.Root>
-            <DropdownMenu.Trigger>
-              <Button className="hover:cursor-pointer">Filter By</Button>
-            </DropdownMenu.Trigger>
-            <DropdownMenu.Content>
-              <DropdownMenu.Label>Filter By</DropdownMenu.Label>
-              <DropdownMenu.Separator />
-              {/* Radio group for filter options */}
-              <DropdownMenu.RadioGroup
-                value={selectedFilter}
-                onValueChange={setSelectedFilter}
-              >
-                <DropdownMenu.RadioItem value="All">All</DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value="User">
-                  User
-                </DropdownMenu.RadioItem>
-                <DropdownMenu.RadioItem value="Organization">
-                  Organization
-                </DropdownMenu.RadioItem>
-              </DropdownMenu.RadioGroup>
-            </DropdownMenu.Content>
-          </DropdownMenu.Root>
-        </TextField.Root>
-        {/* Display loading indicator if data is still being fetched */}
-        {loading && <Loading />}
-        {/* Virtualized list for rendering user data */}
-        <VList
-          style={{
-            height: "50vh",
-            marginTop: "20px",
-          }}
+    <>
+      {count > 1000 && (
+        <Tooltip
+          content={`User have more than 1000 ${option.charAt(0).toUpperCase()}${option.slice(1)}. If you open dialog, the application sent
+                  request for every 100 user.`}
         >
-          {Array.isArray(filteredData) && filteredData?.length > 0 ? (
-            filteredData.map((item: UserData, index: number) => (
-              // Link to user profile page
-              <Link
-                key={index}
-                href={`/${item.login}`}
-                className="flex flex-row items-center gap-2 rounded-2xl p-2 hover:bg-black hover:bg-opacity-50"
-              >
-                {/* Display user avatar or fallback icon */}
-                <Avatar
-                  fallback={item.login.charAt(0)}
-                  src={item.avatar_url || item.avatar_url}
-                />
-                {/* Display user information */}
-                <Box className="flex flex-col">
-                  <Text className="text-xl font-bold"> {item.login}</Text>
-                  <Text> {item.type}</Text>
-                </Box>
-              </Link>
-            ))
-          ) : (
-            // Display a message if no matching data is found
-            <>{!loading && <Text>No matching data found.</Text>}</>
-          )}
-        </VList>
-      </Dialog.Content>
-    </Dialog.Root>
+          <Box className="flex items-center">
+            <BsInfoCircleFill />
+          </Box>
+        </Tooltip>
+      )}
+      <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
+        <Dialog.Trigger>
+          <Button className="hover:cursor-pointer">
+            <Text className="flex flex-row items-center gap-2">
+              <FaUser />
+              {option.charAt(0).toUpperCase()}
+              {option.slice(1)}
+            </Text>
+            <Text> {count}</Text>
+          </Button>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Title className="flex w-full flex-row justify-between">
+            <Box className="flex w-full flex-row items-start justify-between">
+              <div> Users </div>
+              <Dialog.Close>
+                <Button className="cursor-pointer hover:underline">
+                  Close
+                </Button>
+              </Dialog.Close>
+            </Box>
+          </Dialog.Title>
+          {/* Textfield for filtering by name */}
+          <TextField.Root>
+            <TextField.Input
+              value={filter}
+              type="search"
+              placeholder="Filter by name"
+              onChange={(e) => setFilter(e.target.value)}
+            ></TextField.Input>
+            {/* Dropdown for selecting the filter option */}
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <Button className="hover:cursor-pointer">Filter By</Button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content>
+                <DropdownMenu.Label>Filter By</DropdownMenu.Label>
+                <DropdownMenu.Separator />
+                {/* Radio group for filter options */}
+                <DropdownMenu.RadioGroup
+                  value={selectedFilter}
+                  onValueChange={setSelectedFilter}
+                >
+                  <DropdownMenu.RadioItem value="All">
+                    All
+                  </DropdownMenu.RadioItem>
+                  <DropdownMenu.RadioItem value="User">
+                    User
+                  </DropdownMenu.RadioItem>
+                  <DropdownMenu.RadioItem value="Organization">
+                    Organization
+                  </DropdownMenu.RadioItem>
+                </DropdownMenu.RadioGroup>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+          </TextField.Root>
+          {/* Display loading indicator if data is still being fetched */}
+          {loading && <Loading />}
+          {/* Virtualized list for rendering user data */}
+          <VList
+            style={{
+              height: "50vh",
+              marginTop: "20px",
+            }}
+          >
+            {Array.isArray(filteredData) && filteredData?.length > 0 ? (
+              filteredData.map((item: UserData, index: number) => (
+                // Link to user profile page
+                <Link
+                  key={index}
+                  href={`/${item.login}`}
+                  className="flex flex-row items-center gap-2 rounded-2xl p-2 hover:bg-black hover:bg-opacity-50"
+                >
+                  {/* Display user avatar or fallback icon */}
+                  <Avatar
+                    fallback={item.login.charAt(0)}
+                    src={item.avatar_url || item.avatar_url}
+                  />
+                  {/* Display user information */}
+                  <Box className="flex flex-col">
+                    <Text className="text-xl font-bold"> {item.login}</Text>
+                    <Text> {item.type}</Text>
+                  </Box>
+                </Link>
+              ))
+            ) : (
+              // Display a message if no matching data is found
+              <>{!loading && <Text>No matching data found.</Text>}</>
+            )}
+          </VList>
+        </Dialog.Content>
+      </Dialog.Root>
+    </>
   );
 }
