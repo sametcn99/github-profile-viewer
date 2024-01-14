@@ -1,5 +1,6 @@
-import SearchBar from "@/components/Search";
 import { Section, Text } from "@radix-ui/themes";
+import SearchBar from "./components/Search";
+import Rate from "./components/Rate";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
           information. Discover a user&apos;s coding journey and contributions
           to the open-source community.
         </Text>
+        <Rate />
         <SearchBar />
       </Section>
     </>

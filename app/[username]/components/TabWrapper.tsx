@@ -1,7 +1,7 @@
 "use client";
-import Gists from "@/components/Gists";
-import Repositories from "@/components/repositories/Repositories";
-import Stats from "@/components/stats/Stats";
+import Gists from "@/app/components/Gists";
+import Repositories from "@/app/components/repositories/Repositories";
+import Stats from "@/app/components/stats/Stats";
 import { Box, Tabs } from "@radix-ui/themes";
 
 export default function TabWrapper() {

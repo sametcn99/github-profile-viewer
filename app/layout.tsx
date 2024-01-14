@@ -2,11 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import Navbar from "@/components/Navbar";
 import { Analytics } from "@vercel/analytics/react";
 import "@radix-ui/themes/styles.css";
 const inter = Inter({ subsets: ["latin"] });
 import { Theme } from "@radix-ui/themes";
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: {
