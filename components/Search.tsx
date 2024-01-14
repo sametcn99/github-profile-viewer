@@ -52,30 +52,7 @@ export default function SearchBar() {
           onChange={handleChange}
         />
       </TextField.Root>
-      {/* {data && data?.length > 0 ? (
-        <ScrollArea type="always" scrollbars="vertical" style={{ height: 300 }}>
-          {data.map((item: any, index: number) => (
-            <Link
-              href={`/${item.login}`}
-              key={index}
-              className="flex flex-row items-center rounded-3xl hover:bg-black hover:bg-opacity-50 gap-2 p-2 justify-start"
-            >
-              <Avatar
-                size="3"
-                fallback={item.login.charAt(0)}
-                src={item.avatar_url || item.avatar_url}
-              />
-              <div className="flex flex-col text-start">
-                <span className="text-xl font-bold"> {item.login}</span>
-                <span> {item.type}</span>
-              </div>
-            </Link>
-          ))}
-        </ScrollArea>
-      ) : (
-        <RecommendedUsers/>
-      )} */}
-      <ScrollArea type="always" scrollbars="vertical" style={{ height: 400 }}>
+      <ScrollArea type="hover" scrollbars="vertical" style={{ height: 400 }}>
         {data && data?.length > 0 ? (
           data.map((item: any, index: number) => (
             <Link
