@@ -25,46 +25,76 @@ export default function FollowersOrFollowings({
   option: string;
   count: number;
 }) {
+  // State to hold fetched data
   const [data, setData] = useState<UserData[]>([]);
+  // State for filtering data based on user input
   const [filter, setFilter] = useState<string>("");
+  // State to manage loading state
   const [loading, setLoading] = useState(true);
+  // State to track the selected filter option
   const [selectedFilter, setSelectedFilter] = useState("All");
+  // State to control the dialog open/close state
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  // Effect to fetch data when the dialog is open or when the username or option changes
   useEffect(() => {
+    let isMounted = true; // Variable to check if the component is mounted
     const abortController = new AbortController();
     const signal = abortController.signal;
 
     const fetchData = async () => {
-      try {
-        console.log(`Fetching ${username}'s ${option}...`);
-        const repositoryData = await fetchContact(username, option, signal);
-        setData(repositoryData);
-        setLoading(false);
-        console.log(
-          `${username}'s ${option} fetched successfully.\n${repositoryData}`,
-        );
-      } catch (error) {
-        if (error === "AbortError") {
-          // Request was aborted
-          console.log("Fetch operation was aborted");
-        } else {
-          console.error("Error fetching data:", error);
-          // Handle the error as needed
+      let page = 1; // Initial page number
+      let allDataFetched = false;
+
+      setLoading(true); // Set loading to true when data fetching starts
+
+      // Continue fetching data until all data is fetched or the component is unmounted
+      while (!allDataFetched && isMounted) {
+        try {
+          // Fetch data for the current page
+          const pageData = await fetchContact(username, option, page, signal);
+          if (pageData.length === 0) {
+            allDataFetched = true; // Assume all data is fetched if the page data is empty
+          } else {
+            page++; // Move to the next page
+          }
+
+          // Update data state with the fetched data
+          if (isMounted) {
+            setData((prevData) => [...prevData, ...pageData]);
+          }
+        } catch (error) {
+          // Handle errors, log and stop the loop in case of an error
+          if (isMounted) {
+            if (error === "AbortError") {
+              console.log("Fetch operation was aborted");
+            } else {
+              console.error("Error fetching data:", error);
+            }
+          }
+          allDataFetched = true; // Stop the loop in case of an error
         }
+      }
+
+      // Set loading to false when data fetching is complete
+      if (isMounted) {
+        setLoading(false);
       }
     };
 
-    if (dialogOpen && data.length === 0) {
+    // Fetch data only when the dialog is open
+    if (dialogOpen) {
       fetchData();
     }
 
+    // Cleanup function to handle component unmounting
     return () => {
-      // Cleanup function to abort the ongoing operation
-      abortController.abort();
+      isMounted = false; // Unmount the component
+      abortController.abort(); // Abort ongoing requests
     };
-  }, [dialogOpen, data.length, option, username]);
+  }, [dialogOpen, username, option]);
 
+  // Filter data based on user input and selected filter option
   const filteredData = data.filter((item: UserData) => {
     const loginMatches = item.login
       .toLowerCase()
@@ -73,16 +103,13 @@ export default function FollowersOrFollowings({
     if (selectedFilter === "All") {
       return loginMatches;
     } else {
-      console.log("Selected Filter:", selectedFilter);
-      console.log("Item Type:", item.type.toLowerCase());
-      console.log("Login Matches:", loginMatches);
-
       return (
         item.type.toLowerCase() === selectedFilter.toLowerCase() && loginMatches
       );
     }
   });
 
+  // JSX for rendering the component
   return (
     <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
       <Dialog.Trigger>
@@ -104,6 +131,7 @@ export default function FollowersOrFollowings({
             </Dialog.Close>
           </Box>
         </Dialog.Title>
+        {/* Textfield for filtering by name */}
         <TextField.Root>
           <TextField.Input
             value={filter}
@@ -111,6 +139,7 @@ export default function FollowersOrFollowings({
             placeholder="Filter by name"
             onChange={(e) => setFilter(e.target.value)}
           ></TextField.Input>
+          {/* Dropdown for selecting the filter option */}
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
               <Button className="hover:cursor-pointer">Filter By</Button>
@@ -118,6 +147,7 @@ export default function FollowersOrFollowings({
             <DropdownMenu.Content>
               <DropdownMenu.Label>Filter By</DropdownMenu.Label>
               <DropdownMenu.Separator />
+              {/* Radio group for filter options */}
               <DropdownMenu.RadioGroup
                 value={selectedFilter}
                 onValueChange={setSelectedFilter}
@@ -133,7 +163,9 @@ export default function FollowersOrFollowings({
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </TextField.Root>
+        {/* Display loading indicator if data is still being fetched */}
         {loading && <Loading />}
+        {/* Virtualized list for rendering user data */}
         <VList
           style={{
             height: "50vh",
@@ -142,15 +174,18 @@ export default function FollowersOrFollowings({
         >
           {Array.isArray(filteredData) && filteredData?.length > 0 ? (
             filteredData.map((item: UserData, index: number) => (
+              // Link to user profile page
               <Link
                 key={index}
                 href={`/${item.login}`}
                 className="flex flex-row items-center gap-2 rounded-2xl p-2 hover:bg-black hover:bg-opacity-50"
               >
+                {/* Display user avatar or fallback icon */}
                 <Avatar
                   fallback={item.login.charAt(0)}
                   src={item.avatar_url || item.avatar_url}
                 />
+                {/* Display user information */}
                 <Box className="flex flex-col">
                   <Text className="text-xl font-bold"> {item.login}</Text>
                   <Text> {item.type}</Text>
@@ -158,6 +193,7 @@ export default function FollowersOrFollowings({
               </Link>
             ))
           ) : (
+            // Display a message if no matching data is found
             <>{!loading && <Text>No matching data found.</Text>}</>
           )}
         </VList>

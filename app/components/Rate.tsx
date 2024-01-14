@@ -1,5 +1,5 @@
 "use client";
-import { Button, Dialog, Flex } from "@radix-ui/themes";
+import { Button, Dialog, Flex, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import { JsonView, allExpanded, darkStyles } from "react-json-view-lite";
 
@@ -43,6 +43,12 @@ export default function Rate() {
           The current rate limit is based on anonymous access. However, if you
           surpass this limit, you can continue browsing uninterrupted through
           our GitHub API key.
+          <Text size="1" color="gray" mt="2">
+            The primary rate limit for anonymous requests is 60 requests per
+            hour.
+            <br />
+            Application rate limit of 5,000 requests per hour.
+          </Text>
         </Dialog.Description>
 
         <Flex direction="column" gap="3">
@@ -56,7 +62,7 @@ export default function Rate() {
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
             <Button variant="soft" color="gray">
-              Cancel
+              Close
             </Button>
           </Dialog.Close>
         </Flex>
