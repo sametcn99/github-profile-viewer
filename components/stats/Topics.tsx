@@ -39,36 +39,36 @@ export default function Topics({
               ]}
             />
           </Box>
-        </Card>
-      )}
-      {Object.keys(topTopics).length > 5 && (
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>See All Topics</AccordionTrigger>
-            <AccordionContent>
-              <Table.Root>
-                <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.ColumnHeaderCell>Topic</Table.ColumnHeaderCell>
-                      <Table.ColumnHeaderCell>Count</Table.ColumnHeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {Object.entries(topTopics)
-                      .sort((a, b) => b[1] - a[1])
-                      .map(([topic, count]) => (
-                        <Table.Row key={topic}>
-                          <Table.Cell>{topic}</Table.Cell>
-                          <Table.Cell>{count}</Table.Cell>
+          {Object.keys(topTopics).length > 5 && (
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>See All Topics</AccordionTrigger>
+                <AccordionContent>
+                  <Table.Root>
+                    <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                      <Table.Header>
+                        <Table.Row>
+                          <Table.ColumnHeaderCell>Topic</Table.ColumnHeaderCell>
+                          <Table.ColumnHeaderCell>Count</Table.ColumnHeaderCell>
                         </Table.Row>
-                      ))}
-                  </Table.Body>
-                </ScrollArea>
-              </Table.Root>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+                      </Table.Header>
+                      <Table.Body>
+                        {Object.entries(topTopics)
+                          .sort((a, b) => b[1] - a[1])
+                          .map(([topic, count]) => (
+                            <Table.Row key={topic}>
+                              <Table.Cell>{topic}</Table.Cell>
+                              <Table.Cell>{count}</Table.Cell>
+                            </Table.Row>
+                          ))}
+                      </Table.Body>
+                    </ScrollArea>
+                  </Table.Root>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          )}
+        </Card>
       )}
     </>
   );
