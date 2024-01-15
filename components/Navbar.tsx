@@ -21,14 +21,6 @@ const Navbar = () => {
         >
           <FaGithub size={25} />
         </Link>
-        <Link
-          href="https://github.com/sponsors/sametcn99"
-          className="flex items-center space-x-2 px-4 py-2"
-          target="_blank"
-        >
-          <FaHeart />
-          <span>Sponsor</span>
-        </Link>
       </div>
     </Box>
   );
