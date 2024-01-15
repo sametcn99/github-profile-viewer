@@ -29,36 +29,36 @@ export default function GistCreationDate({ statsData }: { statsData: any[] }) {
             height={300}
           />
         </Box>
+        {statsData.length > 5 && (
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>See All Creation Dates</AccordionTrigger>
+              <AccordionContent>
+                <Table.Root>
+                  <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                    <Table.Header>
+                      <Table.Row>
+                        <Table.ColumnHeaderCell>Year</Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell>Count</Table.ColumnHeaderCell>
+                      </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                      {statsData
+                        .sort((a, b) => Number(b.value) - Number(a.value))
+                        .map((data) => (
+                          <Table.Row key={data.value}>
+                            <Table.Cell>{data.category}</Table.Cell>
+                            <Table.Cell>{data.value}</Table.Cell>
+                          </Table.Row>
+                        ))}
+                    </Table.Body>
+                  </ScrollArea>
+                </Table.Root>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
       </Card>
-      {statsData.length > 5 && (
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>See All Creation Dates</AccordionTrigger>
-            <AccordionContent>
-              <Table.Root>
-                <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.ColumnHeaderCell>Year</Table.ColumnHeaderCell>
-                      <Table.ColumnHeaderCell>Count</Table.ColumnHeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {statsData
-                      .sort((a, b) => Number(b.value) - Number(a.value))
-                      .map((data) => (
-                        <Table.Row key={data.value}>
-                          <Table.Cell>{data.category}</Table.Cell>
-                          <Table.Cell>{data.value}</Table.Cell>
-                        </Table.Row>
-                      ))}
-                  </Table.Body>
-                </ScrollArea>
-              </Table.Root>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      )}
     </>
   );
 }
