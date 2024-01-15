@@ -22,13 +22,19 @@ export default function Topics({
               xAxis={[
                 {
                   id: "barCategories",
-                  data: Object.keys(topTopics).slice(0, 5),
+                  data: Object.entries(topTopics)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
+                    .map(([topic, count]) => topic),
                   scaleType: "band",
                 },
               ]}
               series={[
                 {
-                  data: Object.values(topTopics).slice(0, 5),
+                  data: Object.entries(topTopics)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5)
+                    .map(([topic, count]) => count),
                 },
               ]}
             />
