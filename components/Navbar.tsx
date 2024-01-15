@@ -1,6 +1,7 @@
 import { FaGithub } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import { Box, Link } from "@radix-ui/themes";
+import SearchBar from "./Search";
 
 const Navbar = () => {
   return (
@@ -11,13 +12,14 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex  flex-row flex-wrap items-center space-x-4">
+        <SearchBar />
         <Link
           href="https://github.com/sametcn99"
           className="m-2 rounded-2xl text-white hover:bg-secondary"
           aria-label="Github"
           target="_blank"
         >
-          <FaGithub size={30} />
+          <FaGithub size={25} />
         </Link>
         <Link
           href="https://github.com/sponsors/sametcn99"

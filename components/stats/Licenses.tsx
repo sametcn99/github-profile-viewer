@@ -6,7 +6,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/app/components/ui/accordion";
+} from "@/components/ui/accordion";
 import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
 export default function Licenses({ licenses, count }: any) {
   return (

@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "@radix-ui/themes/styles.css";
 const inter = Inter({ subsets: ["latin"] });
 import { Theme } from "@radix-ui/themes";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 
 export const metadata: Metadata = {
   title: {
