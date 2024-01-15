@@ -24,6 +24,7 @@ import Topics from "./Topics";
 import Languages from "./Languages";
 import CreationDate from "./CreationDate";
 import GistCreationDate from "./GistCreationDate";
+import DownloadData from "./DownloadData";
 
 export default function Stats() {
   const { repos, loading, gists }: any = useContext(GithubContext);
@@ -109,6 +110,7 @@ export default function Stats() {
                   <Repository repo={updatePeriod} />
                 </Box>
               )}
+              <DownloadData />
             </>
           )}
         </Flex>

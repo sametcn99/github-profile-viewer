@@ -50,8 +50,8 @@ export default function Header({ userData }: HeaderProps) {
               </Text>
             )}
             {userData.location && (
-              <Text className="flex flex-row items-center gap-2 text-base font-normal">
-                <HiLocationMarker />
+              <Text className="flex flex-row gap-1 text-base font-normal">
+                <HiLocationMarker size={18} />
                 {userData.location}
               </Text>
             )}
