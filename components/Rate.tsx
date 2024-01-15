@@ -39,7 +39,7 @@ export default function Rate() {
 
       <Dialog.Content style={{ maxWidth: 450 }}>
         <Dialog.Title>API Rate</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
+        <Dialog.Description size="2" mb="4" className="flex flex-col">
           The current rate limit is based on anonymous access. However, if you
           surpass this limit, you can continue browsing uninterrupted through
           our GitHub API key.
