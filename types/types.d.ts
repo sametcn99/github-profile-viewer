@@ -23,39 +23,6 @@ export type GitHubRepo = {
   [key: string]: any; // Index signature for dynamic properties
 };
 
-export type GithubApiResponse = {
-  status: number;
-  url: string;
-  headers: {
-    "access-control-allow-origin": string;
-    "access-control-expose-headers": string;
-    "cache-control": string;
-    "content-encoding": string;
-    "content-security-policy": string;
-    "content-type": string;
-    date: string;
-    etag: string;
-    "referrer-policy": string;
-    server: string;
-    "strict-transport-security": string;
-    "transfer-encoding": string;
-    vary: string;
-    "x-accepted-oauth-scopes": string;
-    "x-content-type-options": string;
-    "x-frame-options": string;
-    "x-github-api-version-selected": string;
-    "x-github-media-type": string;
-    "x-github-request-id": string;
-    "x-oauth-scopes": string;
-    "x-ratelimit-limit": string;
-    "x-ratelimit-remaining": string;
-    "x-ratelimit-reset": string;
-    "x-ratelimit-resource": string;
-    "x-ratelimit-used": string;
-    "x-xss-protection": string;
-  };
-  data: GitHubRepo[];
-};
 export type UserData = {
   login: string;
   id: number;
@@ -89,4 +56,9 @@ export type UserData = {
   following: number;
   created_at: string;
   updated_at: string;
+};
+
+type SocialLink = {
+  provider: string;
+  url: string;
 };

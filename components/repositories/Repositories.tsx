@@ -1,7 +1,6 @@
 "use client";
 import { useContext, useMemo, useState } from "react";
 import { GithubContext } from "@/app/context/context";
-import Loading from "@/app/loading";
 import { Box } from "@radix-ui/themes";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import FilterBar from "./FilterBar";
@@ -11,7 +10,7 @@ import { VList } from "virtua";
 type SetSelectedFunction = (value: string) => void;
 
 export default function Repositories() {
-  const { repos, loading }: any = useContext(GithubContext);
+  const { repos } = useContext(GithubContext);
   const [sort, setSort] = useState("Stars Descending");
   const [filterValue, setFilterValue] = useState("");
   const [selectedTopic, setSelectedTopic] = useState(""); // Add state for selected topic
@@ -136,11 +135,6 @@ export default function Repositories() {
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
         />
-        {loading && (
-          <Box className="flex w-full items-center justify-center">
-            <Loading />
-          </Box>
-        )}
         <VList
           style={{
             height: "85vh",

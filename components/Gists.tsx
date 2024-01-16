@@ -12,7 +12,7 @@ import { VList } from "virtua";
 // Gistss component
 const Gists = () => {
   // State to store GitHub API data
-  const { gists, loading }: any = useContext(GithubContext);
+  const { gists } = useContext(GithubContext);
   const [filterValue, setFilterValue] = useState("");
   const [sort, setSort] = useState("updated");
 
@@ -25,26 +25,23 @@ const Gists = () => {
               filename.toLowerCase().includes(filterValue.toLowerCase()),
             ),
         )
-      : null;
+      : [];
 
     switch (sort) {
-      // Created Ascending(artan)
       case "Created Ascending":
         return sortByKeyAscending(filteredGists, "created_at");
 
-      // Created Descending(azalan)
       case "Created Descending":
         return sortByKeyDescending(filteredGists, "created_at");
 
-      // Updated Ascending(artan)
       case "Updated Ascending":
         return sortByKeyAscending(filteredGists, "updated_at");
 
-      // Updated Descending
       default:
-        return sortByKeyDescending(filteredGists, "updated_at"); // Default sorting by pushed date (descending)
+        return sortByKeyDescending(filteredGists, "updated_at");
     }
   }, [gists, sort, filterValue]);
+
   return (
     <>
       <Box className="flex flex-col gap-3">
@@ -74,11 +71,6 @@ const Gists = () => {
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </Box>
-        {loading && (
-          <Box className="flex w-full items-center justify-center">
-            <Loading />
-          </Box>
-        )}
         <VList
           style={{
             height: "90vh",

@@ -4,13 +4,13 @@ import SocialLinks from "./SocialLinks";
 import { createUrlObject } from "@/lib/utils";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { BsTwitterX } from "react-icons/bs";
-import Readme from "./Readme";
 import { TfiWorld } from "react-icons/tfi";
 import { Avatar, Box, Card, Link, Text, Tooltip } from "@radix-ui/themes";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { GrOrganization } from "react-icons/gr";
+import Readme from "@/components/repositories/Readme";
 
 interface HeaderProps {
   userData: UserData;
@@ -136,7 +136,9 @@ export default function Header({ userData }: HeaderProps) {
             {userData.twitter_username}
           </Link>
         )}
-        <Readme username={userData.login} option="readme" />
+        <Readme
+          url={`https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`}
+        />
         <SocialLinks username={userData.login} option="social" />
       </Box>
     </Card>

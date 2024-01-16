@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import { Dialog } from "@radix-ui/themes";
+import { Box, Dialog } from "@radix-ui/themes";
 import { FaReadme } from "react-icons/fa6";
 
 // Define the props type for the Readme component
@@ -52,7 +52,9 @@ export default function Readme({ url }: ReadmeProps) {
   return (
     <Dialog.Root>
       <Dialog.Trigger className="dialog-trigger">
-        <FaReadme size={22} />
+        <Box>
+          <FaReadme size={22} />
+        </Box>
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>Readme.md</Dialog.Title>
