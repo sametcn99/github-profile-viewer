@@ -36,7 +36,7 @@ export const GithubProvider = ({
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `/api/new?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
+          `/api/github?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
         );
         const data = await response.json();
         if (data) {

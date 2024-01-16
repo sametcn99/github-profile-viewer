@@ -18,7 +18,7 @@ export async function generateMetadata(
   try {
     const username = searchParams.params.username;
     const response = await fetch(
-      `${getSiteUrl()}/api/new?username=${username}&option=profile`,
+      `${getSiteUrl()}/api/github?username=${username}&option=profile`,
     );
     const data = await response.json();
     const userData = data.profile;
@@ -41,7 +41,7 @@ export default async function fetchUserPage(searchParams: SearchParams) {
   try {
     const username = searchParams.params.username;
     const response = await fetch(
-      `${getSiteUrl()}/api/new?username=${username}&option=profile`,
+      `${getSiteUrl()}/api/github?username=${username}&option=profile`,
     );
     const data = await response.json();
     const userData: UserData = data.profile;
