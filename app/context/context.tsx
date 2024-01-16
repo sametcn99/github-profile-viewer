@@ -1,5 +1,5 @@
 "use client";
-import { getSiteUrl } from "@/lib/utils";
+import { fetchGithub, getSiteUrl } from "@/lib/utils";
 import { GitHubRepo } from "@/types/types";
 import { createContext, ReactNode, useState, useEffect } from "react";
 
@@ -36,21 +36,26 @@ export const GithubProvider = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const timeoutPromise = new Promise(
-          (_, reject) => setTimeout(() => reject(new Error("Timeout")), 100000), // 10 seconds timeout
-        );
-
-        const apiCallPromise = fetch(
-          `${getSiteUrl()}/api/new?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
-        ).then((response) => response.json());
-
-        const data = await Promise.race([apiCallPromise, timeoutPromise]);
-
-        if (data) {
-          setRepos(data.repos);
-          setGists(data.gists);
-          setLoading(false);
-          console.log(data);
+        if (repoCount > 1000) {
+          const data = await fetchGithub(username, gistCount, repoCount);
+          if (data) {
+            // Append new data to existing state
+            setRepos(data);
+            setLoading(false);
+            console.log(data);
+          }
+        } else {
+          const response = await fetch(
+            `/api/new?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
+          );
+          const data = await response.json();
+          if (data) {
+            // Append new data to existing state
+            setRepos(data.repos);
+            setGists(data.gists);
+            setLoading(false);
+            console.log(data);
+          }
         }
       } catch (error) {
         setLoading(false);
@@ -62,7 +67,7 @@ export const GithubProvider = ({
   }, [gistCount, repoCount, username]);
 
   // Create the context value object
-  const contextValue: GithubContextProps = {
+  const contextValue = {
     repos,
     gists,
     loading,

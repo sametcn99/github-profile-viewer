@@ -70,6 +70,7 @@ export default function Stats() {
             <>
               <Text>Total Stars: {formatNumber(totalStars)}</Text>
               <Text>Total Repositories: {totalRepos}</Text>
+              <Text>Total Gists: {gists.length}</Text>
               <Text>Total Forks: {totalForks}</Text>
               <Text>
                 Average Stars Per Repository: {averageStarsPerRepo.toFixed(2)}

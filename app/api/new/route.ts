@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const repoCount = nextUrl.searchParams.get("repoCount");
   const gistCount = nextUrl.searchParams.get("gistCount");
   const chunk = nextUrl.searchParams.get("chunk");
-  const page = nextUrl.searchParams.get("page");
+  const page = Number(nextUrl.searchParams.get("page"));
   let auth;
 
   let octokit = new Octokit({
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     let rateLimitRemaining = rateLimitResponse.data.resources.core.remaining;
 
     if (rateLimitRemaining === 0) {
-      auth = process.env.GH_TOKEN;
+      auth = process.env.GH_TOKEN ?? "";
       octokit = new Octokit({
         auth: auth,
         headers: {
@@ -96,23 +96,57 @@ export async function GET(request: NextRequest) {
         (accumulator: any[], response) => accumulator.concat(response.data),
         [],
       );
+      return NextResponse.json({
+        profile: profile,
+        repos: repoData,
+        gists: gistData,
+      });
     } else if (
       username &&
       option === "repos" &&
-      chunk === "true" &&
       repoCount &&
-      gistCount
+      gistCount &&
+      chunk === "true"
     ) {
+      // `page` parametresi 1 tabanlı index olmalıdır.
+      const currentPage = page || 1; // Eğer `page` parametresi yoksa veya geçersizse, 1 varsayalım.
+      const startIndex = (currentPage - 1) * 10 + 1; // Her 1000 öğe için başlangıç sayfasını hesapla (1 tabanlı index).
+      const endIndex = startIndex + 10; // Sonraki 10 sayfa için bitiş index'ini hesapla.
+
+      // 10 ayrı istek için Promise'ları hazırla.
+      const repoPromises = [];
+      for (let i = startIndex; i < endIndex; i++) {
+        repoPromises.push(
+          octokit.rest.repos.listForUser({
+            username: username,
+            per_page: 100,
+            page: i,
+          }),
+        );
+      }
+
+      // Promise.all ile tüm istekleri paralel olarak yap.
+      const repoResponses = await Promise.all(repoPromises);
+      // Tüm sayfalardan gelen verileri birleştir.
+      repoData = repoResponses.flatMap((response) => response.data);
+      return NextResponse.json({
+        profile: profile,
+        repos: repoData,
+        gists: gistData,
+      });
     } else if (option === "profile" && username) {
       const profileResponse = await octokit.rest.users.getByUsername({
         username: username,
       });
       profile = profileResponse.data;
+      return NextResponse.json({
+        profile: profile,
+        repos: repoData,
+        gists: gistData,
+      });
     }
     return NextResponse.json({
-      profile: profile,
-      repos: repoData,
-      gists: gistData,
+      error: "Something is missing. Please check your request parameters.",
     });
   } catch (error) {
     return NextResponse.json({
