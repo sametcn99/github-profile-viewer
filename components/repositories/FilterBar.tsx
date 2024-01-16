@@ -12,6 +12,9 @@ export default function FilterBar({
   uniqueTopics,
   selectedFilter,
   setSelectedFilter,
+  selectedLicense,
+  setSelectedLicense,
+  uniqueLicenses,
 }: any) {
   return (
     <Box className="flex w-full flex-row flex-wrap items-center justify-between gap-3">
@@ -70,6 +73,7 @@ export default function FilterBar({
             </DropdownMenu.RadioGroup>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
+
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
             <Button className="hover:cursor-pointer">Topics</Button>
@@ -94,12 +98,38 @@ export default function FilterBar({
             </DropdownMenu.RadioGroup>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
+
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
-            <Button className="hover:cursor-pointer">Filter By</Button>
+            <Button className="hover:cursor-pointer">Licenses</Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
-            <DropdownMenu.Label>Filter By</DropdownMenu.Label>
+            <DropdownMenu.Label>Licenses</DropdownMenu.Label>
+            <DropdownMenu.Separator />
+            <DropdownMenu.RadioGroup
+              value={selectedLicense}
+              onValueChange={setSelectedLicense}
+              style={{
+                maxHeight: "300px",
+                overflowY: "auto",
+              }}
+            >
+              <DropdownMenu.RadioItem value="">All</DropdownMenu.RadioItem>
+              {uniqueLicenses.map((license: string, index: number) => (
+                <DropdownMenu.RadioItem key={index} value={license}>
+                  {license}
+                </DropdownMenu.RadioItem>
+              ))}
+            </DropdownMenu.RadioGroup>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
+
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>
+            <Button className="hover:cursor-pointer">Fork</Button>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Label>Fork</DropdownMenu.Label>
             <DropdownMenu.Separator />
             <DropdownMenu.RadioGroup
               value={selectedFilter}

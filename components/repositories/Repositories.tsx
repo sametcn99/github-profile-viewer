@@ -109,6 +109,16 @@ export default function Repositories() {
     return Array.from(languagesSet);
   }, [filteredAndSortedRepos]);
 
+  const uniqueLicenses = useMemo(() => {
+    const licenseSet = new Set<string>();
+    filteredAndSortedRepos.forEach((repo: any) => {
+      if (repo.license?.spdx_id) {
+        licenseSet.add(repo.license.spdx_id);
+      }
+    });
+    return Array.from(licenseSet);
+  }, [filteredAndSortedRepos]);
+
   const uniqueTopics = useMemo(() => {
     const topicSet = new Set<string>();
     filteredAndSortedRepos.forEach((repo: any) => {
@@ -134,6 +144,9 @@ export default function Repositories() {
           uniqueTopics={uniqueTopics}
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
+          uniqueLicenses={uniqueLicenses}
+          selectedLicense={selectedLicense}
+          setSelectedLicense={setSelectedLicense}
         />
         <VList
           style={{
