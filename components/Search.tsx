@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react"; // Import useState hook
+import { useEffect, useMemo, useState } from "react"; // Import useState hook
 import { useRouter } from "next/navigation";
 import { getSiteUrl } from "@/lib/utils";
 import { UserData } from "@/types/types";
@@ -13,13 +13,16 @@ import {
   Flex,
   Text,
   Box,
+  DropdownMenu,
 } from "@radix-ui/themes";
 import { FaSearch } from "react-icons/fa";
 import { debounce } from "lodash";
+import { VList } from "virtua";
 
 export default function SearchBar() {
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState<UserData[] | []>([]);
+  const [selectedFilter, setSelectedFilter] = useState("All");
   const router = useRouter();
 
   const handleKeyPress = (e: any) => {
@@ -62,6 +65,23 @@ export default function SearchBar() {
     };
   }, [fetchData, inputValue]);
 
+  // Filtreleme işlevi
+  const filteredData = useMemo(() => {
+    return data.filter((item: UserData) => {
+      const loginMatches = item.login
+        .toLowerCase()
+        .includes(inputValue.toLowerCase());
+      if (selectedFilter === "All") {
+        return loginMatches;
+      } else {
+        return (
+          item.type.toLowerCase() === selectedFilter.toLowerCase() &&
+          loginMatches
+        );
+      }
+    });
+  }, [data, inputValue, selectedFilter]);
+
   return (
     <Dialog.Root>
       <Dialog.Trigger className="hover:cursor-pointer">
@@ -88,21 +108,42 @@ export default function SearchBar() {
 
         <Flex gap="3" mt="4" justify="end"></Flex>
         <section className="static flex w-[15rem] flex-col items-center justify-center gap-5 md:w-[25rem] ">
-          <TextField.Root size="3" className="w-full" aria-label="Search">
-            <TextField.Input
-              placeholder="Write user name"
-              onKeyDown={handleKeyPress}
-              onChange={handleChange}
-            />
-          </TextField.Root>
-          <ScrollArea
-            type="hover"
-            scrollbars="vertical"
-            style={{ height: 400 }}
-          >
+          <Box className="flex w-full flex-row items-center justify-between gap-3">
+            <TextField.Root size="3" className="w-full" aria-label="Search">
+              <TextField.Input
+                placeholder="Write user name"
+                onKeyDown={handleKeyPress}
+                onChange={handleChange}
+              />
+            </TextField.Root>
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <Button className="hover:cursor-pointer">Filter By</Button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content>
+                <DropdownMenu.Label>Filter By</DropdownMenu.Label>
+                <DropdownMenu.Separator />
+                <DropdownMenu.RadioGroup
+                  value={selectedFilter}
+                  onValueChange={setSelectedFilter}
+                >
+                  <DropdownMenu.RadioItem value="All">
+                    All
+                  </DropdownMenu.RadioItem>
+                  <DropdownMenu.RadioItem value="User">
+                    User
+                  </DropdownMenu.RadioItem>
+                  <DropdownMenu.RadioItem value="Organization">
+                    Organization
+                  </DropdownMenu.RadioItem>
+                </DropdownMenu.RadioGroup>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+          </Box>
+          <VList style={{ height: 400 }}>
             {data &&
               data?.length > 0 &&
-              data.map((item: any, index: number) => (
+              filteredData.map((item: any, index: number) => (
                 <Link
                   href={`/${item.login}`}
                   key={index}
@@ -119,7 +160,7 @@ export default function SearchBar() {
                   </div>
                 </Link>
               ))}
-          </ScrollArea>
+          </VList>
         </section>
       </Dialog.Content>
     </Dialog.Root>

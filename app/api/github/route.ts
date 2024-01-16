@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
         rateLimitRemaining = rateLimitResponse.data.resources.core.remaining;
         if (rateLimitRemaining === 0) {
           const resetTime = new Date(
-            rateLimitResponse.data.resources.core.reset * 1000
+            rateLimitResponse.data.resources.core.reset * 1000,
           );
           return NextResponse.json({
             error: `Rate limit exceeded. Please try again later. ${resetTime.toISOString()}`,
@@ -121,7 +121,7 @@ export async function GET(request: NextRequest) {
         case "search":
           responseData = await octokit.rest.search.users({
             q: username,
-            per_page: 10,
+            per_page: 100,
           });
           break;
 
