@@ -6,6 +6,7 @@ import { Box } from "@radix-ui/themes";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import FilterBar from "./FilterBar";
 import ReposCard from "./ReposCard";
+import { VList } from "virtua";
 
 type SetSelectedFunction = (value: string) => void;
 
@@ -121,11 +122,6 @@ export default function Repositories() {
 
   return (
     <>
-      {loading && (
-        <Box className="flex w-full items-center justify-center">
-          <Loading />
-        </Box>
-      )}
       <Box className="flex w-full flex-col gap-3">
         <FilterBar
           setFilterValue={setFilterValue}
@@ -140,20 +136,31 @@ export default function Repositories() {
           selectedFilter={selectedFilter}
           setSelectedFilter={setSelectedFilter}
         />
-        {Array.isArray(filteredAndSortedRepos) &&
-          filteredAndSortedRepos.map((repo, index) => (
-            <ReposCard
-              key={index}
-              repo={repo}
-              index={index}
-              selectedLanguage={selectedLanguage}
-              selectedLicense={selectedLicense}
-              selectedTopic={selectedTopic}
-              handleTopicClick={handleTopicClick}
-              handleLanguageClick={handleLanguageClick}
-              handleLicenseClick={handleLicenseClick}
-            />
-          ))}
+        {loading && (
+          <Box className="flex w-full items-center justify-center">
+            <Loading />
+          </Box>
+        )}
+        <VList
+          style={{
+            height: "85vh",
+          }}
+        >
+          {Array.isArray(filteredAndSortedRepos) &&
+            filteredAndSortedRepos.map((repo, index) => (
+              <ReposCard
+                key={index}
+                repo={repo}
+                index={index}
+                selectedLanguage={selectedLanguage}
+                selectedLicense={selectedLicense}
+                selectedTopic={selectedTopic}
+                handleTopicClick={handleTopicClick}
+                handleLanguageClick={handleLanguageClick}
+                handleLicenseClick={handleLicenseClick}
+              />
+            ))}
+        </VList>
       </Box>
     </>
   );

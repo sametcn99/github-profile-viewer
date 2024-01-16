@@ -17,7 +17,7 @@ interface HeaderProps {
 }
 export default function Header({ userData }: HeaderProps) {
   return (
-    <Card className="h-fit">
+    <Card className="h-fit shadow-md shadow-black">
       <Box className="flex flex-col">
         <Box className="flex flex-col items-center justify-center gap-6 md:flex-row ">
           <Box className="absolute right-5 top-5">
