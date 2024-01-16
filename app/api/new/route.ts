@@ -48,7 +48,6 @@ export async function GET(request: NextRequest) {
     let repoData: any[] = [];
     let gistData: any[] = [];
     let profile;
-    let social = {};
     if (username) {
       const profileResponse = await octokit.rest.users.getByUsername({
         username: username,
@@ -94,14 +93,12 @@ export async function GET(request: NextRequest) {
         (accumulator: any[], response) => accumulator.concat(response.data),
         [],
       );
-      social = socialResponse.data;
     }
 
     return NextResponse.json({
       profile: profile,
       repos: repoData,
       gists: gistData,
-      social: social,
     });
   } catch (error) {
     return NextResponse.json({

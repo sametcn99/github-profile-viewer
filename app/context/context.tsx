@@ -1,7 +1,6 @@
 "use client";
-import { fetchGithub } from "@/lib/utils";
-import { GitHubRepo, UserData } from "@/types/types";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { GitHubRepo } from "@/types/types";
+import { createContext, ReactNode, useState } from "react";
 
 // Define the structure of the context data
 export type GithubContextProps = {

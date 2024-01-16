@@ -7,7 +7,6 @@ import {
   Link,
   ScrollArea,
   TextField,
-  Section,
   Avatar,
   Dialog,
   Button,
@@ -15,7 +14,6 @@ import {
   Text,
   Box,
 } from "@radix-ui/themes";
-import RecommendedUsers from "./RecommendedUsers";
 import { FaSearch } from "react-icons/fa";
 import { debounce } from "lodash";
 

@@ -73,7 +73,7 @@ const RecommendedUsers = () => {
 
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
-  }, [randomUserData]); // Dependency on randomUserData to re-run effect when the data changes
+  }, [creator, data, randomUserData]); // Dependency on randomUserData to re-run effect when the data changes
 
   return (
     <>

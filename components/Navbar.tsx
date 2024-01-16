@@ -1,5 +1,4 @@
 import { FaGithub } from "react-icons/fa6";
-import { FaHeart } from "react-icons/fa6";
 import { Box, Link } from "@radix-ui/themes";
 import SearchBar from "./Search";
 

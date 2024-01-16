@@ -1,7 +1,6 @@
-import { GitHubRepo, UserData } from "@/types/types";
+import { UserData } from "@/types/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { sortByKeyDescending } from "./utils/sort";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -28,21 +27,6 @@ export const createUrlObject = (link: string) => {
   let newLink = link.startsWith("http") ? link : `https://${link}`;
   let url = new URL(newLink);
   return url;
-};
-
-export const removeDuplicates = (arr: any[]) => {
-  const uniqueData: any[] = [];
-  const uniqueSet = new Set();
-
-  for (const item of arr) {
-    const key = item.login; // You may need to adjust this depending on your data structure
-    if (!uniqueSet.has(key)) {
-      uniqueSet.add(key);
-      uniqueData.push(item);
-    }
-  }
-
-  return uniqueData;
 };
 
 // utils.ts dosyasında fetchContact fonksiyonunu güncelle
@@ -85,53 +69,6 @@ export async function fetchContact(
 
     return [];
   }
-}
-
-// Async function to fetch GitHub repositories based on a username and option
-export async function fetchGithub(
-  username: string,
-  option: string,
-): Promise<GitHubRepo[]> {
-  // Initialize variables for pagination and repository storage
-  let nextPage = 1;
-  let repos: GitHubRepo[] = [];
-  let completed = false;
-  try {
-    // Infinite loop to paginate through the user's repositories
-    while (completed === false) {
-      let url = `/api/github?username=${username}&option=${option}&page=${nextPage}`;
-      console.log(url);
-      // Fetch repositories data from the server using the provided username, option, and page number
-      const reposResponse = await fetch(url);
-
-      // Check if the response is successful; otherwise, throw an error
-      if (!reposResponse.ok) {
-        throw new Error(`Failed to fetch data for ${username}`);
-      }
-
-      // Parse the JSON data from the response
-      const reposJsonData = await reposResponse.json();
-
-      // Check if there are repositories in the response
-      if (reposJsonData.data.length > 0) {
-        // Increment the page number for the next iteration
-        nextPage++;
-
-        // Concatenate the new repositories to the existing ones
-        repos = [...repos, ...reposJsonData.data];
-      } else if (reposJsonData.data.length === 0) {
-        // Break the loop if there are no more repositories
-        completed = true;
-        break;
-      }
-    }
-  } catch (error) {
-    // Log and handle any errors that occur during the fetch process
-    console.error(error);
-  }
-  repos = sortByKeyDescending(repos, "created_at");
-  // Return the accumulated repositories
-  return repos;
 }
 
 export function formatNumber(number: number) {

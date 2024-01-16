@@ -10,7 +10,7 @@ import { HiLocationMarker } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { GrOrganization } from "react-icons/gr";
-import Readme from "@/components/repositories/Readme";
+import Readme from "@/components/Readme";
 
 interface HeaderProps {
   userData: UserData;

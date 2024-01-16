@@ -11,7 +11,7 @@ import {
   Text,
   Tooltip,
 } from "@radix-ui/themes";
-import Readme from "./Readme";
+import Readme from "../Readme";
 import { languageIcons } from "./LanguageIcons";
 export default function Repository({ repo, index }: any) {
   return (

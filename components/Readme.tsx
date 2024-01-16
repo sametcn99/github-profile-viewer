@@ -50,17 +50,21 @@ export default function Readme({ url }: ReadmeProps) {
 
   // If content is available, render the Dialog with the README content
   return (
-    <Dialog.Root>
-      <Dialog.Trigger className="dialog-trigger">
-        <Box>
-          <FaReadme size={22} />
-        </Box>
-      </Dialog.Trigger>
-      <Dialog.Content>
-        <Dialog.Title>Readme.md</Dialog.Title>
-        {/* Use MarkdownPreview to render the markdown content */}
-        <MarkdownPreview source={content || "No content available."} />
-      </Dialog.Content>
-    </Dialog.Root>
+    <>
+      {!error && content && (
+        <Dialog.Root>
+          <Dialog.Trigger className="dialog-trigger">
+            <Box>
+              <FaReadme size={22} />
+            </Box>
+          </Dialog.Trigger>
+          <Dialog.Content>
+            <Dialog.Title>Readme.md</Dialog.Title>
+            {/* Use MarkdownPreview to render the markdown content */}
+            <MarkdownPreview source={content || "No content available."} />
+          </Dialog.Content>
+        </Dialog.Root>
+      )}
+    </>
   );
 }
