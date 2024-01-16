@@ -1,5 +1,4 @@
 "use client";
-import { fetchGithub, getSiteUrl } from "@/lib/utils";
 import { GitHubRepo } from "@/types/types";
 import { createContext, ReactNode, useState, useEffect } from "react";
 
@@ -36,26 +35,16 @@ export const GithubProvider = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (repoCount > 1000) {
-          const data = await fetchGithub(username, gistCount, repoCount);
-          if (data) {
-            // Append new data to existing state
-            setRepos(data);
-            setLoading(false);
-            console.log(data);
-          }
-        } else {
-          const response = await fetch(
-            `/api/new?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
-          );
-          const data = await response.json();
-          if (data) {
-            // Append new data to existing state
-            setRepos(data.repos);
-            setGists(data.gists);
-            setLoading(false);
-            console.log(data);
-          }
+        const response = await fetch(
+          `/api/new?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
+        );
+        const data = await response.json();
+        if (data) {
+          // Append new data to existing state
+          setRepos(data.repos);
+          setGists(data.gists);
+          setLoading(false);
+          console.log(data);
         }
       } catch (error) {
         setLoading(false);

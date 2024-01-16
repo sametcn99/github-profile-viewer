@@ -101,39 +101,6 @@ export async function GET(request: NextRequest) {
         repos: repoData,
         gists: gistData,
       });
-    } else if (
-      username &&
-      option === "repos" &&
-      repoCount &&
-      gistCount &&
-      chunk === "true"
-    ) {
-      // `page` parametresi 1 tabanlı index olmalıdır.
-      const currentPage = page || 1; // Eğer `page` parametresi yoksa veya geçersizse, 1 varsayalım.
-      const startIndex = (currentPage - 1) * 10 + 1; // Her 1000 öğe için başlangıç sayfasını hesapla (1 tabanlı index).
-      const endIndex = startIndex + 10; // Sonraki 10 sayfa için bitiş index'ini hesapla.
-
-      // 10 ayrı istek için Promise'ları hazırla.
-      const repoPromises = [];
-      for (let i = startIndex; i < endIndex; i++) {
-        repoPromises.push(
-          octokit.rest.repos.listForUser({
-            username: username,
-            per_page: 100,
-            page: i,
-          }),
-        );
-      }
-
-      // Promise.all ile tüm istekleri paralel olarak yap.
-      const repoResponses = await Promise.all(repoPromises);
-      // Tüm sayfalardan gelen verileri birleştir.
-      repoData = repoResponses.flatMap((response) => response.data);
-      return NextResponse.json({
-        profile: profile,
-        repos: repoData,
-        gists: gistData,
-      });
     } else if (option === "profile" && username) {
       const profileResponse = await octokit.rest.users.getByUsername({
         username: username,
