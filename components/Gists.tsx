@@ -7,11 +7,12 @@ import { Box, Button, Card, DropdownMenu, Link, Text } from "@radix-ui/themes";
 import { FaGithub } from "react-icons/fa";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import { VList } from "virtua";
+import Loading from "@/app/loading";
 
 // Gistss component
 const Gists = () => {
   // State to store GitHub API data
-  const { gists } = useContext(GithubContext);
+  const { gists, loading } = useContext(GithubContext);
   const [filterValue, setFilterValue] = useState("");
   const [sort, setSort] = useState("updated");
 
@@ -70,6 +71,11 @@ const Gists = () => {
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </Box>
+        {loading && (
+          <Box className="flex w-full items-center justify-center">
+            <Loading />
+          </Box>
+        )}
         <VList
           style={{
             height: "90vh",

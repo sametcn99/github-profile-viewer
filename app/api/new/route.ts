@@ -5,6 +5,9 @@ import { Octokit } from "octokit";
 export async function GET(request: NextRequest) {
   const nextUrl = request.nextUrl;
   const username = nextUrl.searchParams.get("username");
+  const option = nextUrl.searchParams.get("option");
+  const repoCount = nextUrl.searchParams.get("repoCount");
+  const gistCount = nextUrl.searchParams.get("gistCount");
   let auth;
 
   let octokit = new Octokit({
@@ -48,15 +51,11 @@ export async function GET(request: NextRequest) {
     let repoData: any[] = [];
     let gistData: any[] = [];
     let profile;
-    if (username) {
-      const profileResponse = await octokit.rest.users.getByUsername({
-        username: username,
-      });
-      profile = profileResponse.data;
-      repos = profile.public_repos;
-      gists = profile.public_gists;
+    if (username && option === "repos" && repoCount && gistCount) {
+      repos = Number(repoCount);
+      gists = Number(gistCount);
       // Use Promise.all to fetch data for both repositories and gists concurrently
-      const [repoResponses, gistResponses, socialResponse] = await Promise.all([
+      const [repoResponses, gistResponses] = await Promise.all([
         // Fetch repository data
         Promise.all(
           Array.from({ length: Math.ceil(repos / 100) }, (_, page) =>
@@ -78,9 +77,6 @@ export async function GET(request: NextRequest) {
             }),
           ),
         ),
-        await octokit.rest.users.listSocialAccountsForUser({
-          username: username,
-        }),
       ]);
 
       // Concatenate repo data from all pages
@@ -93,8 +89,12 @@ export async function GET(request: NextRequest) {
         (accumulator: any[], response) => accumulator.concat(response.data),
         [],
       );
+    } else if (option === "profile" && username) {
+      const profileResponse = await octokit.rest.users.getByUsername({
+        username: username,
+      });
+      profile = profileResponse.data;
     }
-
     return NextResponse.json({
       profile: profile,
       repos: repoData,

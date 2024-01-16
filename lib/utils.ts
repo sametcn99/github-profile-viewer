@@ -13,7 +13,7 @@ export const getSiteUrl = () => {
 
   // Define the base URL for both production and local development environments.
   const baseUrl = isProduction
-    ? "https://next-github-profile-viewer.vercel.app"
+    ? process.env.NEXT_PUBLIC_URL
     : "http://localhost:3000";
 
   // Return the appropriate base URL based on the environment.

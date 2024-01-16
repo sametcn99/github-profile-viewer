@@ -18,7 +18,7 @@ export async function generateMetadata(
   try {
     const username = searchParams.params.username;
     const response = await fetch(
-      `${getSiteUrl()}/api/new?username=${username}`,
+      `${getSiteUrl()}/api/new?username=${username}&option=profile`,
     );
     const data = await response.json();
     const userData = data.profile;
@@ -41,19 +41,22 @@ export default async function fetchUserPage(searchParams: SearchParams) {
   try {
     const username = searchParams.params.username;
     const response = await fetch(
-      `${getSiteUrl()}/api/new?username=${username}`,
+      `${getSiteUrl()}/api/new?username=${username}&option=profile`,
     );
     const data = await response.json();
     const userData: UserData = data.profile;
-    const repos: GitHubRepo[] = data.repos;
-    const gists: GitHubRepo[] = data.gists;
-    const social: SocialLink[] = data.social;
-    if (data) {
+    if (userData) {
       return (
-        <GithubProvider initialRepos={repos} initialGists={gists}>
+        <>
           <Header userData={userData} />
-          <TabWrapper />
-        </GithubProvider>
+          <GithubProvider
+            username={username}
+            repoCount={userData.public_repos}
+            gistCount={userData.public_gists}
+          >
+            <TabWrapper />
+          </GithubProvider>
+        </>
       );
     } else {
       return <div>Error fetching user profile. Please try again later.</div>;

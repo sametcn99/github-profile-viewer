@@ -6,11 +6,12 @@ import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import FilterBar from "./FilterBar";
 import ReposCard from "./ReposCard";
 import { VList } from "virtua";
+import Loading from "@/app/loading";
 
 type SetSelectedFunction = (value: string) => void;
 
 export default function Repositories() {
-  const { repos } = useContext(GithubContext);
+  const { repos, loading } = useContext(GithubContext);
   const [sort, setSort] = useState("Stars Descending");
   const [filterValue, setFilterValue] = useState("");
   const [selectedTopic, setSelectedTopic] = useState(""); // Add state for selected topic
@@ -148,6 +149,11 @@ export default function Repositories() {
           selectedLicense={selectedLicense}
           setSelectedLicense={setSelectedLicense}
         />
+        {loading && (
+          <Box className="flex w-full items-center justify-center">
+            <Loading />
+          </Box>
+        )}
         <VList
           style={{
             height: "85vh",
