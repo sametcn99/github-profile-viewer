@@ -36,16 +36,24 @@ export const GithubProvider = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          `${getSiteUrl()}/api/new?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}`,
+        const timeoutPromise = new Promise(
+          (_, reject) => setTimeout(() => reject(new Error("Timeout")), 100000), // 10 seconds timeout
         );
-        const data = await response.json();
-        setRepos(data.repos);
-        setGists(data.gists);
-        setLoading(false); // Set loading to false when data is successfully fetched
-        console.log(data);
+
+        const apiCallPromise = fetch(
+          `${getSiteUrl()}/api/new?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
+        ).then((response) => response.json());
+
+        const data = await Promise.race([apiCallPromise, timeoutPromise]);
+
+        if (data) {
+          setRepos(data.repos);
+          setGists(data.gists);
+          setLoading(false);
+          console.log(data);
+        }
       } catch (error) {
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false);
         console.error("Error fetching GitHub data:", error);
       }
     };

@@ -8,6 +8,8 @@ export async function GET(request: NextRequest) {
   const option = nextUrl.searchParams.get("option");
   const repoCount = nextUrl.searchParams.get("repoCount");
   const gistCount = nextUrl.searchParams.get("gistCount");
+  const chunk = nextUrl.searchParams.get("chunk");
+  const page = nextUrl.searchParams.get("page");
   let auth;
 
   let octokit = new Octokit({
@@ -46,14 +48,19 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    let repos = 0;
-    let gists = 0;
+    let repos = Number(repoCount);
+    let gists = Number(gistCount);
     let repoData: any[] = [];
     let gistData: any[] = [];
     let profile;
-    if (username && option === "repos" && repoCount && gistCount) {
-      repos = Number(repoCount);
-      gists = Number(gistCount);
+
+    if (
+      username &&
+      option === "repos" &&
+      repoCount &&
+      gistCount &&
+      chunk === "false"
+    ) {
       // Use Promise.all to fetch data for both repositories and gists concurrently
       const [repoResponses, gistResponses] = await Promise.all([
         // Fetch repository data
@@ -89,6 +96,13 @@ export async function GET(request: NextRequest) {
         (accumulator: any[], response) => accumulator.concat(response.data),
         [],
       );
+    } else if (
+      username &&
+      option === "repos" &&
+      chunk === "true" &&
+      repoCount &&
+      gistCount
+    ) {
     } else if (option === "profile" && username) {
       const profileResponse = await octokit.rest.users.getByUsername({
         username: username,
