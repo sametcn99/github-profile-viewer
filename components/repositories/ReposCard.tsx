@@ -29,7 +29,11 @@ export default function ReposCard({
       <Box className="flex flex-row gap-4 ">
         <Box className="flex w-full flex-row items-center justify-between gap-2">
           <Box className="flex w-full flex-row  items-center gap-2 break-all text-start">
-            <Heading>{repo.name}</Heading>
+            <Heading>
+              <Link href={repo.html_url} target="_blank">
+                {repo.name}
+              </Link>
+            </Heading>
             <Box className="flex w-fit flex-row flex-wrap items-center justify-start gap-2">
               {repo.fork && (
                 <Tooltip content="Forked Repo">

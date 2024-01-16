@@ -89,7 +89,13 @@ const Gists = () => {
                     <Box className="flex flex-row flex-wrap items-start justify-start gap-2 break-all text-start">
                       <Box className="flex flex-col gap-2 break-all">
                         {Object.keys(gist.files).map((filename, index) => (
-                          <Text key={index}>{filename}</Text>
+                          <Link
+                            key={index}
+                            href={gist.html_url}
+                            target="_blank"
+                          >
+                            {filename}
+                          </Link>
                         ))}
                       </Box>
                     </Box>
