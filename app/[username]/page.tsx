@@ -22,35 +22,35 @@ export async function generateMetadata(
       `${getSiteUrl()}/api/github?username=${username}&option=profile`,
     );
     const data = await response.json();
-    const userData = data.profile;
+    const userData: UserData = data.profile;
     if (userData) {
       return {
-        title: userData.login,
-        description: userData.bio,
+        title: userData.login ?? "Default Title",
+        description: userData.bio ?? "",
         icons: [userData.avatar_url],
         metadataBase: new URL(`${getSiteUrl()}`),
         robots: "index, follow",
         twitter: {
-          site: "@" + userData.twitter_username,
-          title: userData.login,
-          description: userData.bio,
+          site: "@" + (userData.twitter_username ?? ""),
+          title: userData.login ?? "Default Title",
+          description: userData.bio ?? "",
           card: "summary_large_image",
           images: [userData.avatar_url],
-          siteId: "@" + userData.twitter_username,
-          creator: userData.twitter_username,
-          creatorId: userData.twitter_username,
+          siteId: "@" + (userData.twitter_username ?? ""),
+          creator: userData.twitter_username ?? "",
+          creatorId: userData.twitter_username ?? "",
         },
 
         openGraph: {
-          title: userData.login,
-          description: userData.bio,
+          title: userData.login ?? "Default Title",
+          description: userData.bio ?? "",
           type: "profile",
           url: `/user/${username}`,
           images: [userData.avatar_url],
           locale: "en_US",
           siteName: "GitHub Profile Viewer",
-          emails: [userData.email],
-          username: userData.login,
+          emails: [userData.email ?? ""],
+          username: userData.login ?? "",
         },
       };
     }
@@ -63,7 +63,6 @@ export async function generateMetadata(
 }
 
 // Main function to fetch user page and render components
-
 export default async function fetchUserPage(searchParams: SearchParams) {
   try {
     const username = searchParams.params.username;
