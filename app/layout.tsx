@@ -7,29 +7,55 @@ import "@radix-ui/themes/styles.css";
 const inter = Inter({ subsets: ["latin"] });
 import { Theme } from "@radix-ui/themes";
 import Navbar from "../components/Navbar";
+import { getSiteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`${getSiteUrl()}`),
   title: {
     template: "%s | GPV",
     default: "Github Profile Viewer",
   },
   description:
-    "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information",
+    "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
   applicationName: "Github Profile Viewer",
   keywords: "github profile viewer, github stats, github profile",
   creator: "sametcn99",
+  publisher: "sametcn99",
+  robots: "index, follow",
+  openGraph: {
+    title: {
+      template: "%s | GPV",
+      default: "Github Profile Viewer",
+    },
+    description:
+      "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
+    type: "website",
+    url: `${getSiteUrl()}`,
+    images: ["/favicon.png"],
+    locale: "en_US",
+    siteName: "Github Profile Viewer",
+    emails: "sametcn99@gmail.com",
+  },
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
     apple: "/favicon.png",
+    username: "sametcn99",
+  },
+  twitter: {
+    site: "Github Profile Viewer",
+    title: "Github Profile Viewer",
+    description:
+      "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
+    card: "summary_large_image",
+    images: ["/favicon.png"],
+    creator: "sametcn99",
+    creatorId: "@sametcn99",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "black" }],
   width: "device-width",
   initialScale: 1,
   userScalable: true,

@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import { GitHubRepo, SocialLink, UserData } from "@/types/types";
 import { GithubProvider } from "../context/context";
 import TabWrapper from "./components/TabWrapper";
+import { Metadata } from "next";
 
 interface SearchParams {
   params: {
@@ -14,7 +15,7 @@ interface SearchParams {
 // Function to generate page metadata
 export async function generateMetadata(
   searchParams: SearchParams,
-): Promise<{ title: string }> {
+): Promise<Metadata> {
   try {
     const username = searchParams.params.username;
     const response = await fetch(
@@ -25,6 +26,32 @@ export async function generateMetadata(
     if (userData) {
       return {
         title: userData.login,
+        description: userData.bio,
+        icons: [userData.avatar_url],
+        metadataBase: new URL(`${getSiteUrl()}`),
+        robots: "index, follow",
+        twitter: {
+          site: "@" + userData.twitter_username,
+          title: userData.login,
+          description: userData.bio,
+          card: "summary_large_image",
+          images: [userData.avatar_url],
+          siteId: "@" + userData.twitter_username,
+          creator: userData.twitter_username,
+          creatorId: userData.twitter_username,
+        },
+
+        openGraph: {
+          title: userData.login,
+          description: userData.bio,
+          type: "profile",
+          url: `/user/${username}`,
+          images: [userData.avatar_url],
+          locale: "en_US",
+          siteName: "GitHub Profile Viewer",
+          emails: [userData.email],
+          username: userData.login,
+        },
       };
     }
   } catch (error) {
