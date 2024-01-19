@@ -14,6 +14,7 @@ import {
 import Readme from "../Readme";
 import { languageIcons } from "./LanguageIcons";
 import { GitHubRepo } from "@/types/types";
+import { GoLaw } from "react-icons/go";
 
 interface ReposCardProps {
   repo: GitHubRepo;
@@ -58,7 +59,9 @@ export default function ReposCard({
                 <Box className="flex flex-row items-center gap-2">
                   <Readme
                     url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
-                  />
+                  >
+                    <span></span>
+                  </Readme>
                 </Box>
               </Tooltip>
               {repo.stargazers_count > 0 && (
@@ -115,7 +118,7 @@ export default function ReposCard({
                 : "flex flex-row items-center gap-2 font-thin hover:cursor-pointer"
             }
           >
-            {repo.license?.spdx_id}
+            <GoLaw /> {repo.license?.spdx_id}
           </Text>
           {repo.language && (
             <>

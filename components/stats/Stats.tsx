@@ -54,68 +54,63 @@ export default function Stats() {
     }),
   );
   return (
-    <>
-      <Card>
-        <Flex gap="4" direction="column">
-          <Heading size="7">Repository Statistics</Heading>
-          <Text>
-            These statistics are calculated using the data from the GitHub API.
-          </Text>
-          {loading && (
-            <Box className="flex w-full items-center justify-center">
-              <Loading />
-            </Box>
-          )}
-          {!loading && (
-            <>
-              <Text>Total Stars: {formatNumber(totalStars)}</Text>
-              <Text>Total Repositories: {totalRepos}</Text>
-              <Text>Total Gists: {gists.length}</Text>
-              <Text>Total Forks: {totalForks}</Text>
-              <Text>
-                Average Stars Per Repository: {averageStarsPerRepo.toFixed(2)}
-              </Text>
-              {language.length > 0 && (
-                <Languages language={language} count={count} />
-              )}
-              {Object.values(licenses).length > 0 && (
-                <Licenses licenses={licenses} count={Object.values(licenses)} />
-              )}
-              {topTopics && <Topics topTopics={topTopics} />}
-              {statsData.length > 0 && <CreationDate statsData={statsData} />}
-              {gistStatsData.length > 0 && (
-                <GistCreationDate statsData={gistStatsData} />
-              )}
-              {mostStarredRepo && (
-                <Box>
-                  <Text>Most Starred Repository</Text>
-                  <Repository repo={mostStarredRepo} />
-                </Box>
-              )}
+    <Card>
+      <Flex gap="4" direction="column">
+        <Heading size="7">Repository Statistics</Heading>
+        {loading && (
+          <Box className="flex w-full items-center justify-center">
+            <Loading />
+          </Box>
+        )}
+        {!loading && (
+          <>
+            <Text>Total Stars: {formatNumber(totalStars)}</Text>
+            <Text>Total Repositories: {totalRepos}</Text>
+            <Text>Total Gists: {gists.length}</Text>
+            <Text>Total Forks: {totalForks}</Text>
+            <Text>
+              Average Stars Per Repository: {averageStarsPerRepo.toFixed(2)}
+            </Text>
+            {language.length > 0 && (
+              <Languages language={language} count={count} />
+            )}
+            {Object.values(licenses).length > 0 && (
+              <Licenses licenses={licenses} count={Object.values(licenses)} />
+            )}
+            {topTopics && <Topics topTopics={topTopics} />}
+            {statsData.length > 0 && <CreationDate statsData={statsData} />}
+            {gistStatsData.length > 0 && (
+              <GistCreationDate statsData={gistStatsData} />
+            )}
+            {mostStarredRepo && (
+              <Box>
+                <Text>Most Starred Repository</Text>
+                <Repository repo={mostStarredRepo} />
+              </Box>
+            )}
 
-              {oldestRepo && (
-                <Box>
-                  <Text>Oldest Repository</Text>
-                  {oldestRepo && <Repository repo={oldestRepo} />}
-                </Box>
-              )}
-              {latestUpdatedRepo && (
-                <Box className="header-wrapper">
-                  <Text>Latest Updated Repository</Text>
-                  <Repository repo={latestUpdatedRepo} />
-                </Box>
-              )}
-              {updatePeriod && (
-                <Box className="header-wrapper">
-                  <Text>Longest Update Period</Text>
-                  <Repository repo={updatePeriod} />
-                </Box>
-              )}
-              <DownloadData />
-            </>
-          )}
-        </Flex>
-      </Card>
-    </>
+            {oldestRepo && (
+              <Box>
+                <Text>Oldest Repository</Text>
+                {oldestRepo && <Repository repo={oldestRepo} />}
+              </Box>
+            )}
+            {latestUpdatedRepo && (
+              <Box className="header-wrapper">
+                <Text>Latest Updated Repository</Text>
+                <Repository repo={latestUpdatedRepo} />
+              </Box>
+            )}
+            {updatePeriod && (
+              <Box className="header-wrapper">
+                <Text>Longest Update Period</Text>
+                <Repository repo={updatePeriod} />
+              </Box>
+            )}
+            <DownloadData />
+          </>
+        )}
+      </Flex>
+    </Card>
   );
 }

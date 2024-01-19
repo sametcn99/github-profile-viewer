@@ -1,3 +1,9 @@
+/**
+ * Type definition for a GitHub repository.
+ * Contains details like id, name, stargazer count, URLs,
+ * creation/update dates, topics, license info, language,
+ * file list, owner details, and other metadata.
+ */
 export type GitHubRepo = {
   id: number;
   name: string;
@@ -20,9 +26,14 @@ export type GitHubRepo = {
   license_spdx_id: string;
   files: string[];
   owner: any;
-  [key: string]: any; // Index signature for dynamic properties
+  [key: string]: any;
 };
 
+/**
+ * UserData type definition for a GitHub user.
+ * Contains details like name, login, avatar,
+ * URLs, follower counts, etc.
+ */
 export type UserData = {
   login: string;
   id: number;
@@ -58,6 +69,7 @@ export type UserData = {
   updated_at: string;
 };
 
+/** SocialLink type definition for social media links associated with a GitHub user profile. */
 type SocialLink = {
   provider: string;
   url: string;

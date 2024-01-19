@@ -3,9 +3,17 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { sortByKeyDescending } from "./utils/sort";
 
+/**
+ * Merges Tailwind CSS classes generated with clsx into a single
+ * class string, to avoid long lists of classes.
+ *
+ * @param inputs List of class values to merge
+ * @returns Merged class string
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
 export const getSiteUrl = () => {
   // Dynamically generate the site URL based on the environment in which the page is running.
 
@@ -72,6 +80,12 @@ export async function fetchContact(
   }
 }
 
+/**
+ * Formats a number by adding "." separators for thousands if the number is >= 1000.
+ * Otherwise returns the number unchanged.
+ * @param number - The number to potentially format
+ * @returns The formatted number string or the original number
+ */
 export function formatNumber(number: number) {
   if (number >= 1000) {
     const formattedNumber = number

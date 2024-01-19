@@ -28,7 +28,6 @@ export default function DownloadData() {
 
   return (
     <Box className="flex flex-col gap-3">
-      <Heading className="ml-3">Additional Feature</Heading>
       <Button onClick={downloadRepos} className="hover:cursor-pointer">
         Download Repositories
       </Button>

@@ -14,16 +14,11 @@ import {
 import Readme from "../Readme";
 import { languageIcons } from "./LanguageIcons";
 import { GitHubRepo } from "@/types/types";
+import { GoLaw } from "react-icons/go";
 
-export default function Repository({
-  repo,
-  index,
-}: {
-  repo: GitHubRepo;
-  index: number;
-}) {
+export default function Repository({ repo }: { repo: GitHubRepo }) {
   return (
-    <Card key={index}>
+    <Card>
       <Box className="flex flex-row gap-4 ">
         <Box className="flex w-full flex-row items-center justify-between gap-2">
           <Box className="flex w-full flex-row  items-center gap-2 break-all text-start">
@@ -44,7 +39,9 @@ export default function Repository({
                 <Box className="flex flex-row items-center gap-2">
                   <Readme
                     url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
-                  />
+                  >
+                    <span></span>
+                  </Readme>
                 </Box>
               </Tooltip>
               {repo.stargazers_count > 0 && (
@@ -94,7 +91,7 @@ export default function Repository({
       <Box className="flex flex-col items-start">
         <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
           <Text className={"flex flex-row items-center gap-2 font-thin "}>
-            {repo.license?.spdx_id}
+            <GoLaw /> {repo.license?.spdx_id}
           </Text>
           {repo.language && (
             <>

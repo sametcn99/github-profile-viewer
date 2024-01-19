@@ -7,10 +7,11 @@ import { FaReadme } from "react-icons/fa6";
 // Define the props type for the Readme component
 interface ReadmeProps {
   url: string;
+  children: any;
 }
 
 // The Readme component fetches and displays the content of a README.md file from a provided URL.
-export default function Readme({ url }: ReadmeProps) {
+export default function Readme({ url, children }: ReadmeProps) {
   // State to hold the content of the README file
   const [content, setContent] = useState<string | null>(null);
   // State to track if there was an error fetching the README file
@@ -56,6 +57,7 @@ export default function Readme({ url }: ReadmeProps) {
           <Dialog.Trigger className="dialog-trigger">
             <Box>
               <FaReadme size={22} />
+              {children}
             </Box>
           </Dialog.Trigger>
           <Dialog.Content>

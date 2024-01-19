@@ -18,7 +18,7 @@ import { VList } from "virtua";
 import { FaUser } from "react-icons/fa6";
 import { BsInfoCircleFill } from "react-icons/bs";
 
-export default function FollowersOrFollowings({
+export default function ContactList({
   username,
   option,
   count,

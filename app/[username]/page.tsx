@@ -1,10 +1,9 @@
-// fetchUserPage.js
 import { getSiteUrl } from "@/lib/utils";
-import Header from "./components/Header/Header";
-import { GitHubRepo, SocialLink, UserData } from "@/types/types";
+import { UserData } from "@/types/types";
 import { GithubProvider } from "../context/context";
-import TabWrapper from "./components/TabWrapper";
+import TabWrapper from "../../components/TabWrapper";
 import { Metadata } from "next";
+import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 interface SearchParams {
   params: {
@@ -80,7 +79,7 @@ export default async function fetchUserPage(searchParams: SearchParams) {
     if (userData) {
       return (
         <>
-          <Header userData={userData} />
+          <ProfileCard userData={userData} />
           <GithubProvider
             username={username}
             repoCount={userData.public_repos}
