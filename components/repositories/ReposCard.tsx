@@ -13,6 +13,18 @@ import {
 } from "@radix-ui/themes";
 import Readme from "../Readme";
 import { languageIcons } from "./LanguageIcons";
+import { GitHubRepo } from "@/types/types";
+
+interface ReposCardProps {
+  repo: GitHubRepo;
+  index: number;
+  selectedLanguage: string;
+  selectedLicense: string;
+  selectedTopic: string;
+  handleTopicClick: (topic: string) => void;
+  handleLanguageClick: (language: string) => void;
+  handleLicenseClick: (license: string) => void;
+}
 
 export default function ReposCard({
   repo,
@@ -23,7 +35,7 @@ export default function ReposCard({
   handleTopicClick,
   handleLanguageClick,
   handleLicenseClick,
-}: any) {
+}: ReposCardProps) {
   return (
     <Card key={index}>
       <Box className="flex flex-row gap-4 ">
@@ -78,12 +90,9 @@ export default function ReposCard({
                     Github.DEV
                   </Link>
                 </DropdownMenu.Item>
-                {repo.home_page && (
+                {repo.homepage && (
                   <DropdownMenu.Item>
-                    <Link
-                      href={repo.home_page.replace("github.com", "github.dev")}
-                      target="_blank"
-                    >
+                    <Link href={repo.homepage} target="_blank">
                       Website
                     </Link>
                   </DropdownMenu.Item>

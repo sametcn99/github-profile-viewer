@@ -13,7 +13,15 @@ import {
 } from "@radix-ui/themes";
 import Readme from "../Readme";
 import { languageIcons } from "./LanguageIcons";
-export default function Repository({ repo, index }: any) {
+import { GitHubRepo } from "@/types/types";
+
+export default function Repository({
+  repo,
+  index,
+}: {
+  repo: GitHubRepo;
+  index: number;
+}) {
   return (
     <Card key={index}>
       <Box className="flex flex-row gap-4 ">
@@ -68,12 +76,9 @@ export default function Repository({ repo, index }: any) {
                     Github.DEV
                   </Link>
                 </DropdownMenu.Item>
-                {repo.home_page && (
+                {repo.homepage && (
                   <DropdownMenu.Item>
-                    <Link
-                      href={repo.home_page.replace("github.com", "github.dev")}
-                      target="_blank"
-                    >
+                    <Link href={repo.homepage} target="_blank">
                       Website
                     </Link>
                   </DropdownMenu.Item>
