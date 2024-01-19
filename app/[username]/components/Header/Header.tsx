@@ -106,25 +106,31 @@ export default function Header({ userData }: HeaderProps) {
           </Link>
         )}
         {userData.company && (
-          <Link
-            target="_blank"
-            href={
-              userData.company.startsWith("@")
-                ? `https://github.com/${userData.company.replace("@", "")}`
-                : ""
-            }
-            title={
-              userData.company.startsWith("@")
-                ? userData.company.replace("@", "")
-                : userData.company
-            }
-            className="dialog-trigger"
-          >
-            <MdOutlineWorkOutline />
-            {userData.company.startsWith("@")
-              ? userData.company.replace("@", "")
-              : userData.company}
-          </Link>
+          <>
+            {userData.company.split(", ").map((comp) => {
+              if (comp.startsWith("@")) {
+                const name = comp.slice(1);
+                return (
+                  <Link
+                    key={name}
+                    href={`https://github.com/${name}`}
+                    target="_blank"
+                    className="flex flex-row items-center gap-2"
+                  >
+                    <MdOutlineWorkOutline /> @{name}
+                  </Link>
+                );
+              } else {
+                return (
+                  <span key={comp}>
+                    {" "}
+                    <MdOutlineWorkOutline />
+                    {comp}
+                  </span>
+                );
+              }
+            })}
+          </>
         )}
         {userData.twitter_username && (
           <Link
