@@ -47,7 +47,7 @@ export async function fetchContact(
     console.log(url);
 
     // Fetch data from the server using the provided username, option, and page number
-    const response = await fetch(url, { signal });
+    const response = await fetch(url, { signal, next: { revalidate: 1000 } });
 
     // Check if the response is successful; otherwise, throw an error
     if (!response.ok) {

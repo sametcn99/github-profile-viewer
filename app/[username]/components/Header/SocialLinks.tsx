@@ -16,7 +16,7 @@ export default function SocialLinks({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, { next: { revalidate: 1000 } });
         if (!response.ok) {
           throw new Error(`HTTP error! Status code: ${response.status}`);
         }

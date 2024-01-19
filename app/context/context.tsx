@@ -37,6 +37,9 @@ export const GithubProvider = ({
       try {
         const response = await fetch(
           `/api/github?username=${username}&option=repos&repoCount=${repoCount}&gistCount=${gistCount}&chunk=false`,
+          {
+            next: { revalidate: 1000 },
+          },
         );
         const data = await response.json();
         if (data) {
