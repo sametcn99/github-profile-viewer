@@ -31,15 +31,15 @@ export const metadata: Metadata = {
       "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
     type: "website",
     url: getSiteUrl(),
-    images: ["/favicon.png"],
+    images: ["/icons/icon512.png"],
     locale: "en_US",
     siteName: "Github Profile Viewer",
     emails: "sametcn99@gmail.com",
   },
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/icons/icon512.png",
+    shortcut: "/icons/icon512.png",
+    apple: "/icons/icon512.png",
     username: "sametcn99",
   },
   twitter: {
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     description:
       "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
     card: "summary_large_image",
-    images: ["/favicon.png"],
+    images: ["/icons/icon512.png"],
     creator: "sametcn99",
     creatorId: "@sametcn99",
   },
