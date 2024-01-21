@@ -90,7 +90,7 @@ export function formatNumber(number: number) {
   if (number >= 1000) {
     const formattedNumber = number
       .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     return formattedNumber;
   } else {
     return number;
