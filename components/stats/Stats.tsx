@@ -18,7 +18,7 @@ import { useContext } from "react";
 import Repository from "../repositories/Repository";
 import "@/app/globals.css";
 import { formatNumber } from "@/lib/utils";
-import { Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
+import { Box, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import Licenses from "./Licenses";
 import Topics from "./Topics";
 import Languages from "./Languages";
@@ -64,13 +64,48 @@ export default function Stats() {
         )}
         {!loading && (
           <>
-            <Text>Total Stars: {formatNumber(totalStars)}</Text>
-            <Text>Total Repositories: {totalRepos}</Text>
-            <Text>Total Gists: {gists.length}</Text>
-            <Text>Total Forks: {totalForks}</Text>
-            <Text>
-              Average Stars Per Repository: {averageStarsPerRepo.toFixed(2)}
-            </Text>
+            <Card>
+              <Grid
+                columns="2"
+                width="auto"
+                className="rounded-xl p-2 hover:bg-black/30"
+              >
+                <Heading size="4">Total Repositories</Heading>
+                <Text>{totalRepos}</Text>
+              </Grid>
+              <Grid
+                columns="2"
+                width="auto"
+                className="rounded-xl p-2 hover:bg-black/30"
+              >
+                <Heading size="4">Total Gists</Heading>
+                <Text>{gists.length}</Text>
+              </Grid>
+              <Grid
+                columns="2"
+                width="auto"
+                className="rounded-xl p-2 hover:bg-black/30"
+              >
+                <Heading size="4">Total Forks</Heading>
+                <Text>{totalForks}</Text>
+              </Grid>
+              <Grid
+                columns="2"
+                width="auto"
+                className="rounded-xl p-2 hover:bg-black/30"
+              >
+                <Heading size="4">Total Stars</Heading>
+                <Text>{formatNumber(totalStars)}</Text>
+              </Grid>
+              <Grid
+                columns="2"
+                width="auto"
+                className="rounded-xl p-2 hover:bg-black/30"
+              >
+                <Heading size="4">Average Stars Per Repository</Heading>
+                <Text>{averageStarsPerRepo.toFixed(2)}</Text>
+              </Grid>
+            </Card>
             {language.length > 0 && (
               <Languages language={language} count={count} />
             )}
