@@ -1,5 +1,5 @@
 "use client";
-import Gists from "@/components/Gists";
+import Gists from "@/components/Gists/Gists";
 import Repositories from "@/components/repositories/Repositories";
 import Stats from "@/components/stats/Stats";
 import { Box, Tabs } from "@radix-ui/themes";
