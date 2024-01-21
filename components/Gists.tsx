@@ -15,7 +15,7 @@ const Gists = () => {
   // State to store GitHub API data
   const { gists, loading } = useContext(GithubContext);
   const [filterValue, setFilterValue] = useState("");
-  const [sort, setSort] = useState("updated");
+  const [sort, setSort] = useState("Updated Descending");
 
   const filteredAndSortedGists = useMemo(() => {
     const filteredGists = gists
