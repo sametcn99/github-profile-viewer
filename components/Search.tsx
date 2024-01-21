@@ -106,8 +106,7 @@ export default function SearchBar() {
           </Dialog.Close>
         </Dialog.Title>
 
-        <Flex gap="3" mt="4" justify="end"></Flex>
-        <section className="static flex w-[15rem] flex-col items-center justify-center gap-5 md:w-[25rem] ">
+        <Box className="static flex flex-col items-center justify-center gap-5 ">
           <Box className="flex w-full flex-row items-center justify-between gap-3">
             <TextField.Root size="3" className="w-full" aria-label="Search">
               <TextField.Input
@@ -161,7 +160,7 @@ export default function SearchBar() {
                 </Link>
               ))}
           </VList>
-        </section>
+        </Box>
       </Dialog.Content>
     </Dialog.Root>
   );

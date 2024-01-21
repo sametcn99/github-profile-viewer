@@ -14,15 +14,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getSiteUrl = () => {
+export const getSiteUrl = (): string => {
   // Dynamically generate the site URL based on the environment in which the page is running.
 
   // Check if the environment is production.
-  const isProduction = process.env.NODE_ENV === "production";
+  const isProduction: boolean = process.env.NODE_ENV === "production";
 
   // Define the base URL for both production and local development environments.
-  const baseUrl = isProduction
-    ? process.env.NEXT_PUBLIC_URL
+  const baseUrl: string = isProduction
+    ? process.env.NEXT_PUBLIC_URL || ""
     : "http://localhost:3000";
 
   // Return the appropriate base URL based on the environment.

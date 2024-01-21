@@ -20,7 +20,7 @@ export async function generateMetadata(
     const response = await fetch(
       `${getSiteUrl()}/api/github?username=${username}&option=profile`,
       {
-        next: { revalidate: 1000 },
+        cache: "no-store",
       },
     );
     const data = await response.json();
@@ -71,7 +71,7 @@ export default async function fetchUserPage(searchParams: SearchParams) {
     const response = await fetch(
       `${getSiteUrl()}/api/github?username=${username}&option=profile`,
       {
-        next: { revalidate: 1000 },
+        cache: "no-store",
       },
     );
     const data = await response.json();

@@ -10,7 +10,7 @@ import Navbar from "../components/Navbar";
 import { getSiteUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(`${getSiteUrl()}`),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     template: "%s | GPV",
     default: "Github Profile Viewer",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description:
       "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
     type: "website",
-    url: `${getSiteUrl()}`,
+    url: getSiteUrl(),
     images: ["/favicon.png"],
     locale: "en_US",
     siteName: "Github Profile Viewer",
