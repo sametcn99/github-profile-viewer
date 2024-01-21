@@ -61,7 +61,11 @@ export default function Rate() {
 
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button variant="soft" color="gray">
+            <Button
+              variant="soft"
+              color="gray"
+              className="hover:cursor-pointer"
+            >
               Close
             </Button>
           </Dialog.Close>
