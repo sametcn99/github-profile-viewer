@@ -25,13 +25,13 @@ export default function SearchBar() {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const router = useRouter();
 
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       searchHandle();
     }
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
@@ -142,7 +142,7 @@ export default function SearchBar() {
           <VList style={{ height: 400 }}>
             {data &&
               data?.length > 0 &&
-              filteredData.map((item: any, index: number) => (
+              filteredData.map((item: UserData, index: number) => (
                 <Link
                   href={`/${item.login}`}
                   key={index}

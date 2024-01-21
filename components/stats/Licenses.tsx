@@ -8,7 +8,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
-export default function Licenses({ licenses, count }: any) {
+interface LicensesProps {
+  licenses: {
+    [key: string]: number;
+  };
+  count: number[];
+}
+
+export default function Licenses({ licenses, count }: LicensesProps) {
   return (
     <Card>
       <Heading className="ml-3">Top 5 Licenses</Heading>

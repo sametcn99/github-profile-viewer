@@ -8,6 +8,7 @@ import { FaGithub } from "react-icons/fa";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import { VList } from "virtua";
 import Loading from "@/app/loading";
+import { GitHubRepo } from "@/types/types";
 
 // Gistss component
 const Gists = () => {
@@ -19,7 +20,7 @@ const Gists = () => {
   const filteredAndSortedGists = useMemo(() => {
     const filteredGists = gists
       ? gists.filter(
-          (gist: any) =>
+          (gist: GitHubRepo) =>
             gist.files &&
             Object.keys(gist.files).some((filename) =>
               filename.toLowerCase().includes(filterValue.toLowerCase()),

@@ -1,5 +1,23 @@
 import FilterInput from "../FilterInput";
 import { Box, Button, DropdownMenu } from "@radix-ui/themes";
+
+interface FilterBarProps {
+  setFilterValue: (value: string) => void;
+  sort: string;
+  setSort: (value: string) => void;
+  selectedLanguage: string;
+  setSelectedLanguage: (value: string) => void;
+  uniqueLanguages: string[];
+  selectedTopic: string;
+  setSelectedTopic: (value: string) => void;
+  uniqueTopics: string[];
+  selectedFilter: string;
+  setSelectedFilter: (value: string) => void;
+  selectedLicense: string;
+  setSelectedLicense: (value: string) => void;
+  uniqueLicenses: string[];
+}
+
 export default function FilterBar({
   setFilterValue,
   sort,
@@ -15,11 +33,11 @@ export default function FilterBar({
   selectedLicense,
   setSelectedLicense,
   uniqueLicenses,
-}: any) {
+}: FilterBarProps) {
   return (
     <Box className="flex w-full flex-row flex-wrap items-center justify-between gap-3">
       <FilterInput setFilterValue={setFilterValue} />
-      <Box className="mx-auto flex flex-row  flex-wrap items-center justify-center ">
+      <Box className="mx-auto flex flex-row flex-wrap items-center justify-center ">
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
             <Button className="hover:cursor-pointer">Sort By</Button>

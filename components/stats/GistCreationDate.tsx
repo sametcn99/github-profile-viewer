@@ -7,7 +7,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-export default function GistCreationDate({ statsData }: { statsData: any[] }) {
+interface StatsData {
+  category: string;
+  value: number;
+}
+
+interface Props {
+  statsData: StatsData[];
+}
+
+export default function GistCreationDate({ statsData }: Props) {
   return (
     <>
       <Card>
@@ -16,13 +25,13 @@ export default function GistCreationDate({ statsData }: { statsData: any[] }) {
           <LineChart
             xAxis={[
               {
-                data: statsData.map((d: any) => d.category.toString()),
-                valueFormatter: (date) => date.toString(),
+                data: statsData.map((d) => d.category.toString()),
+                valueFormatter: (date: string) => date.toString(),
               },
             ]}
             series={[
               {
-                data: statsData.map((d: any) => d.value),
+                data: statsData.map((d) => d.value),
                 area: true,
               },
             ]}

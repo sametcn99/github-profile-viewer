@@ -1,17 +1,8 @@
 import { GitHubRepo } from "@/types/types";
 
-export const sortByDateDesc = (property: string) => (a: any, b: any) =>
-  new Date(b[property]).getTime() - new Date(a[property]).getTime();
-
-/**
- * Sorts an array of GitHubRepo objects by the specified key in descending order.
- * @param data - The array of GitHubRepo objects to be sorted.
- * @param key - The key based on which the sorting will be performed.
- * @returns The array of GitHubRepo objects sorted by the specified key in descending order.
- */
 export function sortByKeyDescending<K extends keyof GitHubRepo>(
   data: GitHubRepo[],
-  key: K
+  key: K,
 ): GitHubRepo[] {
   return data.sort((a, b) => {
     if (b[key] > a[key]) {
@@ -31,7 +22,7 @@ export function sortByKeyDescending<K extends keyof GitHubRepo>(
  */
 export function sortByKeyAscending<K extends keyof GitHubRepo>(
   data: GitHubRepo[],
-  key: K
+  key: K,
 ): GitHubRepo[] {
   return data.sort((a, b) => {
     if (a[key] > b[key]) {

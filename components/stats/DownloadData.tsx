@@ -3,7 +3,7 @@ import { Box, Button, Heading } from "@radix-ui/themes";
 import React, { useContext } from "react";
 
 export default function DownloadData() {
-  const { repos, gists }: any = useContext(GithubContext);
+  const { repos, gists } = useContext(GithubContext);
 
   const download = (content: any, fileName: string, contentType: string) => {
     const a = document.createElement("a");

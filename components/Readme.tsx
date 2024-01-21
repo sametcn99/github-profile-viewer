@@ -7,7 +7,7 @@ import { FaReadme } from "react-icons/fa6";
 // Define the props type for the Readme component
 interface ReadmeProps {
   url: string;
-  children: any;
+  children: React.ReactNode;
 }
 
 // The Readme component fetches and displays the content of a README.md file from a provided URL.

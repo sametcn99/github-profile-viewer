@@ -7,6 +7,7 @@ import FilterBar from "./FilterBar";
 import ReposCard from "./ReposCard";
 import { VList } from "virtua";
 import Loading from "@/app/loading";
+import { GitHubRepo } from "@/types/types";
 
 type SetSelectedFunction = (value: string) => void;
 
@@ -102,7 +103,7 @@ export default function Repositories() {
 
   const uniqueLanguages = useMemo(() => {
     const languagesSet = new Set<string>();
-    filteredAndSortedRepos.forEach((repo: any) => {
+    filteredAndSortedRepos.forEach((repo: GitHubRepo) => {
       if (repo.language) {
         languagesSet.add(repo.language);
       }
@@ -112,7 +113,7 @@ export default function Repositories() {
 
   const uniqueLicenses = useMemo(() => {
     const licenseSet = new Set<string>();
-    filteredAndSortedRepos.forEach((repo: any) => {
+    filteredAndSortedRepos.forEach((repo: GitHubRepo) => {
       if (repo.license?.spdx_id) {
         licenseSet.add(repo.license.spdx_id);
       }
@@ -122,9 +123,9 @@ export default function Repositories() {
 
   const uniqueTopics = useMemo(() => {
     const topicSet = new Set<string>();
-    filteredAndSortedRepos.forEach((repo: any) => {
+    filteredAndSortedRepos.forEach((repo: GitHubRepo) => {
       if (Array.isArray(repo.topics)) {
-        repo.topics.forEach((topic: any) => topicSet.add(topic));
+        repo.topics.forEach((topic: string) => topicSet.add(topic));
       }
     });
     return Array.from(topicSet);

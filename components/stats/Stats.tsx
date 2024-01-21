@@ -27,7 +27,7 @@ import GistCreationDate from "./GistCreationDate";
 import DownloadData from "./DownloadData";
 
 export default function Stats() {
-  const { repos, loading, gists }: any = useContext(GithubContext);
+  const { repos, loading, gists } = useContext(GithubContext);
   const totalRepos = calculateTotalRepos(repos);
   const totalStars = calculateTotalStars(repos);
   const mostStarredRepo = findMostStarredRepo(repos);

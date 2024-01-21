@@ -1,6 +1,10 @@
 import { TextField } from "@radix-ui/themes";
 
-export default function FilterInput({ setFilterValue }: any) {
+export default function FilterInput({
+  setFilterValue,
+}: {
+  setFilterValue: (value: string) => void;
+}) {
   return (
     <div className="w-full">
       <TextField.Root>

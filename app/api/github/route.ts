@@ -1,3 +1,4 @@
+import { GitHubRepo } from "@/types/types";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { Octokit } from "octokit";
@@ -50,8 +51,8 @@ export async function GET(request: NextRequest) {
 
     let repos = Number(repoCount);
     let gists = Number(gistCount);
-    let repoData: any[] = [];
-    let gistData: any[] = [];
+    let repoData: GitHubRepo[] = [];
+    let gistData: GitHubRepo[] = [];
     let profile;
     let responseData;
     if (
