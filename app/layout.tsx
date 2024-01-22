@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 import { Theme } from "@radix-ui/themes";
 import Navbar from "../components/Navbar";
 import { getSiteUrl } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -85,6 +86,7 @@ export default function RootLayout({
           {/* <ThemePanel /> */}
         </Theme>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
