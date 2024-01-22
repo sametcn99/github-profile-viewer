@@ -1,6 +1,11 @@
+
 # Github Profile Viewer
 
 Welcome to the GitHub Profile Viewer, a dynamic web platform powered by Next.js and Radix UI. Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information. Discover a user's coding journey and contributions to the open-source community.
+
+<a href="https://chromewebstore.google.com/detail/gpv-opener/abgechjdbcnlcdcmhkaakobeoimjgkmb">
+  <img src="https://raw.githubusercontent.com/sametcn99/github-profile-viewer/master/public/icons/chrome-extension-dark.png" alt="Google Chrome Extension" width="200">
+</a>
 
 ## Key Features
 
