@@ -1,3 +1,4 @@
+"use client";
 import "@/app/globals.css";
 import { PieChart } from "@mui/x-charts/PieChart";
 import {
@@ -6,7 +7,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
+import {
+  Box,
+  Card,
+  Flex,
+  Heading,
+  ScrollArea,
+  Table,
+  Text,
+} from "@radix-ui/themes";
+import { useState } from "react";
+import FilterChart from "./FilterChart/FilterChart";
 
 export default function Languages({
   language,
@@ -23,10 +34,20 @@ export default function Languages({
 
   // Sort the combined array based on the count in descending order
   const sortedLanguageData = languageData.sort((a, b) => b.count - a.count);
+  const [length, setLength] = useState(5);
 
   return (
     <Card>
-      <Heading className="ml-3">Top 5 Languages</Heading>
+      <Heading className="ml-3">
+        <Flex gap="4">
+          <Text>Top {length} Languages</Text>
+          <FilterChart
+            maxLength={Object.keys(language).length}
+            length={length}
+            setLength={setLength}
+          />
+        </Flex>
+      </Heading>
       <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
         {sortedLanguageData.length > 0 && (
           <PieChart
@@ -37,11 +58,13 @@ export default function Languages({
             }}
             series={[
               {
-                data: sortedLanguageData.slice(0, 5).map((data, index) => ({
-                  id: index.toString(),
-                  value: Number(data.count),
-                  label: data.name,
-                })),
+                data: sortedLanguageData
+                  .slice(0, length)
+                  .map((data, index) => ({
+                    id: index.toString(),
+                    value: Number(data.count),
+                    label: data.name,
+                  })),
               },
             ]}
           />

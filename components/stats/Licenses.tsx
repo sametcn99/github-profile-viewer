@@ -1,3 +1,4 @@
+"use client";
 import "@/app/globals.css";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts/BarChart";
@@ -7,7 +8,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
+import {
+  Box,
+  Card,
+  Flex,
+  Heading,
+  ScrollArea,
+  Table,
+  Text,
+} from "@radix-ui/themes";
+import FilterChart from "./FilterChart/FilterChart";
+import { useState } from "react";
 interface LicensesProps {
   licenses: {
     [key: string]: number;
@@ -16,9 +27,19 @@ interface LicensesProps {
 }
 
 export default function Licenses({ licenses, count }: LicensesProps) {
+  const [length, setLength] = useState(5);
   return (
     <Card>
-      <Heading className="ml-3">Top 5 Licenses</Heading>
+      <Heading className="ml-3">
+        <Flex gap="4">
+          <Text>Top {length} Licenses</Text>
+          <FilterChart
+            maxLength={Object.keys(licenses).length}
+            length={length}
+            setLength={setLength}
+          />
+        </Flex>
+      </Heading>
       <Box className="block h-[20rem] w-full rounded-2xl bg-gray-400 md:hidden">
         <PieChart
           sx={{
@@ -29,7 +50,7 @@ export default function Licenses({ licenses, count }: LicensesProps) {
           series={[
             {
               data: Object.keys(licenses)
-                .slice(0, 5)
+                .slice(0, length)
                 .map((lang, index) => ({
                   id: index.toString(),
                   value: count[index],
@@ -48,13 +69,13 @@ export default function Licenses({ licenses, count }: LicensesProps) {
           xAxis={[
             {
               id: "barCategories",
-              data: Object.keys(licenses).slice(0, 5),
+              data: Object.keys(licenses).slice(0, length),
               scaleType: "band",
             },
           ]}
           series={[
             {
-              data: Object.values(licenses).slice(0, 5) as number[],
+              data: Object.values(licenses).slice(0, length) as number[],
             },
           ]}
         />

@@ -1,22 +1,43 @@
+"use client";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
+import {
+  Box,
+  Card,
+  Flex,
+  Heading,
+  ScrollArea,
+  Table,
+  Text,
+} from "@radix-ui/themes";
 import { BarChart } from "@mui/x-charts/BarChart";
+import FilterChart from "./FilterChart/FilterChart";
+import { useState } from "react";
 
 export default function Topics({
   topTopics,
 }: {
   topTopics: Record<string, number>;
 }) {
+  const [length, setLength] = useState(5);
   return (
     <>
       {Object.keys(topTopics).length > 0 && (
         <Card>
-          <Heading className="ml-3">Top 5 Topics</Heading>
+          <Heading className="ml-3 flex flex-row gap-4">
+            <Flex gap="4">
+              <Text> Top {length} Topics</Text>
+              <FilterChart
+                maxLength={Object.keys(topTopics).length}
+                length={length}
+                setLength={setLength}
+              />
+            </Flex>
+          </Heading>
           <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
             <BarChart
               xAxis={[
@@ -24,7 +45,7 @@ export default function Topics({
                   id: "barCategories",
                   data: Object.entries(topTopics)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 5)
+                    .slice(0, length)
                     .map(([topic, count]) => topic),
                   scaleType: "band",
                 },
@@ -33,7 +54,7 @@ export default function Topics({
                 {
                   data: Object.entries(topTopics)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 5)
+                    .slice(0, length)
                     .map(([topic, count]) => count),
                 },
               ]}
