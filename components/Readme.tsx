@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
-import { Box, Dialog } from "@radix-ui/themes";
+import { Box, Button, Dialog, Text } from "@radix-ui/themes";
 import { FaReadme } from "react-icons/fa6";
 
 // Define the props type for the Readme component
@@ -61,7 +61,20 @@ export default function Readme({ url, children }: ReadmeProps) {
             </Box>
           </Dialog.Trigger>
           <Dialog.Content>
-            <Dialog.Title>Readme.md</Dialog.Title>
+            <Dialog.Title className="flex w-full flex-row justify-between">
+              <Dialog.Close>
+                <Box className="flex w-full flex-row items-center justify-between gap-3">
+                  <Text>README.md</Text>
+                  <Button
+                    variant="soft"
+                    color="gray"
+                    className="hover:cursor-pointer"
+                  >
+                    Close
+                  </Button>
+                </Box>
+              </Dialog.Close>
+            </Dialog.Title>
             {/* Use MarkdownPreview to render the markdown content */}
             <MarkdownPreview source={content || "No content available."} />
           </Dialog.Content>

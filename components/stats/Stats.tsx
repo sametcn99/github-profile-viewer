@@ -119,26 +119,34 @@ export default function Stats() {
             )}
             {mostStarredRepo && (
               <Box>
-                <Text>Most Starred Repository</Text>
+                <Heading size="4" className="ml-2">
+                  Most Starred Repository
+                </Heading>
                 <Repository repo={mostStarredRepo} />
               </Box>
             )}
 
             {oldestRepo && (
               <Box>
-                <Text>Oldest Repository</Text>
+                <Heading size="4" className="ml-2">
+                  Oldest Repository
+                </Heading>
                 {oldestRepo && <Repository repo={oldestRepo} />}
               </Box>
             )}
             {latestUpdatedRepo && (
-              <Box className="header-wrapper">
-                <Text>Latest Updated Repository</Text>
+              <Box>
+                <Heading size="4" className="ml-2">
+                  Latest Updated Repository
+                </Heading>
                 <Repository repo={latestUpdatedRepo} />
               </Box>
             )}
             {updatePeriod && (
               <Box className="header-wrapper">
-                <Text>Longest Update Period</Text>
+                <Heading size="4" className="ml-2">
+                  Longest Update Period
+                </Heading>
                 <Repository repo={updatePeriod} />
               </Box>
             )}
