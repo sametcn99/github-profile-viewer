@@ -2,6 +2,8 @@ import { Section, Text } from "@radix-ui/themes";
 import Rate from "../components/Rate";
 import Link from "next/link";
 import Image from "next/image";
+import { Search } from "lucide-react";
+import SearchBar from "@/components/Search";
 
 export default function Home() {
   return (
@@ -16,6 +18,7 @@ export default function Home() {
           to the open-source community.
         </Text>
         <Rate />
+        <SearchBar className="w-44" />
         <Link
           href="https://chromewebstore.google.com/detail/gpv-opener/abgechjdbcnlcdcmhkaakobeoimjgkmb"
           target="_blank"

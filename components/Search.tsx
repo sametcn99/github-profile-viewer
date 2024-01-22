@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react"; // Import useState hook
 import { useRouter } from "next/navigation";
-import { getSiteUrl } from "@/lib/utils";
+import { cn, getSiteUrl } from "@/lib/utils";
 import { UserData } from "@/types/types";
 import {
   Link,
@@ -19,12 +19,11 @@ import { FaSearch } from "react-icons/fa";
 import { debounce } from "lodash";
 import { VList } from "virtua";
 
-export default function SearchBar() {
+export default function SearchBar({ className }: { className?: string }) {
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState<UserData[] | []>([]);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const router = useRouter();
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       searchHandle();
@@ -45,9 +44,9 @@ export default function SearchBar() {
       return;
     }
     try {
-      const response = await fetch(
-        `${getSiteUrl()}/api/github?option=search&username=${inputValue}`,
-      );
+      const url = `${getSiteUrl()}/api/github?option=search&username=${inputValue}`;
+      console.log(url);
+      const response = await fetch(url, { cache: "no-store" });
       if (!response.ok) {
         throw new Error(`HTTP error! Status code: ${response.status}`);
       }
@@ -63,9 +62,10 @@ export default function SearchBar() {
     return () => {
       fetchData.cancel();
     };
-  }, [fetchData, inputValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputValue]);
 
-  // Filtreleme işlevi
+  // Filter data
   const filteredData = useMemo(() => {
     return data.filter((item: UserData) => {
       const loginMatches = item.login
@@ -84,7 +84,7 @@ export default function SearchBar() {
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger className="hover:cursor-pointer">
+      <Dialog.Trigger className={cn("hover:cursor-pointer", className)}>
         <Button>
           <FaSearch />
           Search

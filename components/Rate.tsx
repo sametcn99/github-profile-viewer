@@ -10,6 +10,12 @@ export default function Rate() {
     remaining: 0,
     reset: 0,
   });
+  const [search, setSearch] = useState({
+    limit: 0,
+    used: 0,
+    remaining: 0,
+    reset: 0,
+  });
 
   const handleRate = async () => {
     try {
@@ -19,6 +25,7 @@ export default function Rate() {
       }
 
       const data = await response.json();
+      setSearch(data.data.resources.search);
       setRate(data.data.rate);
       console.log(`Fetched rate: ${data.data.rate}`);
     } catch (error) {
@@ -38,7 +45,20 @@ export default function Rate() {
       </Dialog.Trigger>
 
       <Dialog.Content style={{ maxWidth: 450 }}>
-        <Dialog.Title>API Rate</Dialog.Title>
+        <Dialog.Title>
+          <Flex justify="between">
+            <Text> API Rate</Text>
+            <Dialog.Close>
+              <Button
+                variant="soft"
+                color="gray"
+                className="hover:cursor-pointer"
+              >
+                Close
+              </Button>
+            </Dialog.Close>
+          </Flex>
+        </Dialog.Title>
         <Dialog.Description size="2" mb="4" className="flex flex-col">
           The current rate limit is based on anonymous access. However, if you
           surpass this limit, you can continue browsing uninterrupted through
@@ -50,26 +70,16 @@ export default function Rate() {
             Application rate limit is 5,000 requests per hour.
           </Text>
         </Dialog.Description>
-
-        <Flex direction="column" gap="3">
-          <JsonView
-            data={rate}
-            shouldExpandNode={allExpanded}
-            style={darkStyles}
-          />
-        </Flex>
-
-        <Flex gap="3" mt="4" justify="end">
-          <Dialog.Close>
-            <Button
-              variant="soft"
-              color="gray"
-              className="hover:cursor-pointer"
-            >
-              Close
-            </Button>
-          </Dialog.Close>
-        </Flex>
+        <JsonView
+          data={search}
+          shouldExpandNode={allExpanded}
+          style={darkStyles}
+        />
+        <JsonView
+          data={rate}
+          shouldExpandNode={allExpanded}
+          style={darkStyles}
+        />
       </Dialog.Content>
     </Dialog.Root>
   );
