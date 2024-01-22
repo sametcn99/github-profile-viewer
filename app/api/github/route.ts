@@ -21,6 +21,8 @@ export async function GET(request: NextRequest) {
   const chunk = searchParams.get("chunk");
   const page = Number(searchParams.get("page"));
 
+  let duration = Date.now();
+
   // Initialize Octokit instance
   let octokit = await createOctokitInstance();
 
@@ -70,7 +72,8 @@ export async function GET(request: NextRequest) {
           [],
         );
 
-        // Return JSON response with profile, repos, and gists data
+        duration = Date.now() - duration;
+        console.log(`${username}'s API response took ${duration}ms`); // Return JSON response with profile, repos, and gists data
         return NextResponse.json({
           repos: repoData,
           gists: gistData,
