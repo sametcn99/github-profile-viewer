@@ -34,7 +34,9 @@ export default function Languages({
 
   // Sort the combined array based on the count in descending order
   const sortedLanguageData = languageData.sort((a, b) => b.count - a.count);
-  const [length, setLength] = useState(5);
+  const [length, setLength] = useState(
+    Object.keys(language).length > 5 ? 5 : Object.keys(language).length,
+  );
 
   return (
     <Card>

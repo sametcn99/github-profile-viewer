@@ -23,7 +23,9 @@ export default function Topics({
 }: {
   topTopics: Record<string, number>;
 }) {
-  const [length, setLength] = useState(5);
+  const [length, setLength] = useState(
+    Object.keys(topTopics).length > 5 ? 5 : Object.keys(topTopics).length,
+  );
   return (
     <>
       {Object.keys(topTopics).length > 0 && (

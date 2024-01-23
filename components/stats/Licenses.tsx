@@ -27,7 +27,9 @@ interface LicensesProps {
 }
 
 export default function Licenses({ licenses, count }: LicensesProps) {
-  const [length, setLength] = useState(5);
+  const [length, setLength] = useState(
+    Object.keys(licenses).length > 5 ? 5 : Object.keys(licenses).length,
+  );
   return (
     <Card>
       <Heading className="ml-3">
