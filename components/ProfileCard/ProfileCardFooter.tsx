@@ -4,7 +4,7 @@ import { createUrlObject } from "@/lib/utils";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { BsTwitterX } from "react-icons/bs";
 import { TfiWorld } from "react-icons/tfi";
-import { Box, Link } from "@radix-ui/themes";
+import { Box, Link, Text } from "@radix-ui/themes";
 import Readme from "@/components/Readme";
 import ContactList from "./ContactList";
 export default function ProfileCardFooter({
@@ -49,7 +49,8 @@ export default function ProfileCardFooter({
                     target="_blank"
                     className="flex flex-row items-center gap-2"
                   >
-                    <MdOutlineWorkOutline /> @{name}
+                    <MdOutlineWorkOutline />
+                    <Text> @{name}</Text>
                   </Link>
                 );
               } else {
