@@ -29,6 +29,7 @@ export default function Home() {
             src="/icons/chrome-extension-dark.png"
             alt="GPV Opener"
             className="shadow-md shadow-gray-700 transition-all duration-500 hover:scale-105"
+            fetchPriority="high"
           />
         </Link>
       </Section>
