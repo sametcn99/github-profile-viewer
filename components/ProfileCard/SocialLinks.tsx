@@ -1,7 +1,8 @@
 "use client";
 import { getSiteUrl } from "@/lib/utils";
-import { Button, DropdownMenu, Link } from "@radix-ui/themes";
+import { Button, DropdownMenu, Link, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
+import { FaLink } from "react-icons/fa6";
 
 interface SocialLink {
   provider: string;
@@ -39,7 +40,10 @@ export default function SocialLinks({ username, option }: SocialLinksProps) {
       {data.length > 0 && (
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
-            <Button className="hover:cursor-pointer">Links</Button>
+            <Button className="flex flex-row hover:cursor-pointer">
+              <FaLink size={22} />
+              <Text>Links</Text>
+            </Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
             {data.map((item: SocialLink, index: number) => (
