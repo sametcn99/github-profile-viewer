@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background: linear-gradient(
+    0deg,
+    rgba(36, 36, 36, 1) 0%,
+    rgba(17, 17, 17, 1) 100%
+  );
+}
+
 .dialog-trigger {
   @apply flex flex-row items-center gap-2 hover:cursor-pointer;
 }

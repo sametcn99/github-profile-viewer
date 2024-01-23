@@ -34,9 +34,7 @@ export default function ProfileCardFooter({
             target="_blank"
           >
             <TfiWorld />
-            {(userData.blog.startsWith("http://" || "hhpts://") &&
-              userData.blog.replace("http://", "")) ||
-              userData.blog.replace("https://", "")}
+            {createUrlObject(userData.blog).host}
           </Link>
         )}
         {userData.company && (
@@ -65,16 +63,6 @@ export default function ProfileCardFooter({
               }
             })}
           </>
-        )}
-        {userData.twitter_username && (
-          <Link
-            href={`https://x.com/${userData.twitter_username}`}
-            target="_blank"
-            className="dialog-trigger"
-          >
-            <BsTwitterX />
-            {userData.twitter_username}
-          </Link>
         )}
         <Readme
           url={`https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`}

@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from "@radix-ui/themes";
 import Readme from "../Readme";
-import { languageIcons } from "./LanguageIcons";
+import { languageIcons } from "../icons/LanguageIcons";
 import { GitHubRepo } from "@/types/types";
 import { GoLaw } from "react-icons/go";
 

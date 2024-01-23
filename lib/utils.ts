@@ -29,7 +29,7 @@ export const getSiteUrl = (): string => {
   return baseUrl;
 };
 
-export const createUrlObject = (link: string) => {
+export const createUrlObject = (link: string): URL => {
   if (!link) {
     throw new Error("Link is empty");
   }

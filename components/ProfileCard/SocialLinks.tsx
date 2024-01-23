@@ -3,6 +3,7 @@ import { getSiteUrl } from "@/lib/utils";
 import { Button, DropdownMenu, Link, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import { FaLink } from "react-icons/fa6";
+import { socialMediaIcons } from "../icons/SocialIcons";
 
 interface SocialLink {
   provider: string;
@@ -48,11 +49,16 @@ export default function SocialLinks({ username, option }: SocialLinksProps) {
           <DropdownMenu.Content>
             {data.map((item: SocialLink, index: number) => (
               <DropdownMenu.Item key={index} className="w-full">
-                <Link href={item.url} target="_blank">
+                <Link
+                  href={item.url}
+                  target="_blank"
+                  className="flex flex-row items-center gap-2"
+                >
                   {" "}
                   {item.provider === "generic"
                     ? item.url.replace("https://", "").substring(0, 50)
-                    : item.provider}{" "}
+                    : socialMediaIcons[item.provider.toLowerCase()]}
+                  {item.provider}
                 </Link>
               </DropdownMenu.Item>
             ))}

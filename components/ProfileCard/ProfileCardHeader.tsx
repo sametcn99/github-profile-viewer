@@ -25,7 +25,7 @@ export default function ProfileCardHeader({
           size="9"
           fallback={userData.login.charAt(0)}
           src={userData.avatar_url || userData.avatar_url}
-          className="transition-all duration-1000 hover:shadow-md hover:shadow-slate-700"
+          className="drag-none scale-105 transition-all duration-1000 hover:shadow-lg hover:shadow-slate-700"
         />
         <Box className="flex flex-col">
           <Text className="break-words text-5xl">{userData.name}</Text>
