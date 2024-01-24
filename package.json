@@ -15,6 +15,7 @@
     "@mui/material": "^5.15.5",
     "@mui/x-charts": "^6.19.1",
     "@mui/x-data-grid": "^6.19.1",
+    "@next/third-parties": "^14.1.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/themes": "^2.0.3",

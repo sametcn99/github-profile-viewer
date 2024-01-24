@@ -9,6 +9,7 @@ import { Theme } from "@radix-ui/themes";
 import Navbar from "../components/Navbar";
 import { getSiteUrl } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -87,6 +88,7 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
       </body>
+      <GoogleAnalytics gaId="G-N9EB4H11MT" />
     </html>
   );
 }
