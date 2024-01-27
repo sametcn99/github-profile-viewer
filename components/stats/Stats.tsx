@@ -64,7 +64,7 @@ export default function Stats() {
         )}
         {!loading && (
           <>
-            <Card>
+            <Card className="">
               <Grid
                 columns="2"
                 width="auto"

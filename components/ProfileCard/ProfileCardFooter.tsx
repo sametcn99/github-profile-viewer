@@ -14,7 +14,7 @@ export default function ProfileCardFooter({
 }) {
   return (
     <Box className="flex w-full flex-row flex-wrap justify-center gap-2">
-      <Box className="flex flex-row flex-wrap gap-2">
+      <Box className="flex flex-row flex-wrap justify-center gap-2">
         <ContactList
           option="followers"
           username={userData.login}
