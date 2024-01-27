@@ -17,7 +17,7 @@ import {
   Table,
   Text,
 } from "@radix-ui/themes";
-import FilterChart from "./FilterChart/FilterChart";
+import FilterChart from "./FilterChart";
 import { useState } from "react";
 interface LicensesProps {
   licenses: {

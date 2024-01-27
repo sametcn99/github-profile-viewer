@@ -15,10 +15,10 @@ export default function Repositories() {
   const { repos, loading } = useContext(GithubContext);
   const [sort, setSort] = useState("Stars Descending");
   const [filterValue, setFilterValue] = useState("");
-  const [selectedTopic, setSelectedTopic] = useState(""); // Add state for selected topic
-  const [selectedLanguage, setSelectedLanguage] = useState(""); // Add state for selected topic
+  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("All");
-  const [selectedLicense, setSelectedLicense] = useState(""); // Add state for selected topic
+  const [selectedLicense, setSelectedLicense] = useState("");
 
   const handleFilterClick = (
     value: string,
@@ -32,7 +32,6 @@ export default function Repositories() {
     }
   };
 
-  // Kullanım örnekleri
   const handleTopicClick = (topic: string): void => {
     handleFilterClick(topic, setSelectedTopic, selectedTopic);
   };
@@ -52,10 +51,10 @@ export default function Repositories() {
             return repo.topics.includes(selectedTopic);
           }
           if (selectedLanguage) {
-            return repo.language === selectedLanguage; // Corrected line
+            return repo.language === selectedLanguage;
           }
           if (selectedLicense) {
-            return repo.license?.spdx_id === selectedLicense; // Corrected line
+            return repo.license?.spdx_id === selectedLicense;
           }
 
           const nameMatches = repo.name

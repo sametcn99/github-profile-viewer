@@ -25,6 +25,7 @@ import Languages from "./Languages";
 import CreationDate from "./CreationDate";
 import GistCreationDate from "./GistCreationDate";
 import DownloadData from "./DownloadData";
+import StatTable from "./StatTable";
 
 export default function Stats() {
   const { repos, loading, gists } = useContext(GithubContext);
@@ -56,7 +57,9 @@ export default function Stats() {
   return (
     <Card>
       <Flex gap="4" direction="column">
-        <Heading size="7">Repository Statistics</Heading>
+        <Heading size="7" className="ml-2">
+          Profile Statistics
+        </Heading>
         {loading && (
           <Box className="flex w-full items-center justify-center">
             <Loading />
@@ -64,48 +67,13 @@ export default function Stats() {
         )}
         {!loading && (
           <>
-            <Card className="">
-              <Grid
-                columns="2"
-                width="auto"
-                className="rounded-xl p-2 hover:bg-black/30"
-              >
-                <Heading size="4">Total Repositories</Heading>
-                <Text>{totalRepos}</Text>
-              </Grid>
-              <Grid
-                columns="2"
-                width="auto"
-                className="rounded-xl p-2 hover:bg-black/30"
-              >
-                <Heading size="4">Total Gists</Heading>
-                <Text>{gists.length}</Text>
-              </Grid>
-              <Grid
-                columns="2"
-                width="auto"
-                className="rounded-xl p-2 hover:bg-black/30"
-              >
-                <Heading size="4">Total Forks</Heading>
-                <Text>{totalForks}</Text>
-              </Grid>
-              <Grid
-                columns="2"
-                width="auto"
-                className="rounded-xl p-2 hover:bg-black/30"
-              >
-                <Heading size="4">Total Stars</Heading>
-                <Text>{formatNumber(totalStars)}</Text>
-              </Grid>
-              <Grid
-                columns="2"
-                width="auto"
-                className="rounded-xl p-2 hover:bg-black/30"
-              >
-                <Heading size="4">Average Stars Per Repository</Heading>
-                <Text>{averageStarsPerRepo.toFixed(2)}</Text>
-              </Grid>
-            </Card>
+            <StatTable
+              totalRepos={totalRepos}
+              gists={gists.length}
+              totalForks={totalForks}
+              totalStars={totalStars}
+              averageStarsPerRepo={averageStarsPerRepo}
+            />
             {language.length > 0 && (
               <Languages language={language} count={count} />
             )}

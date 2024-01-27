@@ -15,7 +15,7 @@ import {
   Text,
 } from "@radix-ui/themes";
 import { BarChart } from "@mui/x-charts/BarChart";
-import FilterChart from "./FilterChart/FilterChart";
+import FilterChart from "./FilterChart";
 import { useState } from "react";
 
 export default function Topics({

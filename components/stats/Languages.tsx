@@ -17,7 +17,7 @@ import {
   Text,
 } from "@radix-ui/themes";
 import { useState } from "react";
-import FilterChart from "./FilterChart/FilterChart";
+import FilterChart from "./FilterChart";
 
 export default function Languages({
   language,
