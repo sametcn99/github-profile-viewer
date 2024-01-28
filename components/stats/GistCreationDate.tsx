@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { BarChart } from "@mui/x-charts/BarChart";
 interface StatsData {
   category: string;
   value: number;
@@ -22,20 +23,18 @@ export default function GistCreationDate({ statsData }: Props) {
       <Card>
         <Heading className="ml-3">Gist Creation Dates</Heading>
         <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
-          <LineChart
+          <BarChart
             xAxis={[
               {
-                data: statsData.map((d) => d.category.toString()),
-                valueFormatter: (date: string) => date.toString(),
+                data: statsData.map((d) => d.category),
+                scaleType: "band",
               },
             ]}
             series={[
               {
                 data: statsData.map((d) => d.value),
-                area: true,
               },
             ]}
-            height={300}
           />
         </Box>
         {statsData.length > 5 && (

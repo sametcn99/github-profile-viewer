@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Github Profile Viewer",
     dir: "auto",
     description:
-      "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
+      "Explore GitHub and Gist profile statistics effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
     categories: ["personal"],
     theme_color: "#000000",
     background_color: "#000000",

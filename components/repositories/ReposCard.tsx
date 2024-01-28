@@ -15,6 +15,7 @@ import Readme from "../Readme";
 import { languageIcons } from "../icons/LanguageIcons";
 import { GitHubRepo } from "@/types/types";
 import { GoLaw } from "react-icons/go";
+import StarHistory from "../stats/StarHistory";
 
 interface ReposCardProps {
   repo: GitHubRepo;
@@ -71,6 +72,13 @@ export default function ReposCard({
                     <Text>{formatNumber(repo.stargazers_count)}</Text>
                   </Box>
                 </Tooltip>
+              )}
+              {repo.stargazers_count > 0 && (
+                <StarHistory
+                  username={repo.owner.login}
+                  repo={repo.name}
+                  option="stargazers"
+                />
               )}
             </Box>
           </Box>

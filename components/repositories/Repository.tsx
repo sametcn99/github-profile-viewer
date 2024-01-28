@@ -15,13 +15,14 @@ import Readme from "../Readme";
 import { languageIcons } from "../icons/LanguageIcons";
 import { GitHubRepo } from "@/types/types";
 import { GoLaw } from "react-icons/go";
+import StarHistory from "../stats/StarHistory";
 
 export default function Repository({ repo }: { repo: GitHubRepo }) {
   return (
     <Card>
       <Box className="flex flex-row gap-4 ">
         <Box className="flex w-full flex-row items-center justify-between gap-2">
-          <Box className="flex w-full flex-row  items-center gap-2 break-all text-start">
+          <Box className="flex w-full flex-row items-center gap-2 break-all text-start">
             <Heading>
               <Link href={repo.html_url} target="_blank">
                 {repo.name}
@@ -53,6 +54,13 @@ export default function Repository({ repo }: { repo: GitHubRepo }) {
                 </Tooltip>
               )}
             </Box>
+            {repo.stargazers_count > 0 && (
+              <StarHistory
+                username={repo.owner.login}
+                repo={repo.name}
+                option="stargazers"
+              />
+            )}
           </Box>
           <Box>
             <DropdownMenu.Root>

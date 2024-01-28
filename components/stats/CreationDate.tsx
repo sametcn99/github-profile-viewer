@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { BarChart } from "@mui/x-charts/BarChart";
 
 interface StatsData {
   category: string;
@@ -23,20 +24,18 @@ export default function CreationDate({ statsData }: Props) {
       <Card>
         <Heading className="ml-3">Repository Creation Dates</Heading>
         <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
-          <LineChart
+          <BarChart
             xAxis={[
               {
-                data: statsData.map((d: StatsData) => d.category.toString()),
-                valueFormatter: (date) => date.toString(),
+                data: statsData.map((d) => d.category),
+                scaleType: "band",
               },
             ]}
             series={[
               {
-                data: statsData.map((d: StatsData) => d.value),
-                area: true,
+                data: statsData.map((d) => d.value),
               },
             ]}
-            height={300}
           />
         </Box>
         {statsData.length > 5 && (

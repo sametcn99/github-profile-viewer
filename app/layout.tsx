@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: "Github Profile Viewer",
   },
   description:
-    "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
+    "Explore GitHub and Gist profile statistics effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
   applicationName: "Github Profile Viewer",
   keywords: "github profile viewer, github stats, github profile",
   creator: "sametcn99",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       default: "Github Profile Viewer",
     },
     description:
-      "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
+      "Explore GitHub and Gist profile statistics effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
     type: "website",
     url: getSiteUrl(),
     images: ["/icons/icon512.png"],
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     site: "Github Profile Viewer",
     title: "Github Profile Viewer",
     description:
-      "Explore GitHub and Gist profiles effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
+      "Explore GitHub and Gist profile statistics effortlessly, utilizing the GitHub REST API to retrieve comprehensive information.",
     card: "summary_large_image",
     images: ["/icons/icon512.png"],
     creator: "sametcn99",

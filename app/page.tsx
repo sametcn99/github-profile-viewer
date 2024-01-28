@@ -8,14 +8,14 @@ import SearchBar from "@/components/Search";
 export default function Home() {
   return (
     <>
-      <Section className="flex flex-col items-center justify-center gap-4 py-8 text-center break-words md:py-10">
+      <Section className="flex flex-col items-center justify-center gap-4 break-words py-8 text-center md:py-10">
         <Text className="text-3xl font-bold">Github Profile Viewer</Text>
         <Text className="max-w-[50rem]">
-          Welcome to the Github Profile Viewer, a dynamic web platform powered
-          by Next.js and Radix UI. Explore GitHub and Gist profiles
-          effortlessly, utilizing the GitHub REST API to retrieve comprehensive
-          information. Discover a user&apos;s coding journey and contributions
-          to the open-source community.
+          GitHub Profile Viewer provides comprehensive statistics of GitHub
+          profiles, showcasing a user&apos;s coding journey and contributions to
+          the open-source community. Powered by Next.js and Radix UI, this
+          dynamic web platform utilizes the GitHub REST API to effortlessly
+          retrieve and display information on GitHub and Gist profiles.
         </Text>
         <Rate />
         <Link
@@ -27,7 +27,7 @@ export default function Home() {
             height={40}
             src="/icons/chrome-extension-dark.png"
             alt="GPV Opener"
-            className="transition-all duration-500 shadow-md shadow-gray-700 hover:scale-105"
+            className="shadow-md shadow-gray-700 transition-all duration-500 hover:scale-105"
             fetchPriority="high"
           />
         </Link>
