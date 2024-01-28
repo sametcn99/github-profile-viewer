@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaChartLine } from "react-icons/fa6";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { Box, Dialog } from "@radix-ui/themes";
+import { Box, Button, Dialog } from "@radix-ui/themes";
 import Loading from "@/app/loading";
 
 type StarredItem = {
@@ -69,7 +69,16 @@ export default function StarHistory({
           <FaChartLine size={22} />
         </Dialog.Trigger>
         <Dialog.Content>
-          <Dialog.Title>Star History</Dialog.Title>
+          <Dialog.Title className="flex w-full flex-row justify-between">
+            <Box className="flex w-full flex-row items-start justify-between">
+              <div> Star History </div>
+              <Dialog.Close>
+                <Button className="cursor-pointer hover:underline">
+                  Close
+                </Button>
+              </Dialog.Close>
+            </Box>
+          </Dialog.Title>
           {loading && <Loading />}
           {data.length > 0 && (
             <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
