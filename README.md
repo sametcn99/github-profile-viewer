@@ -13,6 +13,7 @@ Welcome to the GitHub Profile Viewer, a dynamic web platform powered by Next.js 
 - Explore a user's followers and those they follow.
 - Check out contribution statistics, including commit history.
 - Discover public Gists and their content.
+- Discover repositories star history
 
 ## Why use Github Profile Viewer?
 
