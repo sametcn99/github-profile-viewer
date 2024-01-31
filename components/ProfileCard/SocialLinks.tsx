@@ -54,11 +54,11 @@ export default function SocialLinks({ username, option }: SocialLinksProps) {
                   target="_blank"
                   className="flex flex-row items-center gap-2"
                 >
-                  {" "}
                   {item.provider === "generic"
                     ? item.url.replace("https://", "").substring(0, 50)
                     : socialMediaIcons[item.provider.toLowerCase()]}
-                  {item.provider}
+                  {item.provider !== "generic" &&
+                    item.url.replace("https://", "").substring(0, 50)}
                 </Link>
               </DropdownMenu.Item>
             ))}

@@ -54,7 +54,6 @@ export default function ProfileCardFooter({
               } else {
                 return (
                   <span key={comp} className="flex flex-row items-center gap-2">
-                    {" "}
                     <MdOutlineWorkOutline />
                     {comp}
                   </span>
