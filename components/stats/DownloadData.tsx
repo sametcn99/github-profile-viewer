@@ -18,12 +18,16 @@ export default function DownloadData() {
 
   const downloadRepos = () => {
     const repoData = JSON.stringify(repos, null, 2); // Convert repos to JSON format
-    download(repoData, `${repos[0].owner}'s repositories`, "application/json");
+    download(
+      repoData,
+      `${repos[0].owner.login}'s repositories`,
+      "application/json"
+    );
   };
 
   const downloadGists = () => {
     const gistData = JSON.stringify(gists, null, 2); // Convert gists to JSON format
-    download(gistData, `${repos[0].owner}'s gists`, "application/json");
+    download(gistData, `${repos[0].owner.login}'s gists`, "application/json");
   };
 
   return (
