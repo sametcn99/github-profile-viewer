@@ -26,32 +26,25 @@ export async function generateMetadata(
     const userData: UserData = data.profile;
     if (userData) {
       return {
-        title: userData.login ?? "Default Title",
+        title: userData.login ?? "Not Found",
         description: userData.bio ?? "",
         icons: [userData.avatar_url],
         metadataBase: new URL(`${getSiteUrl()}`),
         robots: "index, follow",
         twitter: {
-          site: "@" + (userData.twitter_username ?? ""),
           title: userData.login ?? "Default Title",
           description: userData.bio ?? "",
           card: "summary_large_image",
           images: [userData.avatar_url],
-          siteId: "@" + (userData.twitter_username ?? ""),
-          creator: userData.twitter_username ?? "",
-          creatorId: userData.twitter_username ?? "",
         },
 
         openGraph: {
           title: userData.login ?? "Default Title",
           description: userData.bio ?? "",
-          type: "profile",
-          url: `/user/${username}`,
+          url: `/${username}`,
           images: [userData.avatar_url],
           locale: "en_US",
           siteName: "GitHub Profile Viewer",
-          emails: [userData.email ?? ""],
-          username: userData.login ?? "",
         },
       };
     }
