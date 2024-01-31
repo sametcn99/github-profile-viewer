@@ -38,7 +38,7 @@ export default function Repository({ repo }: { repo: GitHubRepo }) {
               <Tooltip content="Show Readme">
                 <Box className="flex flex-row items-center gap-2">
                   <Readme
-                    url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
+                    url={`https://raw.githubusercontent.com/${repo.owner}/${repo.name}/master/README.md`}
                   >
                     <span></span>
                   </Readme>
@@ -55,7 +55,7 @@ export default function Repository({ repo }: { repo: GitHubRepo }) {
             </Box>
             {repo.stargazers_count > 0 && (
               <StarHistory
-                username={repo.owner.login}
+                username={repo.owner}
                 repo={repo.name}
                 option="stargazers"
               />
