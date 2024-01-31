@@ -1,8 +1,5 @@
 // utils.js
 
-// Importing GitHubRepo type from the specified module
-import { GitHubRepo } from "@/types/types";
-
 /**
  * Calculates the total number of repositories.
  *

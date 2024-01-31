@@ -1,4 +1,3 @@
-import { UserData } from "@/types/types";
 import { Avatar, Box, Link, Text, Tooltip } from "@radix-ui/themes";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";

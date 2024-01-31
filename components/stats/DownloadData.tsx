@@ -1,6 +1,6 @@
 import { GithubContext } from "@/app/context/context";
-import { Box, Button, Heading } from "@radix-ui/themes";
-import React, { useContext } from "react";
+import { Box, Button } from "@radix-ui/themes";
+import { useContext } from "react";
 
 export default function DownloadData() {
   const { repos, gists } = useContext(GithubContext);

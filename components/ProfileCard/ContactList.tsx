@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { fetchContact } from "@/lib/utils";
-import { UserData } from "@/types/types";
 import {
   Avatar,
   Box,

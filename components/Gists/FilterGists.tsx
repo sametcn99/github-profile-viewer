@@ -1,13 +1,5 @@
-import React from "react";
-import { useContext, useMemo, useState } from "react";
-import { GithubContext } from "@/app/context/context";
 import FilterInput from "../FilterInput";
-import { Box, Button, Card, DropdownMenu, Link, Text } from "@radix-ui/themes";
-import { FaGithub } from "react-icons/fa";
-import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
-import { VList } from "virtua";
-import Loading from "@/app/loading";
-import { GitHubRepo } from "@/types/types";
+import { Box, Button, DropdownMenu } from "@radix-ui/themes";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {

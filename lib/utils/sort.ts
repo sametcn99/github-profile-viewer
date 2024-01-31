@@ -1,5 +1,3 @@
-import { GitHubRepo } from "@/types/types";
-
 export function sortByKeyDescending<K extends keyof GitHubRepo>(
   data: GitHubRepo[],
   key: K,

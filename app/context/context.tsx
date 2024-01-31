@@ -1,5 +1,4 @@
 "use client";
-import { GitHubRepo } from "@/types/types";
 import { createContext, ReactNode, useState, useEffect } from "react";
 
 // Define the structure of the context data

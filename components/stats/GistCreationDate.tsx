@@ -1,5 +1,3 @@
-import React from "react";
-import { LineChart } from "@mui/x-charts/LineChart";
 import { Box, Card, Heading, ScrollArea, Table } from "@radix-ui/themes";
 import {
   Accordion,

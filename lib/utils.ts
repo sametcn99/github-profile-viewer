@@ -1,7 +1,5 @@
-import { GitHubRepo, UserData } from "@/types/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { sortByKeyDescending } from "./utils/sort";
 
 /**
  * Merges Tailwind CSS classes generated with clsx into a single

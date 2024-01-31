@@ -13,7 +13,6 @@ import {
 } from "@radix-ui/themes";
 import Readme from "../Readme";
 import { languageIcons } from "../icons/LanguageIcons";
-import { GitHubRepo } from "@/types/types";
 import { GoLaw } from "react-icons/go";
 import StarHistory from "../stats/StarHistory";
 

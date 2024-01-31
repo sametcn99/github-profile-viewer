@@ -1,30 +1,6 @@
-import React from "react";
-import { GithubContext } from "@/app/context/context";
-import Loading from "@/app/loading";
-import {
-  calculateLanguageDistribution,
-  calculateLicenseDistribution,
-  calculateTopTopics,
-  calculateTotalForks,
-  calculateTotalRepos,
-  calculateTotalStars,
-  findLatestUpdatedRepo,
-  findMostStarredRepo,
-  findOldestRepo,
-  findRepoWithLongestUpdatePeriod,
-  getCreationStatsByYear,
-} from "@/lib/utils/stats";
-import { useContext } from "react";
-import Repository from "../repositories/Repository";
 import "@/app/globals.css";
 import { formatNumber } from "@/lib/utils";
-import { Box, Card, Flex, Grid, Heading, Text } from "@radix-ui/themes";
-import Licenses from "./Licenses";
-import Topics from "./Topics";
-import Languages from "./Languages";
-import CreationDate from "./CreationDate";
-import GistCreationDate from "./GistCreationDate";
-import DownloadData from "./DownloadData";
+import { Card, Grid, Heading, Text } from "@radix-ui/themes";
 
 export default function StatTable({
   totalRepos,

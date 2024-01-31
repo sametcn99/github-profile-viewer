@@ -4,7 +4,7 @@
  * creation/update dates, topics, license info, language,
  * file list, owner details, and other metadata.
  */
-export type GitHubRepo = {
+type GitHubRepo = {
   id: number;
   name: string;
   stargazers_count: number;
@@ -34,7 +34,7 @@ export type GitHubRepo = {
  * Contains details like name, login, avatar,
  * URLs, follower counts, etc.
  */
-export type UserData = {
+type UserData = {
   login: string;
   id: number;
   node_id: string;

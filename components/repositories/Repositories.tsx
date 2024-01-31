@@ -7,7 +7,6 @@ import FilterBar from "./FilterBar";
 import ReposCard from "./ReposCard";
 import { VList } from "virtua";
 import Loading from "@/app/loading";
-import { GitHubRepo } from "@/types/types";
 
 type SetSelectedFunction = (value: string) => void;
 

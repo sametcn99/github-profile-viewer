@@ -1,8 +1,6 @@
-import { UserData } from "@/types/types";
 import SocialLinks from "./SocialLinks";
 import { createUrlObject } from "@/lib/utils";
 import { MdOutlineWorkOutline } from "react-icons/md";
-import { BsTwitterX } from "react-icons/bs";
 import { TfiWorld } from "react-icons/tfi";
 import { Box, Link, Text } from "@radix-ui/themes";
 import Readme from "@/components/Readme";

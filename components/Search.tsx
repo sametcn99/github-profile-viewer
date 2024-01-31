@@ -2,15 +2,12 @@
 import { useEffect, useMemo, useState } from "react"; // Import useState hook
 import { useRouter } from "next/navigation";
 import { cn, getSiteUrl } from "@/lib/utils";
-import { UserData } from "@/types/types";
 import {
   Link,
-  ScrollArea,
   TextField,
   Avatar,
   Dialog,
   Button,
-  Flex,
   Text,
   Box,
   DropdownMenu,

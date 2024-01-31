@@ -1,5 +1,4 @@
 import { getSiteUrl } from "@/lib/utils";
-import { UserData } from "@/types/types";
 import { GithubProvider } from "../context/context";
 import TabWrapper from "../../components/TabWrapper";
 import { Metadata } from "next";

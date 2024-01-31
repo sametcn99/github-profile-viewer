@@ -1,4 +1,3 @@
-import { UserData } from "@/types/types";
 import { Card } from "@radix-ui/themes";
 import ProfileCardHeader from "./ProfileCardHeader";
 import ProfileCardFooter from "./ProfileCardFooter";

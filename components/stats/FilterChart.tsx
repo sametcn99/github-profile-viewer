@@ -1,5 +1,5 @@
 "use client";
-import { Box, Flex, Button } from "@radix-ui/themes";
+import { Flex, Button } from "@radix-ui/themes";
 import React from "react";
 
 export default function FilterChart({

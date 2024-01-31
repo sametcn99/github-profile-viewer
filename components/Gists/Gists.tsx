@@ -8,7 +8,6 @@ import { FaGithub } from "react-icons/fa";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import { VList } from "virtua";
 import Loading from "@/app/loading";
-import { GitHubRepo } from "@/types/types";
 import FilterGists from "./FilterGists";
 
 // Gistss component
