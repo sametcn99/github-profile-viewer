@@ -99,10 +99,7 @@ export default function Licenses({ licenses, count }: LicensesProps) {
                     {Object.entries(licenses)
                       .sort((a, b) => (b[1] as number) - (a[1] as number))
                       .map(([topic, count]) => (
-                        <Table.Row
-                          key={topic}
-                          className="hover:bg-black hover:bg-opacity-20"
-                        >
+                        <Table.Row key={topic} className="hover:bg-black/30">
                           <Table.Cell>{topic}</Table.Cell>
                           <Table.Cell>{String(count)}</Table.Cell>
                         </Table.Row>

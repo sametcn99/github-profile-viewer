@@ -79,7 +79,10 @@ export default function Topics({
                         {Object.entries(topTopics)
                           .sort((a, b) => b[1] - a[1])
                           .map(([topic, count]) => (
-                            <Table.Row key={topic}>
+                            <Table.Row
+                              key={topic}
+                              className="hover:bg-black/30"
+                            >
                               <Table.Cell>{topic}</Table.Cell>
                               <Table.Cell>{count}</Table.Cell>
                             </Table.Row>

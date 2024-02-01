@@ -54,7 +54,7 @@ export default function GistCreationDate({ statsData }: Props) {
                         .map((data) => (
                           <Table.Row
                             key={data.value}
-                            className="hover:bg-black hover:bg-opacity-20"
+                            className="hover:bg-black/30"
                           >
                             <Table.Cell>{data.category}</Table.Cell>
                             <Table.Cell>{data.value}</Table.Cell>

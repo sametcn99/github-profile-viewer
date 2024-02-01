@@ -121,7 +121,6 @@ export default function Stats() {
                 <Repository repo={updatePeriod} />
               </Box>
             )}
-
             <DownloadData />
           </>
         )}

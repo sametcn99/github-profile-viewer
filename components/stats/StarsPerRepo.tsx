@@ -63,10 +63,7 @@ export default function StarsPerRepo({
                 </Table.Header>
                 <Table.Body>
                   {Object.entries(starsPerRepo).map(([key, value]) => (
-                    <Table.Row
-                      key={key}
-                      className="hover:bg-black hover:bg-opacity-20"
-                    >
+                    <Table.Row key={key} className="hover:bg-black/30">
                       <Table.Cell>{key}</Table.Cell>
                       <Table.Cell>{value}</Table.Cell>
                     </Table.Row>
