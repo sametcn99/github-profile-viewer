@@ -41,7 +41,7 @@ export default function ReposCard({
     <Card key={index}>
       <Box className="flex flex-row gap-4 ">
         <Box className="flex w-full flex-row items-center justify-between gap-2">
-          <Box className="flex w-full flex-row items-center gap-2 break-all text-start">
+          <Box className="flex w-full flex-row flex-wrap items-center gap-2 break-all text-start">
             <Heading>
               <Link href={repo.html_url} target="_blank">
                 {repo.name}
