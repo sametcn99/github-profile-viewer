@@ -52,7 +52,10 @@ export default function GistCreationDate({ statsData }: Props) {
                       {statsData
                         .sort((a, b) => Number(b.value) - Number(a.value))
                         .map((data) => (
-                          <Table.Row key={data.value}>
+                          <Table.Row
+                            key={data.value}
+                            className="hover:bg-black hover:bg-opacity-20"
+                          >
                             <Table.Cell>{data.category}</Table.Cell>
                             <Table.Cell>{data.value}</Table.Cell>
                           </Table.Row>

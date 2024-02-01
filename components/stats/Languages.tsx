@@ -87,7 +87,10 @@ export default function Languages({
                   </Table.Header>
                   <Table.Body>
                     {sortedLanguageData.map((data) => (
-                      <Table.Row key={data.name}>
+                      <Table.Row
+                        key={data.name}
+                        className="hover:bg-black hover:bg-opacity-20"
+                      >
                         <Table.Cell>{data.name}</Table.Cell>
                         <Table.Cell>{data.count}</Table.Cell>
                       </Table.Row>

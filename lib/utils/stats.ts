@@ -182,3 +182,26 @@ export const getCreationStatsByYear = (repos: GitHubRepo[]) => {
 
   return stats;
 };
+
+export function getStarsPerRepo(repos: GitHubRepo[]) {
+  interface StarsPerRepo {
+    [key: string]: number;
+  }
+
+  const starsPerRepo: StarsPerRepo = {};
+
+  repos.forEach((repo) => {
+    if (repo.stargazers_count > 0) {
+      starsPerRepo[repo.name] = repo.stargazers_count;
+    }
+  });
+
+  const sortedStarsPerRepo = Object.entries(starsPerRepo)
+    .sort((a, b) => b[1] - a[1])
+    .reduce((acc, [name, stars]) => {
+      acc[name] = stars;
+      return acc;
+    }, {} as StarsPerRepo);
+
+  return sortedStarsPerRepo;
+}

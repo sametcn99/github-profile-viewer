@@ -13,6 +13,7 @@ import {
   findOldestRepo,
   findRepoWithLongestUpdatePeriod,
   getCreationStatsByYear,
+  getStarsPerRepo,
 } from "@/lib/utils/stats";
 import { useContext } from "react";
 import Repository from "../repositories/Repository";
@@ -26,6 +27,7 @@ import CreationDate from "./CreationDate";
 import GistCreationDate from "./GistCreationDate";
 import DownloadData from "./DownloadData";
 import StatTable from "./StatTable";
+import StarsPerRepo from "./StarsPerRepo";
 
 export default function Stats() {
   const { repos, loading, gists } = useContext(GithubContext);
@@ -54,6 +56,7 @@ export default function Stats() {
       value: count,
     }),
   );
+  const starsPerRepo = getStarsPerRepo(repos);
   return (
     <Card>
       <Flex gap="4" direction="column">
@@ -74,6 +77,7 @@ export default function Stats() {
               totalStars={totalStars}
               averageStarsPerRepo={averageStarsPerRepo}
             />
+            {starsPerRepo && <StarsPerRepo starsPerRepo={starsPerRepo} />}
             {language.length > 0 && (
               <Languages language={language} count={count} />
             )}
@@ -93,7 +97,6 @@ export default function Stats() {
                 <Repository repo={mostStarredRepo} />
               </Box>
             )}
-
             {oldestRepo && (
               <Box>
                 <Heading size="4" className="ml-2">
@@ -118,6 +121,7 @@ export default function Stats() {
                 <Repository repo={updatePeriod} />
               </Box>
             )}
+
             <DownloadData />
           </>
         )}
