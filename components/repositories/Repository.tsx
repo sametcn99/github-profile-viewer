@@ -46,20 +46,20 @@ export default function Repository({ repo }: { repo: GitHubRepo }) {
               </Tooltip>
               {repo.stargazers_count > 0 && (
                 <Tooltip content="Total Stars">
-                  <Box className="flex flex-row gap-2">
+                  <Box className="flex flex-row gap-2 break-normal">
                     <BsFillStarFill size={22} />
                     <Text>{formatNumber(repo.stargazers_count)}</Text>
                   </Box>
                 </Tooltip>
               )}
+              {repo.stargazers_count > 0 && (
+                <StarHistory
+                  username={repo.owner.login}
+                  repo={repo.name}
+                  option="stargazers"
+                />
+              )}
             </Box>
-            {repo.stargazers_count > 0 && (
-              <StarHistory
-                username={repo.owner.login}
-                repo={repo.name}
-                option="stargazers"
-              />
-            )}
           </Box>
           <Box>
             <DropdownMenu.Root>
