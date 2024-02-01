@@ -113,20 +113,20 @@ export default function ContactList({
   // JSX for rendering the component
   return (
     <>
-      {count > 1000 && (
-        <Tooltip
-          content={`User have more than 1000 ${option.charAt(0).toUpperCase()}${option.slice(1)}. If you open dialog, the application send
-                  request for every 100 user.`}
-        >
-          <Box className="flex items-center">
-            <BsInfoCircleFill />
-          </Box>
-        </Tooltip>
-      )}
       <Dialog.Root open={dialogOpen} onOpenChange={setDialogOpen}>
         <Dialog.Trigger>
           <Button className="hover:cursor-pointer">
-            <Text className="flex flex-row items-center gap-2">
+            <Text className="flex items-center gap-2">
+              {count > 1000 && (
+                <Tooltip
+                  content={`User have more than 1000 ${option.charAt(0).toUpperCase()}${option.slice(1)}. If you open dialog, the application send
+                  request for every 100 user.`}
+                >
+                  <Box className="flex flex-row items-center">
+                    <BsInfoCircleFill />
+                  </Box>
+                </Tooltip>
+              )}
               <FaUser />
               {option.charAt(0).toUpperCase()}
               {option.slice(1)}
