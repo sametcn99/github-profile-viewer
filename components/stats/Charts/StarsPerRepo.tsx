@@ -1,7 +1,7 @@
 "use client";
 import { Box, Card, Flex, Heading, Text } from "@radix-ui/themes";
-import { useState } from "react";
-import FilterChart from "./FilterChart";
+import { useContext, useState } from "react";
+import FilterChart from "../FilterChart";
 import { PieChart } from "@mui/x-charts/PieChart";
 import {
   Accordion,
@@ -10,14 +10,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { ScrollArea, Table } from "@radix-ui/themes";
-export default function StarsPerRepo({
-  starsPerRepo,
-}: {
-  starsPerRepo: { [key: string]: number };
-}) {
+import { StatsContext } from "@/app/context/StatsContext";
+export default function StarsPerRepo({}: {}) {
+  const statContext = useContext(StatsContext);
+  const starsPerRepo = statContext?.starsPerRepo ?? {}; // Provide an empty object as default
   const [length, setLength] = useState(
     Object.keys(starsPerRepo).length > 5 ? 5 : Object.keys(starsPerRepo).length,
   );
+  if (Object.keys(starsPerRepo).length === 0) return null;
   return (
     <Card>
       <Heading className="ml-3">

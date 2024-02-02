@@ -14,7 +14,7 @@ import {
 import Readme from "../Readme";
 import { languageIcons } from "../icons/LanguageIcons";
 import { GoLaw } from "react-icons/go";
-import StarHistory from "../stats/StarHistory";
+import StarHistory from "../stats/Charts/StarHistory";
 
 export default function Repository({ repo }: { repo: GitHubRepo }) {
   return (

@@ -15,17 +15,17 @@ import {
   Text,
 } from "@radix-ui/themes";
 import { BarChart } from "@mui/x-charts/BarChart";
-import FilterChart from "./FilterChart";
-import { useState } from "react";
+import FilterChart from "../FilterChart";
+import { use, useContext, useState } from "react";
+import { StatsContext } from "@/app/context/StatsContext";
 
-export default function Topics({
-  topTopics,
-}: {
-  topTopics: Record<string, number>;
-}) {
+export default function Topics({}: {}) {
+  const statsContext = useContext(StatsContext);
+  const topTopics = statsContext?.topTopics ?? {}; // Provide an empty object as default
   const [length, setLength] = useState(
     Object.keys(topTopics).length > 5 ? 5 : Object.keys(topTopics).length,
   );
+
   return (
     <>
       {Object.keys(topTopics).length > 0 && (

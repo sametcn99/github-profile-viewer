@@ -1,9 +1,8 @@
 "use client";
 // gists component
 import { useContext, useMemo, useState } from "react";
-import { GithubContext } from "@/app/context/context";
-import FilterInput from "../FilterInput";
-import { Box, Button, Card, DropdownMenu, Link, Text } from "@radix-ui/themes";
+import { GithubContext } from "@/app/context/GithubContext";
+import { Box, Card, Link, Text } from "@radix-ui/themes";
 import { FaGithub } from "react-icons/fa";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import { VList } from "virtua";

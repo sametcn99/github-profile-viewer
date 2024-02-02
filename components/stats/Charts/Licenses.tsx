@@ -17,19 +17,18 @@ import {
   Table,
   Text,
 } from "@radix-ui/themes";
-import FilterChart from "./FilterChart";
-import { useState } from "react";
-interface LicensesProps {
-  licenses: {
-    [key: string]: number;
-  };
-  count: number[];
-}
+import FilterChart from "../FilterChart";
+import { useContext, useState } from "react";
+import { StatsContext } from "@/app/context/StatsContext";
 
-export default function Licenses({ licenses, count }: LicensesProps) {
+export default function Licenses() {
+  const statContext = useContext(StatsContext);
+  const licenses = statContext?.licenses ?? {}; // Provide an empty object as default
+  const count = Object.values(licenses);
   const [length, setLength] = useState(
     Object.keys(licenses).length > 5 ? 5 : Object.keys(licenses).length,
   );
+  if (Object.keys(licenses).length === 0) return null;
   return (
     <Card>
       <Heading className="ml-3">
@@ -82,35 +81,33 @@ export default function Licenses({ licenses, count }: LicensesProps) {
           ]}
         />
       </Box>
-      {Object.values(licenses).length > 5 && (
-        <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>See All Licenses</AccordionTrigger>
-            <AccordionContent>
-              <Table.Root>
-                <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
-                  <Table.Header>
-                    <Table.Row>
-                      <Table.ColumnHeaderCell>License</Table.ColumnHeaderCell>
-                      <Table.ColumnHeaderCell>Count</Table.ColumnHeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {Object.entries(licenses)
-                      .sort((a, b) => (b[1] as number) - (a[1] as number))
-                      .map(([topic, count]) => (
-                        <Table.Row key={topic} className="hover:bg-black/30">
-                          <Table.Cell>{topic}</Table.Cell>
-                          <Table.Cell>{String(count)}</Table.Cell>
-                        </Table.Row>
-                      ))}
-                  </Table.Body>
-                </ScrollArea>
-              </Table.Root>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      )}
+      <Accordion type="single" collapsible className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger>See All Licenses</AccordionTrigger>
+          <AccordionContent>
+            <Table.Root>
+              <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                <Table.Header>
+                  <Table.Row>
+                    <Table.ColumnHeaderCell>License</Table.ColumnHeaderCell>
+                    <Table.ColumnHeaderCell>Count</Table.ColumnHeaderCell>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  {Object.entries(licenses)
+                    .sort((a, b) => (b[1] as number) - (a[1] as number))
+                    .map(([topic, count]) => (
+                      <Table.Row key={topic} className="hover:bg-black/30">
+                        <Table.Cell>{topic}</Table.Cell>
+                        <Table.Cell>{String(count)}</Table.Cell>
+                      </Table.Row>
+                    ))}
+                </Table.Body>
+              </ScrollArea>
+            </Table.Root>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </Card>
   );
 }

@@ -16,42 +16,32 @@ import {
   Table,
   Text,
 } from "@radix-ui/themes";
-import { useState } from "react";
-import FilterChart from "./FilterChart";
+import { useContext, useState } from "react";
+import FilterChart from "../FilterChart";
+import { StatsContext } from "@/app/context/StatsContext";
 
-export default function Languages({
-  language,
-  count,
-}: {
-  language: string[];
-  count: number[];
-}) {
-  // Combine the language and count arrays into one array of objects
-  const languageData = language.map((lang, index) => ({
-    name: lang,
-    count: count[index],
-  }));
-
-  // Sort the combined array based on the count in descending order
-  const sortedLanguageData = languageData.sort((a, b) => b.count - a.count);
+export default function Languages({}: {}) {
+  const statsContext = useContext(StatsContext);
+  const languages = statsContext?.languages ?? {};
+  const count = Object.values(languages);
   const [length, setLength] = useState(
-    Object.keys(language).length > 5 ? 5 : Object.keys(language).length,
+    Object.keys(languages).length > 5 ? 5 : Object.keys(languages).length,
   );
-
+  if (Object.keys(languages).length === 0) return null;
   return (
     <Card>
       <Heading className="ml-3">
         <Flex gap="4">
           <Text>Top {length} Languages</Text>
           <FilterChart
-            maxLength={Object.keys(language).length}
+            maxLength={Object.keys(languages).length}
             length={length}
             setLength={setLength}
           />
         </Flex>
       </Heading>
       <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
-        {sortedLanguageData.length > 0 && (
+        {Object.keys(languages).length > 0 && (
           <PieChart
             sx={{
               color: "green",
@@ -60,19 +50,21 @@ export default function Languages({
             }}
             series={[
               {
-                data: sortedLanguageData
-                  .slice(0, length)
-                  .map((data, index) => ({
+                data: Object.entries(languages) // Convert object to array of [key, value] pairs
+                  .sort((a, b) => b[1] - a[1]) // Sort by count in descending order
+                  .slice(0, length) // Slice the first 'length' elements
+                  .map(([name, count], index) => ({
+                    // Map to the desired structure
                     id: index.toString(),
-                    value: Number(data.count),
-                    label: data.name,
+                    value: Number(count),
+                    label: name,
                   })),
               },
             ]}
           />
         )}
       </Box>
-      {sortedLanguageData.length > 5 && (
+      {Object.keys(languages).length > 5 && (
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>See All Languages</AccordionTrigger>
@@ -86,10 +78,10 @@ export default function Languages({
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    {sortedLanguageData.map((data) => (
-                      <Table.Row key={data.name} className="hover:bg-black/30">
-                        <Table.Cell>{data.name}</Table.Cell>
-                        <Table.Cell>{data.count}</Table.Cell>
+                    {Object.entries(languages).map(([name, count]) => (
+                      <Table.Row key={name} className="hover:bg-black/30">
+                        <Table.Cell>{name}</Table.Cell>
+                        <Table.Cell>{count}</Table.Cell>
                       </Table.Row>
                     ))}
                   </Table.Body>

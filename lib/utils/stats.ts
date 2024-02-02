@@ -72,7 +72,7 @@ export const calculateLanguageDistribution = (
     const language = repo.language || "Unknown";
     languageDistribution[language] = (languageDistribution[language] || 0) + 1;
   });
-
+  //  Sort the combined array based on the count in descending order
   return languageDistribution;
 };
 
@@ -150,20 +150,22 @@ export const findRepoWithLongestUpdatePeriod = (
  * @param repos - Array of GitHub repository objects to analyze.
  * @returns Record with keys of topic names and values of occurrence counts.
  */
-export const calculateTopTopics = (repos: GitHubRepo[]) => {
-  const topics: Record<string, number> = {};
+export const calculateTopTopics = (
+  repos: GitHubRepo[],
+): Record<string, number> => {
+  const topicCounts: Record<string, number> = {};
 
   repos.forEach((repo) => {
     if (repo.topics) {
       repo.topics.forEach((topic) => {
         if (typeof topic === "string") {
-          topics[topic] = (topics[topic] || 0) + 1;
+          topicCounts[topic] = (topicCounts[topic] || 0) + 1;
         }
       });
     }
   });
 
-  return topics;
+  return topicCounts;
 };
 
 export const getCreationStatsByYear = (repos: GitHubRepo[]) => {
@@ -179,7 +181,10 @@ export const getCreationStatsByYear = (repos: GitHubRepo[]) => {
 
     stats[year]++;
   });
-
+  Object.entries(stats).map(([year, count]) => ({
+    category: year,
+    value: count,
+  }));
   return stats;
 };
 

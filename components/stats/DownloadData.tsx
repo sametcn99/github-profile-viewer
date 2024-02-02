@@ -1,4 +1,4 @@
-import { GithubContext } from "@/app/context/context";
+import { GithubContext } from "@/app/context/GithubContext";
 import { Box, Button } from "@radix-ui/themes";
 import { useContext } from "react";
 
@@ -21,7 +21,7 @@ export default function DownloadData() {
     download(
       repoData,
       `${repos[0].owner.login}'s repositories`,
-      "application/json"
+      "application/json",
     );
   };
 

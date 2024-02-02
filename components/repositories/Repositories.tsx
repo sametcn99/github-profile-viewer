@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useMemo, useState } from "react";
-import { GithubContext } from "@/app/context/context";
+import { GithubContext } from "@/app/context/GithubContext";
 import { Box } from "@radix-ui/themes";
 import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 import FilterBar from "./FilterBar";

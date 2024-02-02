@@ -69,8 +69,8 @@ export default function StarHistory({
           <FaChartLine size={22} />
         </Dialog.Trigger>
         <Dialog.Content>
-          <Dialog.Title className="flex w-full flex-row justify-between">
-            <Box className="flex w-full flex-row items-start justify-between">
+          <Dialog.Title className="flex flex-row justify-between w-full">
+            <Box className="flex flex-row items-start justify-between w-full">
               <div> Star History </div>
               <Dialog.Close>
                 <Button className="cursor-pointer hover:underline">

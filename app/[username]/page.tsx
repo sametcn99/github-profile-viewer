@@ -1,8 +1,9 @@
 import { getSiteUrl } from "@/lib/utils";
-import { GithubProvider } from "../context/context";
+import { GithubProvider } from "../context/GithubContext";
 import TabWrapper from "../../components/TabWrapper";
 import { Metadata } from "next";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
+import { StatsProvider } from "../context/StatsContext";
 
 interface SearchParams {
   params: {
@@ -77,7 +78,9 @@ export default async function fetchUserPage(searchParams: SearchParams) {
             repoCount={userData.public_repos}
             gistCount={userData.public_gists}
           >
-            <TabWrapper />
+            <StatsProvider>
+              <TabWrapper />
+            </StatsProvider>
           </GithubProvider>
         </>
       );
