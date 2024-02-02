@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className="flex flex-row flex-wrap items-center space-x-4">
         <SearchBar />
         <Link
-          href="https://github.com/sametcn99/github-profile-viewer"
+          href="https://sametcc.me/github-profile-viewer"
           className="m-2 rounded-2xl text-white hover:bg-secondary"
           aria-label="Github Source Code"
           target="_blank"
