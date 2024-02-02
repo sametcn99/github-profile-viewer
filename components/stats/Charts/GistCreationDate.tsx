@@ -17,7 +17,7 @@ export default function GistCreationDate() {
     value: count,
   }));
 
-  if (Object.keys(gistCreationStats).length === 0) return null;
+  if (Object.entries(gistCreationStats).length === 0) return null;
   return (
     <>
       <Card>

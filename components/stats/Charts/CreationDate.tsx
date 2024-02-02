@@ -16,7 +16,7 @@ export default function CreationDate() {
     category: year,
     value: count,
   }));
-  if (Object.keys(creationStats).length === 0) return null;
+  if (Object.entries(creationStats).length === 0) return null;
   return (
     <>
       <Card>

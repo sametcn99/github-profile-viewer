@@ -1,4 +1,4 @@
-// utils.js
+// stats.ts
 
 /**
  * Calculates the total number of repositories.
@@ -72,8 +72,12 @@ export const calculateLanguageDistribution = (
     const language = repo.language || "Unknown";
     languageDistribution[language] = (languageDistribution[language] || 0) + 1;
   });
-  //  Sort the combined array based on the count in descending order
-  return languageDistribution;
+
+  const sortedLanguageDistribution = Object.entries(languageDistribution)
+    .sort((a, b) => b[1] - a[1])
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
+  return sortedLanguageDistribution;
 };
 
 /**
@@ -100,8 +104,10 @@ export const calculateLicenseDistribution = (
         (licenseDistribution["Unknown"] || 0) + 1;
     }
   });
-
-  return licenseDistribution;
+  const sortedLicenseDistribution = Object.entries(licenseDistribution)
+    .sort((a, b) => b[1] - a[1])
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+  return sortedLicenseDistribution;
 };
 
 /**
@@ -164,8 +170,11 @@ export const calculateTopTopics = (
       });
     }
   });
+  const sortedTopicCounts = Object.entries(topicCounts)
+    .sort((a, b) => b[1] - a[1]) // Değerlere göre sırala
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {}); // Yeniden objeye çevir
 
-  return topicCounts;
+  return sortedTopicCounts;
 };
 
 export const getCreationStatsByYear = (repos: GitHubRepo[]) => {
