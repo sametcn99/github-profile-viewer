@@ -70,13 +70,13 @@ export default function ChartCardWrapper({
       {Object.entries(data).length > 5 && (
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
-            <AccordionTrigger>See All Languages</AccordionTrigger>
+            <AccordionTrigger>See All {title}</AccordionTrigger>
             <AccordionContent>
               <Table.Root>
                 <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
                   <Table.Header>
                     <Table.Row>
-                      <Table.ColumnHeaderCell>Language</Table.ColumnHeaderCell>
+                      <Table.ColumnHeaderCell> {title}</Table.ColumnHeaderCell>
                       <Table.ColumnHeaderCell>Count</Table.ColumnHeaderCell>
                     </Table.Row>
                   </Table.Header>
