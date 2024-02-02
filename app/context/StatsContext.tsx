@@ -8,6 +8,7 @@ import {
   calculateTotalForks,
   calculateTotalRepos,
   calculateTotalStars,
+  calculateTotalTopics,
   findLatestUpdatedRepo,
   findMostStarredRepo,
   findOldestRepo,
@@ -24,6 +25,7 @@ type StatsContextProps = {
   totalStars: number;
   totalGists: number;
   totalForks: number;
+  totalTopics: number;
   averageStarsPerRepo: number;
   starsPerRepo: Record<string, number>;
   languages: Record<string, number>;
@@ -63,13 +65,14 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
   const latestUpdatedRepo = findLatestUpdatedRepo(repos);
   const oldestRepo = findOldestRepo(repos);
   const updatePeriod = findRepoWithLongestUpdatePeriod(repos);
-
+  const totalTopics = calculateTotalTopics(repos);
   // Create the context value object
   const statsContextValue: StatsContextProps = {
     totalRepos,
     totalGists,
     totalStars,
     totalForks,
+    totalTopics,
     averageStarsPerRepo,
     starsPerRepo,
     languages,

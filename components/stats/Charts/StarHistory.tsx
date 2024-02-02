@@ -69,8 +69,8 @@ export default function StarHistory({
           <FaChartLine size={22} />
         </Dialog.Trigger>
         <Dialog.Content>
-          <Dialog.Title className="flex flex-row justify-between w-full">
-            <Box className="flex flex-row items-start justify-between w-full">
+          <Dialog.Title className="flex w-full flex-row justify-between">
+            <Box className="flex w-full flex-row items-start justify-between">
               <div> Star History </div>
               <Dialog.Close>
                 <Button className="cursor-pointer hover:underline">
@@ -81,7 +81,7 @@ export default function StarHistory({
           </Dialog.Title>
           {loading && <Loading />}
           {data.length > 0 && (
-            <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
+            <Box className="h-[25rem] w-full rounded-2xl bg-gray-400 p-2">
               <BarChart
                 xAxis={[
                   {

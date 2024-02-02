@@ -219,3 +219,20 @@ export function getStarsPerRepo(repos: GitHubRepo[]) {
 
   return sortedStarsPerRepo;
 }
+
+/**
+ * Calculates the total number of unique topics across the given GitHub repos.
+ * Iterates through all repos, collects the topics for each repo into a Set to get
+ * unique values, and returns the size of the set.
+ */
+export const calculateTotalTopics = (repos: GitHubRepo[]): number => {
+  let uniqueTopics = new Set<string>();
+  repos.forEach((repo) => {
+    if (repo.topics) {
+      repo.topics.forEach((topic) => {
+        uniqueTopics.add(topic);
+      });
+    }
+  });
+  return uniqueTopics.size;
+};
