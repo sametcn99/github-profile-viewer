@@ -5,7 +5,7 @@ import React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import "@radix-ui/themes/styles.css";
 const inter = Inter({ subsets: ["latin"] });
-import { Theme } from "@radix-ui/themes";
+import { Theme, ThemePanel } from "@radix-ui/themes";
 import Navbar from "../components/Navbar";
 import { getSiteUrl } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -83,7 +83,6 @@ export default function RootLayout({
             <Navbar />
             {children}
           </main>
-          {/* <ThemePanel /> */}
         </Theme>
         <Analytics />
         <SpeedInsights />

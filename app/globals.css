@@ -5,3 +5,12 @@
 .dialog-trigger {
   @apply flex flex-row items-center gap-2 hover:cursor-pointer;
 }
+
+body {
+  opacity: 1;
+  background-image: radial-gradient(
+    #252525 1.9000000000000001px,
+    #0a0a0a 1.9000000000000001px
+  );
+  background-size: 38px 38px;
+}
