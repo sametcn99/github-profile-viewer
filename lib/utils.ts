@@ -27,20 +27,23 @@ export const getSiteUrl = (): string => {
   return baseUrl;
 };
 
-export const createUrlObject = (link: string): URL => {
+export const createUrlObject = (link: string) => {
   if (!link) {
     throw new Error("Link is empty");
   }
-  let newLink = link.startsWith("http") ? link : `https://${link}`;
+  // Ensure 'link' is a string before calling 'startsWith'
+  let newLink =
+    typeof link === "string" && link.startsWith("http")
+      ? link
+      : `https://${link}`;
   let url = new URL(newLink);
   return url;
 };
 
-// utils.ts dosyasında fetchContact fonksiyonunu güncelle
 export async function fetchContact(
   username: string,
   option: string,
-  page: number, // Sayfa numarası parametresi ekle
+  page: number,
   signal: AbortSignal,
 ): Promise<UserData[] | []> {
   try {
