@@ -62,7 +62,7 @@ export default function StatTable({}: {}) {
         className="rounded-xl p-2 hover:bg-black/30"
       >
         <Heading size="4">Average Stars Per Repository</Heading>
-        <Text>{averageStarsPerRepo}</Text>
+        <Text>{averageStarsPerRepo?.toFixed(2)}</Text>
       </Grid>
     </Card>
   );
