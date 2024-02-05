@@ -97,3 +97,22 @@ export function formatNumber(number: number) {
     return number;
   }
 }
+
+export const extractUniqueValues = <T, K extends keyof T>(
+  items: T[],
+  key: K,
+  subKey?: Extract<keyof T[K], string>,
+): string[] => {
+  const uniqueSet = new Set<string>();
+  items.forEach((item) => {
+    const value = item[key];
+    if (typeof value === "object" && value !== null && subKey !== undefined) {
+      if (typeof subKey === "string" && subKey in value) {
+        uniqueSet.add(String(value[subKey]));
+      }
+    } else if (typeof value === "string") {
+      uniqueSet.add(value);
+    }
+  });
+  return Array.from(uniqueSet);
+};
