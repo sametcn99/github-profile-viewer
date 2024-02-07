@@ -24,15 +24,11 @@ export default function Readme({ url, children }: ReadmeProps) {
         const response = await fetch(url);
         // Check if the response is not OK and throw an error
         if (!response.ok) {
-          throw new Error(`Failed to fetch README.md: ${response.statusText}`);
+          console.log(`Failed to fetch README.md: ${url}`);
         }
         const text = await response.text();
         // Check if the content is not the GitHub 404 message
-        if (text !== "404: Not Found") {
-          setContent(text);
-        } else {
-          setError(true);
-        }
+        text === "404: Not Found" ? setError(true) : setContent(text);
       } catch (err) {
         // Catch any network or other errors and set the error state
         console.error(err);
