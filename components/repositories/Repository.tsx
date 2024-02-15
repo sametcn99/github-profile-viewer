@@ -97,9 +97,11 @@ export default function Repository({ repo }: { repo: GitHubRepo }) {
       </Box>
       <Box className="flex flex-col items-start">
         <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-          <Text className={"flex flex-row items-center gap-2 font-thin "}>
-            <GoLaw /> {repo.license?.spdx_id}
-          </Text>
+          {repo.license?.spdx_id && (
+            <Text className={"flex flex-row items-center gap-2 font-thin "}>
+              <GoLaw /> {repo.license?.spdx_id}
+            </Text>
+          )}
           {repo.language && (
             <>
               {repo.language && languageIcons[repo.language] ? (

@@ -117,16 +117,18 @@ export default function ReposCard({
       </Box>
       <Box className="flex flex-col items-start">
         <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-          <Text
-            onClick={() => handleLicenseClick(repo.license?.spdx_id)}
-            className={
-              selectedLicense === repo.license?.spdx_id
-                ? "flex scale-105 flex-row items-center gap-2 font-bold hover:cursor-pointer"
-                : "flex flex-row items-center gap-2 font-thin hover:cursor-pointer"
-            }
-          >
-            <GoLaw /> {repo.license?.spdx_id}
-          </Text>
+          {repo.license.spdx_id && (
+            <Text
+              onClick={() => handleLicenseClick(repo.license?.spdx_id)}
+              className={
+                selectedLicense === repo.license?.spdx_id
+                  ? "flex scale-105 flex-row items-center gap-2 font-bold hover:cursor-pointer"
+                  : "flex flex-row items-center gap-2 font-thin hover:cursor-pointer"
+              }
+            >
+              <GoLaw /> {repo.license?.spdx_id}
+            </Text>
+          )}
           {repo.language && (
             <>
               {repo.language && languageIcons[repo.language] ? (
