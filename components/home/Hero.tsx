@@ -4,7 +4,12 @@ import ChromeStore from "./ChromeStore";
 export default function Hero() {
   return (
     <Section className="flex flex-col items-center justify-center gap-4 text-center ">
-      <Heading size="8">Github Profile Viewer</Heading>
+      <Heading
+        size="9"
+        className="bg-gradient-to-r from-blue-600 via-green-600 to-purple-600 bg-clip-text text-transparent"
+      >
+        Github Profile Viewer
+      </Heading>
       <Text className="max-w-[50rem]">
         GitHub Profile Viewer provides comprehensive statistics of GitHub
         profiles, showcasing a user&apos;s coding journey and contributions to
