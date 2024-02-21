@@ -4,12 +4,13 @@ import "./globals.css";
 import React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import "@radix-ui/themes/styles.css";
-const inter = Inter({ subsets: ["latin"] });
-import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import Navbar from "../components/Navbar";
 import { getSiteUrl } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Footer from "@/components/home/Footer";
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -82,6 +83,7 @@ export default function RootLayout({
           <main className=" flex w-full flex-col gap-4 p-2 pt-4 transition-all duration-1000 sm:w-[30rem] md:w-[40rem] lg:w-[60rem] xl:w-[70rem]">
             <Navbar />
             {children}
+            <Footer />
           </main>
         </Theme>
         <Analytics />

@@ -81,7 +81,9 @@ export default function SearchBar({ className }: { className?: string }) {
 
   return (
     <Dialog.Root>
-      <Dialog.Trigger className={cn("hover:cursor-pointer", className)}>
+      <Dialog.Trigger
+        className={cn("hover:cursor-pointer hover:underline", className)}
+      >
         <Button>
           <FaSearch />
           Search
