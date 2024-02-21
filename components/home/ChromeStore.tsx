@@ -9,8 +9,8 @@ export default function ChromeStore() {
         target="_blank"
       >
         <Image
-          width={180}
-          height={40}
+          height={56.25}
+          width={186}
           src="/icons/chrome-extension-dark.png"
           alt="GPV Opener"
           className="shadow-md shadow-gray-700 transition-all duration-500 hover:scale-105"
