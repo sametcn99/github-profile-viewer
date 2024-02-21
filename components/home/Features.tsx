@@ -7,7 +7,7 @@ export default function Features() {
       <Heading size="8" className="text-3xl font-bold">
         Features
       </Heading>
-      <Box className="flex flex-row flex-wrap items-center justify-center gap-4 break-words">
+      <Box className="grid gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
         <FeatureBox
           header="Effortless Navigation"
           span="Github Profile Viewer ensures effortless navigation through GitHub profiles. Whether you're a seasoned open-source enthusiast or a curious observer, the user-friendly interface simplifies the exploration process."

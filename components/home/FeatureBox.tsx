@@ -8,7 +8,7 @@ export default function FeatureBox({
   span: string;
 }) {
   return (
-    <Card className="h-[18rem] w-[20rem] p-4">
+    <Card className="p-4">
       <Heading>{header}</Heading>
       <Text>{span}</Text>
     </Card>
