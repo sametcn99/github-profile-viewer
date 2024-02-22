@@ -117,7 +117,7 @@ export default function ReposCard({
       </Box>
       <Box className="flex flex-col items-start">
         <Box className="item flex flex-col flex-wrap gap-1 text-left text-xs">
-          {repo.license.spdx_id && (
+          {repo.license?.spdx_id && (
             <Text
               onClick={() => handleLicenseClick(repo.license?.spdx_id)}
               className={
