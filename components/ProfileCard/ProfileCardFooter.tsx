@@ -1,5 +1,5 @@
 import SocialLinks from "./SocialLinks";
-import { createUrlObject } from "@/lib/utils";
+import { checkEmail, createUrlObject } from "@/lib/utils";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { TfiWorld } from "react-icons/tfi";
 import { Box, Link, Text } from "@radix-ui/themes";
@@ -27,12 +27,18 @@ export default function ProfileCardFooter({
       <Box className="flex w-full flex-row flex-wrap items-center justify-center gap-2">
         {userData.blog && (
           <Link
-            href={createUrlObject(userData.blog).href}
+            href={
+              checkEmail(userData.blog)
+                ? `mailto:${userData.blog}`
+                : createUrlObject(userData.blog).href
+            }
             className="dialog-trigger"
             target="_blank"
           >
             <TfiWorld />
-            {createUrlObject(userData.blog).host}
+            {checkEmail(userData.blog)
+              ? `${userData.blog}`
+              : createUrlObject(userData.blog).href}
           </Link>
         )}
         {userData.company && (

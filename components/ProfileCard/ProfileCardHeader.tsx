@@ -36,7 +36,7 @@ export default function ProfileCardHeader({
             @{userData.login}
           </Link>
           {userData.bio && (
-            <Text className="break-all text-base font-normal md:break-normal">
+            <Text className="break-words text-base font-normal md:break-normal">
               {userData.bio}
             </Text>
           )}
