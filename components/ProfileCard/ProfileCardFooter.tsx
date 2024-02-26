@@ -32,7 +32,7 @@ export default function ProfileCardFooter({
                 ? `mailto:${userData.blog}`
                 : createUrlObject(userData.blog).href
             }
-            className="dialog-trigger"
+            className="dialog-trigger text-white"
             target="_blank"
           >
             <TfiWorld />
