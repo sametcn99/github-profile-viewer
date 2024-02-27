@@ -74,7 +74,7 @@ export default function ChartCardWrapper({
             <AccordionTrigger>See All</AccordionTrigger>
             <AccordionContent>
               <Table.Root>
-                <ScrollArea className="h-[15rem] w-full rounded-2xl border p-4">
+                <ScrollArea className="h-[20rem] w-full rounded-2xl border p-4">
                   <Table.Header>
                     <Table.Row>
                       <Table.ColumnHeaderCell> {title}</Table.ColumnHeaderCell>
