@@ -15,6 +15,7 @@ import Readme from "../Readme";
 import { languageIcons } from "../icons/LanguageIcons";
 import { GoLaw } from "react-icons/go";
 import StarHistory from "../stats/Charts/StarHistory";
+import { TfiWorld } from "react-icons/tfi";
 
 interface ReposCardProps {
   repo: GitHubRepo;
@@ -40,75 +41,51 @@ export default function ReposCard({
   return (
     <Card key={index}>
       <Box className="flex flex-row gap-4 ">
-        <Box className="flex w-full flex-row items-center justify-between gap-2">
-          <Box className="flex w-full flex-row flex-wrap items-center gap-2 break-all text-start">
-            <Heading>
-              <Link href={repo.html_url} target="_blank">
-                {repo.name}
-              </Link>
-            </Heading>
-            <Box className="flex w-fit flex-row flex-wrap items-center justify-start gap-2">
-              {repo.fork && (
-                <Tooltip content="Forked Repo">
-                  <Box>
-                    <FaCodeFork size={22} />
-                  </Box>
-                </Tooltip>
-              )}
-              <Tooltip content="Show Readme">
-                <Box className="flex flex-row items-center gap-2">
-                  <Readme
-                    url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
-                  >
-                    <span></span>
-                  </Readme>
+        <Box className="flex w-full flex-row flex-wrap items-center gap-2 break-all text-start">
+          <Heading>
+            <Link href={repo.html_url} target="_blank">
+              {repo.name}
+            </Link>
+          </Heading>
+          <Box className="flex w-fit flex-row flex-wrap items-center justify-start gap-2">
+            {repo.fork && (
+              <Tooltip content="Forked Repo">
+                <Box>
+                  <FaCodeFork size={22} />
                 </Box>
               </Tooltip>
-              {repo.stargazers_count > 0 && (
-                <Tooltip content="Total Stars">
-                  <Box className="flex flex-row gap-2">
-                    <BsFillStarFill size={22} />
-                    <Text>{formatNumber(repo.stargazers_count)}</Text>
-                  </Box>
-                </Tooltip>
-              )}
-              {repo.stargazers_count > 0 && (
-                <StarHistory
-                  username={repo.owner.login}
-                  repo={repo.name}
-                  option="stargazers"
-                />
-              )}
-            </Box>
-          </Box>
-          <Box>
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger>
-                <Button className="hover:cursor-pointer">Open</Button>
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Content>
-                <DropdownMenu.Item>
-                  <Link href={repo.html_url} target="_blank">
-                    Github
-                  </Link>
-                </DropdownMenu.Item>
-                <DropdownMenu.Item>
-                  <Link
-                    href={repo.html_url.replace("github.com", "github.dev")}
-                    target="_blank"
-                  >
-                    Github.DEV
-                  </Link>
-                </DropdownMenu.Item>
-                {repo.homepage && (
-                  <DropdownMenu.Item>
-                    <Link href={repo.homepage} target="_blank">
-                      Website
-                    </Link>
-                  </DropdownMenu.Item>
-                )}
-              </DropdownMenu.Content>
-            </DropdownMenu.Root>
+            )}
+            <Tooltip content="Show Readme">
+              <Box className="flex flex-row items-center gap-2">
+                <Readme
+                  url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
+                >
+                  <span></span>
+                </Readme>
+              </Box>
+            </Tooltip>
+            {repo.homepage && (
+              <Tooltip content="Home Page">
+                <Link href={repo.homepage} target="_blank">
+                  <TfiWorld size={22} color="white" />
+                </Link>
+              </Tooltip>
+            )}
+            {repo.stargazers_count > 0 && (
+              <Tooltip content="Total Stars">
+                <Box className="flex flex-row gap-2">
+                  <BsFillStarFill size={22} />
+                  <Text>{formatNumber(repo.stargazers_count)}</Text>
+                </Box>
+              </Tooltip>
+            )}
+            {repo.stargazers_count > 0 && (
+              <StarHistory
+                username={repo.owner.login}
+                repo={repo.name}
+                option="stargazers"
+              />
+            )}
           </Box>
         </Box>
       </Box>
