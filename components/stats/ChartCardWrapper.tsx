@@ -47,11 +47,6 @@ export default function ChartCardWrapper({
       <Box className="h-[20rem] w-full rounded-2xl bg-gray-400 p-2">
         {Object.keys(data).length > 0 && (
           <PieChart
-            sx={{
-              color: "green",
-              WebkitTextStrokeColor: "white",
-              fontWeight: "bold",
-            }}
             series={[
               {
                 data: Object.entries(data) // Convert object to array of [key, value] pairs
@@ -62,6 +57,12 @@ export default function ChartCardWrapper({
                     value: Number(count),
                     label: name,
                   })),
+                highlightScope: { faded: "global", highlighted: "item" },
+                faded: {
+                  innerRadius: 30,
+                  additionalRadius: -30,
+                  color: "gray",
+                },
               },
             ]}
           />
