@@ -38,7 +38,7 @@ export default function Stats() {
             <CreationDate />
             <GistCreationDate />
             <ReposWrapper />
-            <DownloadData />
+            {/* <DownloadData /> */}
           </>
         )}
       </Flex>

@@ -42,7 +42,6 @@ export default function SearchBar({ className }: { className?: string }) {
     }
     try {
       const url = `${getSiteUrl()}/api/github?option=search&username=${inputValue}`;
-      console.log(url);
       const response = await fetch(url, { cache: "no-store" });
       if (!response.ok) {
         throw new Error(`HTTP error! Status code: ${response.status}`);
