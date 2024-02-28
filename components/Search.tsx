@@ -52,7 +52,7 @@ export default function SearchBar({ className }: { className?: string }) {
     } catch (error) {
       console.error("Could not fetch data:", error);
     }
-  }, 350);
+  }, 100);
 
   useEffect(() => {
     fetchData();
