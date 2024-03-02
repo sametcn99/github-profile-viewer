@@ -99,12 +99,8 @@ export default function Repository({ repo }: { repo: GitHubRepo }) {
               )}
             </>
           )}
-          <Text>
-            Created at: {new Date(repo.created_at).toLocaleDateString()}
-          </Text>
-          <Text>
-            Last update: {new Date(repo.pushed_at).toLocaleDateString()}
-          </Text>
+          <Text>Last update: {new Date(repo.pushed_at).toUTCString()}</Text>
+          <Text>Created at: {new Date(repo.created_at).toUTCString()}</Text>
         </Box>
         <Box className="flex w-full flex-row flex-wrap justify-center gap-2">
           {repo.topics.map((topic: any, index: any) => (
