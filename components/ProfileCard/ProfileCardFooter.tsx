@@ -11,7 +11,7 @@ export default function ProfileCardFooter({
   userData: UserData;
 }) {
   return (
-    <Box className="flex w-full flex-row flex-wrap justify-center gap-2">
+    <Box className="flex flex-row flex-wrap justify-center w-full gap-2">
       <Box className="flex flex-row flex-wrap justify-center gap-2">
         <ContactList
           option="followers"
@@ -24,7 +24,7 @@ export default function ProfileCardFooter({
           count={userData.following}
         />
       </Box>
-      <Box className="flex w-full flex-row flex-wrap items-center justify-center gap-2">
+      <Box className="flex flex-row flex-wrap items-center justify-center w-full gap-2">
         {userData.blog && (
           <Link
             href={
@@ -32,7 +32,7 @@ export default function ProfileCardFooter({
                 ? `mailto:${userData.blog}`
                 : createUrlObject(userData.blog).href
             }
-            className="dialog-trigger text-white"
+            className="text-white dialog-trigger"
             target="_blank"
           >
             <TfiWorld />
@@ -69,7 +69,11 @@ export default function ProfileCardFooter({
           </>
         )}
         <Readme
-          url={`https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`}
+          url={
+            userData.type === "User"
+              ? `https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`
+              : `https://raw.githubusercontent.com/${userData.login}/.github/main/profile/README.md`
+          }
         >
           README.md
         </Readme>

@@ -57,9 +57,9 @@ export default function Readme({ url, children }: ReadmeProps) {
             </Box>
           </Dialog.Trigger>
           <Dialog.Content>
-            <Dialog.Title className="flex w-full flex-row justify-between">
+            <Dialog.Title className="flex flex-row justify-between w-full">
               <Dialog.Close>
-                <Box className="flex w-full flex-row items-center justify-between gap-3">
+                <Box className="flex flex-row items-center justify-between w-full gap-3">
                   <Text>README.md</Text>
                   <Button
                     variant="soft"
