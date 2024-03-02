@@ -1,6 +1,6 @@
 import SocialLinks from "./SocialLinks";
 import { checkEmail, createUrlObject } from "@/lib/utils";
-import { MdOutlineWorkOutline } from "react-icons/md";
+import { MdEmail, MdOutlineWorkOutline } from "react-icons/md";
 import { TfiWorld } from "react-icons/tfi";
 import { Box, Link, Text } from "@radix-ui/themes";
 import Readme from "@/components/Readme";
@@ -35,7 +35,7 @@ export default function ProfileCardFooter({
             className="text-white dialog-trigger"
             target="_blank"
           >
-            <TfiWorld />
+            {checkEmail(userData.blog) ? <MdEmail /> : <TfiWorld />}
             {checkEmail(userData.blog)
               ? `${userData.blog}`
               : createUrlObject(userData.blog).href}
