@@ -1,11 +1,11 @@
 ---
-title: "GitHub Profile Viewer Opener Chrome Extension"
+title: "GitHub Profile Viewer Chrome Extension"
 date: "2024-03-03"
 description: "This Chrome extension allows you to easily open a GitHub Profile on Github Profile Viewer Website."
 author: "admin"
 keywords: "GitHub Profile Viewer, GPV Chrome Extension"
 ---
-# GitHub Profile Viewer Opener Chrome Extension
+# GitHub Profile Viewer Chrome Extension
 
 This Chrome extension allows you to easily open a GitHub Profile on [Github Profile Viewer](https://githubprofileviewer.com/).
 Install the GPV extension to enhance your experience on Github, Gists, and GitLab profiles. Once installed, simply click on the extension while browsing profiles on these platforms to access comprehensive Profile Statistics through the Github Profile Viewer. Elevate your profile tracking and analysis by integrating GPV into your browser, allowing for a seamless and enriched exploration of Github, Gists, and GitLab profiles.
