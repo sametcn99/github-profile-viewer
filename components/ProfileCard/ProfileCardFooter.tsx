@@ -5,7 +5,6 @@ import { TfiWorld } from "react-icons/tfi";
 import { Box, Link, Text } from "@radix-ui/themes";
 import Readme from "@/components/Readme";
 import ContactList from "./ContactList";
-import { Suspense } from "react";
 export default function ProfileCardFooter({
   userData,
 }: {
@@ -69,17 +68,15 @@ export default function ProfileCardFooter({
             })}
           </>
         )}
-        <Suspense fallback={<></>}>
-          <Readme
-            url={
-              userData.type === "User"
-                ? `https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`
-                : `https://raw.githubusercontent.com/${userData.login}/.github/main/profile/README.md`
-            }
-          >
-            README.md
-          </Readme>
-        </Suspense>
+        <Readme
+          url={
+            userData.type === "User"
+              ? `https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`
+              : `https://raw.githubusercontent.com/${userData.login}/.github/main/profile/README.md`
+          }
+        >
+          README.md
+        </Readme>
         <SocialLinks username={userData.login} option="social" />
       </Box>
     </Box>
