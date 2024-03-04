@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     ...posts.map((post: BlogPost) => ({
-      url: `${getSiteUrl()}/blog/${post.title}`,
+      url: `${getSiteUrl()}/blog/${post.id}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as
         | "monthly"
