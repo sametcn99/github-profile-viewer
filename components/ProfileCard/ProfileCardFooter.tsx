@@ -5,13 +5,14 @@ import { TfiWorld } from "react-icons/tfi";
 import { Box, Link, Text } from "@radix-ui/themes";
 import Readme from "@/components/Readme";
 import ContactList from "./ContactList";
+import { Suspense } from "react";
 export default function ProfileCardFooter({
   userData,
 }: {
   userData: UserData;
 }) {
   return (
-    <Box className="flex flex-row flex-wrap justify-center w-full gap-2">
+    <Box className="flex w-full flex-row flex-wrap justify-center gap-2">
       <Box className="flex flex-row flex-wrap justify-center gap-2">
         <ContactList
           option="followers"
@@ -24,7 +25,7 @@ export default function ProfileCardFooter({
           count={userData.following}
         />
       </Box>
-      <Box className="flex flex-row flex-wrap items-center justify-center w-full gap-2">
+      <Box className="flex w-full flex-row flex-wrap items-center justify-center gap-2">
         {userData.blog && (
           <Link
             href={
@@ -32,7 +33,7 @@ export default function ProfileCardFooter({
                 ? `mailto:${userData.blog}`
                 : createUrlObject(userData.blog).href
             }
-            className="text-white dialog-trigger"
+            className="dialog-trigger text-white"
             target="_blank"
           >
             {checkEmail(userData.blog) ? <MdEmail /> : <TfiWorld />}
@@ -68,15 +69,17 @@ export default function ProfileCardFooter({
             })}
           </>
         )}
-        <Readme
-          url={
-            userData.type === "User"
-              ? `https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`
-              : `https://raw.githubusercontent.com/${userData.login}/.github/main/profile/README.md`
-          }
-        >
-          README.md
-        </Readme>
+        <Suspense fallback={<></>}>
+          <Readme
+            url={
+              userData.type === "User"
+                ? `https://raw.githubusercontent.com/${userData.login}/${userData.login}/master/README.md`
+                : `https://raw.githubusercontent.com/${userData.login}/.github/main/profile/README.md`
+            }
+          >
+            README.md
+          </Readme>
+        </Suspense>
         <SocialLinks username={userData.login} option="social" />
       </Box>
     </Box>

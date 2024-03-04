@@ -16,6 +16,7 @@ import { languageIcons } from "../icons/LanguageIcons";
 import { GoLaw } from "react-icons/go";
 import StarHistory from "../stats/Charts/StarHistory";
 import { TfiWorld } from "react-icons/tfi";
+import { Suspense } from "react";
 
 export default function Repository({ repo }: { repo: GitHubRepo }) {
   return (
@@ -37,11 +38,13 @@ export default function Repository({ repo }: { repo: GitHubRepo }) {
             )}
             <Tooltip content="Show Readme">
               <Box className="flex flex-row items-center gap-2">
-                <Readme
-                  url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
-                >
-                  <span></span>
-                </Readme>
+                <Suspense fallback={<></>}>
+                  <Readme
+                    url={`https://raw.githubusercontent.com/${repo.owner.login}/${repo.name}/master/README.md`}
+                  >
+                    <span></span>
+                  </Readme>
+                </Suspense>
               </Box>
             </Tooltip>
             {repo.homepage && (
