@@ -3,7 +3,7 @@ import FeatureBox from "./FeatureBox";
 
 export default function Features() {
   return (
-    <Section className="flex flex-col items-center gap-4">
+    <Section className="flex flex-col items-center gap-4" id="features">
       <Heading size="8" className="text-3xl font-bold">
         Features
       </Heading>

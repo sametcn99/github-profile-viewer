@@ -9,14 +9,14 @@ export default function RenderPosts() {
 
   // Render each post as a 'PostCard' component separated by a 'Divider'
   return (
-    <section className="flex w-full flex-col gap-4">
+    <section className="flex w-full flex-col gap-4" id="blog-posts">
       <Heading as="h2" size="4" className="mb-4">
         Read more about GPV
       </Heading>
       {posts.map((post: BlogPost, index: number) => (
         <React.Fragment key={index}>
           <PostCard post={post} key={`${index}-post-card`} />
-          <Separator className="w-full" size="4" key={`${index}-separator`} />
+          <Separator size="4" key={`${index}-separator`} />
         </React.Fragment>
       ))}
     </section>
