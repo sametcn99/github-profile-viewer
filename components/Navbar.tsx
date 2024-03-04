@@ -1,5 +1,6 @@
-import { Box, Link } from "@radix-ui/themes";
+import { Box } from "@radix-ui/themes";
 import SearchBar from "./Search";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
