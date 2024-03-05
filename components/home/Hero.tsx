@@ -1,5 +1,6 @@
 import { Heading, Section, Text } from "@radix-ui/themes";
 import ChromeStore from "./ChromeStore";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -18,6 +19,13 @@ export default function Hero() {
         API to retrieve comprehensive information.
       </Text>
       <ChromeStore />
+      <Image
+        src="/icons/octocat.png"
+        alt="octocat"
+        width={350}
+        height={350}
+        className="absolute left-0 -z-10 hidden lg:block"
+      />
     </Section>
   );
 }
