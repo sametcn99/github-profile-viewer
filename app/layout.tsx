@@ -90,12 +90,12 @@ export default function RootLayout({
         </Theme>
         <Analytics />
         <SpeedInsights />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9043926174238983"
+          crossOrigin="anonymous"
+        ></script>
       </body>
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9043926174238983"
-        crossOrigin="anonymous"
-      ></script>
       <GoogleAnalytics gaId="G-N9EB4H11MT" />
     </html>
   );
