@@ -72,6 +72,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="google-adsense-account" content="ca-pub-9043926174238983" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9043926174238983"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body
         className={`${inter.className} flex min-h-screen w-full justify-center px-1 transition-all duration-1000 md:px-4`}
@@ -90,11 +95,6 @@ export default function RootLayout({
         </Theme>
         <Analytics />
         <SpeedInsights />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9043926174238983"
-          crossOrigin="anonymous"
-        ></script>
       </body>
       <GoogleAnalytics gaId="G-N9EB4H11MT" />
     </html>
