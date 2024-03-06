@@ -1,6 +1,8 @@
 
 # Github Profile Viewer
 
+<img src="https://raw.githubusercontent.com/sametcn99/github-profile-viewer/master/public/icons/icon300.png" alt="Google Chrome Extension" width="200">
+
 Welcome to the GitHub Profile Viewer, a dynamic web platform powered by Next.js and Radix UI. This platform provides a comprehensive and user-friendly interface for exploring GitHub profiles and gaining valuable insights into developers' open-source contributions.
 
 <a href="https://chromewebstore.google.com/detail/gpv-opener/abgechjdbcnlcdcmhkaakobeoimjgkmb">
