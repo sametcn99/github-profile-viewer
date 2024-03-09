@@ -1,5 +1,5 @@
 "use client";
-import { getSiteUrl } from "@/lib/utils";
+import { createUrlObject, getSiteUrl } from "@/lib/utils";
 import { Button, DropdownMenu, Link, Text } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import { FaLink } from "react-icons/fa6";
@@ -52,13 +52,14 @@ export default function SocialLinks({ username, option }: SocialLinksProps) {
                 <Link
                   href={item.url}
                   target="_blank"
-                  className="flex flex-row items-center gap-2"
+                  className="flex flex-row items-center gap-2 text-base"
                 >
-                  {item.provider === "generic"
-                    ? item.url.replace("https://", "").substring(0, 50)
-                    : socialMediaIcons[item.provider.toLowerCase()]}
-                  {item.provider !== "generic" &&
-                    item.url.replace("https://", "").substring(0, 50)}
+                  {
+                    socialMediaIcons[
+                      createUrlObject(item.url).hostname.toLowerCase()
+                    ]
+                  }
+                  {item.url.replace("https://", "").substring(0, 50)}
                 </Link>
               </DropdownMenu.Item>
             ))}
