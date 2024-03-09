@@ -59,7 +59,9 @@ export default function SocialLinks({ username, option }: SocialLinksProps) {
                       createUrlObject(item.url).hostname.toLowerCase()
                     ]
                   }
-                  {item.url.replace("https://", "").substring(0, 50)}
+                  {createUrlObject(item.url).hostname +
+                    "/" +
+                    createUrlObject(item.url).pathname.slice(1)}
                 </Link>
               </DropdownMenu.Item>
             ))}
