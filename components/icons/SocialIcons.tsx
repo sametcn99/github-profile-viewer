@@ -50,6 +50,7 @@ export const socialMediaIcons: Record<string, JSX.Element> = {
   "bento.me": <SiBento />,
   "instagram.com": <FaInstagram />,
   "www.linkedin.com": <FaLinkedin />,
+  "linkedin.com": <FaLinkedin />,
   "github.com": <FaGithub />,
   "gist.github.com": <FaGithub />,
   "snapchat.com": <FaSnapchat />,
