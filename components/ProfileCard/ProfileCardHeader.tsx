@@ -59,12 +59,6 @@ export default function ProfileCardHeader({
             </Text>
           )}
           <Text className="text-base font-normal">
-            Public Repositories: {userData.public_repos}
-          </Text>
-          <Text className="text-base font-normal">
-            Public Gists: {userData.public_gists}
-          </Text>
-          <Text className="text-base font-normal">
             Last Update: {new Date(userData.updated_at).toUTCString()}
           </Text>
           <Text className="text-base font-normal">
