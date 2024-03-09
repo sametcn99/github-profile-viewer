@@ -3,13 +3,14 @@ import { HiLocationMarker } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { GrOrganization } from "react-icons/gr";
+import { Separator } from "@radix-ui/react-select";
 export default function ProfileCardHeader({
   userData,
 }: {
   userData: UserData;
 }) {
   return (
-    <Box className="flex flex-col">
+    <Box className="flex flex-col py-6">
       <Box className="flex flex-col items-center justify-center gap-6 md:flex-row ">
         <Box className="absolute right-5 top-5">
           <Tooltip content={`Profile Type: ${userData.type}`}>
