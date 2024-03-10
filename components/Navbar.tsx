@@ -1,6 +1,7 @@
 import { Box } from "@radix-ui/themes";
 import SearchBar from "./Search";
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   return (
@@ -14,6 +15,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex flex-row flex-wrap items-center space-x-4">
+        <UserButton />
         <SearchBar />
       </div>
     </Box>
