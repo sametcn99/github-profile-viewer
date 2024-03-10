@@ -4,6 +4,7 @@ import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { GrOrganization } from "react-icons/gr";
 import { Separator } from "@radix-ui/react-select";
+import { isUrl } from "@/lib/utils";
 export default function ProfileCardHeader({
   userData,
 }: {
@@ -38,7 +39,18 @@ export default function ProfileCardHeader({
           </Link>
           {userData.bio && (
             <Text className="break-words text-base font-normal md:break-normal">
-              {userData.bio}
+              {userData.bio.split(" ").map((word) => {
+                if (isUrl(word)) {
+                  const url = word.trim();
+                  return (
+                    <Link key={url} href={url} target="_blank">
+                      {url}
+                    </Link>
+                  );
+                } else {
+                  return word + " ";
+                }
+              })}
             </Text>
           )}
           {userData.location && (

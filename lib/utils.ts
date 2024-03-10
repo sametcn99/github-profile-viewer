@@ -139,3 +139,9 @@ export default function getFormattedDate(dateString: string): string {
   // Use the formatter to format the date string.
   return formatter.format(date);
 }
+
+export const isUrl = (word: string) => {
+  return word.match(
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+  );
+};
