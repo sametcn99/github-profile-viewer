@@ -1,5 +1,5 @@
 import SocialLinks from "./SocialLinks";
-import { checkEmail, createUrlObject } from "@/lib/utils";
+import { checkEmail, createUrlObject, isGithubProfile } from "@/lib/utils";
 import { MdEmail, MdOutlineWorkOutline } from "react-icons/md";
 import { TfiWorld } from "react-icons/tfi";
 import { Box, Link, Text } from "@radix-ui/themes";
@@ -41,7 +41,7 @@ export default function ProfileCardFooter({
               : createUrlObject(userData.blog).href}
           </Link>
         )}
-        {userData.company && (
+        {/* {userData.company && (
           <>
             {userData.company.split(", ").map((comp) => {
               if (comp.startsWith("@")) {
@@ -66,6 +66,31 @@ export default function ProfileCardFooter({
                 );
               }
             })}
+          </>
+        )} */}
+        {userData.company && (
+          <>
+            <Text className="flex flex-row items-center gap-2 overflow-hidden break-words text-base font-normal md:break-normal">
+              <MdOutlineWorkOutline />
+              <Text>
+                {userData.company.split(" ").map((word) => {
+                  if (isGithubProfile(word)) {
+                    const url = word.trim();
+                    return (
+                      <Link
+                        key={url}
+                        href={`https://github.com/${url.replace(/[^a-zA-Z0-9@]/g, "")}`}
+                        target="_blank"
+                      >
+                        {url}{" "}
+                      </Link>
+                    );
+                  } else {
+                    return word + " ";
+                  }
+                })}
+              </Text>
+            </Text>
           </>
         )}
         <Readme
