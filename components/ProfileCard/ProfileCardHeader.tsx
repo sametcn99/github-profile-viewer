@@ -5,6 +5,7 @@ import { FaUser } from "react-icons/fa";
 import { GrOrganization } from "react-icons/gr";
 import { Separator } from "@radix-ui/react-select";
 import { isUrl } from "@/lib/utils";
+import CustomTextArea from "../ui/CustomTextArea";
 export default function ProfileCardHeader({
   userData,
 }: {
@@ -37,22 +38,7 @@ export default function ProfileCardHeader({
           >
             @{userData.login}
           </Link>
-          {userData.bio && (
-            <Text className="break-words text-base font-normal md:break-normal">
-              {userData.bio.split(" ").map((word) => {
-                if (isUrl(word)) {
-                  const url = word.trim();
-                  return (
-                    <Link key={url} href={url} target="_blank">
-                      {url}
-                    </Link>
-                  );
-                } else {
-                  return word + " ";
-                }
-              })}
-            </Text>
-          )}
+          {userData.bio && <CustomTextArea text={userData.bio} logo={<></>} />}
           {userData.location && (
             <Text className="flex flex-row gap-1 text-base font-normal">
               <HiLocationMarker size={18} />

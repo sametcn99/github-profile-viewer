@@ -5,6 +5,8 @@ import { TfiWorld } from "react-icons/tfi";
 import { Box, Link, Text } from "@radix-ui/themes";
 import Readme from "@/components/Readme";
 import ContactList from "./ContactList";
+import CustomTextArea from "../ui/CustomTextArea";
+
 export default function ProfileCardFooter({
   userData,
 }: {
@@ -43,34 +45,7 @@ export default function ProfileCardFooter({
         )}
         {/* {userData.company && (
           <>
-            {userData.company.split(", ").map((comp) => {
-              if (comp.startsWith("@")) {
-                const name = comp.slice(1);
-                return (
-                  <Link
-                    key={name}
-                    href={`https://github.com/${name}`}
-                    target="_blank"
-                    className="flex flex-row items-center gap-2"
-                  >
-                    <MdOutlineWorkOutline />
-                    <Text> @{name}</Text>
-                  </Link>
-                );
-              } else {
-                return (
-                  <span key={comp} className="flex flex-row items-center gap-2">
-                    <MdOutlineWorkOutline />
-                    {comp}
-                  </span>
-                );
-              }
-            })}
-          </>
-        )} */}
-        {userData.company && (
-          <>
-            <Text className="flex flex-row items-center gap-2 overflow-hidden break-words text-base font-normal md:break-normal">
+            <Text className="flex flex-row items-center gap-2 overflow-hidden text-base font-normal break-words md:break-normal">
               <MdOutlineWorkOutline />
               <Text>
                 {userData.company.split(" ").map((word) => {
@@ -92,6 +67,12 @@ export default function ProfileCardFooter({
               </Text>
             </Text>
           </>
+        )} */}
+        {userData.company && (
+          <CustomTextArea
+            text={userData.company}
+            logo={<MdOutlineWorkOutline />}
+          />
         )}
         <Readme
           url={
