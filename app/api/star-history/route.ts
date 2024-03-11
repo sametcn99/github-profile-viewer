@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import createOctokitInstance from "../github/createOctokitInstance";
+import { auth } from "@clerk/nextjs";
 
 /**
  * Fetches stargazers for a GitHub repo from the GitHub API.
@@ -35,10 +36,11 @@ export async function GET(request: NextRequest) {
   const username = searchParams.get("username");
   const repo = searchParams.get("repo");
   const option = searchParams.get("option");
+  const { userId } = auth();
 
   if (username && repo && option === "stargazers") {
     let responseData = [];
-    let octokit = await createOctokitInstance();
+    let octokit = await createOctokitInstance(userId ? userId : undefined);
 
     const initialResponse = await octokit.rest.activity.listStargazersForRepo({
       owner: username,

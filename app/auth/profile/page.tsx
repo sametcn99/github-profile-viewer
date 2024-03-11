@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button, Card, Grid, Tooltip } from "@radix-ui/themes";
+import { Button, Card, Tooltip } from "@radix-ui/themes";
 import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import FaqAccordion from "@/components/auth/FaqAccordion";
@@ -16,7 +16,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = `${getSiteUrl()}/api/github?option=rate&authId=${user?.id}`;
+        const url = `${getSiteUrl()}/api/github?option=rate`;
         if (user?.id) {
           setToken(user.unsafeMetadata.token as string);
           const response = await fetch(url);
@@ -39,7 +39,6 @@ export default function Page() {
 
   return (
     <>
-      <p className="text-3xl font-bold text-red-600">TESTING!!!</p>
       <FaqAccordion />
       <Card>
         <div className="flex flex-col gap-2">
