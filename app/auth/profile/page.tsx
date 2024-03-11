@@ -16,6 +16,7 @@ import FaqAccordion from "@/components/auth/FaqAccordion";
 import { convertUnixTimestampToDate, getSiteUrl } from "@/lib/utils";
 import { GoEyeClosed } from "react-icons/go";
 import { GoEye } from "react-icons/go";
+import Link from "next/link";
 
 export default function Page() {
   const { user } = useUser();
@@ -25,6 +26,7 @@ export default function Page() {
     useState<GitHubRateLimitResponse>();
   const [loading, setLoading] = useState(true);
   const [masked, setMasked] = useState(true);
+  const [clerkUserIdMasked, setClerkUserIdMasked] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -186,6 +188,67 @@ export default function Page() {
                   rateLimitRemaining?.data.resources.search.reset,
                 ).toString()}
               </Text>
+            </Grid>
+          </Card>
+          <Card>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Signed Username</Heading>
+              <Link href={`/${user?.verifiedExternalAccounts[0].username}`}>
+                {user?.verifiedExternalAccounts[0].username}
+              </Link>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Signed With</Heading>
+              <Text>{user?.verifiedExternalAccounts[0].provider}</Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Account Created At</Heading>
+              <Text>
+                {user?.createdAt ? (user?.createdAt).toString() : "N/A"}
+              </Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Email Verification</Heading>
+              <Text>
+                {user?.emailAddresses?.[0] ? "Verified" : "Not Verified"}
+              </Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Clerk User ID</Heading>
+              <div className="flex flex-row gap-2">
+                <Text
+                  onClick={() => setClerkUserIdMasked(false)}
+                  className="transition-all duration-200 hover:cursor-pointer"
+                >
+                  {clerkUserIdMasked ? (
+                    <Text>Click to see your id</Text>
+                  ) : (
+                    <Text className="select-all">
+                      {user?.id ? (user?.id).toString() : "N/A"}
+                    </Text>
+                  )}
+                </Text>
+              </div>
             </Grid>
           </Card>
         </>
