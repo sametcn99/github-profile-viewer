@@ -5,6 +5,7 @@ import {
   Card,
   Grid,
   Heading,
+  IconButton,
   Separator,
   Text,
   Tooltip,
@@ -13,6 +14,8 @@ import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import FaqAccordion from "@/components/auth/FaqAccordion";
 import { convertUnixTimestampToDate, getSiteUrl } from "@/lib/utils";
+import { GoEyeClosed } from "react-icons/go";
+import { GoEye } from "react-icons/go";
 
 export default function Page() {
   const { user } = useUser();
@@ -21,7 +24,7 @@ export default function Page() {
   const [rateLimitRemaining, setRateLimitRemaining] =
     useState<GitHubRateLimitResponse>();
   const [loading, setLoading] = useState(true);
-
+  const [masked, setMasked] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -73,13 +76,21 @@ export default function Page() {
           <span className="text-xs font-thin">
             Please be sure to grant read-only access to public repositories.
           </span>
-          <input
-            placeholder="Paste Your Auth Token Here"
-            className="p-2"
-            type="text"
-            value={token}
-            onChange={(e) => setToken(e.target.value)}
-          />
+          <div className="flex flex-row items-center gap-2">
+            <input
+              placeholder="Paste Your Auth Token Here"
+              className="w-full rounded-xl p-2"
+              type={masked ? "password" : "text"}
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+            ></input>
+            <IconButton
+              onClick={() => setMasked(!masked)}
+              className="transition-all duration-200 hover:scale-105 hover:cursor-pointer"
+            >
+              {masked ? <GoEyeClosed /> : <GoEye />}
+            </IconButton>
+          </div>
           <Button
             className="w-fit p-2 hover:cursor-pointer hover:underline"
             onClick={() => {
