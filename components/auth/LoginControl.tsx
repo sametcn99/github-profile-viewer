@@ -9,7 +9,12 @@ export default function LoginControl() {
   return (
     <>
       {user ? (
-        <UserButton />
+        <>
+          <UserButton />
+          <Link className="font-bold hover:underline" href={"/auth/profile"}>
+            Profile
+          </Link>
+        </>
       ) : (
         <Link className="font-bold hover:underline" href={"/auth/profile"}>
           Login
