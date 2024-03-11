@@ -18,7 +18,7 @@ export default function LoginControl() {
       ) : (
         <Link
           className="font-bold hover:underline"
-          href={"accounts.githubprofileviewer.com"}
+          href={"https://accounts.githubprofileviewer.com/"}
         >
           Login
         </Link>
