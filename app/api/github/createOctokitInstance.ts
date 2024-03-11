@@ -1,7 +1,12 @@
 import { Octokit } from "octokit";
+import { clerkClient } from "@clerk/nextjs";
 
-export default async function createOctokitInstance() {
+export default async function createOctokitInstance(userId?: string) {
   let auth;
+  if (userId !== undefined) {
+    const user = await clerkClient.users.getUser(userId);
+    auth = user.unsafeMetadata.token as string;
+  }
   let octokit = new Octokit({
     auth: auth,
     headers: {
@@ -24,12 +29,6 @@ export default async function createOctokitInstance() {
     if (auth === process.env.GH_TOKEN) {
       const rateLimitResponse = await octokit.request("GET /rate_limit");
       rateLimitRemaining = rateLimitResponse.data.resources.core.remaining;
-
-      if (rateLimitRemaining === 0) {
-        const resetTime = new Date(
-          rateLimitResponse.data.resources.core.reset * 1000,
-        );
-      }
     }
   }
   return octokit;

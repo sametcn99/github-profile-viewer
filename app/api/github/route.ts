@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createOctokitInstance from "./createOctokitInstance";
+import { use } from "react";
 
 /**
  * Handles GitHub API requests and responses.
@@ -19,11 +20,12 @@ export async function GET(request: NextRequest) {
   const gistCount = searchParams.get("gistCount");
   const chunk = searchParams.get("chunk");
   const page = Number(searchParams.get("page"));
+  const authId = searchParams.get("authId");
 
   let duration = Date.now();
 
   // Initialize Octokit instance
-  let octokit = await createOctokitInstance();
+  let octokit = await createOctokitInstance(authId ? authId : undefined);
 
   // Initialize variables for data storage
   let repos = Number(repoCount);
@@ -35,6 +37,13 @@ export async function GET(request: NextRequest) {
 
   // Determine the option and handle the corresponding GitHub API call
   switch (option) {
+    case "get-auth-user":
+      if (authId) {
+        // Fetch followings data with pagination
+        responseData = await octokit.rest.users.getAuthenticated();
+        return NextResponse.json(responseData);
+      }
+      break;
     case "repos":
       if (username && repoCount && gistCount && chunk === "false") {
         // Fetch repository and gist data using pagination

@@ -1,92 +1,97 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { UserProfile } from "@clerk/nextjs";
-import { Card } from "@radix-ui/themes";
-import Link from "next/link";
-import React from "react";
+"use client";
+import { useState } from "react";
+import { Button, Card, Grid, Tooltip } from "@radix-ui/themes";
+import { useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
+import FaqAccordion from "@/components/auth/FaqAccordion";
+import { getSiteUrl } from "@/lib/utils";
+import { JsonView } from "react-json-view-lite";
+export default function Page() {
+  const { user } = useUser();
+  const [token, setToken] = useState("");
+  const [checkToken, setCheckToken] = useState(false);
+  const [rateLimitRemaining, setRateLimitRemaining] = useState("");
+  const [loading, setLoading] = useState(true);
 
-export default function page() {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `${getSiteUrl()}/api/github?option=rate&authId=${user?.id}`;
+        if (user?.id) {
+          setToken(user.unsafeMetadata.token as string);
+          const response = await fetch(url);
+          if (response.status === 200) {
+            const data = await response.json();
+            setCheckToken(true);
+            setRateLimitRemaining(data.data.rate);
+          } else {
+            setCheckToken(false);
+          }
+        }
+      } catch (error) {
+        console.error("Error: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [user]);
+
   return (
     <>
-      <div className="text-3xl font-bold text-red-600">TESTING!!!</div>
-      <Card>
-        <Accordion type="single" collapsible className="w-full ">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              How can I create an Auth Access Token?
-            </AccordionTrigger>
-            <AccordionContent>
-              To generate an Auth Access Token, you can follow these steps:
-              <ol className="list-decimal pl-5">
-                <li>
-                  Visit the{" "}
-                  <Link
-                    href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
-                    target="_blank"
-                    className="text-blue-600 hover:underline"
-                  >
-                    GitHub documentation
-                  </Link>{" "}
-                  on managing Personal Access Tokens.
-                </li>
-                <li>
-                  Follow the instructions provided in the documentation to
-                  create a new Personal Access Token for your account.
-                </li>
-                <li>
-                  Once you have generated the token, copy and paste it into the
-                  input field below.
-                </li>
-              </ol>
-              By following these steps, you&apos;ll successfully create and
-              integrate an Auth Access Token for your application.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>Why do I need an Access Token?</AccordionTrigger>
-            <AccordionContent>
-              An Access Token is crucial for secure and authenticated
-              interactions with the GitHub API. Here&apos;s why you need one:
-              <ol className="list-decimal pl-5">
-                <li>
-                  <strong>Authentication:</strong> GitHub requires
-                  authentication to access certain features and resources. An
-                  Access Token serves as a secure way to verify your identity.
-                </li>
-                <li>
-                  <strong>Rate Limiting:</strong> When making requests to the
-                  GitHub API, there are rate limits in place. An Access Token
-                  increases these limits, allowing for more requests within a
-                  given time frame.
-                </li>
-              </ol>
-              By obtaining and using an Access Token, you not only comply with
-              GitHub&apos;s authentication requirements but also enhance the
-              performance and security of your application.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </Card>
+      <p className="text-3xl font-bold text-red-600">TESTING!!!</p>
+      <FaqAccordion />
       <Card>
         <div className="flex flex-col gap-2">
-          <label>
-            Auth Token:{" "}
-            <span className="text-sm font-thin">
-              Please be sure to grant read-only access to public repositories.
-            </span>
+          <label className="flex items-center gap-2">
+            Auth Token{" "}
+            {loading ? (
+              <>Checking...</>
+            ) : (
+              <>
+                {checkToken ? (
+                  <Tooltip content="Authenticated Successfully">
+                    <div className="h-fit w-fit">✅</div>
+                  </Tooltip>
+                ) : (
+                  <Tooltip content="Not Authenticated">
+                    <div className="h-fit w-fit">❌</div>
+                  </Tooltip>
+                )}
+              </>
+            )}
           </label>
+          <span className="text-xs font-thin">
+            Please be sure to grant read-only access to public repositories.
+          </span>
           <input
             placeholder="Paste Your Auth Token Here"
             className="p-2"
             type="text"
+            value={token}
+            onChange={(e) => setToken(e.target.value)}
           />
-          <button className="w-fit p-2 hover:underline">Submit</button>
+          <Button
+            className="w-fit p-2 hover:cursor-pointer hover:underline"
+            onClick={() => {
+              user?.update({
+                unsafeMetadata: {
+                  token: token,
+                },
+              });
+            }}
+          >
+            Submit
+          </Button>
         </div>
       </Card>
+      {checkToken && (
+        <>
+          <Card>
+            API Rate: <JsonView data={rateLimitRemaining} />
+          </Card>
+        </>
+      )}
     </>
   );
 }
