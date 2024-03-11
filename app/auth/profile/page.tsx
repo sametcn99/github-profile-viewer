@@ -1,16 +1,25 @@
 "use client";
 import { useState } from "react";
-import { Button, Card, Tooltip } from "@radix-ui/themes";
+import {
+  Button,
+  Card,
+  Grid,
+  Heading,
+  Separator,
+  Text,
+  Tooltip,
+} from "@radix-ui/themes";
 import { useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import FaqAccordion from "@/components/auth/FaqAccordion";
-import { getSiteUrl } from "@/lib/utils";
-import { JsonView } from "react-json-view-lite";
+import { convertUnixTimestampToDate, getSiteUrl } from "@/lib/utils";
+
 export default function Page() {
   const { user } = useUser();
   const [token, setToken] = useState("");
   const [checkToken, setCheckToken] = useState(false);
-  const [rateLimitRemaining, setRateLimitRemaining] = useState("");
+  const [rateLimitRemaining, setRateLimitRemaining] =
+    useState<GitHubRateLimitResponse>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,8 +31,9 @@ export default function Page() {
           const response = await fetch(url);
           if (response.status === 200) {
             const data = await response.json();
+            console.log("data: ", data);
             setCheckToken(true);
-            setRateLimitRemaining(data.data.rate);
+            setRateLimitRemaining(data);
           } else {
             setCheckToken(false);
           }
@@ -84,10 +94,88 @@ export default function Page() {
           </Button>
         </div>
       </Card>
-      {checkToken && (
+      {checkToken && rateLimitRemaining && (
         <>
           <Card>
-            API Rate: <JsonView data={rateLimitRemaining} />
+            <Heading size="4" className="p-2">
+              Rate Limit
+            </Heading>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Limit</Heading>
+              <Text>{rateLimitRemaining?.data.rate.limit}</Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Used</Heading>
+              <Text>{rateLimitRemaining?.data.rate.used}</Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Remaining</Heading>
+              <Text>{rateLimitRemaining?.data.rate.remaining}</Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Reset</Heading>
+              <Text>
+                {convertUnixTimestampToDate(
+                  rateLimitRemaining?.data.rate.reset,
+                ).toString()}
+              </Text>
+            </Grid>
+            <Separator size={"4"} />
+            <Heading size="4" className="p-2">
+              Searching Rate Limit
+            </Heading>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Limit</Heading>
+              <Text>{rateLimitRemaining?.data.resources.search.limit}</Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Used</Heading>
+              <Text>{rateLimitRemaining?.data.resources.search.used}</Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Remaining</Heading>
+              <Text>{rateLimitRemaining?.data.resources.search.remaining}</Text>
+            </Grid>
+            <Grid
+              columns="2"
+              width="auto"
+              className="rounded-xl p-2 hover:bg-black/30"
+            >
+              <Heading size="4">Reset</Heading>
+              <Text>
+                {convertUnixTimestampToDate(
+                  rateLimitRemaining?.data.resources.search.reset,
+                ).toString()}
+              </Text>
+            </Grid>
           </Card>
         </>
       )}

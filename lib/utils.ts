@@ -150,3 +150,9 @@ export const isGithubProfile = (word: string): boolean => {
   const match = word.match(/^@/);
   return match !== null;
 };
+
+export function convertUnixTimestampToDate(unixTimestamp: number): Date {
+  const milliseconds = unixTimestamp * 1000;
+  const date = new Date(milliseconds);
+  return date;
+}

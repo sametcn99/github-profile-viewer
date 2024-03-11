@@ -83,3 +83,110 @@ type BlogPost = {
   author: string;
   keywords: string[];
 };
+
+type GitHubRateLimitResponse = {
+  status: number;
+  url: string;
+  headers: {
+    "access-control-allow-origin": string;
+    "access-control-expose-headers": string;
+    "cache-control": string;
+    "content-encoding": string;
+    "content-security-policy": string;
+    "content-type": string;
+    date: string;
+    "github-authentication-token-expiration": string;
+    "referrer-policy": string;
+    server: string;
+    "strict-transport-security": string;
+    "transfer-encoding": string;
+    vary: string;
+    "x-content-type-options": string;
+    "x-frame-options": string;
+    "x-github-api-version-selected": string;
+    "x-github-media-type": string;
+    "x-github-request-id": string;
+    "x-ratelimit-limit": string;
+    "x-ratelimit-remaining": string;
+    "x-ratelimit-reset": string;
+    "x-ratelimit-resource": string;
+    "x-ratelimit-used": string;
+    "x-xss-protection": string;
+  };
+  data: {
+    resources: {
+      core: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      search: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      graphql: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      integration_manifest: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      source_import: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      code_scanning_upload: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      actions_runner_registration: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      scim: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      dependency_snapshots: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      audit_log: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+      code_search: {
+        limit: number;
+        used: number;
+        remaining: number;
+        reset: number;
+      };
+    };
+    rate: {
+      limit: number;
+      used: number;
+      remaining: number;
+      reset: number;
+    };
+  };
+};
