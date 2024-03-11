@@ -16,7 +16,10 @@ export default function LoginControl() {
           </Link>
         </>
       ) : (
-        <Link className="font-bold hover:underline" href={"/auth/profile"}>
+        <Link
+          className="font-bold hover:underline"
+          href={"accounts.githubprofileviewer.com"}
+        >
           Login
         </Link>
       )}
