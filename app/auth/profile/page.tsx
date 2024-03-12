@@ -198,7 +198,10 @@ export default function Page() {
               className="rounded-xl p-2 hover:bg-black/30"
             >
               <Heading size="4">Signed Username</Heading>
-              <Link href={`/${user?.verifiedExternalAccounts[0].username}`}>
+              <Link
+                href={`/${user?.verifiedExternalAccounts[0].username}`}
+                className="hover:underline"
+              >
                 {user?.verifiedExternalAccounts[0].username}
               </Link>
             </Grid>
