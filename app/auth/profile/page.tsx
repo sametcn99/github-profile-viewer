@@ -17,13 +17,14 @@ import { convertUnixTimestampToDate, getSiteUrl } from "@/lib/utils";
 import { GoEyeClosed } from "react-icons/go";
 import { GoEye } from "react-icons/go";
 import Link from "next/link";
+import { Endpoints } from "@octokit/types";
 
 export default function Page() {
   const { user } = useUser();
   const [token, setToken] = useState("");
   const [checkToken, setCheckToken] = useState(false);
   const [rateLimitRemaining, setRateLimitRemaining] =
-    useState<GitHubRateLimitResponse>();
+    useState<Endpoints["GET /rate_limit"]["response"]>();
   const [loading, setLoading] = useState(true);
   const [masked, setMasked] = useState(true);
   const [clerkUserIdMasked, setClerkUserIdMasked] = useState(true);
