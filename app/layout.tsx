@@ -13,6 +13,7 @@ import Footer from "@/components/home/Footer";
 import Script from "next/script";
 import { ClerkProvider, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -78,17 +79,12 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <head>
+        <Head>
           <meta
             name="google-adsense-account"
             content="ca-pub-9043926174238983"
           />
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9043926174238983"
-            crossOrigin="anonymous"
-          ></Script>
-        </head>
+        </Head>
         <body
           className={`${inter.className} flex min-h-screen w-full justify-center px-1 transition-all duration-1000 md:px-4`}
         >
@@ -106,6 +102,11 @@ export default function RootLayout({
           </Theme>
           <Analytics />
           <SpeedInsights />
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9043926174238983"
+            crossOrigin="anonymous"
+          />
         </body>
         <GoogleAnalytics gaId="G-N9EB4H11MT" />
       </html>
