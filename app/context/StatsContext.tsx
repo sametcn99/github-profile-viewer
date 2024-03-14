@@ -37,7 +37,6 @@ type StatsContextProps = {
   latestUpdatedRepo: GitHubRepo | null;
   oldestRepo: GitHubRepo | null;
   updatePeriod: GitHubRepo | null;
-  user: UserData | null;
 };
 
 // Step 2: Create the context with a default value
@@ -47,7 +46,7 @@ export const StatsContext = createContext<StatsContextProps | null>(null);
 export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const { repos, gists, loading, user } = useContext(GithubContext);
+  const { repos, gists, loading } = useContext(GithubContext);
 
   // Calculate stats here or fetch them from an API
   const totalRepos = calculateTotalRepos(repos);
@@ -85,7 +84,6 @@ export const StatsProvider: React.FC<{ children: React.ReactNode }> = ({
     latestUpdatedRepo,
     oldestRepo,
     updatePeriod,
-    user,
   };
 
   // Provide the context value to the child components
