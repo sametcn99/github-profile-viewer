@@ -5,18 +5,16 @@ import { createContext, ReactNode, useState, useEffect } from "react";
 export type GithubContextProps = {
   repos: GitHubRepo[] | [];
   gists: GitHubRepo[] | [];
-  user: UserData | null;
   loading: boolean;
-  setUser: (user: UserData) => void; // Add this line
+  user: UserData | null;
 };
 
 // Create a context with the defined structure
 export const GithubContext = createContext<GithubContextProps>({
   repos: [],
   gists: [],
-  user: null,
   loading: false,
-  setUser: () => {},
+  user: null,
 });
 
 // Create a provider component for the GitHub context
@@ -25,16 +23,17 @@ export const GithubProvider = ({
   username,
   repoCount,
   gistCount,
+  user,
 }: {
   children: ReactNode;
   username: string;
   repoCount: number;
   gistCount: number;
+  user: UserData;
 }) => {
   const [repos, setRepos] = useState<GitHubRepo[] | []>([]);
   const [gists, setGists] = useState<GitHubRepo[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [user, setUser] = useState<UserData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,9 +65,8 @@ export const GithubProvider = ({
   const contextValue = {
     repos,
     gists,
-    user,
-    setUser,
     loading,
+    user,
   };
 
   // Provide the context value to the child components

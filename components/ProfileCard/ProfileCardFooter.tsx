@@ -1,8 +1,8 @@
 import SocialLinks from "./SocialLinks";
-import { checkEmail, createUrlObject, isGithubProfile } from "@/lib/utils";
+import { checkEmail, createUrlObject } from "@/lib/utils";
 import { MdEmail, MdOutlineWorkOutline } from "react-icons/md";
 import { TfiWorld } from "react-icons/tfi";
-import { Box, Link, Text } from "@radix-ui/themes";
+import { Box, Link } from "@radix-ui/themes";
 import Readme from "@/components/Readme";
 import ContactList from "./ContactList";
 import CustomTextArea from "../ui/CustomTextArea";

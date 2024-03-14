@@ -3,8 +3,6 @@ import { HiLocationMarker } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { GrOrganization } from "react-icons/gr";
-import { Separator } from "@radix-ui/react-select";
-import { isUrl } from "@/lib/utils";
 import CustomTextArea from "../ui/CustomTextArea";
 export default function ProfileCardHeader({
   userData,

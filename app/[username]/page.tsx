@@ -77,6 +77,7 @@ export default async function fetchUserPage(searchParams: SearchParams) {
             username={username}
             repoCount={userData.public_repos}
             gistCount={userData.public_gists}
+            user={userData}
           >
             <StatsProvider>
               <TabWrapper />

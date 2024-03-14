@@ -23,7 +23,7 @@ export default function Readme({ url, children }: ReadmeProps) {
       try {
         const response = await fetch(url);
         // Check if the response is not OK and throw an error
-        if (!response.ok) {
+        if (response.status !== 200) {
           console.log(`Failed to fetch README.md: ${url}`);
         }
         const text = await response.text();
@@ -31,7 +31,7 @@ export default function Readme({ url, children }: ReadmeProps) {
         text === "404: Not Found" ? setError(true) : setContent(text);
       } catch (err) {
         // Catch any network or other errors and set the error state
-        console.error(err);
+        console.log(err);
         setError(true);
       }
     };
