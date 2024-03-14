@@ -9,13 +9,20 @@ import { VList } from "virtua";
 import Loading from "@/app/loading";
 import FilterGists from "./FilterGists";
 
-// Gistss component
+// Gists component
 const Gists = () => {
   // State to store GitHub API data
   const { gists, loading } = useContext(GithubContext);
   const [filterValue, setFilterValue] = useState("");
   const [sort, setSort] = useState("Updated Descending");
 
+  /**
+   * Filters the gists array based on the filterValue, sorts the filtered
+   * array based on the sort value, and returns the sorted & filtered array.
+   *
+   * Depends on the gists array passed in via context, as well as the
+   * filterValue and sort values from component state.
+   */
   const filteredAndSortedGists = useMemo(() => {
     const filteredGists = gists
       ? gists.filter(
@@ -26,17 +33,13 @@ const Gists = () => {
             ),
         )
       : [];
-
     switch (sort) {
       case "Created Ascending":
         return sortByKeyAscending(filteredGists, "created_at");
-
       case "Created Descending":
         return sortByKeyDescending(filteredGists, "created_at");
-
       case "Updated Ascending":
         return sortByKeyAscending(filteredGists, "updated_at");
-
       default:
         return sortByKeyDescending(filteredGists, "updated_at");
     }

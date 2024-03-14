@@ -35,6 +35,20 @@ export const GithubProvider = ({
   const [gists, setGists] = useState<GitHubRepo[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  /**
+   * Fetches GitHub data for the given username
+   * and populates the component state.
+   *
+   * On mount, fetches repos, gists, and user data from the
+   * GitHub API. Uses the provided username, repoCount, and
+   * gistCount query parameters. Updates component state
+   * with the API response.
+   *
+   * Adds revalidation to allow periodic refetching of
+   * the data.
+   *
+   * Catches any errors and updates state accordingly.
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {

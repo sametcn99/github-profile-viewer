@@ -28,6 +28,12 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [masked, setMasked] = useState(true);
   const [clerkUserIdMasked, setClerkUserIdMasked] = useState(true);
+  /**
+   * Fetches GitHub rate limit data when component mounts.
+   * Sets token, checkToken, and rateLimitRemaining state based on response.
+   * Wrapped in try/catch to handle errors.
+   * Ensures loading state is updated correctly.
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {

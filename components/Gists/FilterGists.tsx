@@ -7,6 +7,12 @@ interface Props {
   sort: string;
   setSort: Dispatch<SetStateAction<string>>;
 }
+/**
+ * Renders a filter input and dropdown menu for sorting gists.
+ * @param setFilterValue - Callback to update the filter value state
+ * @param sort - The current sort value
+ * @param setSort - Callback to update the sort value state
+ */
 export default function FilterGists({ setFilterValue, sort, setSort }: Props) {
   return (
     <Box className="flex flex-row gap-3">

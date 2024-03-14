@@ -4,6 +4,13 @@ import { sortByKeyAscending, sortByKeyDescending } from "@/lib/utils/sort";
 
 type SetSelectedFunction = (value: string) => void;
 
+/**
+ * Hook for managing repository filters and sorting.
+ * Allows filtering repositories by topic, language, license, name, and fork status.
+ * Also handles sorting repositories by creation date, update date, and stars.
+ * Returns filter and sort state and handlers to update state. Also returns the
+ * filtered and sorted repository array.
+ */
 export const useRepositoryFilters = (repos: GitHubRepo[]) => {
   const [sort, setSort] = useState("Stars Descending");
   const [filterValue, setFilterValue] = useState("");
@@ -12,6 +19,15 @@ export const useRepositoryFilters = (repos: GitHubRepo[]) => {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [selectedLicense, setSelectedLicense] = useState("");
 
+  /**
+   * Handles clicking on a filter value.
+   * Sets the selected filter value to the clicked value.
+   * If the clicked value is already selected, clears the selection.
+   *
+   * @param value - The filter value clicked
+   * @param setSelectedFunction - The state setter function for the filter
+   * @param selectedValue - The currently selected filter value
+   */
   const handleFilterClick = (
     value: string,
     setSelectedFunction: SetSelectedFunction,
@@ -23,6 +39,18 @@ export const useRepositoryFilters = (repos: GitHubRepo[]) => {
     }
   };
 
+  /**
+   * Filters the repositories based on the selected filters,
+   * then sorts them according to the selected sort option.
+   *
+   * The filtering is done by topic, language, license,
+   * name match, and fork status.
+   *
+   * The sorting is done by creation date, update date,
+   * and stars count, in both ascending and descending order.
+   *
+   * Returns the filtered and sorted array of repositories.
+   */
   const filteredAndSortedRepos = useMemo(() => {
     const filteredRepos = repos
       ? repos.filter((repo: any) => {

@@ -177,6 +177,12 @@ export const calculateTopTopics = (
   return sortedTopicCounts;
 };
 
+/**
+ * Generates statistics about repository creation dates by year.
+ * Iterates through the provided array of repositories, extracting the creation date for each one.
+ * The creation years are tallied in a stats object.
+ * Returns an array of objects containing the year and count for each year.
+ */
 export const getCreationStatsByYear = (repos: GitHubRepo[]) => {
   const stats: { [year: string]: number } = {};
 
@@ -197,6 +203,11 @@ export const getCreationStatsByYear = (repos: GitHubRepo[]) => {
   return stats;
 };
 
+/**
+ * Calculates the number of stars per GitHub repository in the given array.
+ * @param repos - Array of GitHub repository objects to analyze.
+ * @returns Object mapping repository name to stargazer count.
+ */
 export function getStarsPerRepo(repos: GitHubRepo[]) {
   interface StarsPerRepo {
     [key: string]: number;

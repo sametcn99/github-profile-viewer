@@ -11,11 +11,16 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Footer from "@/components/home/Footer";
 import Script from "next/script";
-import { ClerkProvider, UserButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
+/**
+ * Metadata object to configure the <head> and properties of the webpage.
+ * Includes title, description, open graph tags, twitter tags, favicon.
+ * Used by _app.tsx to populate metadata in next.js.
+ */
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
@@ -61,6 +66,11 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Viewport configuration for responsive design.
+ * Sets width to device width, initial scale to 1,
+ * and allows user scaling.
+ */
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,

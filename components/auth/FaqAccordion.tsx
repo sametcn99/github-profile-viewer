@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { Card } from "@radix-ui/themes";
 import Link from "next/link";
+
 export default function FaqAccordion() {
   return (
     <Card>

@@ -1,5 +1,12 @@
 import { authMiddleware } from "@clerk/nextjs";
 
+/**
+ * Configures authentication middleware with public and ignored routes.
+ *
+ * @param config - Configuration object with `publicRoutes` and `ignoredRoutes` arrays.
+ * `publicRoutes` defines routes that can be accessed while signed out.
+ * `ignoredRoutes` defines routes that can always be accessed without authentication.
+ */
 export default authMiddleware({
   // Routes that can be accessed while signed out
   publicRoutes: [

@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createOctokitInstance from "./createOctokitInstance";
-import { use } from "react";
 import { auth } from "@clerk/nextjs";
 
 /**

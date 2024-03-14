@@ -5,6 +5,11 @@ import { Metadata } from "next";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import { StatsProvider } from "../context/StatsContext";
 
+/**
+ * Interface for search parameters.
+ *
+ * @param params - Search parameters object with username property.
+ */
 interface SearchParams {
   params: {
     username: string;
