@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import createOctokitInstance from "../github/createOctokitInstance";
+import createOctokitInstance from "../../../lib/createOctokitInstance";
 import { auth } from "@clerk/nextjs";
 
 /**
