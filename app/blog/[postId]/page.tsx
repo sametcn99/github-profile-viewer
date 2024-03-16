@@ -3,6 +3,7 @@ import { getPostData, getSortedPostsData } from "@/lib/utils/blog/getPosts";
 import { Card } from "@radix-ui/themes";
 import getFormattedDate from "@/lib/utils";
 import "./styles.css";
+import { Metadata } from "next";
 
 // Function to generate static page parameters
 export function generateStaticParams() {
@@ -13,7 +14,11 @@ export function generateStaticParams() {
 }
 
 // Function to generate page metadata
-export function generateMetadata({ params }: { params: { postId: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { postId: string };
+}): Promise<Metadata> {
   const posts = getSortedPostsData(); // Getting sorted post data
   const { postId } = params; // Extracting the post ID from parameters
 
@@ -24,7 +29,6 @@ export function generateMetadata({ params }: { params: { postId: string } }) {
       title: "Post Not Found", // Using "Post Not Found" as the title if the post is not found
       description: "This post does not exist.", // Add a description for SEO
       keywords: [], // Add an empty tags array to avoid errors
-      author: "Unknown", // Add an unknown author to avoid errors
     };
   }
 
@@ -32,7 +36,11 @@ export function generateMetadata({ params }: { params: { postId: string } }) {
     title: post.title, // Using the post's title as the title
     description: post.description,
     keywords: post.keywords, // Using the post's tags as the tags
-    author: post.author, // Using the post's author as the author
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: "article",
+    },
   };
 }
 
