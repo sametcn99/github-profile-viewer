@@ -54,3 +54,11 @@ Handles various GitHub API requests based on the specified `option` parameter.
 ### 8. Get Followings
 
 - Example URL: `/api/github?option=followings&username=exampleUser&page=1`
+
+### 8. Get Commit History
+
+- Example URL: `/api/github?option=commit-history&username=exampleUser&reponame=exampleRepo`
+
+### 8. Event Activity
+
+- Example URL: `/api/github?option=event-activity&username=exampleUser`

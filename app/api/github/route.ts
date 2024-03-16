@@ -20,6 +20,7 @@ export async function GET(request: NextRequest) {
   const gistCount = searchParams.get("gistCount");
   const chunk = searchParams.get("chunk");
   const page = Number(searchParams.get("page"));
+  const reponame = searchParams.get("reponame");
 
   const { userId } = auth();
 
@@ -98,6 +99,36 @@ export async function GET(request: NextRequest) {
         });
         profile = profileResponse.data;
 
+        // Return JSON response with profile, repos, and gists data
+        return NextResponse.json({
+          profile: profile,
+        });
+      }
+      break;
+    case "event-activity":
+      if (username) {
+        // Fetch user profile data
+        const profileResponse =
+          await octokit.rest.activity.listPublicEventsForUser({
+            username: username,
+            per_page: 100,
+          });
+        profile = profileResponse.data;
+        // Return JSON response with profile, repos, and gists data
+        return NextResponse.json({
+          profile: profile,
+        });
+      }
+      break;
+    case "commit-history":
+      if (username && reponame) {
+        // Fetch user profile data
+        const profileResponse = await octokit.rest.repos.listCommits({
+          owner: username,
+          repo: reponame,
+          per_page: 100,
+        });
+        profile = profileResponse.data;
         // Return JSON response with profile, repos, and gists data
         return NextResponse.json({
           profile: profile,
