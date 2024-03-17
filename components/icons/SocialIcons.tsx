@@ -31,7 +31,7 @@ import {
 } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import Image from "next/image";
-import { SiBento } from "react-icons/si";
+import { SiBento, SiLeetcode } from "react-icons/si";
 
 export const socialMediaIcons: Record<string, JSX.Element> = {
   "facebook.com": <FaFacebook />,
@@ -49,15 +49,14 @@ export const socialMediaIcons: Record<string, JSX.Element> = {
   ),
   "bento.me": <SiBento />,
   "instagram.com": <FaInstagram />,
-  "www.linkedin.com": <FaLinkedin />,
   "linkedin.com": <FaLinkedin />,
   "github.com": <FaGithub />,
   "gist.github.com": <FaGithub />,
+  "leetcode.com": <SiLeetcode />,
   "snapchat.com": <FaSnapchat />,
   "pinterest.com": <FaPinterest />,
   "tumblr.com": <FaTumblr />,
   "reddit.com": <FaReddit />,
-  "www.youtube.com": <FaYoutube />,
   "whatsapp.com": <FaWhatsapp />,
   "skype.com": <FaSkype />,
   "vimeo.com": <FaVimeo />,

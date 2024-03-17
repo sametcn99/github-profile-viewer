@@ -56,10 +56,12 @@ export default function SocialLinks({ username, option }: SocialLinksProps) {
                 >
                   {
                     socialMediaIcons[
-                      createUrlObject(item.url).hostname.toLowerCase()
+                      createUrlObject(item.url)
+                        .hostname.toLowerCase()
+                        .replace("www.", "")
                     ]
                   }
-                  {createUrlObject(item.url).hostname +
+                  {createUrlObject(item.url).hostname.replace("www.", "") +
                     "/" +
                     createUrlObject(item.url).pathname.slice(1)}
                 </Link>
