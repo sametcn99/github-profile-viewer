@@ -2,11 +2,9 @@
 const nextConfig = {
   /* config options here */
   productionBrowserSourceMaps: true,
-
+  optimizeFonts: true,
   experimental: {
-    esmExternals: "loose",
-
-    optimizeFonts: true,
+    esmExternals: true,
   },
 };
 
