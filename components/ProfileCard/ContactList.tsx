@@ -147,12 +147,12 @@ export default function ContactList({
           </Dialog.Title>
           {/* Textfield for filtering by name */}
           <TextField.Root>
-            <TextField.Root
+            <TextField.Input
               value={filter}
               type="search"
               placeholder="Filter by name"
               onChange={(e) => setFilter(e.target.value)}
-            ></TextField.Root>
+            ></TextField.Input>
             {/* Dropdown for selecting the filter option */}
             <DropdownMenu.Root>
               <DropdownMenu.Trigger>
