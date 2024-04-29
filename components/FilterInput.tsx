@@ -7,7 +7,7 @@ export default function FilterInput({
 }) {
   return (
     <div className="w-full">
-      <TextField.Root
+      <TextField.Input
         placeholder="Filter by title"
         type="search"
         onChange={(e) => setFilterValue(e.target.value)}
