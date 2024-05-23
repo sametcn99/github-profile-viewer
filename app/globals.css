@@ -20,19 +20,8 @@ body {
   background: linear-gradient(
     to right,
     hsl(0, 0%, 30%) 0,
-    hsl(0, 0%, 100%) 10%,
-    hsl(0, 0%, 30%) 20%
+    hsl(0, 0%, 57%) 100%
   );
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 3s infinite linear;
-}
-
-@keyframes shine {
-  0% {
-    background-position: 0;
-  }
-  100% {
-    background-position: 600px;
-  }
 }

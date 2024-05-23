@@ -4,7 +4,7 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   optimizeFonts: true,
   experimental: {
-    esmExternals: true,
+    esmExternals: "loose",
   },
 };
 
