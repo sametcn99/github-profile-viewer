@@ -1,5 +1,5 @@
+import { clerkClient } from "@clerk/nextjs/server";
 import { Octokit } from "octokit";
-import { clerkClient } from "@clerk/nextjs";
 
 export default async function createOctokitInstance(userId?: string) {
   let auth;

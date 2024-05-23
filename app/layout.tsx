@@ -89,12 +89,6 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <Head>
-          <meta
-            name="google-adsense-account"
-            content="ca-pub-9043926174238983"
-          />
-        </Head>
         <body
           className={`${inter.className} flex min-h-screen w-full justify-center px-1 transition-all duration-1000 md:px-4`}
         >

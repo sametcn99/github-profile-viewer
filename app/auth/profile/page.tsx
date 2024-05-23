@@ -11,13 +11,13 @@ import {
   Tooltip,
 } from "@radix-ui/themes";
 import { useEffect } from "react";
-import { useUser } from "@clerk/nextjs";
 import FaqAccordion from "@/components/auth/FaqAccordion";
 import { convertUnixTimestampToDate, getSiteUrl } from "@/lib/utils";
 import { GoEyeClosed } from "react-icons/go";
 import { GoEye } from "react-icons/go";
 import Link from "next/link";
 import { Endpoints } from "@octokit/types";
+import { useUser } from "@clerk/nextjs";
 
 export default function Page() {
   const { user } = useUser();

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import createOctokitInstance from "../../../lib/createOctokitInstance";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 /**
  * Fetches stargazers for a GitHub repo from the GitHub API.
