@@ -44,8 +44,9 @@ export default function ContactList({
     const signal = abortController.signal;
 
     const fetchData = async () => {
-      let page = 1; // Initial page number
       let allDataFetched = false;
+      if (data.length > 0) return; // Return if data is already fetched
+      let page = 1; // Initial page number
 
       setLoading(true); // Set loading to true when data fetching starts
 
@@ -93,7 +94,7 @@ export default function ContactList({
       isMounted = false; // Unmount the component
       abortController.abort(); // Abort ongoing requests
     };
-  }, [dialogOpen, username, option]);
+  }, [dialogOpen, username, option, data.length]);
 
   // Filter data based on user input and selected filter option
   const filteredData = data.filter((item: UserData) => {
