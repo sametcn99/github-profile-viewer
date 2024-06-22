@@ -98,7 +98,7 @@ export default function RootLayout({
             grayColor="slate"
             radius="large"
           >
-            <main className=" flex w-full flex-col gap-4 p-2 pt-4 transition-all duration-1000 sm:w-[30rem] md:w-[40rem] lg:w-[60rem] xl:w-[70rem] 2xl:w-[80rem]">
+            <main className=" flex w-full flex-col items-center gap-4 p-2 pt-4 transition-all duration-1000 sm:w-[30rem] md:w-[40rem] lg:w-[60rem] xl:w-[70rem] 2xl:w-[80rem]">
               <Navbar />
               {children}
               <Footer />

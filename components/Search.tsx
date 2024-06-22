@@ -85,7 +85,7 @@ export default function SearchBar({ className }: { className?: string }) {
       >
         <Button>
           <FaSearch />
-          Search
+          Search User
         </Button>
       </Dialog.Trigger>
       <Dialog.Content style={{ maxWidth: 450 }}>
