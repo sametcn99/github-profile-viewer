@@ -6,7 +6,7 @@ import { Box, Tabs } from "@radix-ui/themes";
 
 export default function TabWrapper() {
   return (
-    <Tabs.Root defaultValue="stats">
+    <Tabs.Root defaultValue="stats" className="w-full">
       <Tabs.List className="mb-2 w-full items-center justify-center">
         <Tabs.Trigger value="repositories" className="hover:cursor-pointer">
           Repos
