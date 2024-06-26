@@ -62,7 +62,7 @@ export default function Page() {
   return (
     <>
       <FaqAccordion />
-      <Card>
+      <Card className="w-full">
         <div className="flex flex-col gap-2">
           <label className="flex items-center gap-2">
             Auth Token{" "}
@@ -116,7 +116,7 @@ export default function Page() {
       </Card>
       {checkToken && rateLimitRemaining && (
         <>
-          <Card>
+          <Card className="w-full">
             <Heading size="4" className="p-2">
               Rate Limit
             </Heading>
@@ -197,7 +197,7 @@ export default function Page() {
               </Text>
             </Grid>
           </Card>
-          <Card>
+          <Card className="w-full">
             <Grid
               columns="2"
               width="auto"

@@ -18,7 +18,7 @@ export default function TabWrapper() {
           Gists
         </Tabs.Trigger>
       </Tabs.List>
-      <Box>
+      <Box className="w-full">
         <Tabs.Content value="repositories">
           <Repositories />
         </Tabs.Content>

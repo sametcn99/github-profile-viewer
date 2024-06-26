@@ -9,8 +9,8 @@ import Link from "next/link";
 
 export default function FaqAccordion() {
   return (
-    <Card>
-      <Accordion type="single" collapsible className="w-full ">
+    <Card className="w-full">
+      <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger>How can I create an Access Token?</AccordionTrigger>
           <AccordionContent>

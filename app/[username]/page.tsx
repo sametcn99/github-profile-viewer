@@ -2,8 +2,9 @@ import { getSiteUrl } from "@/lib/utils";
 import { GithubProvider } from "../context/GithubContext";
 import TabWrapper from "../../components/TabWrapper";
 import { Metadata } from "next";
-import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import { StatsProvider } from "../context/StatsContext";
+import { Card } from "@radix-ui/themes";
+import ProfileCardHeader from "@/components/ProfileCard/ProfileCardHeader";
 
 /**
  * Interface for search parameters.
@@ -77,13 +78,15 @@ export default async function fetchUserPage(searchParams: SearchParams) {
     if (userData) {
       return (
         <>
-          <ProfileCard userData={userData} />
           <GithubProvider
             username={username}
             repoCount={userData.public_repos}
             gistCount={userData.public_gists}
             user={userData}
           >
+            <Card className="h-fit w-full shadow-lg shadow-black">
+              <ProfileCardHeader userData={userData} />
+            </Card>
             <StatsProvider>
               <TabWrapper />
             </StatsProvider>

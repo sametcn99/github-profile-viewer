@@ -3,7 +3,7 @@ import { Octokit } from "octokit";
 
 export default async function createOctokitInstance(userId?: string) {
   let auth;
-  if (userId !== undefined) {
+  if (userId !== null && userId !== undefined) {
     const user = await clerkClient.users.getUser(userId);
     auth = user.unsafeMetadata.token as string;
   }
